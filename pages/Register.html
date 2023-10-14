@@ -31,9 +31,14 @@
 
         <form method="POST" action="register.php" class="registration-form mt-4 needs-validation" novalidate>
             <div class="form-row">
-                <div class="form-group col-md-12 mb-4"> <!-- Colonne de largeur 12 pour Raison Sociale -->
+                <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Raison Sociale -->
                     <label for="raisonSociale">Raison Sociale</label>
-                    <input class="form-control" type="text" id="raisonSociale" name="raisonSociale placeholder="Raison Sociale" required />
+                    <input class="form-control" type="text" id="raisonSociale" name="raisonSociale" placeholder="Raison Sociale" required />
+                    <div class="invalid-feedback">Erreur</div>
+                </div>
+                <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Raison Sociale -->
+                    <label for="numeroSiren">N° SIREN</label>
+                    <input class="form-control" type="text" id="numeroSiren" name="numeroSiren" placeholder="Numéro SIREN" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Email -->
@@ -55,8 +60,8 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6 mb-4">
-                        <label for="carte">Numéro de la carte</label>
-                        <input type="text" class="form-control" id="carte" name="carte" placeholder="numéro de carte" required />
+                        <label for="carte">Numéro de carte bancaire</label>
+                        <input type="text" class="form-control" id="carte" name="carte" placeholder="Numéro de carte" required />
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                     <div class="form-group col-md-3 mb-4">

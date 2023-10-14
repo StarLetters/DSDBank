@@ -2,7 +2,7 @@
 
 if ( (!isset($_POST['email'])) || (!isset($_POST['password'])) || (!isset($_POST['numeroSiren'])) || (!isset($_POST['raisonSociale'])) || (!isset($_POST['telephone'])) ){
     echo "Erreur : données manquantes<br>";
-    print_r($_POST['email']);
+    print_r($_POST);
 
 
     echo "<br><a href='../pages/register.php'>Retour</a>";
