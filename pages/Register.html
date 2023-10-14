@@ -19,7 +19,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-    <script src="../js/Eye.js"></script>
+    <script src="../scripts/load.js"></script>
 </head>
 
 <body>
@@ -29,61 +29,56 @@
         </div>
 
 
-        <form class="registration-form mt-4 needs-validation" novalidate>
+        <form method="POST" action="register.php" class="registration-form mt-4 needs-validation" novalidate>
             <div class="form-row">
-                <div class="form-group col-md-6 mb-4">
+                <div class="form-group col-md-12 mb-4"> <!-- Colonne de largeur 12 pour Raison Sociale -->
                     <label for="raisonSociale">Raison Sociale</label>
-                    <input class="form-control" type="text" id="name" name="name" placeholder="Raison Sociale" required />
+                    <input class="form-control" type="text" id="raisonSociale" name="raisonSociale placeholder="Raison Sociale" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
-                <div class="form-group col-md-6 mb-4">
+                <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Email -->
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
-                
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-6 mb-4">
+                <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Téléphone -->
                     <label for="phoneNumber">Téléphone</label>
-                    <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Téléphone"
-                        required />
+                    <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="Téléphone" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
- 
             </div>
+            
+
+            <hr style="border: 2px solid #2c0844; margin-top: 20px;">
 
             <div class="form-row">
 
-                <div class="form-group col-md-6 mb-4">
-                    <label for="carte">Numéro de la carte</label>
-                    <input type="text" class="form-control" id="carte" name="carte" placeholder="numéro de carte"
-                        required />
-                    <div class="invalid-feedback">Erreur</div>
-                </div>
-
-                <div class="form-group col-md-6 mb-4">
-                    <label for="cvv">CVV</label>
-                    <input type="text" class="form-control" id="cvv" name="cvv" placeholder="CVV" required />
-                    <div class="invalid-feedback">Erreur</div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 mb-4">
+                        <label for="carte">Numéro de la carte</label>
+                        <input type="text" class="form-control" id="carte" name="carte" placeholder="numéro de carte" required />
+                        <div class="invalid-feedback">Erreur</div>
+                    </div>
+                    <div class="form-group col-md-3 mb-4">
+                        <label for="cvv">CVV</label>
+                        <input type="text" class="form-control" id="cvv" name="cvv" placeholder="CVV" required />
+                        <div class="invalid-feedback">Erreur</div>
+                    </div>
+                    <div class="form-group col-md-3 mb-4">
+                        <label for="expireOn">Expire le</label>
+                        <input type="text" class="form-control" id="expireOn" name="expireOn" placeholder="Expire le" required />
+                        <div class="invalid-feedback">Erreur</div>
+                    </div>
                 </div>
                 
             </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-6 mb-4">
-                    <label for="expireOn">Expire le</label>
-                    <input type="text" class="form-control" id="expireOn" name="expireOn" placeholder="Expire le"
-                        required />
-                    <div class="invalid-feedback">Erreur</div>
-                </div>
-            </div>
+            <hr style="border: 2px solid #2c0844; margin-top: 20px;">
 
             <div class="form-row">
                 <div class="form-group col-md-6 mb-4">
                     <label for="createPassword">Créer un mot de passe</label>
-                    <input type="password" class="form-control" id="createPassword" name="createPassword"
+                    <input type="password" class="form-control" id="password" name="password"
                         placeholder="Créer un mot de passe" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
@@ -100,79 +95,24 @@
                     J'accepte les conditions générales.
                 </label>
             </div>
-            <button type="submit" class="btn btn-primary mt-4 mx-auto d-block">
-                S'inscrire >
-            </button>
-        </form>
 
-        
-
-
-
-
-
-
-        <!-- <form class="registration-form">
-            <div class="registration-form">
-                <div class="form-pair">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Nom" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="card-number" name="card-number" placeholder="Numéro de la carte" required>
-                    </div>                    
+            <div class="form-row">
+                <div class="form-group col-md-12 text-center">
+                    <!-- Bouton "S'inscrire" -->
+                    <button type="submit"class="custom-button mr-3">
+                        S'inscrire
+                    </button>
+                    <!-- Bouton "Retour" -->
+                    <a href="Welcome.html" class="custom-button btn-secondary">
+                        Retour
+                    </a>
                 </div>
-                <div class="form-pair">
-                    <div class="form-group">
-                        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Téléphone" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="expireOn" name="expireOn" placeholder="Expire le" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="cvv" name="cvv" placeholder="CVV" required>
-                    </div>
-                </div>
-                <div class="form-pair">
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="createPassword" name="createPassword" placeholder="Créer un mot de passe" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmer le mot de passe" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="agree-terms">
-                        <input type="checkbox" id="agree-terms" name="agree-terms">
-                        J'accepte les conditions générales.
-                    </label>
-                </div>                
-                <button class="button-login" type="submit">S'inscrire ></button>
             </div>
-        </form> -->
-    </div>
+            
+            
 
-    <script>
-        (
-            function() {
-          window.addEventListener('load', function() {
-            var forms = document.getElementsByClassName('needs-validation');
-      
-            var validation = Array.prototype.filter.call(forms, function(form) {
-              form.addEventListener('submit', function(event) {
-                if (form.checkValidity() === false) {
-                  event.preventDefault();
-                  event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-              }, false);
-            });
-          }, false);
-        })();
-      </script>
+        </form>
+    </div>
     
 </body>
 

@@ -206,3 +206,13 @@ form label {
 form .form-check-label {
     color: #fff;
 }
+
+/* boutons */
+
+.custom-button {
+    background-color: var(--couleur-bouton-violet); 
+    color: var(--couleur-text-blanc); 
+    border: none;
+    padding: 10px 25px;
+    border-radius: 30px;
+}

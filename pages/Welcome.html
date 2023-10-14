@@ -15,6 +15,7 @@
     <link rel='stylesheet' type='text/css' media='screen' href='../css/Welcome.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='../css/varColor.css'>
     <script src="../scripts/Eye.js"></script>
+    <script src="../scripts/load.js"></script>
 </head> 
 <body>
     <div class="center-box">
@@ -29,7 +30,7 @@
                 <h1>Bienvenue,</h1>
                 <p>Saisissez vos informations pour vous connecter</p>
             </div>
-            <form class="login-form">
+            <form class="login-form" method="POST">
                 <div class="form-group">
                     <input type="text" id="email" name="email" placeholder="E-mail" required>
                 </div>
@@ -40,6 +41,7 @@
                     </div>
                 </div>
                 <button class="button-login" type="submit">Se connecter > </button>
+                <button class="button-reset" type="reset">Réinitialiser</button>
             </form>
         </div>
     </div>    
