@@ -22,20 +22,31 @@ $request = "
 SELECT *
 FROM dsd_users
 WHERE email = $email";
-
 $result = $cnx->prepare($request);
 $result->execute();
 $result = $result->fetchAll();
+
+//SI YA DEJA QUELQU'UN AVEC CET EMAIL
+//TODO
+if (count($result) > 0){
+    echo "Erreur : email déjà utilisé<br>";
+}
+
+
+
+
+
 print_r($result);
 
     $request = "
-    INSERT INTO users VALUES
-    (NULL,
+    INSERT INTO `dsd_users`(`email`, `password`, `numeroSiren`, `role`, `raisonSociale`, `telephone`) 
+    VALUES
+    (
     '".$email."',
     '".$password."',
     '".$inscriptionDate."',
-    ".$numeroSiren.",
-    'cli',
+    '".$numeroSiren.",'
+    'Client',
     '".$raisonSociale."',
     '".$telephone."')
     ;";
