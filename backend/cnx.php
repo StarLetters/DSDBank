@@ -5,7 +5,6 @@ try {
     echo "Connexion réussie"; 
 }
 catch (PDOException $e) {
-    echo "ERREUR : La connexion a échouée";
     echo $e;
 }
 ?>
