@@ -1,21 +1,21 @@
 <?php
 session_start();
 // Si il manque une donnée dans le formulaire
-if ( (!isset($_POST['email'])) || (!isset($_POST['password'])) || (!isset($_POST['numeroSiren'])) || (!isset($_POST['raisonSociale'])) || (!isset($_POST['telephone'])) ){
+if ( (!isset($_POST['email'])) || (!isset($_POST['password'])) || (!isset($_POST['siren'])) || (!isset($_POST['socialReason'])) || (!isset($_POST['phone'])) ){
 }
 else {
 
 include('../backend/cnx.php');
 
 // Données à insérer dans la base de données
-$email = $_POST['email'];
-$password = $_POST['password'];
+$email = htmlspecialchars($_POST['email']);
+$password = htmlspecialchars($_POST['password']);
 $inscriptionDate = date("Y-m-d");
-$numeroSiren = $_POST['numeroSiren'];
-$raisonSociale = $_POST['raisonSociale'];
-$telephone = $_POST['telephone'];
+$siren = htmlspecialchars($_POST['siren']);
+$socialReason = htmlspecialchars($_POST['socialReason']);
+$phone = $_POST['phone'];
 
-// Vérification de l'unicité de l'email
+// Vérification de l'unicite de l'email
 $request = 'SELECT email, password FROM dsd_users WHERE email = "'.$email.'"';
 
 $result = $cnx->prepare($request);
@@ -34,13 +34,11 @@ VALUES
 (
     "'.$email.'",
     SHA2("'.$password.'",256),
-    "'.$numeroSiren.'",
+    "'.$siren.'",
     "Client",
-    "'.$raisonSociale.'",
-    "'.$telephone.'"
+    "'.$socialReason.'",
+    "'.$phone.'"
 );';
-
-echo $request;
 
 $result = $cnx->prepare($request);
 $result->execute();
@@ -84,13 +82,13 @@ $result->closeCursor();
         <form method="POST" action="register.php" class="registration-form mt-4 needs-validation" novalidate>
             <div class="form-row">
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Raison Sociale -->
-                    <label for="raisonSociale">Raison Sociale</label>
-                    <input class="form-control" type="text" id="raisonSociale" name="raisonSociale" placeholder="Raison Sociale" maxlength="100" required />
+                    <label for="socialReason">Raison Sociale</label>
+                    <input class="form-control" type="text" id="socialReason" name="socialReason" placeholder="Raison Sociale" maxlength="100" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Raison Sociale -->
-                    <label for="numeroSiren">N° SIREN</label>
-                    <input class="form-control" type="text" id="numeroSiren" name="numeroSiren" placeholder="Numéro SIREN" pattern="[0-9]{9}" required />
+                    <label for="siren">N° SIREN</label>
+                    <input class="form-control" type="text" id="siren" name="siren" placeholder="Numéro SIREN" pattern="[0-9]{9}" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Email -->
@@ -99,8 +97,8 @@ $result->closeCursor();
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Téléphone --> <!-- PAS SUR POUR LE PATTERN -->
-                    <label for="phoneNumber">Téléphone</label>
-                    <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="Téléphone" pattern="^\+?\d{7,10}$" />
+                    <label for="phone">Téléphone</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Téléphone" pattern="^\+?\d{7,10}$" />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
             </div>
@@ -112,8 +110,8 @@ $result->closeCursor();
 
                 <div class="form-row">
                     <div class="form-group col-md-11 mb-4">
-                        <label for="carte">Numéro de carte bancaire</label>
-                        <input type="text" class="form-control" id="carte" name="carte" placeholder="Numéro de carte" pattern="(?:[0-9]{4}[\s-]?){3}[0-9]{4}" required />
+                        <label for="card">Numéro de carte bancaire</label>
+                        <input type="text" class="form-control" id="card" name="card" placeholder="Numéro de carte" pattern="(?:[0-9]{4}[\s-]?){3}[0-9]{4}" required />
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                     
@@ -127,16 +125,16 @@ $result->closeCursor();
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-1 mb-4">
-                    <label for="expireOn">Expire le</label>
-                    <input type="text" class="form-control" id="expireOn" name="expireOn" placeholder="jj" pattern="[1-9]|[12][0-9]|3[01]" required />
+                    <label for="expireOnDay">Expire le</label>
+                    <input type="text" class="form-control" id="expireOnDay" name="expireOnDay" placeholder="jj" pattern="[1-9]|[12][0-9]|3[01]" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group">
                     /
                 </div>
                 <div class="form-group col-md-1 mb-4">
-                    <label for="expireOn">&nbsp;</label>
-                    <input type="text" class="form-control" id="expireOn" name="expireOn" placeholder="mm" pattern="[0-9]{2}" required />
+                    <label for="expireOnMonth">&nbsp;</label>
+                    <input type="text" class="form-control" id="expireOnMonth" name="expireOnMonth" placeholder="mm" pattern="[0-9]{2}" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
             </div>
@@ -147,13 +145,13 @@ $result->closeCursor();
                 <div class="form-group col-md-6 mb-4">
                     <label for="createPassword">Créer un mot de passe</label>
                     <input type="password" class="form-control" id="password" name="password"
-                        placeholder="Créer un mot de passe" required />
+                        placeholder="Créer un mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{12,}$" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4">
                     <label for="phoneNumber">Confirmation du mot de passe</label>
                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
-                        placeholder="Confirmer le mot de passe" required />
+                        placeholder="Confirmer le mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{12,}$" required />
                 </div>
                 <div class="invalid-feedback">Erreur</div>
             </div>
