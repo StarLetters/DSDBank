@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--couleur-violette);
+}
+
+.sidebar {
+    width: 250px;
+    height: 100%;
+    background-color: #9f94de;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    color: white;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding-left: 20px;
+}
+
+nav ul li {
+    margin-bottom: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 5px 0;
+    transition: 0.2s;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+.divider {
+    background-color: #2980b9;
+    height: 2px;
+    margin: 20px 0;
+}
+
+
+nav ul:last-child li a:hover {
+    background-color: #3498db;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 80px;;
+    width: 60%;
+}
+
+/* Styles CSS pour la section profil */
+.profile-section {
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    margin-left: 20px;
+}
+
+.profile-picture img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-info {
+    flex-grow: 1;
+}
+
+.profile-name {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.profile-profession {
+    font-size: 14px;
+    color: #777;
+}
+
+
+.container { 
+    color: #fff;
+    padding: 20px;
+}
