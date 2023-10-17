@@ -1,11 +1,8 @@
 <?php 
 session_start();
 
-if ( (!isset($_POST['email'])) || (!isset($_POST['password']))) {
+if ( isset($_POST['email']) && !isset($_POST['password'])) {
 
-    
-} else {
-    
     include('../backend/cnx.php');
 
     $email = $_POST['email'];
@@ -81,8 +78,10 @@ function isPasswordValid($password,$hash){
                         <span class="eye-icon" onclick="togglePasswordVisibility(this)">&#x1F441;</span> <!-- pour le eye -->
                     </div>
                 </div>
-                <button class="button-login" type="submit">Se connecter > </button>
                 <button class="button-reset" type="reset">Réinitialiser</button>
+                <button class="button-login" type="submit">Se connecter > </button>
+                <a href="test.php">test inputs</a>
+                
             </form>
         </div>
     </div>    

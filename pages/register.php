@@ -13,37 +13,34 @@ $password = htmlspecialchars($_POST['password']);
 $inscriptionDate = date("Y-m-d");
 $siren = htmlspecialchars($_POST['siren']);
 $socialReason = htmlspecialchars($_POST['socialReason']);
-$phone = $_POST['phone'];
+$phone = htmlspecialchars($_POST['phone']);
+
 
 // Vérification de l'unicite de l'email
-$request = 'SELECT email, password FROM dsd_users WHERE email = "'.$email.'"';
+$request = 'SELECT email, password FROM dsd_users WHERE email = :email';
 
 $result = $cnx->prepare($request);
+$result->bindParam(':email', $email);
 $result->execute();
 $result = $result->fetchAll();
 
 //SI YA DEJA QUELQU'UN AVEC CET EMAIL
 //TODO
 if (count($result) > 0){
-    echo "Erreur : email déjà utilisé<br>";
+    exit;
 }
 
-$request = '
-INSERT INTO `dsd_users` (`email`, `password`, `numeroSiren`, `role`, `raisonSociale`, `telephone`) 
-VALUES
-(
-    "'.$email.'",
-    SHA2("'.$password.'",256),
-    "'.$siren.'",
-    "Client",
-    "'.$socialReason.'",
-    "'.$phone.'"
-);';
+$request = 
+'INSERT INTO `dsd_users` (`email`, `password`, `numeroSiren`, `role`, `raisonSociale`, `telephone`)
+VALUES (:email, SHA2(:password, 256), :siren, "Client", :socialReason, :phone)';
 
 $result = $cnx->prepare($request);
+$result->bindParam(':email', $email);
+$result->bindParam(':password', $password);
+$result->bindParam(':siren', $siren);
+$result->bindParam(':socialReason', $socialReason);
+$result->bindParam(':phone', $phone);
 $result->execute();
-
-
 
 $result->closeCursor();
 }
