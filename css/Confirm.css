@@ -1,0 +1,47 @@
+body, div, p {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.container {
+    margin: 0;
+    padding: 50px;
+    background: url("../data/img/imgachangersvp.jpg");
+}
+
+.header {
+    padding: 30px 0 30px 30px;
+    background-color: #251250;
+    color: white;
+    font-weight: 700;
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 7px;
+}
+
+.content {
+    padding: 100px 30px 100px 30px;
+    background-color: #9e6bdc;
+}
+
+.message {
+    padding-top: 40px;
+    font-size: 25px;
+    text-align: center;
+    float: left;
+}
+
+.button {
+    padding: 10px 25px;
+    background-color: rgba(39, 18, 66, 0.804);
+    color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    display: block;
+    width: 250px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 28px;
+    margin-top: 50px;
+}
