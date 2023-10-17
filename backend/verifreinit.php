@@ -20,12 +20,12 @@ if (!isset($_GET['email']) || !isset($_GET['token'])) {
     $token = $_GET['token'];
 
     include('cnx.php');
-    $requete = "SELECT * FROM token WHERE email = '" . $email . "' AND token = '" . $token . "' AND type = 'verification';";
+    $requete = "SELECT * FROM token WHERE email = '" . $email . "' AND token = '" . $token . "' AND type = 'reinitialisation';";
     $cnx->prepare($requete);
     $resultat = $cnx->query($requete);
 
     if($resultat->rowCount() == 0){
-        echo "Erreur lors de la vérification";
+        echo "Erreur lors de la reinitialisation";
         exit;
     }
     while ($donnees = $reponse->fetch()) {
