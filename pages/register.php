@@ -2,12 +2,8 @@
 session_start();
 // Si il manque une donnée dans le formulaire
 if ( (!isset($_POST['email'])) || (!isset($_POST['password'])) || (!isset($_POST['numeroSiren'])) || (!isset($_POST['raisonSociale'])) || (!isset($_POST['telephone'])) ){
-    echo "Erreur : données manquantes<br>";
-    print_r($_POST);
-
-    echo "<br><a href='../../../index.html'>Retour</a>";
-    exit;
 }
+else {
 
 include('../backend/cnx.php');
 
@@ -52,6 +48,7 @@ $result->execute();
 
 
 $result->closeCursor();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -174,7 +171,7 @@ $result->closeCursor();
                         S'inscrire
                     </button>
                     <!-- Bouton "Retour" -->
-                    <a href="Welcome.html" class="custom-button btn-secondary">
+                    <a href="welcome.php" class="custom-button btn-secondary">
                         Retour
                     </a>
                 </div>
