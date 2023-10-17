@@ -144,13 +144,13 @@ verification();
 
             <div class="form-row">
                 <div class="form-group col-md-6 mb-4">
-                    <label for="createPassword">Créer un mot de passe</label>
+                    <label for="password">Créer un mot de passe</label>
                     <input type="password" class="form-control" id="password" name="password"
                         placeholder="Créer un mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{12,}$" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4">
-                    <label for="phoneNumber">Confirmation du mot de passe</label>
+                    <label for="confirmPassword">Confirmation du mot de passe</label>
                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
                         placeholder="Confirmer le mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{12,}$" required />
                 </div>

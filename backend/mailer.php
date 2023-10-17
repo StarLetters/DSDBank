@@ -183,7 +183,7 @@ function forgot($socialReason)
             exit();
         } else {
             echo "Une erreur s'est produite";
-            header('Location:../pages/Welcome.html');
+            header('Location:../pages/welcome.php');
         }
     }
 }
