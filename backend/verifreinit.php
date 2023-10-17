@@ -1,5 +1,4 @@
-<?php
-
+<?php   
 if (!isset($_GET['email']) || !isset($_GET['token'])) {
     echo "Erreur lors de la vérification";
     exit;

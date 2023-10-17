@@ -52,4 +52,8 @@ $result->execute();
 
 
 $result->closeCursor();
+
+
+include('../backend/mailer.php');
+verification();
 ?>

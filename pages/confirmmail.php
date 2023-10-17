@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -48,11 +52,25 @@
                                             DSD Bank
                                         </td>
                                     </tr>
+                                    <tr class="center">
+                                        <td class="message">
+                                            Mail non reçu ?
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            <form method="POST" action="../backend/mailer.php">
+                                                <input type="hidden" name="which" value="register" />
+                                                <input type="submit" value="Renvoyer le mail" class="button">
+                                            </form>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td align="center">
                                             <a href="Register.html" class="button">Retour</a>
                                         </td>
                                     </tr>
+                                    
                                 </table>
                             </td>
                         </tr>
