@@ -71,6 +71,7 @@ verification();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     <script src="../scripts/load.js"></script>
+    <script defer src="../scripts/passwordMatch.js"></script>
 </head>
 
 <body>
@@ -80,7 +81,7 @@ verification();
         </div>
 
 
-        <form method="POST" action="register.php" class="registration-form mt-4 needs-validation" novalidate>
+        <form method="POST" action="register.php" class="registration-form mt-4 needs-validation" id="registration-form" novalidate>
             <div class="form-row">
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Raison Sociale -->
                     <label for="socialReason">Raison Sociale</label>
@@ -112,7 +113,7 @@ verification();
                 <div class="form-row">
                     <div class="form-group col-md-11 mb-4">
                         <label for="card">Numéro de carte bancaire</label>
-                        <input type="text" class="form-control" id="card" name="card" placeholder="Numéro de carte" pattern="(?:[0-9]{4}[\s-]?){3}[0-9]{4}" required />
+                        <input type="text" class="form-control" id="card" name="card" placeholder="Numéro de carte" pattern="[0-9]{4}[\s-]?[0-9]{4}[\s-]?[0-9]{4}" required />
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                     
@@ -175,7 +176,6 @@ verification();
                     </a>
                 </div>
             </div>
-            
             
 
         </form>
