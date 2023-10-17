@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,72 +11,45 @@ session_start();
     <link rel="stylesheet" href="../css/Confirm.css">
 </head>
 
-<body background="../data/img/imgachangersvp.jpg">
-    <div class="container">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%">
-            <tr>
-                <td>
-                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-                        <tr>
-                            <td class="header">
-                                CONFIRMATION MAIL
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="content">
-                                <!-- Table -->
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td align="center">
-                                            <img src="../data/img/LogoDSD.png">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="message">
-                                            Bienvenue!
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="message">
-                                            Un mail de confirmation vient de vous être envoyé!
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="message">
-                                            Meilleures salutations,
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="message">
-                                            DSD Bank
-                                        </td>
-                                    </tr>
-                                    <tr class="center">
-                                        <td class="message">
-                                            Mail non reçu ?
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">
-                                            <form method="POST" action="../backend/mailer.php">
-                                                <input type="hidden" name="which" value="register" />
-                                                <input type="submit" value="Renvoyer le mail" class="button">
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">
-                                            <a href="Register.html" class="button">Retour</a>
-                                        </td>
-                                    </tr>
-                                    
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+<body>
+    <div class="outer-container">
+        <div class="content-container">
+            <div class="header">
+                CONFIRMATION MAIL
+            </div>
+            <div class="content">
+                <div class="center">
+                    <img src="../data/img/LogoDSD.png">
+                </div>
+                <div class="message">
+                    Bienvenue!
+                </div>
+                <div class="message">
+                    Un mail de confirmation vient de vous être envoyé!
+                </div>
+                <div class="message">
+                    Meilleures salutations,
+                </div>
+                <div class="message">
+                    DSD Bank
+                </div>
+                <div class="center">
+                    <div class="message">
+                        Mail non reçu ?
+                    </div>
+                </div>
+                <div class="center">
+                    <form method="POST" action="../backend/mailer.php">
+                        <input type="hidden" name="which" value="register" />
+                        <input type="submit" value="Renvoyer le mail" class="button">
+                    </form>
+                </div>
+                <div class="center top-left-button">
+                    <a href="register.php" class="back-button">Retour</a>
+                </div>
+
+            </div>
+        </div>
     </div>
 </body>
 
