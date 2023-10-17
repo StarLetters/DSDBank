@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -21,7 +22,7 @@ require '../lib/PHPMailer/src/SMTP.php';
         - false si le mail n'a pas été envoyé
         
     */
-function envoi_mail($name, $email, $token)
+function envoi_mail($name, $email, $subject, $body)
 {
 
     $mail = new PHPMailer(true);
@@ -43,20 +44,8 @@ function envoi_mail($name, $email, $token)
 
         //Contenu du mail
         $mail->isHTML(true);
-        $mail->Subject = "Verification de votre adresse mail";
-
-        $mail->Body = "<h1> DSDBank </h1>";
-        $mail->Body .= "Bonjour " . $name . ",";
-        $mail->Body .= "<br><br>";
-        $mail->Body .= "Il ne vous reste qu'une étape pour vérifier votre nouvelle adresse e-mail.";
-        $mail->Body .= "<br><br>";
-        $mail->Body .= "Veuillez cliquer sur ce lien : <a href='" . SITE_NAME . "?email=" . $email . "&token=" . $token . "'>Cliquer ici</a>";
-        $mail->Body .= "<br><br>";
-        $mail->Body .= "Si vous n'avez pas demandé à vérifier cette adresse e-mail, vous pouvez ignorer cet e-mail.";
-        $mail->Body .= "<br><br>";
-        $mail->Body .= "Merci,";
-        $mail->Body .= "<br>";
-        $mail->Body .= "L'équipe DSDBank";
+        $mail->Subject = $subject;
+        $mail->Body = $body;
         $mail->send();
         return true;
     } catch (Exception $e) {
@@ -64,19 +53,6 @@ function envoi_mail($name, $email, $token)
     }
 }
 
-/*
-    Fonction de test d'envoi de mail
-        Paramètres :
-            - $name : nom de l'utilisateur
-            - $email : email de l'utilisateur
-            - $token : token de vérification
-    Retour :
-        - rien
-*/
-function test_mail($name, $email, $token)
-{
-    envoi_mail($name, $email, $token);
-}
 
 /*
     Fonction d'insertion du token dans la base de données
@@ -94,21 +70,56 @@ function insertion($email, $token)
     $cnx->exec($requete);
 }
 
-if (isset($_POST['nom']) && isset($_POST['email'])) {
-    $nom = $_POST['nom'];
-    $email = $_POST['email'];
-    $string = sha1(rand());
-    $token = substr($string, 0, 16); // Génération du token
+/*
+    Fonction de vérification de l'adresse mail
+    Retour :
+        - true si l'adresse mail a été vérifiée
+        - false si l'adresse mail n'a pas été vérifiée
+*/
 
-    if (envoi_mail($nom, $email, $token)) {
-        //echo 'OK';
-        insertion($email, $token);
-        header('Location: ../pages/confirmmail.php');
-        exit();
+function verification()
+{
+    if ((isset($_POST['nom']) && isset($_POST['email'])) || (isset($_SESSION['email']) && isset($_SESSION['token']) && isset($_SESSION['nom']))) {
+        if (isset($_SESSION['email']) && isset($_SESSION['token']) && isset($_SESSION['nom'])) {
+            $email = $_SESSION['email'];
+            $token = $_SESSION['token'];
+            $nom = $_SESSION['nom'];
+        } else {
+            $nom = $_POST['nom'];
+            $email = $_POST['email'];
+            $string = sha1(rand());
+            $token = substr($string, 0, 16); // Génération du token
+            $_SESSION['email'] = $email;
+            $_SESSION['token'] = $token;
+            $_SESSION['nom'] = $nom;
+        }
+
+        $subject = "Verification de votre adresse mail";
+
+        $body = "<h1> DSDBank </h1>";
+        $body .= "Bonjour " . $nom . ",";
+        $body .= "<br><br>";
+        $body .= "Il ne vous reste qu'une étape pour vérifier votre nouvelle adresse e-mail.";
+        $body .= "<br><br>";
+        $body .= "Veuillez cliquer sur ce lien : <a href='" . SITE_NAME . "?email=" . $email . "&token=" . $token . "'>Cliquer ici</a>";
+        $body .= "<br><br>";
+        $body .= "Si vous n'avez pas demandé à vérifier cette adresse e-mail, vous pouvez ignorer cet e-mail.";
+        $body .= "<br><br>";
+        $body .= "Merci,";
+        $body .= "<br>";
+        $body .= "L'équipe DSDBank";
+
+        if (envoi_mail($nom, $email, $subject, $body)) {
+            //echo 'OK';
+            insertion($email, $token);
+            header('Location: ../pages/confirmmail.php');
+            exit();
+        } else {
+            echo "Une erreur s'est produite";
+        }
     } else {
-        echo "Une erreur s'est produite";
+        //test_mail("lucas", "houangkeo@gmail.com", $token);
+        header('Location: ../pages/register.php');
     }
-} else {
-    //test_mail("lucas", "houangkeo@gmail.com", $token);
-    echo "non";
 }
+
