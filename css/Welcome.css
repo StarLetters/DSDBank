@@ -135,6 +135,15 @@ body {
     color: var(--couleur-violette);
 }
 
+.avertissement{
+    background-color: var(--couleur-rouge);
+    font-size: 15px;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
 
 /* Media Query pour les écrans moyens */
 @media (max-width: 992px) {
