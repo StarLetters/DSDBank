@@ -14,7 +14,9 @@ $inscriptionDate = date("Y-m-d");
 $siren = htmlspecialchars($_POST['siren']);
 $socialReason = htmlspecialchars($_POST['socialReason']);
 $phone = htmlspecialchars($_POST['phone']);
-
+$cardNumber = htmlspecialchars($_POST['card']);
+$expirationDate = htmlspecialchars($_POST['expireOnDay']) . '/' . htmlspecialchars($_POST['expireOnMonth']);
+$cvv = htmlspecialchars($_POST['cvv']);
 
 // Vérification de l'unicite de l'email
 $request = 'SELECT email, password FROM dsd_users WHERE email = :email';
@@ -31,8 +33,8 @@ if (count($result) > 0){
 }
 
 $request = 
-'INSERT INTO `dsd_users` (`email`, `password`, `numeroSiren`, `role`, `raisonSociale`, `telephone`)
-VALUES (:email, SHA2(:password, 256), :siren, "Client", :socialReason, :phone)';
+'INSERT INTO `dsd_users` (`email`, `password`, `numeroSiren`, `role`, `raisonSociale`, `telephone`, `numeroCarte`, `dateExpiration`, `cvv`)
+VALUES (:email, SHA2(:password, 256), :siren, "Client", :socialReason, :phone, :cardNumber, :expirationDate, :cvv )';
 
 $result = $cnx->prepare($request);
 $result->bindParam(':email', $email);
@@ -40,6 +42,9 @@ $result->bindParam(':password', $password);
 $result->bindParam(':siren', $siren);
 $result->bindParam(':socialReason', $socialReason);
 $result->bindParam(':phone', $phone);
+$result->bindParam(':cardNumber', $cardNumber);
+$result->bindParam(':expirationDate', $expirationDate);
+$result->bindParam(':cvv', $cvv);
 $result->execute();
 
 $result->closeCursor();
