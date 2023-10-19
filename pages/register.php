@@ -94,17 +94,17 @@ verification();
                 </div>
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Raison Sociale -->
                     <label for="siren">N° SIREN</label>
-                    <input class="form-control" type="text" id="siren" name="siren" placeholder="Numéro SIREN" pattern="[0-9]{9}" required />
+                    <input class="form-control" type="text" id="siren" name="siren" placeholder="Numéro SIREN" pattern="[0-9]{9}" maxlength="9" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Email -->
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" maxlength="50" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Téléphone --> <!-- PAS SUR POUR LE PATTERN -->
                     <label for="phone">Téléphone</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Téléphone" pattern="^\+?\d{7,10}$" />
+                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Téléphone" maxlength="10" pattern="^\+?\d{7,10}$" />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
             </div>
@@ -117,7 +117,7 @@ verification();
                 <div class="form-row">
                     <div class="form-group col-md-11 mb-4">
                         <label for="card">Numéro de carte bancaire</label>
-                        <input type="text" class="form-control" id="card" name="card" placeholder="Numéro de carte" pattern="[0-9]{4}[\s-]?[0-9]{4}[\s-]?[0-9]{4}" required />
+                        <input type="text" class="form-control" id="card" name="card" placeholder="Numéro de carte" pattern="[0-9]{4}[\s-]?[0-9]{4}[\s-]?[0-9]{4}" maxlength="10" required />
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                     
@@ -127,12 +127,12 @@ verification();
             <div class="form-row">
                 <div class="form-group col-md-1 mb-4">
                     <label for="cvv">CVV</label>
-                    <input type="text" class="form-control" id="cvv" name="cvv" placeholder="000" pattern="[0-9]{3}" required />
+                    <input type="text" class="form-control" id="cvv" name="cvv" placeholder="000" pattern="[0-9]{3}" maxlength="3" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-1 mb-4">
                     <label for="expireOnDay">Expire le</label>
-                    <input type="text" class="form-control" id="expireOnDay" name="expireOnDay" placeholder="jj" pattern="[1-9]|[12][0-9]|3[01]" required />
+                    <input type="text" class="form-control" id="expireOnDay" name="expireOnDay" placeholder="jj" pattern="[1-9]|[12][0-9]|3[01]" maxlength="2" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group">
@@ -140,7 +140,7 @@ verification();
                 </div>
                 <div class="form-group col-md-1 mb-4">
                     <label for="expireOnMonth">&nbsp;</label>
-                    <input type="text" class="form-control" id="expireOnMonth" name="expireOnMonth" placeholder="mm" pattern="[0-9]{2}" required />
+                    <input type="text" class="form-control" id="expireOnMonth" name="expireOnMonth" placeholder="mm" pattern="[0-9]{2}" maxlength="2" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
             </div>
