@@ -14,7 +14,7 @@ $siren = htmlspecialchars($_POST['siren']);
 $socialReason = htmlspecialchars($_POST['socialReason']);
 $phone = htmlspecialchars($_POST['phone']);
 $cardNumber = htmlspecialchars($_POST['card']);
-$expirationDate = htmlspecialchars($_POST['expireOnYear']) . '-' . htmlspecialchars($_POST['expireOnMonth']) . '-01';
+$expirationDate = "20" . htmlspecialchars($_POST['expireOnYear']) . '-' . htmlspecialchars($_POST['expireOnMonth']) . '-01';
 $cvv = htmlspecialchars($_POST['cvv']);
 
 // Vérification de l'unicite de l'email
@@ -45,7 +45,9 @@ $result->execute();
 
 $idUtilisateur = $result->fetchColumn();
 
+
 // Insertion des données de client dans la base de données
+$request = 
 'INSERT INTO `Client` (`idUtilisateur`, `numSiren`, `raisonSociale`, `numCarte`, `dateExpiration`, `cvv`)
 VALUES (:idUtilisateur, :siren, :socialReason, :cardNumber, :expirationDate, :cvv)';
 $result = $cnx->prepare($request);
@@ -57,8 +59,10 @@ $result->bindParam(':expirationDate', $expirationDate);
 $result->bindParam(':cvv', $cvv);
 $result->execute();
 
-$result->closeCursor();
+
+$result->closeCursor(); 
   
+header('location: home.php');
 //include('../backend/mailer.php');
 //verification();
 }
@@ -142,7 +146,7 @@ $result->closeCursor();
                 </div>
                 <div class="form-group col-md-1 mb-4">
                     <label for="expireOnMonth">Expire le</label>
-                    <input type="text" class="form-control" id="expireOnMonth" name="expireOnMonth" placeholder="mm" pattern="[1-9]|[12][0-9]|3[01]" maxlength="2" required />
+                    <input type="text" class="form-control" id="expireOnMonth" name="expireOnMonth" placeholder="mm" pattern="[0-9]|1[0-2]" maxlength="2" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group">
