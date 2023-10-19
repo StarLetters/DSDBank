@@ -30,22 +30,12 @@ if (count($result) > 0){
     exit;
 }
 
-$request = 
-'INSERT INTO `Utilisateur` (`email`, `mdp`, `role`, `numTel`)
-VALUES (:email, SHA2(:password, 256), "Client", :phone)';
 
-$result = $cnx->prepare($request);
-$result->bindParam(':email', $email);
-$result->bindParam(':password', $password);
-$result->bindParam(':phone', $phone);
-$result->execute();
-
-
+// Insertion des données d'utilisateur dans la base de données
 $request = 
 'INSERT INTO `Utilisateur` (`email`, `mdp`, `role`, `numTel`)
 VALUES (:email, SHA2(:password, 256), "Client", :phone)
 RETURNING idUtilisateur';
-
 $result = $cnx->prepare($request);
 $result->bindParam(':email', $email);
 $result->bindParam(':password', $password);
@@ -54,11 +44,29 @@ $result->execute();
 
 $idUtilisateur = $result->fetchColumn();
 
+// Insertion des données de client dans la base de données
+'INSERT INTO `Client` (`idUtilisateur`, `numSiren`, `raisonSociale`, `numCarte`, `dateExpiration`, `cvv`)
+VALUES (:idUtilisateur, :siren, :socialReason, :cardNumber, :expirationDate, :cvv)';
+$result = $cnx->prepare($request);
+$result->bindParam(':idUtilisateur', $idUtilisateur);
+$result->bindParam(':siren', $siren);
+$result->bindParam(':socialReason', $socialReason);
+$result->bindParam(':cardNumber', $cardNumber);
+$result->bindParam(':expirationDate', $expirationDate);
+$result->bindParam(':cvv', $cvv);
+$result->execute();
+
+echo "quoi";
+echo $idUtilisateur;
+echo "coubeh";
+exit;
+
 $result->closeCursor();
   
 //include('../backend/mailer.php');
 //verification();
 }
+print_r($_POST);
 ?>
 <!DOCTYPE html>
 <html>
@@ -138,16 +146,16 @@ $result->closeCursor();
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-1 mb-4">
-                    <label for="expireOnDay">Expire le</label>
-                    <input type="text" class="form-control" id="expireOnDay" name="expireOnDay" placeholder="jj" pattern="[1-9]|[12][0-9]|3[01]" maxlength="2" required />
+                    <label for="expireOnMonth">Expire le</label>
+                    <input type="text" class="form-control" id="expireOnMonth" name="expireOnMonth" placeholder="mm" pattern="[1-9]|[12][0-9]|3[01]" maxlength="2" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group">
                     /
                 </div>
                 <div class="form-group col-md-1 mb-4">
-                    <label for="expireOnMonth">&nbsp;</label>
-                    <input type="text" class="form-control" id="expireOnMonth" name="expireOnMonth" placeholder="mm" pattern="[0-9]{2}" maxlength="2" required />
+                    <label for="expireOnYear">&nbsp;</label>
+                    <input type="text" class="form-control" id="expireOnYear" name="expireOnYear" placeholder="yy" pattern="[0-9]{2}" maxlength="2" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
             </div>
