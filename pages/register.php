@@ -17,7 +17,7 @@ $expirationDate = htmlspecialchars($_POST['expireOnYear']) . '-' . htmlspecialch
 $cvv = htmlspecialchars($_POST['cvv']);
 
 // Vérification de l'unicite de l'email
-$request = 'SELECT email, password FROM dsd_users WHERE email = :email';
+$request = 'SELECT email, password FROM Utilisateur WHERE email = :email';
 
 $result = $cnx->prepare($request);
 $result->bindParam(':email', $email);
@@ -31,19 +31,28 @@ if (count($result) > 0){
 }
 
 $request = 
-'INSERT INTO `dsd_users` (`email`, `password`, `numeroSiren`, `role`, `raisonSociale`, `telephone`, `numeroCarte`, `dateExpiration`, `cvv`)
-VALUES (:email, SHA2(:password, 256), :siren, "Client", :socialReason, :phone, :cardNumber, :expirationDate, :cvv )';
+'INSERT INTO `Utilisateur` (`email`, `mdp`, `role`, `numTel`)
+VALUES (:email, SHA2(:password, 256), "Client", :phone)';
 
 $result = $cnx->prepare($request);
 $result->bindParam(':email', $email);
 $result->bindParam(':password', $password);
-$result->bindParam(':siren', $siren);
-$result->bindParam(':socialReason', $socialReason);
 $result->bindParam(':phone', $phone);
-$result->bindParam(':cardNumber', $cardNumber);
-$result->bindParam(':expirationDate', $expirationDate);
-$result->bindParam(':cvv', $cvv);
 $result->execute();
+
+
+$request = 
+'INSERT INTO `Utilisateur` (`email`, `mdp`, `role`, `numTel`)
+VALUES (:email, SHA2(:password, 256), "Client", :phone)
+RETURNING idUtilisateur';
+
+$result = $cnx->prepare($request);
+$result->bindParam(':email', $email);
+$result->bindParam(':password', $password);
+$result->bindParam(':phone', $phone);
+$result->execute();
+
+$idUtilisateur = $result->fetchColumn();
 
 $result->closeCursor();
   
