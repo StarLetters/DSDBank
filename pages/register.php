@@ -1,10 +1,8 @@
 <?php
 session_start();
 // Si il manque une donnée dans le formulaire
-if ( (!isset($_POST['email'])) || (!isset($_POST['password'])) || (!isset($_POST['siren'])) || (!isset($_POST['socialReason'])) || (!isset($_POST['phone'])) ){
-}
-else {
-
+if ( isset($_POST['email']) && isset($_POST['password']) && isset($_POST['siren']) && isset($_POST['socialReason']) && isset($_POST['phone']) && isset($_POST['card']) && isset($_POST['expireOnMonth']) && isset($_POST['expireOnYear']) && isset($_POST['cvv']) )
+{
 include('../backend/cnx.php');
 
 // Données à insérer dans la base de données
@@ -15,7 +13,7 @@ $siren = htmlspecialchars($_POST['siren']);
 $socialReason = htmlspecialchars($_POST['socialReason']);
 $phone = htmlspecialchars($_POST['phone']);
 $cardNumber = htmlspecialchars($_POST['card']);
-$expirationDate = htmlspecialchars($_POST['expireOnDay']) . '/' . htmlspecialchars($_POST['expireOnMonth']);
+$expirationDate = htmlspecialchars($_POST['expireOnYear']) . '-' . htmlspecialchars($_POST['expireOnMonth']) . '-01';
 $cvv = htmlspecialchars($_POST['cvv']);
 
 // Vérification de l'unicite de l'email
@@ -49,8 +47,8 @@ $result->execute();
 
 $result->closeCursor();
   
-include('../backend/mailer.php');
-verification();
+//include('../backend/mailer.php');
+//verification();
 }
 ?>
 <!DOCTYPE html>
@@ -117,7 +115,7 @@ verification();
                 <div class="form-row">
                     <div class="form-group col-md-11 mb-4">
                         <label for="card">Numéro de carte bancaire</label>
-                        <input type="text" class="form-control" id="card" name="card" placeholder="Numéro de carte" pattern="[0-9]{4}[\s-]?[0-9]{4}[\s-]?[0-9]{4}" maxlength="10" required />
+                        <input type="text" class="form-control" id="card" name="card" placeholder="Numéro de carte" pattern="[0-9]{12}" maxlength="12" required />
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                     
