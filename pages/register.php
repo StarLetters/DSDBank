@@ -1,6 +1,7 @@
 <?php
 session_start();
 // Si il manque une donnée dans le formulaire
+
 if ( isset($_POST['email']) && isset($_POST['password']) && isset($_POST['siren']) && isset($_POST['socialReason']) && isset($_POST['phone']) && isset($_POST['card']) && isset($_POST['expireOnMonth']) && isset($_POST['expireOnYear']) && isset($_POST['cvv']) )
 {
 include('../backend/cnx.php');
@@ -56,17 +57,11 @@ $result->bindParam(':expirationDate', $expirationDate);
 $result->bindParam(':cvv', $cvv);
 $result->execute();
 
-echo "quoi";
-echo $idUtilisateur;
-echo "coubeh";
-exit;
-
 $result->closeCursor();
   
 //include('../backend/mailer.php');
 //verification();
 }
-print_r($_POST);
 ?>
 <!DOCTYPE html>
 <html>
@@ -195,13 +190,7 @@ print_r($_POST);
                     </a>
                 </div>
             </div>
-            
-
         </form>
     </div>
-    
 </body>
-
-
-
 </html>
