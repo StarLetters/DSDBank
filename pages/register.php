@@ -1,7 +1,6 @@
 <?php
 session_start();
 // Si il manque une donnée dans le formulaire
-
 if ( isset($_POST['email']) && isset($_POST['password']) && isset($_POST['siren']) && isset($_POST['socialReason']) && isset($_POST['phone']) && isset($_POST['card']) && isset($_POST['expireOnMonth']) && isset($_POST['expireOnYear']) && isset($_POST['cvv']) )
 {
 include('../backend/cnx.php');
@@ -20,17 +19,16 @@ $cvv = htmlspecialchars($_POST['cvv']);
 // Vérification de l'unicite de l'email
 $request = 'SELECT email, password FROM Utilisateur WHERE email = :email';
 
-$result = $cnx->prepare($request);
-$result->bindParam(':email', $email);
-$result->execute();
-$result = $result->fetchAll();
+    $result = $cnx->prepare($request);
+    $result->bindParam(':email', $email);
+    $result->execute();
+    $result = $result->fetchAll();
 
-//SI YA DEJA QUELQU'UN AVEC CET EMAIL
-//TODO
-if (count($result) > 0){
-    exit;
-}
-
+    //SI YA DEJA QUELQU'UN AVEC CET EMAIL
+    //TODO
+    if (count($result) > 0) {
+        exit;
+    }
 
 // Insertion des données d'utilisateur dans la base de données
 $request = 
@@ -78,11 +76,9 @@ header('location: home.php');
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/Register.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/varColor.css" />
 
@@ -122,7 +118,7 @@ header('location: home.php');
                     <div class="invalid-feedback">Erreur</div>
                 </div>
             </div>
-            
+
 
             <hr style="border: 2px solid #252029; margin-top: 20px;">
 
@@ -134,7 +130,7 @@ header('location: home.php');
                         <input type="text" class="form-control" id="card" name="card" placeholder="Numéro de carte" pattern="[0-9]{12}" maxlength="12" required />
                         <div class="invalid-feedback">Erreur</div>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -164,14 +160,12 @@ header('location: home.php');
             <div class="form-row">
                 <div class="form-group col-md-6 mb-4">
                     <label for="password">Créer un mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password"
-                        placeholder="Créer un mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{12,}$" required />
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Créer un mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{12,}$" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4">
                     <label for="confirmPassword">Confirmation du mot de passe</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
-                        placeholder="Confirmer le mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{12,}$" required />
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmer le mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{12,}$" required />
                 </div>
                 <div class="invalid-feedback">Erreur</div>
             </div>
@@ -185,16 +179,17 @@ header('location: home.php');
             <div class="form-row">
                 <div class="form-group col-md-12 text-center">
                     <!-- Bouton "S'inscrire" -->
-                    <button type="submit"class="custom-button mr-3">
+                    <button type="submit" class="custom-button mr-3">
                         S'inscrire
                     </button>
-                    <!-- Bouton "Retour" -->
-                    <a href="welcome.php" class="custom-button btn-secondary">
-                        Retour
-                    </a>
                 </div>
             </div>
+
+
+            <!-- Bouton "Retour" -->
+            <a href="welcome.php" class="custom-button btn-secondary"><span class="arrow-left">&#x2190;</span> Retour</a>
         </form>
     </div>
+
 </body>
 </html>

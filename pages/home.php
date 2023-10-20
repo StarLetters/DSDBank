@@ -1,14 +1,3 @@
-<?php
-session_start();
-
-
-
-
-
-print_r($_SESSION);
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,72 +7,91 @@ print_r($_SESSION);
     <title>Home</title>
 
     <!-- Inclure Bootstrap CSS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
-
+    <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/Home.css">
     <link rel="stylesheet" href="../css/varColor.css">
-
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Barre latérale -->
-            <div class="col-md-3 d-none d-md-block bg-dark sidebar">
-                <img src="../data/img/LogoDSD.png" alt="Logo" class="logo img-fluid mt-3 mb-3">
-                <nav>
-                    <ul class="nav flex-column text-center">
-                        <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Analyse</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Mon portefeuille</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Compte</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Paramètres</a></li>
-                    </ul>
-                </nav>
-                <div class="divider bg-secondary my-3"></div>
-                <nav>
-                    <ul class="nav flex-column text-center">
-                        <li class="nav-item"><a class="nav-link" href="#">Sécurité</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Centre d'assistance</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Mode sombre</a></li>
-                    </ul>
-                </nav>
+    <div class="">
+        <div id="wrapper">
+
+            <aside id="sidebar-wrapper">
+                <div class="sidebar-brand">
+                    <img src="../data/img/LogoDSD.png" alt="Logo" class="img-fluid">
+                </div>
+                <ul class="sidebar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Analyse</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Mon portefeuille</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Compte</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Paramètres</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sécurité</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Centre d'assistance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Mode sombre</a></li>
+                </ul>
                 <div class="profile-section mt-auto pt-7">
                     <div class="profile-picture text-center">
                         <img src="../data/img/LogoDSD.png" alt="Photo de profil" class="img-fluid rounded-circle">
                     </div>
                     <div class="profile-info text-center">
-                        <div class="profile-name">Prénom Nom</div>
-                        <div class="profile-profession">Profession</div>
+                        <div class="profile-name text-white">Prénom Nom</div>
+                        <div class="profile-profession text-white">Profession</div>
                     </div>
                 </div>
+            </aside>
+
+            <div id="navbar-wrapper">
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a href="#" class="navbar-brand" id="sidebar-toggle"><img src="../data/img/hamburger.svg" width="35px" height="35px" alt=""></a>
+                        </div>
+                    </div>
+                </nav>
             </div>
 
-            <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <section id="content-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="content-title text-white">Bonjour, <span>Prénom Nom</span></h2>
+                    </div>
+                </div>
+            </section>
 
 
-                <!-- Section de profil -->
-                <div class="text-center mt-5">
-                    <h1 class="text-light">Bonjour, Lucas</h1>
+            <section>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div style="height: 120px;"></div> 
+                        <p class="text-white display-4 ml-5">Actualités</p>
+                        <div style="height: 120px;"></div> 
+                        <p class="text-white display-4 ml-5">Votre solde</p>
+                        <div style="height: 120px;"></div> 
+                        <p class="text-white display-4 ml-5">Mentions légales</p>
+                    </div>
                 </div>
-                <div class="text-center my-5">
-                    <h2 class="text-light">Actualité</h2>
-                </div>
-                <div class="text-center my-5">
-                    <h2 class="text-light">Votre solde</h2>
-                </div>
-                <div class="text-center my-5">
-                    <h2 class="text-light">Mentions légales</h2>
-                </div>
-            </main>
+            </section>
+
 
 
         </div>
+
     </div>
+    <!-- Inclure le JavaScript de Bootstrap à la fin de la page -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        const $button = document.querySelector('#sidebar-toggle');
+        const $wrapper = document.querySelector('#wrapper');
+
+        $button.addEventListener('click', (e) => {
+            e.preventDefault();
+            $wrapper.classList.toggle('toggled');
+        });
+    </script>
 </body>
 
 </html>
