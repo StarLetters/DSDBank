@@ -130,6 +130,26 @@ input:checked + .slider:before {
     color: var(--couleur-violette);
 }
 
+
+.custom-button.btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--couleur-text-blanc);
+    color: var(--couleur-text-blanc);
+    border-radius: 30px;
+    padding: 6px 20px;
+    cursor: pointer;
+    position: absolute;
+    left: 30px;
+    top: 30px;
+}
+
+.custom-button.btn-secondary:hover {
+    background-color: var(--couleur-text-blanc);
+    color: var(--couleur-violette);
+}
+
+
+
 /* Agree terms */
 
 .form-group label {
