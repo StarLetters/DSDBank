@@ -101,7 +101,7 @@ function isPasswordValid($password, $hash)
                 </div>
                 <button class="button-reset mt-4" type="reset">Réinitialiser</button>
                 <button class="button-login mt-4" type="submit">Se connecter > </button>
-                <a class="button-forgot" href="demandereinit.html">Mot de passe oublié ?</a>
+                <a class="button-forgot" href="demandeReinit.html">Mot de passe oublié ?</a>
             </form>
         </div>
         </div>
