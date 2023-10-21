@@ -61,7 +61,7 @@ function isPasswordValid($password, $hash)
                     $email = $_POST['email'];
                     $password = $_POST['password'];
 
-                    $request = "SELECT * FROM dsd_users WHERE email = '$email';";
+                    $request = "SELECT * FROM Utilisateur WHERE email = '$email';";
 
                     $result = $cnx->prepare($request);
                     $result->execute();

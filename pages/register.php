@@ -7,7 +7,7 @@ include('../backend/cnx.php');
 
 // Données à insérer dans la base de données
 $email = htmlspecialchars($_POST['email']);
-$password = htmlspecialchars($_POST['password']);
+$pwd = htmlspecialchars($_POST['password']);
 $inscriptionDate = date("Y-m-d");
 $siren = htmlspecialchars($_POST['siren']);
 $socialReason = htmlspecialchars($_POST['socialReason']);
@@ -17,7 +17,7 @@ $expirationDate = "20" . htmlspecialchars($_POST['expireOnYear']) . '-' . htmlsp
 $cvv = htmlspecialchars($_POST['cvv']);
 
 // Vérification de l'unicite de l'email
-$request = 'SELECT email, password FROM Utilisateur WHERE email = :email';
+$request = 'SELECT email, mdp FROM Utilisateur WHERE email = :email';
 
     $result = $cnx->prepare($request);
     $result->bindParam(':email', $email);
@@ -33,11 +33,11 @@ $request = 'SELECT email, password FROM Utilisateur WHERE email = :email';
 // Insertion des données d'utilisateur dans la base de données
 $request = 
 'INSERT INTO `Utilisateur` (`email`, `mdp`, `role`, `numTel`)
-VALUES (:email, SHA2(:password, 256), "Client", :phone)
+VALUES (:email, SHA2(:pwd, 256), "Client", :phone)
 RETURNING idUtilisateur';
 $result = $cnx->prepare($request);
 $result->bindParam(':email', $email);
-$result->bindParam(':password', $password);
+$result->bindParam(':pwd', $pwd);
 $result->bindParam(':phone', $phone);
 $result->execute();
 
@@ -46,7 +46,7 @@ $idUtilisateur = $result->fetchColumn();
 
 // Insertion des données de client dans la base de données
 $request = 
-'INSERT INTO `Client` (`idUtilisateur`, `numSiren`, `raisonSociale`, `numCarte`, `dateExpiration`, `cvv`)
+'INSERT INTO `Entreprise` (`idUtilisateur`, `numSiren`, `raisonSociale`, `numCarteEntreprise`, `dateExpiration`, `cvv`)
 VALUES (:idUtilisateur, :siren, :socialReason, :cardNumber, :expirationDate, :cvv)';
 $result = $cnx->prepare($request);
 $result->bindParam(':idUtilisateur', $idUtilisateur);
