@@ -23,7 +23,7 @@
     background-color: var(--couleur-fond-violet-transparent);
     border-radius: 15px;
     padding: 25px;
-    width: 70%;
+    width: 67%;
     height: 70%;
   }
   
@@ -157,7 +157,7 @@
   @media (min-width: 768px) and (max-width: 992px) {
     .center-box {
         width: 80%;
-        height: 85%;
+        height: 96%;
     }
 
     .left-content, .right-content {
