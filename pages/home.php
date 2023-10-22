@@ -1,5 +1,15 @@
+<?php
+session_start();
+
+include('../backend/cnx.php');
+
+
+
+
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -17,7 +27,7 @@
     <div class="">
         <div id="wrapper">
 
-            <aside id="sidebar-wrapper">
+        <aside id="sidebar-wrapper">
                 <div class="sidebar-brand">
                     <img src="../data/img/LogoDSD.png" alt="Logo" class="img-fluid">
                 </div>
@@ -36,7 +46,7 @@
                         <img src="../data/img/LogoDSD.png" alt="Photo de profil" class="img-fluid rounded-circle">
                     </div>
                     <div class="profile-info text-center">
-                        <div class="profile-name text-white">Prénom Nom</div>
+                        <div class="profile-name text-white"></div>
                         <div class="profile-profession text-white">Profession</div>
                     </div>
                 </div>
@@ -51,6 +61,7 @@
                     </div>
                 </nav>
             </div>
+            
 
             <section id="content-wrapper">
                 <div class="row">

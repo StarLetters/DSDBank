@@ -56,7 +56,7 @@ $result->execute();
 
 
 $result->closeCursor(); 
-  
+
 header('location: home.php');
 //include('../backend/mailer.php');
 //verification();

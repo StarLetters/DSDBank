@@ -68,11 +68,14 @@ function isPasswordValid($password, $hash)
                         $result->execute();
                         $result = $result->fetchAll();
 
-                        if ((!empty($result)) && (isPasswordValid($password, $result[0]['password']))) {
+                        if ((!empty($result)) && (isPasswordValid($password, $result[0]['mdp']))) {
                             $_SESSION['email'] = $email;
                             $_SESSION['tries'] = 0;
+                            include('../backend/token.php');
+                            
+                            $_SESSION['cnx'] = newToken($email, "connexion");
+
                             header('Location: home.php');
-                            print_r($_SESSION);
                         } else {
                             echo "<p class='avertissement'>";
                             echo "L'utilisateur ou le mot de passe est incorrect";
