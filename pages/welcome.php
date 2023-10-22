@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if (isset($_SESSION['cnxToken']) && isset($_SESSION['email'])) {
+    header('Location: home.php');
+}
+
 
 function isPasswordValid($password, $hash)
 {
@@ -73,7 +77,7 @@ function isPasswordValid($password, $hash)
                             $_SESSION['tries'] = 0;
                             include('../backend/token.php');
                             
-                            $_SESSION['cnx'] = newToken($email, "connexion");
+                            $_SESSION['cnxToken'] = newToken($email, "connexion");
 
                             header('Location: home.php');
                         } else {

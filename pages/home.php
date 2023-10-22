@@ -1,7 +1,12 @@
 <?php
 session_start();
 
+include('../backend/verifLogin.php');
+$role = verifLogin();
+
 include('../backend/cnx.php');
+
+
 
 
 
@@ -40,13 +45,16 @@ include('../backend/cnx.php');
                     <li class="nav-item"><a class="nav-link" href="#">Sécurité</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Centre d'assistance</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Mode sombre</a></li>
+                    <!-- TEMPORAIRE -->
+                    <li class="nav-item" ><a class="nav-link" style="color:tomato" href="../backend/deco.php">Se déconnecter</a></li>
+
                 </ul>
                 <div class="profile-section mt-auto pt-7">
                     <div class="profile-picture text-center">
                         <img src="../data/img/LogoDSD.png" alt="Photo de profil" class="img-fluid rounded-circle">
                     </div>
                     <div class="profile-info text-center">
-                        <div class="profile-name text-white"></div>
+                        <div class="profile-name text-white">Nom Prénom</div>
                         <div class="profile-profession text-white">Profession</div>
                     </div>
                 </div>
