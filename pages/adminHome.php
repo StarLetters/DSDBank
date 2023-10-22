@@ -41,7 +41,9 @@ include('../backend/cnx.php');
 
 
 <body>
-    <div class="center-box">
+
+
+<div class="center-box">
         <div class="border-head">
             <h1>Menu Admin</h1>
         </div>
