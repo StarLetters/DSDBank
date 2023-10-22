@@ -1,8 +1,11 @@
 <?php
 session_start();
 
-include('../backend/verifLogin.php');
+include('../account/verifLogin.php');
 $role = verifLogin();
+if ($role === 3) {
+
+}	
 
 include('../backend/cnx.php');
 
@@ -46,8 +49,8 @@ include('../backend/cnx.php');
                     <li class="nav-item"><a class="nav-link" href="#">Centre d'assistance</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Mode sombre</a></li>
                     <!-- TEMPORAIRE -->
-                    <li class="nav-item" ><a class="nav-link" style="color:tomato" href="../backend/deco.php">Se déconnecter</a></li>
-
+                    <li class="nav-item" ><a class="nav-link" style="color:tomato" href="../account/deco.php">Se déconnecter</a></li>
+                    
                 </ul>
                 <div class="profile-section mt-auto pt-7">
                     <div class="profile-picture text-center">

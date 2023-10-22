@@ -1,7 +1,7 @@
 <?php
 
 function verifLogin(){
-    include('cnx.php');
+    include('../backend/cnx.php');
     
 
     if (!isset($_SESSION['cnxToken']) || !isset($_SESSION['email'])) {

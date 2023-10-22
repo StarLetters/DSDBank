@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+include('../account/verifLogin.php');
+if  (verifLogin() != 3) {
+    header('Location: ../pages/welcome.php');
+}
+
 // Si il manque une donnée dans le formulaire
 if ( isset($_POST['email']) && isset($_POST['password']) && isset($_POST['siren']) && isset($_POST['socialReason']) && isset($_POST['phone']) && isset($_POST['card']))
 {
@@ -57,7 +63,8 @@ $result->execute();
 
 $result->closeCursor(); 
 
-header('location: home.php');
+header('Location: ./home.php');
+
 //include('../backend/mailer.php');
 //verification();
 }
@@ -92,7 +99,7 @@ header('location: home.php');
         </div>
 
 
-        <form method="POST" action="register.php" class="registration-form mt-4 needs-validation" id="registration-form" novalidate>
+        <form method="POST" action="createAccount.php" class="registration-form mt-4 needs-validation" id="registration-form" novalidate>
             <div class="form-row">
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Raison Sociale -->
                     <label for="socialReason">Raison Sociale</label>
@@ -136,12 +143,12 @@ header('location: home.php');
             <div class="form-row">
                 <div class="form-group col-md-6 mb-4">
                     <label for="password">Créer un mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Créer un mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{12,}$" required />
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Créer un mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4">
                     <label for="confirmPassword">Confirmation du mot de passe</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmer le mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{12,}$" required />
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmer le mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$" required />
                 </div>
                 <div class="invalid-feedback">Erreur</div>
             </div>
