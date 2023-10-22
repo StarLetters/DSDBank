@@ -112,7 +112,7 @@ function verification()
         if (envoi_mail($socialReason, $email, $subject, $body)) {
             //echo 'OK';
             insertion($email, $token, "verification");
-            header('Location: ../pages/confirmmail.php');
+            header('Location: ../account/confirmMail.php');
             exit();
         } else {
             echo "Une erreur s'est produite";
@@ -179,7 +179,7 @@ function forgot($socialReason)
         if (envoi_mail($socialReason, $email, $subject, $body)) {
             //echo 'OK';
             insertion($email, $token, "reinitialisation");
-            header('Location: ../pages/confirmreinit.html');
+            header('Location: ../account/confirmReinit.html');
             exit();
         } else {
             echo "Une erreur s'est produite";
