@@ -4,7 +4,8 @@ session_start();
 include('../account/verifLogin.php');
 $role = verifLogin();
 if ($role === 3) {
-
+    header('Location: ./adminHome.php');
+    exit;
 }	
 
 include('../backend/cnx.php');

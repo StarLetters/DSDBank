@@ -74,7 +74,7 @@ else {
 <head>
 <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Register</title>
+    <title>Changement de mot de passe</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -114,11 +114,10 @@ else {
             <input type='hidden' name='idToken' value=<?php echo $idToken ?>>
             <div class="form-row">
                 <div class="form-group col-md-12 text-center">
-                    <!-- Bouton "S'inscrire" -->
+
                     <button type="submit" class="custom-button mr-3">
-                        S'inscrire
+                        Changer de mot de passe
                     </button>
-                    <!-- Bouton "Retour" -->
 
                 </div>
             </div>
