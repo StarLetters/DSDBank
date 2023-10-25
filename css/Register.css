@@ -11,15 +11,15 @@ body {
 }
 
 .center-box {
-    background-color: var(--couleur-fond-violet-transparent);
+    background-color: var(--couleur-fond);
     border-radius: 15px;
     padding: 25px;
     width: 60%;
 }
 
 .border-head {
-    border: 2px solid var(--couleur-violette);
-    background-color: var(--couleur-bouton-violet);
+    border: 2px solid var(--couleur-hover);
+    background-color: var(--couleur-bouton);
     padding: 8px 120px 7px 120px;
     text-align: center;
     border-radius: 30px;
@@ -73,18 +73,18 @@ body {
     width: 15px;
     left: 4px;
     bottom: 4px;
-    background-color: var(--couleur-bouton-violet);
+    background-color: var(--couleur-bouton);
     -webkit-transition: .4s;
     transition: .5s;
     border-radius: 20px;
 }
 
 input:checked + .slider {
-    background-color: var(--couleur-violette-clair);
+    background-color: var(--couleur-input);
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px var(--couleur-violette-clair);
+    box-shadow: 0 0 1px var(--couleur-input);
 }
 
 input:checked + .slider:before {
@@ -95,7 +95,7 @@ input:checked + .slider:before {
 
 .switch-container p {
     margin-left: 20px;
-    color: var(--couleur-text-blanc);
+    color: var(--couleur-text);
     padding-top: 7px;
 }
 
@@ -110,13 +110,13 @@ input:checked + .slider:before {
 }
 
 .password-input .eye-icon.active {
-    color: var(--couleur-text-blanc);
+    color: var(--couleur-text);
 }
 
 .button-login {
     background-color: transparent;
-    border: 2px solid var(--couleur-text-blanc);
-    color: var(--couleur-text-blanc);
+    border: 2px solid var(--couleur-text);
+    color: var(--couleur-text);
     border-radius: 30px;
     padding: 6px 20px;
     cursor: pointer;
@@ -126,15 +126,15 @@ input:checked + .slider:before {
 }
 
 .button-login:hover {
-    background-color: var(--couleur-text-blanc);
+    background-color: var(--couleur-text);
     color: var(--couleur-violette);
 }
 
 
 .custom-button.btn-secondary {
     background-color: transparent;
-    border: 2px solid var(--couleur-text-blanc);
-    color: var(--couleur-text-blanc);
+    border: 2px solid var(--couleur-text);
+    color: var(--couleur-text);
     border-radius: 30px;
     padding: 6px 20px;
     cursor: pointer;
@@ -144,8 +144,8 @@ input:checked + .slider:before {
 }
 
 .custom-button.btn-secondary:hover {
-    background-color: var(--couleur-text-blanc);
-    color: var(--couleur-violette);
+    background-color: var(--couleur-text);
+    color: var(--couleur-hover);
 }
 
 
@@ -154,7 +154,7 @@ input:checked + .slider:before {
 
 .form-group label {
     display: block;
-    color: var(--couleur-text-blanc);
+    color: var(--couleur-text);
     font-size: 14px;
     margin: 0px auto;
     position: relative;
@@ -230,8 +230,8 @@ form .form-check-label {
 /* boutons */
 
 .custom-button {
-    background-color: var(--couleur-bouton-violet); 
-    color: var(--couleur-text-blanc); 
+    background-color: var(--couleur-bouton); 
+    color: var(--couleur-text); 
     border: none;
     padding: 10px 25px;
     border-radius: 30px;

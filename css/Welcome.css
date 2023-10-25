@@ -20,7 +20,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--couleur-fond-violet-transparent);
+    background-color: var(--couleur-fond);
     border-radius: 15px;
     padding: 25px;
     width: 67%;
@@ -30,7 +30,7 @@
   .left-content,
   .right-content {
     text-align: center;
-    color: var(--couleur-text-blanc);
+    color: var(--couleur-text);
     flex: 1;
     margin: 10px;
   }
@@ -48,7 +48,7 @@
   
   .right-top {
     text-align: center;
-    color: var(--couleur-text-blanc);
+    color: var(--couleur-text);
     margin-bottom: 10px;
     font-size: 20px;
   }
@@ -77,10 +77,10 @@
   .form-group input {
     width: 100%; 
     padding: 10px;
-    border: 1px solid var(--couleur-bouton-violet);
+    border: 1px solid var(--couleur-bouton);
     border-radius: 30px;
-    background-color: var(--couleur-bouton-violet);
-    color: var(--couleur-text-blanc);
+    background-color: var(--couleur-bouton);
+    color: var(--couleur-text);
   }
   
   .form-group .password-input {
@@ -98,7 +98,7 @@
   }
   
   .form-group .password-input .eye-icon.active {
-    color: var(--couleur-text-blanc);
+    color: var(--couleur-text);
   }
   
   .login-form {
@@ -117,8 +117,8 @@
   .button-login,
   .button-reset {
     background-color: transparent;
-    border: 2px solid var(--couleur-text-blanc);
-    color: var(--couleur-text-blanc);
+    border: 2px solid var(--couleur-text);
+    color: var(--couleur-text);
     border-radius: 30px;
     padding: 7px 15px;
     cursor: pointer;
@@ -126,8 +126,8 @@
   }
   
   .button-register {
-    background-color: var(--couleur-bouton-violet);
-    color: var(--couleur-text-blanc);
+    background-color: var(--couleur-bouton);
+    color: var(--couleur-text);
     border-radius: 30px;
     padding: 10px 30px;
     cursor: pointer;
@@ -140,12 +140,12 @@
   .button-login:hover,
   .button-reset:hover,
   .button-register:hover {
-    background-color: var(--couleur-text-blanc);
-    color: var(--couleur-violette);
+    background-color: var(--couleur-text);
+    color: var(--couleur-hover);
   }
   
   .avertissement {
-    background-color: var(--couleur-rouge);
+    background-color: var(--couleur-avertissement);
     font-size: 15px;
     text-align: center;
     margin-top: 10px;
@@ -162,7 +162,7 @@
 
     .left-content, .right-content {
         text-align: center;
-        color: var(--couleur-text-blanc);
+        color: var(--couleur-text);
         flex: 1;
         margin: 50px;
       }
@@ -177,7 +177,7 @@
 
     .left-content {
         text-align: center;
-        color: var(--couleur-text-blanc);
+        color: var(--couleur-text);
         flex: 1;
         margin-top: 80px;
       }
@@ -209,8 +209,8 @@
 
       .button-login, .button-reset {
         background-color: transparent;
-        border: 2px solid var(--couleur-text-blanc);
-        color: var(--couleur-text-blanc);
+        border: 2px solid var(--couleur-text);
+        color: var(--couleur-text);
         border-radius: 30px;
         padding: 3px 15px;
         cursor: pointer;
