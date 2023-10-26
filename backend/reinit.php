@@ -6,7 +6,7 @@
     $cnx->prepare($requete);
     $result = $cnx->query($requete);
     if ($result->rowCount() == 0) {
-        header('Location: ../pages/confirmreinit.html'); 
+        header('Location: ../account/confirmReinit.html'); 
         exit;
     }
     $donnees = $result->fetch();

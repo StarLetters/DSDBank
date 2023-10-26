@@ -67,9 +67,31 @@ else {
     echo $_SESSION['email'];
     exit;
 }
-
-include('../includes/head.html');
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Changement de mot de passe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../css/Register.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/varColor.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="../scripts/load.js"></script>
+</head>
+
 
 
 <body>
@@ -78,7 +100,7 @@ include('../includes/head.html');
             <h1>Réinitialisation du mot de passe</h1>
         </div>
 
-        <form method="POST" action="verifreinit.php" class="registration-form mt-4 needs-validation" novalidate>
+        <form method="POST" action="verifReinit.php" class="registration-form mt-4 needs-validation" novalidate>
 
             <div class="form-row" style="justify-content: center; margin:2vw">
                 <div class="form-group col-md-6 mb-4">
@@ -92,11 +114,10 @@ include('../includes/head.html');
             <input type='hidden' name='idToken' value=<?php echo $idToken ?>>
             <div class="form-row">
                 <div class="form-group col-md-12 text-center">
-                    <!-- Bouton "S'inscrire" -->
+
                     <button type="submit" class="custom-button mr-3">
-                        S'inscrire
+                        Changer de mot de passe
                     </button>
-                    <!-- Bouton "Retour" -->
 
                 </div>
             </div>

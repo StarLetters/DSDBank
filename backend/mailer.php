@@ -54,21 +54,7 @@ function envoi_mail($name, $email, $subject, $body)
 }
 
 
-/*
-    Fonction d'insertion du token dans la base de données
-        Paramètres :
-            - $email : email de l'utilisateur
-            - $token : token de vérification
-    Retour :
-        - rien
-*/
-function insertion($email, $token, $type)
-{
-    include('cnx.php');
-    $requete = "INSERT INTO token (email, token, date_valid) VALUES ('" . $email . "', '" . $token . "', '" . date("Y-m-d H:i:s", strtotime("+1 day")) . "');";
-    $cnx->prepare($requete);
-    $cnx->exec($requete);
-}
+include('token.php');
 
 /*
     Fonction de vérification de l'adresse mail
@@ -111,8 +97,8 @@ function verification()
 
         if (envoi_mail($socialReason, $email, $subject, $body)) {
             //echo 'OK';
-            insertion($email, $token, "verification");
-            header('Location: ../pages/confirmmail.php');
+            insertToken($email, $token, "verification");
+            header('Location: ../account/confirmMail.php');
             exit();
         } else {
             echo "Une erreur s'est produite";
@@ -178,8 +164,8 @@ function forgot($socialReason)
 
         if (envoi_mail($socialReason, $email, $subject, $body)) {
             //echo 'OK';
-            insertion($email, $token, "reinitialisation");
-            header('Location: ../pages/confirmreinit.html');
+            insertToken($email, $token, "reinitialisation");
+            header('Location: ../account/confirmReinit.html');
             exit();
         } else {
             echo "Une erreur s'est produite";
