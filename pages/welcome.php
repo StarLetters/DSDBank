@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-
+/* Fonction qui vérifie si le mot de passe est correct */
 function isPasswordValid($password, $hash)
 {
     return (hash('sha256', $password) == $hash);
@@ -53,7 +53,7 @@ function isPasswordValid($password, $hash)
                     } else {
                         $_SESSION['tries'] = 0;
                     }
-                    if (isset($_POST['email']) && isset($_POST['password'])) {
+                    if (isset($_POST['email']) && isset($_POST['password'])) { // Si l'utilisateur a rempli le formulaire
 
                         include('../backend/cnx.php');
 
@@ -61,7 +61,7 @@ function isPasswordValid($password, $hash)
                         $password = $_POST['password'];
 
 
-                    $request = "SELECT * FROM Utilisateur WHERE email = '$email';";
+                    $request = "SELECT * FROM Utilisateur WHERE email = '".$email."'  AND verified=1;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
                         $result = $cnx->prepare($request);
                         $result->execute();
                         $result = $result->fetchAll();
@@ -71,12 +71,14 @@ function isPasswordValid($password, $hash)
                             $_SESSION['tries'] = 0;
                             include('../backend/token.php');
                             
-                            $_SESSION['cnxToken'] = newToken($email, "connexion");
+                            $_SESSION['cnxToken'] = newToken($email, "connexion"); // On crée un token de connexion
 
+                            include ('../backend/mailer.php');
+                            login(); // On envoie un mail de connexion
                             header('Location: home.php');
                         } else {
                             echo "<p class='avertissement'>";
-                            echo "L'utilisateur ou le mot de passe est incorrect";
+                            echo "L'utilisateur ou le mot de passe est incorrect"; // On affiche un message d'erreur
                             echo "</p>";
                             $_SESSION['tries'] += 1;
                         }
