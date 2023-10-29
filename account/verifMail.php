@@ -32,7 +32,7 @@ if (!isset($_GET['email']) || !isset($_GET['token'])) {
     while ($donnees = $reponse->fetch()) {
         $date = $donnees['date_valid'];
         if ($date > date("Y-m-d H:i:s")) { // Si le token est valide
-            $requete = "UPDATE users SET verified = 1 WHERE email = " . $email . ";"; // On vérifie le compte
+            $requete = "UPDATE users SET verifier = 1 WHERE email = " . $email . ";"; // On vérifie le compte
             $cnx->prepare($requete);
             $cnx->exec($requete);
             echo "Votre compte a été vérifié";

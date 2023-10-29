@@ -48,7 +48,7 @@ else {
         $email = $result->fetch()['email'];
 
         //Modification du mot de passe dans la base de données
-        $request = "UPDATE dsd_users SET password = SHA2(:password, 256) WHERE email = :email;";
+        $request = "UPDATE Utilisateur SET password = SHA2(:password, 256) WHERE email = :email;";
         $result = $cnx->prepare($request);
         $result->bindParam(':email', $email);
         $result->bindParam(':password', $password);

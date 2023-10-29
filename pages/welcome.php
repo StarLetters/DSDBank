@@ -61,18 +61,25 @@ function isPasswordValid($password, $hash)
                         $password = $_POST['password'];
 
 
-                    $request = "SELECT * FROM Utilisateur WHERE email = '".$email."'  AND verified=1;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
+                    $request = "SELECT * FROM Utilisateur WHERE email = '".$email."'  AND verifier=1;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
                         $result = $cnx->prepare($request);
                         $result->execute();
                         $result = $result->fetchAll();
 
                         if ((!empty($result)) && (isPasswordValid($password, $result[0]['mdp']))) {
+                            $request = "SELECT * FROM POrequete WHERE email = '".$email."';"; // On vérifie si l'utilisateur est dans la table POrequest
+                            $result = $cnx->prepare($request);
+                            $result->execute();
+                            $result = $result->fetchAll();
+                            if (!empty($result)) {
+                                echo "<p class='avertissement'>";
+                                echo "Veuillez contacter l'administrateur"; // On affiche un message d'erreur
+                                echo "</p>";
+                                exit;
+                            }
                             $_SESSION['email'] = $email;
-                            $_SESSION['tries'] = 0;
-                            include('../backend/token.php');
-                            
-                            $_SESSION['cnxToken'] = newToken($email, "connexion"); // On crée un token de connexion
-
+                            $_SESSION['tries'] = 0;                            
+                            echo $_SESSION['email'];
                             include ('../backend/mailer.php');
                             login(); // On envoie un mail de connexion
                             header('Location: home.php');

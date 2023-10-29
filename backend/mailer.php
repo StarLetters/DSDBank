@@ -16,7 +16,6 @@ require '../lib/PHPMailer/src/SMTP.php';
         Paramètres :
             - $name : nom de l'utilisateur
             - $email : email de l'utilisateur
-            - $token : token de vérification
     Retour :
         - true si le mail a été envoyé
         - false si le mail n'a pas été envoyé
@@ -117,11 +116,18 @@ function verification()
 */
 
 function login()
-{
-    if (isset($_SESSION['email']) && isset($_SESSION['socialReason'])) {
+{   
+    
+    if (isset($_SESSION['email'])) {
         $email = $_SESSION['email'];
-        $socialReason = $_SESSION['socialReason'];
+        if (isset($_SESSION['socialReason'])) {
+            $socialReason = $_SESSION['socialReason'];
+        }else{
+            $socialReason = "Monsieur/Madame";
+        }
     }
+    $_SESSION['cnxToken'] = newToken($email, "connexion"); // On crée un token de connexion
+
     $subject = "Connexion à votre compte";
     $body = "<h1> DSDBank </h1>";
     $body .= "Bonjour " . $socialReason . ",";
