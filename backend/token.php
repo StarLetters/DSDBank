@@ -5,6 +5,7 @@
         Paramètres :
             - $email : email de l'utilisateur
             - $token : token de vérification
+            - $type : type de token (connexion, inscription, réinitialisation)
     Retour :
         - rien
 */
