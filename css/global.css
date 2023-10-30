@@ -283,6 +283,5 @@ footer {
     color: white;
     padding: 5px 0;
     width: 100%;
-    position: fixed; /* Position fixe */
-    bottom: 0; /* Aligner en bas de la page */
+    bottom: 0; 
 }

@@ -68,12 +68,6 @@
                 </nav>
             </div>
 
-            <footer class="text-center text-white bg-dark">
-                Mentions légales
-                <br><br><br>
-                © 2023, DSDBank Ltd, All Rights Reserved.
-            </footer>
-
             <section id="content-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
@@ -166,6 +160,12 @@
                     </div>
                 </div>
             </div>
+
+            <footer class="text-center text-white bg-dark">
+                Mentions légales
+                <br><br><br>
+                © 2023, DSDBank Ltd, All Rights Reserved.
+            </footer>
         </div>
     </div>
 
