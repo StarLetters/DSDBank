@@ -187,3 +187,44 @@ body {
 	top: -20px;
 	right: 0;
 }
+
+
+.carousel-item {
+    position: relative;
+    display: none;
+    float: left;
+    width: 100%;
+    margin-right: -100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: -webkit-transform .6s ease-in-out;
+    transition: transform .6s ease-in-out;
+    transition: transform .6s ease-in-out,-webkit-transform .6s ease-in-out;
+    padding-bottom: 80px;
+  }
+
+.footer {
+    background-color: var(--couleur-fond);
+}
+
+  
+@media (max-width: 767px) {
+
+    .card-group > .card {
+        margin-top: 75%;
+      }
+
+      .card {
+        position: relative;
+        height: 270px;
+        width: 370px;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(30px);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 80px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+
+}

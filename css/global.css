@@ -124,7 +124,7 @@ body {
 
 #navbar-wrapper .navbar {
     border-width: 0 0 0 0;
-    background-color: #eee;
+    background-color: var(--couleur-fond);
     font-size: 24px;
     margin-bottom: 0;
     border-radius: 0;

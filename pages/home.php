@@ -161,7 +161,7 @@
                 </div>
             </div>
 
-            <footer class="text-center text-white bg-dark">
+            <footer class="text-center text-white footer">
                 Mentions légales
                 <br><br><br>
                 © 2023, DSDBank Ltd, All Rights Reserved.
