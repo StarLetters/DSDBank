@@ -1,19 +1,20 @@
 <?php
 session_start();
 
-include('../account/verifLogin.php');
-$role = verifLogin();
-if ($role === 3) {
-    header('Location: ./adminHome.php');
-    exit;
-}	
+require('../account/verifLogin.php');
+$verif = verifLogin();	
+switch ($verif){
+    case 0 : //CLIENT
+        break;
+    case 1 : //PRODUCT OWNER
+        header('Location: ../pages/poHome.php');
+        break;
+    case 2 : //ADMIN
+        header('Location: ../pages/adminHome.php');
+        break;
+}
 
 include('../backend/cnx.php');
-
-
-
-
-
 
 ?>
 
@@ -104,6 +105,7 @@ include('../backend/cnx.php');
         </div>
 
     </div>
+
     <!-- Inclure le JavaScript de Bootstrap à la fin de la page -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
