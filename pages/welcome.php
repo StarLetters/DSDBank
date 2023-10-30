@@ -33,6 +33,9 @@ function isPasswordValid($password, $hash)
             <div class="col-md-12 col-sm-12 left-content">
                     <img src="../data/img/LogoDSD.png" alt="DSD BANK Logo">
                     <h2 class="mt-5">DSD BANK</h2>
+
+                    <h4>Vous n'avez pas de compte ?</h4>
+                    <a class="button-register" href="ContactPO.php">Contacter le responsable</a>
                 </div>
                 <div class="col-md-12 col-sm-12 mr-5 right-content">
                     <h1>Bienvenue,</h1>
