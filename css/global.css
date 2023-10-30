@@ -275,3 +275,14 @@ body {
         margin-right: 250px;
     }
 }
+
+
+/* Footer avec position fixe en bas */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 5px 0;
+    width: 100%;
+    position: fixed; /* Position fixe */
+    bottom: 0; /* Aligner en bas de la page */
+}
