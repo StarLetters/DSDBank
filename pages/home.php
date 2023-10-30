@@ -62,12 +62,19 @@
             <section>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div style="height: 120px;"></div> 
-                        <p class="text-white display-4 ml-5">Actualités</p>
-                        <div style="height: 120px;"></div> 
-                        <p class="text-white display-4 ml-5">Votre solde</p>
-                        <div style="height: 120px;"></div> 
-                        <p class="text-white display-4 ml-5">Mentions légales</p>
+                        <div class="card-group">
+                            <div class="card">
+                                <div class="logo">
+                                <img src="../data/img/LogoDSD.png" alt="logo">
+                                </div>
+                                <div class="chip"><img src="../data/img/chip.png" alt="chip"></div>
+                                <div class="number">1234 5678 9012 3456</div>
+                                <div class="name">Prenom Nom</div>
+                                <div class="from">10/19</div>
+                                <div class="to">06/21</div>
+                                <div class="ring"></div> <!-- les cercles en fond -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
