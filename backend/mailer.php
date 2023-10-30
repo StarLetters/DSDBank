@@ -16,7 +16,6 @@ require '../lib/PHPMailer/src/SMTP.php';
         Paramètres :
             - $name : nom de l'utilisateur
             - $email : email de l'utilisateur
-            - $token : token de vérification
     Retour :
         - true si le mail a été envoyé
         - false si le mail n'a pas été envoyé
@@ -54,21 +53,7 @@ function envoi_mail($name, $email, $subject, $body)
 }
 
 
-/*
-    Fonction d'insertion du token dans la base de données
-        Paramètres :
-            - $email : email de l'utilisateur
-            - $token : token de vérification
-    Retour :
-        - rien
-*/
-function insertion($email, $token, $type)
-{
-    include('cnx.php');
-    $requete = "INSERT INTO token (email, token, date_valid) VALUES ('" . $email . "', '" . $token . "', '" . date("Y-m-d H:i:s", strtotime("+1 day")) . "');";
-    $cnx->prepare($requete);
-    $cnx->exec($requete);
-}
+include('token.php');
 
 /*
     Fonction de vérification de l'adresse mail
@@ -111,7 +96,7 @@ function verification()
 
         if (envoi_mail($socialReason, $email, $subject, $body)) {
             //echo 'OK';
-            insertion($email, $token, "verification");
+            insertToken($email, $token, "verification");
             header('Location: ../account/confirmMail.php');
             exit();
         } else {
@@ -131,11 +116,18 @@ function verification()
 */
 
 function login()
-{
-    if (isset($_SESSION['email']) && isset($_SESSION['socialReason'])) {
+{   
+    
+    if (isset($_SESSION['email'])) {
         $email = $_SESSION['email'];
-        $socialReason = $_SESSION['socialReason'];
+        if (isset($_SESSION['socialReason'])) {
+            $socialReason = $_SESSION['socialReason'];
+        }else{
+            $socialReason = "Monsieur/Madame";
+        }
     }
+    $_SESSION['cnxToken'] = newToken($email, "connexion"); // On crée un token de connexion
+
     $subject = "Connexion à votre compte";
     $body = "<h1> DSDBank </h1>";
     $body .= "Bonjour " . $socialReason . ",";
@@ -178,7 +170,7 @@ function forgot($socialReason)
 
         if (envoi_mail($socialReason, $email, $subject, $body)) {
             //echo 'OK';
-            insertion($email, $token, "reinitialisation");
+            insertToken($email, $token, "reinitialisation");
             header('Location: ../account/confirmReinit.html');
             exit();
         } else {
