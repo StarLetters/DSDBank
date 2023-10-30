@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-
+/* Fonction qui vérifie si le mot de passe est correct */
 function isPasswordValid($password, $hash)
 {
     return (hash('sha256', $password) == $hash);
@@ -33,6 +33,7 @@ function isPasswordValid($password, $hash)
             <div class="col-md-12 col-sm-12 left-content">
                     <img src="../data/img/LogoDSD.png" alt="DSD BANK Logo">
                     <h2 class="mt-5">DSD BANK</h2>
+
                     <h4>Vous n'avez pas de compte ?</h4>
                     <a class="button-register" href="ContactPO.php">Contacter le responsable</a>
                 </div>
@@ -55,7 +56,7 @@ function isPasswordValid($password, $hash)
                     } else {
                         $_SESSION['tries'] = 0;
                     }
-                    if (isset($_POST['email']) && isset($_POST['password'])) {
+                    if (isset($_POST['email']) && isset($_POST['password'])) { // Si l'utilisateur a rempli le formulaire
 
                         include('../backend/cnx.php');
 
@@ -63,19 +64,31 @@ function isPasswordValid($password, $hash)
                         $password = $_POST['password'];
 
 
-                    $request = "SELECT * FROM Utilisateur WHERE email = '$email';";
+                    $request = "SELECT * FROM Utilisateur WHERE email = '".$email."'  AND verifier=1;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
                         $result = $cnx->prepare($request);
                         $result->execute();
                         $result = $result->fetchAll();
 
-                        if ((!empty($result)) && (isPasswordValid($password, $result[0]['password']))) {
+                        if ((!empty($result)) && (isPasswordValid($password, $result[0]['mdp']))) {
+                            $request = "SELECT * FROM POrequete WHERE email = '".$email."';"; // On vérifie si l'utilisateur est dans la table POrequest
+                            $result = $cnx->prepare($request);
+                            $result->execute();
+                            $result = $result->fetchAll();
+                            if (!empty($result)) {
+                                echo "<p class='avertissement'>";
+                                echo "Veuillez contacter l'administrateur"; // On affiche un message d'erreur
+                                echo "</p>";
+                                exit;
+                            }
                             $_SESSION['email'] = $email;
-                            $_SESSION['tries'] = 0;
+                            $_SESSION['tries'] = 0;                            
+                            echo $_SESSION['email'];
+                            include ('../backend/mailer.php');
+                            login(); // On envoie un mail de connexion
                             header('Location: home.php');
-                            print_r($_SESSION);
                         } else {
                             echo "<p class='avertissement'>";
-                            echo "L'utilisateur ou le mot de passe est incorrect";
+                            echo "L'utilisateur ou le mot de passe est incorrect"; // On affiche un message d'erreur
                             echo "</p>";
                             $_SESSION['tries'] += 1;
                         }

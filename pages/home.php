@@ -1,5 +1,24 @@
+<?php
+session_start();
+
+include('../account/verifLogin.php');
+$role = verifLogin();
+if ($role === 3) {
+    header('Location: ./adminHome.php');
+    exit;
+}	
+
+include('../backend/cnx.php');
+
+
+
+
+
+
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -17,7 +36,7 @@
     <div class="">
         <div id="wrapper">
 
-            <aside id="sidebar-wrapper">
+        <aside id="sidebar-wrapper">
                 <div class="sidebar-brand">
                     <img src="../data/img/LogoDSD.png" alt="Logo" class="img-fluid">
                 </div>
@@ -30,13 +49,16 @@
                     <li class="nav-item"><a class="nav-link" href="#">Sécurité</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Centre d'assistance</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Mode sombre</a></li>
+                    <!-- TEMPORAIRE -->
+                    <li class="nav-item" ><a class="nav-link" style="color:tomato" href="../account/deco.php">Se déconnecter</a></li>
+                    
                 </ul>
                 <div class="profile-section mt-auto pt-7">
                     <div class="profile-picture text-center">
                         <img src="../data/img/LogoDSD.png" alt="Photo de profil" class="img-fluid rounded-circle">
                     </div>
                     <div class="profile-info text-center">
-                        <div class="profile-name text-white">Prénom Nom</div>
+                        <div class="profile-name text-white">Nom Prénom</div>
                         <div class="profile-profession text-white">Profession</div>
                     </div>
                 </div>
@@ -51,6 +73,7 @@
                     </div>
                 </nav>
             </div>
+            
 
             <section id="content-wrapper">
                 <div class="row">
