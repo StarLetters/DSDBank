@@ -39,6 +39,12 @@ include('../backend/cnx.php');
 
 <body>
 
+    <h1><?php echo $inscrsupp ?></h1>
+    <form method="post" action="validateAdmin.php">
+        <button id="btnValider" >Valider</button>
+        <button id="btnAnnuler" >Annuler</button>
+
+
 <div class="center-box">
         <div class="border-head">
     <h1><?php echo $inscrsupp ?> de comptes</h1>
@@ -46,9 +52,12 @@ include('../backend/cnx.php');
     
     <form class="table-responsive" method="post" action="validateAdmin.php">
         <div class="form-group text-center m-3">
-            <button id="btnValider" >Valider</button>
+
+            <input type='submit' value="Valider"/>
+            <input type='text' id="yoo" name="okok" value="yeaah">
     
-            <button id="btnAnnuler" href="../pages/adminProfile.php" >Annuler</button>
+            <button id="btnAnnuler" href="../pages/adminHome.php" >Annuler</button>
+
         </div>
 
 
@@ -58,8 +67,9 @@ include('../backend/cnx.php');
                 <th scope="col" class="text-light">#</th>
                 <th scope="col" class="text-light">Numéro Sociale</th>
                 <th scope="col" class="text-light">N° SIREN</th>
-                <th scope="col" class="text-light">Valider</th>
-                <th scope="col" class="text-light">Supprimer</th>
+
+                <th scope="col" class="text-light"> <?php echo $_GET['InscrSupp'] == 'inscription' ? "Inscrire" : "Supprimer" ?></th>
+                <th scope="col" class="text-light"> <?php echo $_GET['InscrSupp'] == 'inscription' ? "Refuser" : "Garder" ?></th>
              </tr>
         </thead>
         <tbody>
@@ -77,15 +87,18 @@ include('../backend/cnx.php');
         $result->execute();
         $result = $result->fetchAll();
 
+        $i = 1;
         foreach ($result as $row) {
 
             echo "<tr>";
-            echo "<th scope='row' class='text-light'>1</th>";
+            echo "<th scope='row' class='text-light'>".$i++."</th>";
             echo "<td class='text-light'>".$row['raisonSociale']."</td>";
             echo "<td class='text-light'>".$row['numSiren']."</td>";
-            echo "<td class='text-light'> <input style='width:100%' type=\"checkbox\"  id=\"validateUser ". $row['numSiren']."\" name=\"" . $row['numSiren'] . "\" value =\"validate\" onclick=\"handleClick(this)\"/> </td>";
-            echo "<td class='text-light'> <input style='width:100%' type=\"checkbox\" id=\"deleteUser ". $row['numSiren']."\" name=\"" . $row['numSiren'] . "\" value =\"delete\" onclick=\"handleClick(this)\"/> </td>";
+            echo "<td class='text-light'> <input type='checkbox' name='".$row['numSiren']."' value='+".$row['numSiren']."' onclick=\"handleClick(this)\"/> </td>";
+            echo "<td class='text-light'> <input type='checkbox' name='".$row['numSiren']."' value='-".$row['numSiren']."' onclick=\"handleClick(this)\"/> </td>";
             echo "</tr>";
+
+            // A REPARER, envoyer une liste des numéros SIREN via POST
         }
 
         ?>
