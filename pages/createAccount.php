@@ -2,7 +2,7 @@
 session_start();
 
 include('../account/verifLogin.php');
-if  (verifLogin() != 3) {
+if  (verifLogin() != 1) {
     header('Location: ../pages/welcome.php');
 }
 
@@ -151,12 +151,12 @@ header('Location: ./home.php');
             <div class="form-row">
                 <div class="form-group col-md-6 mb-4">
                     <label for="password">Créer un mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Créer un mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$" required />
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Créer un mot de passe" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4">
                     <label for="confirmPassword">Confirmation du mot de passe</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmer le mot de passe" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$" required />
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmer le mot de passe" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$" required />
                 </div>
                 <div class="invalid-feedback">Erreur</div>
             </div>

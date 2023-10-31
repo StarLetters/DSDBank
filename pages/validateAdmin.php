@@ -4,18 +4,11 @@ session_start();
 
 include('../account/verifLogin.php');
 $role = verifLogin();
-if ($role != 3) { // Si ce n'est pas un admin
+if ($role != 2) { // Si ce n'est pas un admin
     header('Location: ../pages/welcome.php');
 }
 
-<<<<<<< Updated upstream
-if (isset($_SESSION['InscrSupp'])){
-    $inscrsupp = $_SESSION['InscrSupp']; // Inscription ou Suppression
-}
-else {
-    header('Location: ../pages/adminProfil.php');
-}
-=======
+
 //if (!isset($_GET['InscrSupp'])){
  //   header('Location: ../pages/welcome.php');
 //}
@@ -26,7 +19,6 @@ echo 'huh';
 print_r($_POST);
 exit;
 
->>>>>>> Stashed changes
 
 include('../backend/cnx.php');
 $request = "SELECT * 
@@ -58,9 +50,7 @@ foreach ($result as $row) {
 }
 exit;
 $cnx->commit();
-<<<<<<< Updated upstream
-header('Location: ../pages/adminProfil.php')
-=======
+
 header('Location: ../pages/adminHome.php');
 
 
@@ -72,5 +62,5 @@ function inscription($cnx){
 
 
 
->>>>>>> Stashed changes
+header('Location: ../pages/adminProfile.php')
 ?>

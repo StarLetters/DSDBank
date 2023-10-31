@@ -1,8 +1,10 @@
 :root {
-    --couleur-fond-violet-transparent: rgba(31, 23, 80, 0.702); /* Couleur violette transparente */
-    --couleur-bouton-violet: rgba(39, 18, 66, 0.804); /* Couleur bouton violette */
-    --couleur-text-blanc: rgb(252, 247, 237); /* Couleur texte blanche */
-    --couleur-violette: rgb(38, 18, 64); /* Couleur violette */
-    --couleur-violette-clair: rgb(138, 35, 173);
-    --couleur-rouge: rgb(201, 49, 49);
+    --couleur-fond: rgba(31, 23, 80, 0.702); /* Couleur violette transparente */
+    --couleur-bouton: rgba(39, 18, 66, 0.804); /* Couleur bouton violette */
+    --couleur-text: rgb(252, 247, 237); /* Couleur texte blanche */
+    --couleur-hover: rgb(38, 18, 64); /* Couleur violette */
+    --couleur-input: rgb(138, 35, 173); /* couleur violette clair */
+    --couleur-avertissement: rgb(201, 49, 49); /* Couleur avertissement */
+    --couleur-violet-bg:rgb(99, 89, 233); /* Couleur violet bg */
+    --couleur-fond-rouge:rgba(158, 35, 35,0.25); /* Couleur fond rouge  */
 }

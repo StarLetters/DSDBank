@@ -7,6 +7,9 @@ function isPasswordValid($password, $hash)
     return (hash('sha256', $password) == $hash);
 }
 
+if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
+    header('Location: home.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,26 +36,15 @@ function isPasswordValid($password, $hash)
             <div class="col-md-12 col-sm-12 left-content">
                     <img src="../data/img/LogoDSD.png" alt="DSD BANK Logo">
                     <h2 class="mt-5">DSD BANK</h2>
+
+                    <h4>Vous n'avez pas de compte ?</h4>
+                    <a class="button-register" href="ContactPO.php">Contacter le responsable</a>
                 </div>
                 <div class="col-md-12 col-sm-12 mr-5 right-content">
                     <h1>Bienvenue,</h1>
                     <p>Saisissez vos informations pour vous connecter</p>
                     <?php
-                    if (isset($_SESSION['tries'])) {
-                        if ($_SESSION['tries'] == 2) {
-                            echo "<p class='avertissement'>";
-                            echo "ATTENTION, il ne vous reste qu'une tentative de connexion";
-                            echo "</p>";
-                        }
-                        if ($_SESSION['tries'] >= 3) {
-                            echo "<p class='avertissement'>";
-                            echo "Vous avez atteint le nombre maximal de tentatives, pour continuer veuillez réinitialiser votre mot de passe ou contacter l'administrateur";
-                            echo "</p>";
-                            exit;
-                        }
-                    } else {
-                        $_SESSION['tries'] = 0;
-                    }
+
                     if (isset($_POST['email']) && isset($_POST['password'])) { // Si l'utilisateur a rempli le formulaire
 
                         include('../backend/cnx.php');
@@ -79,11 +71,26 @@ function isPasswordValid($password, $hash)
                             }
                             $_SESSION['email'] = $email;
                             $_SESSION['tries'] = 0;                            
-                            echo $_SESSION['email'];
+                            print_r($_SESSION);
                             include ('../backend/mailer.php');
                             login(); // On envoie un mail de connexion
                             header('Location: home.php');
                         } else {
+                            if (isset($_SESSION['tries'])) {
+                                if ($_SESSION['tries'] == 2) {
+                                    echo "<p class='avertissement'>";
+                                    echo "ATTENTION, il ne vous reste qu'une tentative de connexion";
+                                    echo "</p>";
+                                }
+                                if ($_SESSION['tries'] >= 3) {
+                                    echo "<p class='avertissement'>";
+                                    echo "Vous avez atteint le nombre maximal de tentatives, pour continuer veuillez réinitialiser votre mot de passe ou contacter l'administrateur";
+                                    echo "</p>";
+                                    exit;
+                                }
+                            } else {
+                                $_SESSION['tries'] = 0;
+                            }
                             echo "<p class='avertissement'>";
                             echo "L'utilisateur ou le mot de passe est incorrect"; // On affiche un message d'erreur
                             echo "</p>";
