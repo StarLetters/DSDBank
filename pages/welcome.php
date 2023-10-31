@@ -44,21 +44,7 @@ if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
                     <h1>Bienvenue,</h1>
                     <p>Saisissez vos informations pour vous connecter</p>
                     <?php
-                    if (isset($_SESSION['tries'])) {
-                        if ($_SESSION['tries'] == 2) {
-                            echo "<p class='avertissement'>";
-                            echo "ATTENTION, il ne vous reste qu'une tentative de connexion";
-                            echo "</p>";
-                        }
-                        if ($_SESSION['tries'] >= 3) {
-                            echo "<p class='avertissement'>";
-                            echo "Vous avez atteint le nombre maximal de tentatives, pour continuer veuillez réinitialiser votre mot de passe ou contacter l'administrateur";
-                            echo "</p>";
-                            exit;
-                        }
-                    } else {
-                        $_SESSION['tries'] = 0;
-                    }
+
                     if (isset($_POST['email']) && isset($_POST['password'])) { // Si l'utilisateur a rempli le formulaire
 
                         include('../backend/cnx.php');
@@ -90,6 +76,21 @@ if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
                             login(); // On envoie un mail de connexion
                             header('Location: home.php');
                         } else {
+                            if (isset($_SESSION['tries'])) {
+                                if ($_SESSION['tries'] == 2) {
+                                    echo "<p class='avertissement'>";
+                                    echo "ATTENTION, il ne vous reste qu'une tentative de connexion";
+                                    echo "</p>";
+                                }
+                                if ($_SESSION['tries'] >= 3) {
+                                    echo "<p class='avertissement'>";
+                                    echo "Vous avez atteint le nombre maximal de tentatives, pour continuer veuillez réinitialiser votre mot de passe ou contacter l'administrateur";
+                                    echo "</p>";
+                                    exit;
+                                }
+                            } else {
+                                $_SESSION['tries'] = 0;
+                            }
                             echo "<p class='avertissement'>";
                             echo "L'utilisateur ou le mot de passe est incorrect"; // On affiche un message d'erreur
                             echo "</p>";

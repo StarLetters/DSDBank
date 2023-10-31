@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Register</title>
+    <title>ContactPO</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,46 +36,48 @@
 
 
         <form method="POST" action="welcome.php" class="registration-form mt-4 needs-validation" id="registration-form" novalidate>
-        <div>
-            <div class="form-row">
-                <div class="form-group col-md-12 mb-4"> <!-- Colonne de largeur 12 pour Noms -->
-                    <label for="Name">Nom</label>
-                    <input class="form-control" type="text" id="Name" name="Name" placeholder="Nom" maxlength="100" required />
-                    <div class="invalid-feedback">Erreur</div>
+            <div>
+                <div class="form-row">
+                <div class="form-group col-md-12 col-sm-12 mb-4"> <!-- Utilisation des classes col-md-12 col-sm-12 pour une largeur maximale sur les petits écrans -->
+    <label for="Name">Nom</label>
+    <input class="form-control" type="text" id="Name" name="Name" placeholder="Nom" maxlength="100" required />
+    <div class="invalid-feedback">Erreur</div>
+</div>
+
                 </div>
-            </div>
 
 
                 <hr style="border: 2px solid white; margin-top: 20px;">
 
-            <div class="form-row">
-                <div class="form-group col-md-12 mb-4"> <!-- Colonne de largeur 12 pour Email -->
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" maxlength="50" required />
-                    <div class="invalid-feedback">Erreur</div>
+                <div class="form-row">
+                    <div class="form-group col-md-12 mb-4"> <!-- Colonne de largeur 12 pour Email -->
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" maxlength="50" required />
+                        <div class="invalid-feedback">Erreur</div>
+                    </div>
                 </div>
-            </div>
 
                 <hr style="border: 2px solid white; margin-top: 20px;">
 
-            <div class="form-row">
-                <div class="form-group col-md-12 mb-4"> <!-- Colonne de largeur 12 pour Objet -->
-                    <label for="Objet">Objet</label>
-                    <input type="text" class="form-control" id="Objet" name="Objet" placeholder="Objet" maxlength="50" required />
-                    <div class="invalid-feedback">Erreur</div>
+                <div class="form-row">
+                    <div class="form-group col-md-12 mb-4"> <!-- Colonne de largeur 12 pour Objet -->
+                        <label for="Objet">Objet</label>
+                        <input type="text" class="form-control" id="Objet" name="Objet" placeholder="Objet" maxlength="50" required />
+                        <div class="invalid-feedback">Erreur</div>
+                    </div>
                 </div>
-            </div>
 
                 <hr style="border: 2px solid white; margin-top: 20px;">
 
-            <div class="form-row">
-                <div class="form-group col-md-12 mb-4"> <!-- Colonne de largeur 12 pour Objet -->
-                    <label for="Text">Text</label>
-                    <input type="text" class="form-control" id="Text" name="Text" placeholder="Text" maxlength="500" required />
-                    <div class="invalid-feedback">Erreur</div>
+                <div class="form-row">
+                    <div class="form-group col-md-12 mb-4">
+                        <label for="Text">Text</label>
+                        <textarea class="form-control" id="Text" name="Text" placeholder="Text" rows="5" required></textarea>
+                        <div class="invalid-feedback">Erreur</div>
+                    </div>
                 </div>
+
             </div>
-        </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12 text-center">
@@ -87,10 +89,11 @@
             </div>
     </div>
 
-            <!-- Bouton "Retour" -->
-            <a href="welcome.php" class="custom-button btn-secondary"><span class="arrow-left">&#x2190;</span> Retour</a>
-        </form>
+    <!-- Bouton "Retour" -->
+    <a href="welcome.php" class="custom-button btn-secondary"><span class="arrow-left">&#x2190;</span> Retour</a>
+    </form>
     </div>
 
 </body>
+
 </html>

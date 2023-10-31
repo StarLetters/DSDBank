@@ -1,0 +1,22 @@
+.btn-texte-blanc a{
+    color: white;
+}
+
+
+
+.btn-sans-decoration a{
+    text-decoration: none !important;
+}
+
+.btn-deconnexion{
+    background-color: var(--couleur-fond-rouge); 
+    color: var(--couleur-avertissement);
+    border: 1px solid var(--couleur-avertissement);
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-size: 0.9rem;
+}
+
+.btn-deconnexion a{
+    color: var(--couleur-avertissement);
+}
