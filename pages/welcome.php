@@ -7,6 +7,9 @@ function isPasswordValid($password, $hash)
     return (hash('sha256', $password) == $hash);
 }
 
+if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
+    header('Location: home.php');
+}
 ?>
 <!DOCTYPE html>
 <html>

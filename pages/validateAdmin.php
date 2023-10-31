@@ -4,7 +4,7 @@ session_start();
 
 include('../account/verifLogin.php');
 $role = verifLogin();
-if ($role != 3) { // Si ce n'est pas un admin
+if ($role != 2) { // Si ce n'est pas un admin
     header('Location: ../pages/welcome.php');
 }
 
@@ -12,7 +12,7 @@ if (isset($_SESSION['InscrSupp'])){
     $inscrsupp = $_SESSION['InscrSupp']; // Inscription ou Suppression
 }
 else {
-    header('Location: ../pages/adminProfil.php');
+    header('Location: ../pages/adminProfile.php');
 }
 
 include('../backend/cnx.php');
@@ -40,5 +40,5 @@ foreach ($result as $row) {
 }
 
 $cnx->commit();
-header('Location: ../pages/adminProfil.php')
+header('Location: ../pages/adminProfile.php')
 ?>

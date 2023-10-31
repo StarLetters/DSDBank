@@ -1,16 +1,23 @@
 <?php
 session_start();
 
+
 require('../account/verifLogin.php');
-$verif = verifLogin();
-if ($verif != 2) {
+$verif = verifLogin();	
+if ($verif != 1){
     header('Location: ../pages/welcome.php');
 }
 include('../backend/cnx.php');
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -29,19 +36,27 @@ include('../backend/cnx.php');
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     <script src="../scripts/load.js"></script>
 </head>
+
+
+
 <body>
-    <div class="center-box">
+
+
+<div class="center-box">
         <div class="border-head">
-            <h1>Menu Admin DEBUG</h1>
+            <h1>Menu PO DEBUG</h1>
         </div>
 
         <div class="form-row" style="justify-content: center; margin:2vw">
-
-            <a href="adminProfile.php">Profil d'admin</a>&nbsp;&nbsp;
+            
+            <a href="poView.php">PO VIEW</a>&nbsp;&nbsp;
+            <a href="poProfile.php">Profil de PO</a>&nbsp;&nbsp;
+            <a href="createAccount.php">Créer un compte</a>&nbsp;&nbsp;
             <a href="../account/deco.php">Déconnexion</a>&nbsp;&nbsp;
 
-
         </div>
+
+
     </div>
 </body>
 

@@ -4,7 +4,7 @@ session_start();
 
 include('../account/verifLogin.php');
 $role = verifLogin();
-if ($role != 2) {
+if ($role != 1) {
     header('Location: ../pages/welcome.php');
 }
 
