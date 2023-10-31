@@ -2,12 +2,18 @@
 session_start();
 
 
-include('../account/verifLogin.php');
-$role = verifLogin();
-if ($role != 3) {
-    header('Location: ../pages/welcome.php');
+require('../account/verifLogin.php');
+$verif = verifLogin();	
+switch ($verif){
+    case 0 : //CLIENT
+        header('Location: ../pages/welcome.php');
+        break;
+    case 1 : //PRODUCT OWNER
+        header('Location: ../pages/poHome.php');
+        break;
+    case 2 : //ADMIN
+        break;
 }
-
 include('../backend/cnx.php');
 
 

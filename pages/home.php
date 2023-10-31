@@ -1,14 +1,21 @@
 <?php
-// session_start();
 
-// include('../account/verifLogin.php');
-// $role = verifLogin();
-// if ($role === 3) {
-//     header('Location: ./adminHome.php');
-//     exit;
-// }	
+session_start();
 
-// include('../backend/cnx.php');
+require('../account/verifLogin.php');
+$verif = verifLogin();	
+switch ($verif){
+    case 0 : //CLIENT
+        break;
+    case 1 : //PRODUCT OWNER
+        header('Location: ../pages/poHome.php');
+        break;
+    case 2 : //ADMIN
+        header('Location: ../pages/adminHome.php');
+        break;
+}
+
+include('../backend/cnx.php');
 
 ?>
 
@@ -168,14 +175,8 @@
             </footer>
         </div>
     </div>
-
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
-
-
-
-
     <script>
         const $button = document.querySelector('#sidebar-toggle');
         const $wrapper = document.querySelector('#wrapper');

@@ -82,7 +82,7 @@ function isPasswordValid($password, $hash)
                             }
                             $_SESSION['email'] = $email;
                             $_SESSION['tries'] = 0;                            
-                            echo $_SESSION['email'];
+                            print_r($_SESSION);
                             include ('../backend/mailer.php');
                             login(); // On envoie un mail de connexion
                             header('Location: home.php');
