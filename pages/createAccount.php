@@ -60,6 +60,15 @@ $result->bindParam(':socialReason', $socialReason);
 $result->bindParam(':cardNumber', $cardNumber);
 $result->execute();
 
+// Insertion des données de client dans la base de données
+$request = 
+'INSERT INTO `POrequete` (`email`, `type_requete`)
+VALUES (:email, "inscription" )';
+$result = $cnx->prepare($request);
+$result->bindParam(':email', $email);
+$result->execute();
+
+
 
 $result->closeCursor(); 
 
@@ -124,7 +133,6 @@ header('Location: ./home.php');
             </div>
 
 
-            <hr style="border: 2px solid #252029; margin-top: 20px;">
 
             <div class="form-row">
 
@@ -152,13 +160,7 @@ header('Location: ./home.php');
                 </div>
                 <div class="invalid-feedback">Erreur</div>
             </div>
-            <div class="form-check mt-1 text-center">
-                <input class="form-check-input" type="checkbox" id="gridCheck" />
-                <label class="form-check-label" for="gridCheck">
-                    J'accepte les conditions générales.
-                </label>
-            </div>
-
+            
             <div class="form-row">
                 <div class="form-group col-md-12 text-center">
                     <!-- Bouton "S'inscrire" -->

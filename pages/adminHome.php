@@ -9,13 +9,7 @@ if ($role != 3) {
 }
 
 include('../backend/cnx.php');
-
-
-
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -32,11 +26,13 @@ include('../backend/cnx.php');
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/Register.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/varColor.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/admin.css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     <script src="../scripts/load.js"></script>
 </head>
+
 
 
 
@@ -49,12 +45,15 @@ include('../backend/cnx.php');
         </div>
 
         <div class="form-row" style="justify-content: center; margin:2vw">
-            <div class="form-group col-md-6 mb-4">
 
-            <a href="createAccount.php">aaaa</a>
+            <a href="adminProfile.php">Profil d'admin</a>&nbsp;&nbsp;
+            <a href="../account/deco.php">Déconnexion</a>&nbsp;&nbsp;
+
+
         </div>
 
     </div>
+    
 </body>
 
 </html>
