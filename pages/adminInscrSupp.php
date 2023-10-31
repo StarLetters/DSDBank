@@ -48,7 +48,7 @@ include('../backend/cnx.php');
         <div class="form-group text-center m-3">
             <button id="btnValider" >Valider</button>
     
-            <button id="btnAnnuler" href="../pages/adminProfil.php" >Annuler</button>
+            <button id="btnAnnuler" href="../pages/adminProfile.php" >Annuler</button>
         </div>
 
 

@@ -37,7 +37,7 @@ include('../backend/cnx.php');
 
         <div class="form-row" style="justify-content: center; margin:2vw">
 
-            <a href="adminProfil.php">Profil d'admin</a>&nbsp;&nbsp;
+            <a href="adminProfile.php">Profil d'admin</a>&nbsp;&nbsp;
             <a href="../account/deco.php">Déconnexion</a>&nbsp;&nbsp;
 
 
