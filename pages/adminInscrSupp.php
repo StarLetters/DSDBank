@@ -38,13 +38,6 @@ include('../backend/cnx.php');
 </head>
 
 <body>
-
-    <h1><?php echo $inscrsupp ?></h1>
-    <form method="post" action="validateAdmin.php">
-        <button id="btnValider" >Valider</button>
-        <button id="btnAnnuler" >Annuler</button>
-
-
 <div class="center-box">
         <div class="border-head">
     <h1><?php echo $inscrsupp ?> de comptes</h1>
@@ -56,7 +49,7 @@ include('../backend/cnx.php');
             <input type='submit' value="Valider"/>
             <input type='text' id="yoo" name="okok" value="yeaah">
     
-            <button id="btnAnnuler" href="../pages/adminHome.php" >Annuler</button>
+            <button id="btnAnnuler"> <a href="../pages/adminHome.php">Annuler</a></button>
 
         </div>
 

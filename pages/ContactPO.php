@@ -71,8 +71,8 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-12 mb-4">
-                        <label for="Text">Text</label>
-                        <textarea class="form-control" id="Text" name="Text" placeholder="Text" rows="5" required></textarea>
+                        <label for="Text">Texte</label>
+                        <textarea class="form-control" id="Text" name="Text" placeholder="Bonjour..." rows="5" required></textarea>
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                 </div>
