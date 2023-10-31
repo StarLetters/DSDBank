@@ -7,6 +7,9 @@ function isPasswordValid($password, $hash)
     return (hash('sha256', $password) == $hash);
 }
 
+if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
+    header('Location: home.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,7 +71,7 @@ function isPasswordValid($password, $hash)
                             }
                             $_SESSION['email'] = $email;
                             $_SESSION['tries'] = 0;                            
-                            echo $_SESSION['email'];
+                            print_r($_SESSION);
                             include ('../backend/mailer.php');
                             login(); // On envoie un mail de connexion
                             header('Location: home.php');

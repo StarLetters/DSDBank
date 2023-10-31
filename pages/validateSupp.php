@@ -4,7 +4,7 @@ session_start();
 
 include('../account/verifLogin.php');
 $role = verifLogin();
-if ($role != 2) { // Si ce n'est pas un PO
+if ($role != 1) { // Si ce n'est pas un PO
     //header('Location: ../pages/welcome.php');
 }
 
@@ -64,19 +64,12 @@ $cnx->beginTransaction();
 
     <script>
         document.getElementById("btnAnnuler").onclick = function() {
-            // Code d'annulation
-            <?php
-            $cnx->rollBack();
-            header('Location: ../pages/poView.php')
-            ?>
+            window.location.href ='../pages/poView.php?todotransaction=rollback' // Annuler la transaction
+            
         };
 
-        document.getElementById("btnValider").onclick = function() {
-            // Code de validation
-            <?php
-            $cnx->commit();
-            header('Location: ../pages/poView.php')
-            ?>
+        document.getElementById("btnValider").onclick = function() {            
+            window.location.href ='../pages/poView.php?todotransaction=commit' // Valider la transaction  
         };
     </script>
 </body>

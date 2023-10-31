@@ -1,14 +1,14 @@
 <?php
-// session_start();
 
-// include('../account/verifLogin.php');
-// $role = verifLogin();
-// if ($role === 3) {
-//     header('Location: ./adminHome.php');
-//     exit;
-// }	
+session_start();
 
-// include('../backend/cnx.php');
+require('../account/verifLogin.php');
+$verif = verifLogin();	
+if ($verif !== 0){
+    header('Location: ../pages/welcome.php');
+}
+
+
 
 ?>
 
@@ -20,6 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
 
+
     <!-- Inclure Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
 
@@ -27,6 +28,7 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/userProfile.css">
     <link rel="stylesheet" href="../css/varColor.css">
+
 </head>
 
 <body>
@@ -83,6 +85,7 @@
                                 </div>
                             </div>
 
+
                         </div>
             </section>
 
@@ -110,6 +113,7 @@
             $wrapper.classList.toggle('toggled');
         });
     </script>
+
 </body>
 
 </html>
