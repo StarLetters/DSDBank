@@ -30,6 +30,7 @@ include('../backend/cnx.php');
     <!-- Inclure Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/Home.css">
     <link rel="stylesheet" href="../css/varColor.css">
 </head>
@@ -38,42 +39,7 @@ include('../backend/cnx.php');
     <div class="">
         <div id="wrapper">
 
-            <aside id="sidebar-wrapper">
-                <div class="sidebar-brand">
-                    <img src="../data/img/LogoDSD.png" alt="Logo" class="img-fluid">
-                </div>
-                <ul class="sidebar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Analyse</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Mon portefeuille</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Compte</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Paramètres</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sécurité</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Centre d'assistance</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Mode sombre</a></li>
-                    <!-- TEMPORAIRE -->
-                    <li class="nav-item"><a class="nav-link" style="color:tomato" href="../account/deco.php">Se déconnecter</a></li>
-                </ul>
-                <div class="profile-section mt-auto pt-7">
-                    <div class="profile-picture text-center">
-                        <img src="../data/img/LogoDSD.png" alt="Photo de profil" class="img-fluid rounded-circle">
-                    </div>
-                    <div class "profile-info text-center">
-                        <div class="profile-name text-white">Nom Prénom</div>
-                        <div class="profile-profession text-white">Profession</div>
-                    </div>
-                </div>
-            </aside>
-
-            <div id="navbar-wrapper">
-                <nav class="navbar navbar-inverse">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <a href="#" class="navbar-brand" id="sidebar-toggle"><img src="../data/img/hamburger.svg" width="35px" height="35px" alt=""></a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+            <?php include('../includes/header.html'); ?>
 
             <section id="content-wrapper">
                 <div class="row">
