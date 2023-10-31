@@ -4,11 +4,21 @@ session_start();
 
 include('../account/verifLogin.php');
 $role = verifLogin();
-if ($role != 2) { // Si ce n'est pas un PO
-    //header('Location: ../pages/welcome.php');
+if ($role != 1) { // Si ce n'est pas un PO
+    header('Location: ../pages/welcome.php');
 }
 
 include('../backend/cnx.php');
+
+// Vérifier si une demande de suppression a été faite
+if (isset($_GET['todotransaction'])){
+    $todo = $_GET['todotransaction'];
+    if ($todo == "rollback"){
+        $cnx->rollBack();
+    }else if ($todo == "commit"){
+        $cnx->commit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
