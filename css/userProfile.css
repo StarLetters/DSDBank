@@ -1,1 +1,43 @@
 
+
+.profile-head {
+    transform: translateY(5rem)
+}
+
+.cover {
+    background-color: pink;
+}
+
+.profilepic{
+    transform: translateY(-80px);
+}
+
+.profile-title{
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    transform: translateY(-40px);
+}
+
+.btn{
+    margin: 0 10px;
+}
+
+.btn-modifier{
+    background-color: var(--couleur-violet-bg); 
+    color: var(--couleur-text);
+    border: 1px solid var(--couleur-text);
+    border-radius: 50px;
+    padding: 10px 25px;
+    font-size: 0.9rem;
+}
+
+.btn-deconnexion{
+    background-color: var(--couleur-fond-rouge); 
+    color: var(--couleur-avertissement);
+    border: 1px solid var(--couleur-text);
+    border-radius: 50px;
+    padding: 10px 25px;
+    font-size: 0.9rem;
+}
+

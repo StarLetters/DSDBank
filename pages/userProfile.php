@@ -22,6 +22,7 @@
 
     <!-- Inclure Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+    
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/userProfile.css">
@@ -34,13 +35,23 @@
 
             <?php include('../includes/header.html'); ?>
 
-                <!-- TODO : Afficher les informations de l'utilisateur -->
+            <!-- TODO : Afficher les informations de l'utilisateur -->
 
-                <!-- TODO : Bouton modifier profil -> popup modifier mdp (href=demandereinit.html) -->
-                <!-- TODO : deconnexion href='../account/deco.php' -->
-                <div class="vh-100">
-                    
+            <!-- TODO : Bouton modifier profil -> popup modifier mdp (href=demandereinit.html) -->
+            <!-- TODO : deconnexion href='../account/deco.php' -->
+            <section class="min-vh-100">
+                <div class="row-1 bg-primary" style="height: 200px;"></div>
+                <div class="row-1 d-flex justify-content-between flex-column flex-md-row">
+                    <div class="col">
+                        <img src="../data/img/Mochi.jpg" alt="Photo de profil" class="rounded-circle profilepic"  style="height: 150px;">
+                        <p class="text-white profile-title">Luckaski SARL</p>
+                    </div>
+                    <div class="col my-auto d-flex justify-content-center justify-content-md-end ">
+                        <button class="btn btn-modifier">Modifier profil</button>
+                        <button class="btn btn-deconnexion">Se déconnecter</button>
+                    </div>
                 </div>
+            </section>
 
             <footer class="text-center text-white footer">
                 Mentions légales
