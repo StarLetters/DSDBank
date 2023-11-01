@@ -7,4 +7,5 @@
     --couleur-avertissement: rgb(201, 49, 49); /* Couleur avertissement */
     --couleur-violet-bg:rgb(99, 89, 233); /* Couleur violet bg */
     --couleur-fond-rouge:rgba(158, 35, 35,0.25); /* Couleur fond rouge  */
+    --couleur-fond-non-transparent: rgba(31, 23, 80)
 }
