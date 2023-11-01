@@ -37,6 +37,9 @@ $nbSupp = $result['suppression'] ?? 0;
     <link rel="stylesheet" type="text/css" media="screen" href="../css/varColor.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/admin.css" />
 
+
+    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     <script src="../scripts/load.js"></script>
@@ -53,11 +56,11 @@ $nbSupp = $result['suppression'] ?? 0;
         <div class="form-row justify-content-around m-5">
 
             <div>
-                <button id="btnInscr" class="btn btn-success btn-lg btn-sans-decoration btn-texte-blanc"> <a href="../pages/adminInscrSupp.php?InscrSupp=inscription">Demandes d'inscription (<?php echo $nbInscr; ?>)</a></button>
+            <a href="../pages/adminInscrSupp.php?InscrSupp=inscription"><button id="btnInscr" class="btn btn-success btn-lg btn-sans-decoration btn-texte-blanc">Demandes d'inscription (<?php echo $nbInscr; ?>)</button> </a>
             </div>
 
             <div>
-                <button id="btnSupp" class="btn btn-danger btn-lg btn-sans-decoration btn-texte-blanc"> <a href="../pages/adminInscrSupp.php?InscrSupp=suppression">Demandes de suppression (<?php echo $nbSupp; ?>)</a></button>
+            <a href="../pages/adminInscrSupp.php?InscrSupp=suppression"><button id="btnSupp" class="btn btn-danger btn-lg btn-sans-decoration btn-texte-blanc">Demandes de suppression (<?php echo $nbSupp; ?>)</button> </a>
             </div>
 
         </div>
