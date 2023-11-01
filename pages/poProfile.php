@@ -70,11 +70,7 @@ if ($role != 1) {
 
         </section>
 
-        <footer class="text-center text-white footer">
-            Mentions légales
-            <br><br><br>
-            © 2023, DSDBank Ltd, All Rights Reserved.
-        </footer>
+        <?php include('../includes/footer.html'); ?>
     </div>
 
     </div>

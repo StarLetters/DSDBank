@@ -100,12 +100,6 @@
     cursor: pointer;
 }
 
-.titres{
-    font-size: 3vw;
-    font-weight: 550;
-}
-
-
 @media (max-width: 767px) {
     .modal-content {
         background-color: var(--couleur-hover);

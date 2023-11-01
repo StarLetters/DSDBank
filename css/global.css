@@ -21,6 +21,11 @@ button:hover{
   color: var(--couleur-text)!important;
 }
 
+.titres{
+  font-size: 3vw;
+  font-weight: 550;
+}
+
 @media (max-width: 315px){
   p{
       font-size: 0.8rem;
