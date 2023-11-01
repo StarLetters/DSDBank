@@ -38,25 +38,19 @@ include('../backend/cnx.php');
 </head>
 
 <body>
-
-    <h1><?php echo $inscrsupp ?></h1>
-    <form method="post" action="validateAdmin.php">
-        <button id="btnValider" >Valider</button>
-        <button id="btnAnnuler" >Annuler</button>
-
-
 <div class="center-box">
         <div class="border-head">
     <h1><?php echo $inscrsupp ?> de comptes</h1>
         </div>
     
-    <form class="table-responsive" method="post" action="validateAdmin.php">
+    <form class="table-responsive" method="post" action="validateAdmin.php?InscrSupp=<?php echo $inscrsupp?>">
         <div class="form-group text-center m-3">
 
-            <input type='submit' value="Valider"/>
+            <input id="btnSubmit" type='submit' value="Valider"/>
             <input type='text' id="yoo" name="okok" value="yeaah">
+            <input type='hidden' id='listeSiren' name='listeSiren' value="">
     
-            <button id="btnAnnuler" href="../pages/adminHome.php" >Annuler</button>
+            <button id="btnAnnuler"> <a href="../pages/adminHome.php">Annuler</a></button>
 
         </div>
 
@@ -94,28 +88,26 @@ include('../backend/cnx.php');
             echo "<th scope='row' class='text-light'>".$i++."</th>";
             echo "<td class='text-light'>".$row['raisonSociale']."</td>";
             echo "<td class='text-light'>".$row['numSiren']."</td>";
-            echo "<td class='text-light'> <input type='checkbox' name='".$row['numSiren']."' value='+".$row['numSiren']."' onclick=\"handleClick(this)\"/> </td>";
-            echo "<td class='text-light'> <input type='checkbox' name='".$row['numSiren']."' value='-".$row['numSiren']."' onclick=\"handleClick(this)\"/> </td>";
+            echo "<td class='text-light'> <input type='checkbox' id='validate".$row['numSiren']."' name='actions[]' value='+".$row['numSiren']."' onclick=\"handleClick(this)\"/> </td>";
+            echo "<td class='text-light'> <input type='checkbox' id='delete".$row['numSiren']."' name='actions[]' value='-".$row['numSiren']."' onclick=\"handleClick(this)\"/> </td>";
             echo "</tr>";
 
             // A REPARER, envoyer une liste des numéros SIREN via POST
         }
-
         ?>
-
-    
-        
         </tbody>
     </table>
     </form>
         </div>
 </div>
     <script>
+        const storage = "";
 
         function handleClick(checkbox){
             // Désactiver la checkbox
             checkbox.disabled = true;
 
+            const liste = document.getElementById('listeSiren');
             var checkboxId = checkbox.id;
             var associatedInputId;
             if (checkboxId.includes("validate")){
@@ -127,6 +119,8 @@ include('../backend/cnx.php');
             }
             var associatedInput = document.getElementById(associatedInputId);
             associatedInput.style.display = "none";
+
+            liste.value += ("|" +checkbox.value);
         }
 
     </script>
