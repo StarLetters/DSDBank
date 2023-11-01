@@ -35,7 +35,7 @@ $nbSupp = $result['suppression'] ?? 0;
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/Register.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/varColor.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/admin.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/global.css" />
 
 
     
@@ -53,6 +53,7 @@ $nbSupp = $result['suppression'] ?? 0;
             <h1>Menu Admin</h1>
         </div>
 
+
         <div class="form-row justify-content-around m-5">
 
             <div>
@@ -64,7 +65,7 @@ $nbSupp = $result['suppression'] ?? 0;
             </div>
 
         </div>
-        <button class="float-right btn btn-deconnexion btn-sans-decoration"><a href="../account/deco.php">Se déconnecter</a></button>
+        <a href="../account/deco.php"><button class="float-right btn-deconnexion text-decoration-none">Se déconnecter</button></a>
 
         </div>
 

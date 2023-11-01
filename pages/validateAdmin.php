@@ -37,14 +37,13 @@ foreach ($listeSiren as $siren) {
     JOIN Utilisateur ON POrequete.email = Utilisateur.email
     JOIN Entreprise ON Entreprise.idUtilisateur = Utilisateur.idUtilisateur
     WHERE Entreprise.numSiren = '" . $siren . "';"; // Supprimer la demande
-    echo $requete;
     $cnx->exec($requete);
 
     if ($inscrsupp === 'inscription'){
-        inscription($cnx, $action, $îd);
+        inscription($cnx, $action, $idUtilisateur);
     }
     else {
-        suppression($cnx, $action, $id);
+        suppression($cnx, $action, $idUtilisateur);
     }
 }
 $cnx->commit();
@@ -84,13 +83,10 @@ function suppression($cnx, $action, $id){
         "DELETE FROM Entreprise
         WHERE idUtilisateur = '" . $id . "';";
         $cnx->exec($requete);
-
         $requete = 
         "DELETE FROM Utilisateur
         WHERE idUtilisateur = '" . $id . "';";
         $cnx->exec($requete);
-
-        
     }
 }
 
