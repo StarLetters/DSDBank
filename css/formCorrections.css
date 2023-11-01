@@ -1,0 +1,17 @@
+
+form label{
+    text-align:start;
+}
+
+
+.form-group label {
+    padding-bottom: 0 !important;
+}
+
+.border-head{
+    margin-bottom: 20px;
+}
+
+.form-group label{
+    padding-top: 0;
+}
