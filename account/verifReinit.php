@@ -63,6 +63,9 @@ else {
         exit;
     }
 
+    echo "Vous n'êtes pas autorisé ici";
+    exit;
+
     
 }
 ?>
