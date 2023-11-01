@@ -1,0 +1,118 @@
+.profile-head {
+    transform: translateY(5rem)
+}
+
+.cover {
+    background-color: pink;
+}
+
+.profilepic {
+    transform: translateY(-80px);
+}
+
+.profile-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0;
+    transform: translateY(-60px);
+}
+
+.btn {
+    margin: 0 10px;
+}
+
+.btn-modifier {
+    background-color: var(--couleur-violet-bg);
+    color: var(--couleur-text);
+    border: 1px solid var(--couleur-text);
+    border-radius: 50px;
+    padding: 10px 25px;
+    font-size: 0.9rem;
+}
+
+.banner {
+    background: url(../data/img/clouds.jpg) no-repeat center center/cover;
+}
+
+.infos p {
+    color: var(--couleur-text)
+}
+
+.infos {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding-top: 3%;
+    margin-bottom: 2%;
+    height: 50vh;
+}
+
+.btn-option {
+    color: var(--couleur-text);
+    border: 1px solid var(--couleur-text);
+    background-color: var(--couleur-bouton);
+}
+
+/*
+    CSS Pour la fenêtre ouvrante
+*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 8;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    margin: 50px auto;
+    border: 1px solid #999;
+    width: 60%;
+    background-color: var(--couleur-bouton);
+
+}
+
+.modal-content div {
+    color: var(--couleur-text);
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.modal-content>div>div,
+.option {
+    padding: 5%;
+}
+
+.option:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.close {
+    color: var(--couleur-text);
+    float: right;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.titres{
+    font-size: 3vw;
+    font-weight: 550;
+}
+
+
+@media (max-width: 767px) {
+    .modal-content {
+        background-color: var(--couleur-hover);
+    }
+
+    .modal-content div {
+        font-size: 1rem;
+    }
+
+}

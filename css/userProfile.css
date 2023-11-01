@@ -32,15 +32,6 @@
     font-size: 0.9rem;
 }
 
-.btn-deconnexion{
-    background-color: var(--couleur-fond-rouge); 
-    color: var(--couleur-avertissement);
-    border: 1px solid var(--couleur-avertissement);
-    border-radius: 10px;
-    padding: 10px 25px;
-    font-size: 0.9rem;
-}
-
 .banner{
     background: url(../data/img/clouds.jpg) no-repeat center center/cover;
 }
