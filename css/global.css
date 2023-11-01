@@ -3,6 +3,38 @@
     
   }
 
+  .btn-deconnexion{
+    background-color: var(--couleur-fond-rouge); 
+    color: var(--couleur-avertissement);
+    border: 1px solid var(--couleur-avertissement);
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-size: 0.9rem;
+}
+
+button:hover{
+  transform: scale(1.1);
+  transition: all 0.5s ease;
+}
+
+button:hover{
+  color: var(--couleur-text)!important;
+}
+
+@media (max-width: 315px){
+  p{
+      font-size: 0.8rem;
+  }
+
+  .col{
+      flex-direction: column;
+  }
+
+  .btn{
+      margin: 20px;
+  }
+}
+
   @media (max-width: 1050px) {
     body{
         height: auto;

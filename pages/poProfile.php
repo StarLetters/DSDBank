@@ -2,33 +2,27 @@
 /*
 session_start();
 
-require('../account/verifLogin.php');
-$verif = verifLogin();	
-if ($verif !== 0){
+include('../account/verifLogin.php');
+$role = verifLogin();
+if ($role != 1) {
     header('Location: ../pages/welcome.php');
 }
-
 */
 
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-
-
-    <!-- Inclure Bootstrap CSS -->
+    <title>PO Profile</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
 
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/userProfile.css">
+    <link rel="stylesheet" href="../css/poProfile.css">
     <link rel="stylesheet" href="../css/varColor.css">
-
 </head>
 
 <body>
@@ -61,52 +55,18 @@ if ($verif !== 0){
                 </div>
                 <div class="col my-auto d-flex justify-content-center justify-content-md-end ">
                     <button class="btn btn-modifier" onclick="openModifier()">Modifier profil</button>
-                    <button class="btn btn-deconnexion"><a href="../account/deco.php" class="text-reset text-decoration-none">Se déconnecter</a></button>
+                    <a href="../account/deco.php" class="text-reset text-decoration-none"><button class="btn btn-deconnexion">Se déconnecter</button></a>
                 </div>
             </div>
-            <div class="row-1 d-flex flex-wrap justify-content-around mx-2 mt-5 mt-md-0 infos">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <p class="titres">Informations Basiques</p>
-                    <hr>
-                    <div class="information">
-                        <p class="titres-2">Votre N° de SIREN</p>
-                        <p>123 456 789</p>
-                    </div>
-                    <div class="information">
-                        <p class="titres-2">Date d'inscription</p>
-                        <p>31/10/2023</p>
-                    </div>
+            <div class="col-11 infos mx-auto mt-5 mt-md-0 "> 
+                <p class="titres">Gérer le site</p>
+                <div class="row-3 d-flex flex-wrap justify-content-around my-5">
+                    <a href="poView.php"><button class="btn btn-option">Voir les profils</button></a>
+                    <a href=""><button class="btn btn-option">Contacter l'admin</button></a>
+
                 </div>
-                <hr class="d-md-none">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <p class="titres">Informations de contact</p>
-                    <hr>
-                    <div class="information">
-                        <p class="titres-2">Email</p>
-                        <p>merlin.lucas@gmail.com</p>
-                    </div>
-                    <div class="information">
-                        <p class="titres-2">Numéro de téléphone</p>
-                        <p>Non renseigné</p>
-                    </div>
-                </div>
-                <div class="col-12 my-5">
-                    <div class="row-1 d-flex">
-                        <div class="col-lg-12 d-flex justify-content-center">
-                            <div class="card">
-                                <div class="logo">
-                                    <img src="../data/img/LogoDSD.png" alt="logo">
-                                </div>
-                                <div class="chip"><img src="../data/img/chip.png" alt="chip"></div>
-                                <div class="number">1234 5678 9012 3456</div>
-                                <div class="name">Prenom Nom</div>
-                                <div class="from">10/19</div>
-                                <div class="to">06/21</div>
-                                <div class="ring"></div> <!-- les cercles en fond -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+
 
         </section>
 
@@ -117,12 +77,7 @@ if ($verif !== 0){
         </footer>
     </div>
 
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
-
-
+    </div>
 
     <script src="../scripts/header.js"></script>
     <script>
