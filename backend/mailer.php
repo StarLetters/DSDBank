@@ -45,7 +45,7 @@ function envoi_mail($name, $email, $subject, $body)
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body = $body;
-        $mail->send();
+        //$mail->send();
         return true;
     } catch (Exception $e) {
         return false;

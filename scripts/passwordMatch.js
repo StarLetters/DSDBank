@@ -12,4 +12,11 @@ document.getElementById('registration-form').addEventListener('submit', function
     confirmPassword.setCustomValidity("Les mots de passe ne correspondent pas.");
     event.preventDefault(); 
     }
+
+    else {
+        confirmPassword.classList.remove('form-control.is-invalid');
+        confirmPassword.classList.add('form-control.is-valid');
+        confirmPassword.setCustomValidity("");
+        
+    }
 });
