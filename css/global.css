@@ -2,3 +2,9 @@
     width: 10px; /* Largeur de la scrollbar */
     
   }
+
+  @media (max-width: 1050px) {
+    body{
+        height: auto;
+    }
+}

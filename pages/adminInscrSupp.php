@@ -46,11 +46,10 @@ include('../backend/cnx.php');
     <form class="table-responsive" method="post" action="validateAdmin.php?InscrSupp=<?php echo $inscrsupp?>">
         <div class="form-group text-center m-3">
 
-            <input id="btnSubmit" type='submit' value="Valider"/>
-            <input type='text' id="yoo" name="okok" value="yeaah">
+            <input id="btnSubmit" class="btn btn-lg btn-success" type='submit' value="Valider"/>
             <input type='hidden' id='listeSiren' name='listeSiren' value="">
     
-            <button id="btnAnnuler"> <a href="../pages/adminHome.php">Annuler</a></button>
+            <a id="btnAnnuler" class="btn btn-lg btn-danger" href="../pages/adminHome.php">Annuler</a>
 
         </div>
 
@@ -92,7 +91,6 @@ include('../backend/cnx.php');
             echo "<td class='text-light'> <input type='checkbox' id='delete".$row['numSiren']."' name='actions[]' value='-".$row['numSiren']."' onclick=\"handleClick(this)\"/> </td>";
             echo "</tr>";
 
-            // A REPARER, envoyer une liste des numéros SIREN via POST
         }
         ?>
         </tbody>
