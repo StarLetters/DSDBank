@@ -1,21 +1,21 @@
 <?php
 
-// session_start();
+session_start();
 
-// require('../account/verifLogin.php');
-// $verif = verifLogin();	
-// switch ($verif){
-//     case 0 : 
-//         break;
-//     case 1 : 
-//         header('Location: ../pages/poHome.php');
-//         break;
-//     case 2 : //ADMIN
-//         header('Location: ../pages/adminHome.php');
-//         break;
-// }
+require('../account/verifLogin.php');
+$verif = verifLogin();	
+switch ($verif){
+    case 0 : 
+        break;
+    case 1 : 
+        header('Location: ../pages/poHome.php');
+        break;
+    case 2 : //ADMIN
+        header('Location: ../pages/adminHome.php');
+        break;
+}
 
-// include('../backend/cnx.php');
+include('../backend/cnx.php');
 
 ?>
 
