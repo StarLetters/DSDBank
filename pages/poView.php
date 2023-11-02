@@ -19,6 +19,34 @@ if (isset($_GET['todotransaction'])) {
         $cnx->commit();
     }
 }
+
+$request = "SELECT * 
+FROM Utilisateur
+JOIN Entreprise ON Entreprise.idUtilisateur = Utilisateur.idUtilisateur
+WHERE role = 'Client';";
+$result = $cnx->prepare($request);
+$result->execute();
+
+
+
+// Variables pour la pagination
+
+$rowsPerPage = 20; // Nombre de lignes par page
+
+// Récupère le numéro de page actuel depuis l'URL
+$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+
+$totalRows = $result->rowCount();
+$totalPages = ceil($totalRows / $rowsPerPage);
+if ($currentPage < 1 || $currentPage > $totalPages) {
+    $currentPage = 1;
+}
+// Calcule l'index de début et de fin des données à afficher
+$startIndex = ($currentPage - 1) * $rowsPerPage;
+$endIndex = min($startIndex + $rowsPerPage, $totalRows);
+
+$result = $result->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +85,35 @@ if (isset($_GET['todotransaction'])) {
                     </div>
                 </div>
                 <hr>
+
+                <div class="row justify-content-between align-items-end px-4">
+                    <p class="text-white align-bottom">
+                        <?php
+                        echo "Affichage de " . ($startIndex + 1) . " à " . $endIndex . " sur " . $totalRows . " résultats";
+                        ?>
+                    </p>
+                    <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-end">
+                        <?php if ($currentPage > 1) {
+                            echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?page=";
+                            echo $currentPage - 1;
+                            echo "\">&laquo;</a></li>";
+                        }
+                        ?>
+
+                        <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                            <li class="page-item"><a class="page-link <?php if ($i == $currentPage) echo ' activePage'; ?>" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                        <?php endfor; ?>
+
+                        <?php if ($currentPage < $totalPages) {
+                            echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?page=";
+                            echo $currentPage + 1;
+                            echo "\">&raquo;</a></li>";
+                        }
+                        ?>
+                    </ul>
+                </nav>
+                </div>
                 <table>
                     <thead>
                         <tr>
@@ -70,33 +127,24 @@ if (isset($_GET['todotransaction'])) {
                     <tbody>
                         <?php
 
-                        $request = "SELECT * 
-                    FROM Utilisateur
-                    JOIN Entreprise ON Entreprise.idUtilisateur = Utilisateur.idUtilisateur
-                    WHERE role = 'Client';";
-                        $result = $cnx->prepare($request);
-                        $result->execute();
-                        $nbrCompte = $result->rowCount();
-                        $result = $result->fetchAll();
 
-
-                        foreach ($result as $row) { // Afficher les infos de chaque client
+                        for ($i = $startIndex; $i < $endIndex; $i++) { // Afficher les infos de chaque client
                             echo "<tr>";
-                            echo "<td class=\"hiding-check\" scope=\"row\" id=\"selectUser\" style=\"display:none\"><input type=\"checkbox\" id=\"selectUser\" name=\"" . $row['email'] . "\" style=\"display:none\" /></th>"; // Checkbox pour sélectionner les comptes à supprimer
+                            echo "<td class=\"hiding-check\" scope=\"row\" id=\"selectUser\" style=\"display:none\"><input type=\"checkbox\" id=\"selectUser\" name=\"" . $result[$i]['email'] . "\" style=\"display:none\" /></th>"; // Checkbox pour sélectionner les comptes à supprimer
                             // Informations du client
                             echo "<td scope=\"row\" data-label=\"SIREN\">";
-                            echo $row['numSiren'];
+                            echo $result[$i]['numSiren'];
                             echo "</td>";
                             echo "<td data-label=\"Raison sociale\">";
-                            echo $row['raisonSociale'];
+                            echo $result[$i]['raisonSociale'];
                             echo "</td>";
                             echo "<td data-label=\"Email\">";
-                            echo $row['email'];
+                            echo $result[$i]['email'];
                             echo "</td>";
                             echo "<td data-label=\"Status\"";
 
                             // Vérifier une suppression ou une insertion a été demandé pour ce compte
-                            $request3 = "SELECT * FROM POrequete WHERE email ='" . $row['email'] . "';";
+                            $request3 = "SELECT * FROM POrequete WHERE email ='" . $result[$i]['email'] . "';";
                             $result3 = $cnx->prepare($request3);
                             $result3->execute();
                             $result3 = $result3->fetchAll();
@@ -104,7 +152,7 @@ if (isset($_GET['todotransaction'])) {
                                 echo "class=\"statusDemande\">"; // Status Demande
                                 echo $result3[0]['type_requete'] . " demandée"; // Afficher la demande
                             } else {
-                                $request4 = "SELECT * FROM Utilisateur WHERE email ='" . $row['email'] . "' AND verifier=0;";
+                                $request4 = "SELECT * FROM Utilisateur WHERE email ='" . $result[$i]['email'] . "' AND verifier=0;";
                                 $result4 = $cnx->prepare($request4);
                                 $result4->execute();
                                 $result4 = $result4->fetchAll();
@@ -123,16 +171,7 @@ if (isset($_GET['todotransaction'])) {
                         ?>
                     </tbody>
                 </table>
-                <div class="pagination">
-                    <button id="prevBtn">Précédent</button>
-                    <p class="text-white">
-                        <?php
-                        echo $nbrCompte;
-                        ?>
-                    </p>
-                    <button id="nextBtn">Suivant</button>
-                </div>
-
+                
             </form>
         </div>
         <?php include('../includes/footer.html'); ?>
