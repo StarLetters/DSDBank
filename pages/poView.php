@@ -78,7 +78,7 @@ $result = $result->fetchAll();
                     <p class="d-md-block text-white h2 text-center text-md-left">PROFILS</p>
                     <div class="d-flex align-items-center">
                         <!-- TODO : Bouton Créer compte href="createAccount.php" -->
-                        <a href="createAccount.php"><button id="btnCreer">Créer un compte</button></a>
+                        <a href="createAccount.php" class="creer" id="btnCreer">Créer un compte</a>
                         <button id="btnSupp" onclick="suppCompte()"> Supprimer compte(s)</button>
                         <button id="btnValider" type="submit" style="display:none">Valider</button>
                         <button id="btnAnnuler" type="reset" style="display:none">Annuler</button>
@@ -134,9 +134,9 @@ $result = $result->fetchAll();
                             $result2->execute();
                             $result2 = $result2->fetchAll();
                             echo "<tr>";
-                            echo "<td class=\"hiding-check\" scope=\"row\" id=\"selectUser\" style=\"display:none\"><input type=\"checkbox\" id=\"selectUser\" name=\"" . $result[$i]['email'] . "\" style=\"display:none\"";
+                            echo "<td class=\"hiding-check\" scope=\"row\" id=\"selectUser\" style=\"display:none\"><input type=\"checkbox\" id=\"selectUser\" name=\"" . $result[$i]['email'] . "\" style=\"display:none\" ";
                             if (!empty($result2)) {
-                                echo "checked disabled";
+                                echo "checked disabled ";
                             }
                             echo "/></th>"; // Checkbox pour sélectionner les comptes à supprimer
                             // Informations du client
@@ -158,7 +158,14 @@ $result = $result->fetchAll();
                             $result3 = $result3->fetchAll();
                             if (!empty($result3)) {
                                 echo "class=\"statusDemande\">"; // Status Demande
-                                echo $result3[0]['type_requete'] . " demandée"; // Afficher la demande
+                                $date_requete = $result3[0]['date_requete'];
+                                foreach ($result3 as $row2) { // Vérifier la dernière demande
+                                    if ($row2['date_requete'] >= $date_requete) {
+                                        $date_request = $row2['date_requete'];
+                                        $last_request = $row2;
+                                    }
+                                }
+                                echo $last_request['type_requete'] . " demandée"; // Afficher la demande
                             } else {
                                 $request4 = "SELECT * FROM Utilisateur WHERE email ='" . $result[$i]['email'] . "' AND verifier=0;";
                                 $result4 = $cnx->prepare($request4);
@@ -205,7 +212,6 @@ $result = $result->fetchAll();
                 element.style.display = 'table-cell';
             });
         }
-
 
         document.getElementById("btnAnnuler").onclick = function() {
             // Code d'annulation

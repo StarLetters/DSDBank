@@ -57,7 +57,7 @@ $cnx->beginTransaction();
             }
         }
         ?>
-        <button id="btnAnnuler">Non, retour</a>
+        <button id="btnAnnuler">Non, retour</button>
             <button id="btnValider">Oui, supprimer</button>
 
     </form>
