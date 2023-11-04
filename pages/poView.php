@@ -129,8 +129,16 @@ $result = $result->fetchAll();
 
 
                         for ($i = $startIndex; $i < $endIndex; $i++) { // Afficher les infos de chaque client
+                            $request2 = "SELECT * FROM POrequete WHERE email = '" . $result[$i]['email'] . "' AND type_requete = 'suppression';";
+                            $result2 = $cnx->prepare($request2);
+                            $result2->execute();
+                            $result2 = $result2->fetchAll();
                             echo "<tr>";
-                            echo "<td class=\"hiding-check\" scope=\"row\" id=\"selectUser\" style=\"display:none\"><input type=\"checkbox\" id=\"selectUser\" name=\"" . $result[$i]['email'] . "\" style=\"display:none\" /></th>"; // Checkbox pour sélectionner les comptes à supprimer
+                            echo "<td class=\"hiding-check\" scope=\"row\" id=\"selectUser\" style=\"display:none\"><input type=\"checkbox\" id=\"selectUser\" name=\"" . $result[$i]['email'] . "\" style=\"display:none\"";
+                            if (!empty($result2)) {
+                                echo "checked disabled";
+                            }
+                            echo "/></th>"; // Checkbox pour sélectionner les comptes à supprimer
                             // Informations du client
                             echo "<td scope=\"row\" data-label=\"SIREN\">";
                             echo $result[$i]['numSiren'];
