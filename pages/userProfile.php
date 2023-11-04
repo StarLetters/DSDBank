@@ -102,7 +102,7 @@ $result = $result->fetchAll();
                     <div class="row-1 d-flex">
                         <div class="col-lg-12 d-flex justify-content-center">
                             <div class="card">
-                                <div class="amount" style="
+                                <div class="amount" 
                                 <?php
                                 $request1 = "SELECT * FROM Transaction WHERE idUtilisateur = :idUtilisateur;";
                                 $result1 = $cnx->prepare($request1);
@@ -117,13 +117,15 @@ $result = $result->fetchAll();
                                         $montant += $result1[$i]['montant'];
                                     }
                                 }
+                                echo "style = \" ";
                                 if ($montant < 0) {
                                     echo "color: red;";
                                 } else {
                                     echo "color: green;";
-                                } ?>
-                                
-                                "><?php
+                                } 
+                                echo "\"";
+                                ?>                                
+                                ><?php
                                     echo $montant;
                                     ?></div>
                                 <div class="logo">
