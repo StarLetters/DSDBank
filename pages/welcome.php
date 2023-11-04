@@ -25,6 +25,8 @@ if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel='stylesheet' type='text/css' media='screen' href='../css/Welcome.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='../css/varColor.css'>
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/global.css" />
+
     <script src="../scripts/Eye.js"></script>
     <script src="../scripts/load.js"></script>
 </head>
@@ -33,7 +35,7 @@ if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
     <div class="center-box">
         <div class="container">
             <div class="row">
-            <div class="col-md-12 col-sm-12 left-content">
+                <div class="col-md-12 col-sm-12 left-content">
                     <img src="../data/img/LogoDSD.png" alt="DSD BANK Logo">
                     <h2 class="mt-5">DSD BANK</h2>
 
@@ -53,13 +55,13 @@ if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
                         $password = $_POST['password'];
 
 
-                    $request = "SELECT * FROM Utilisateur WHERE email = '".$email."'  AND verifier=1;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
+                        $request = "SELECT * FROM Utilisateur WHERE email = '" . $email . "'  AND verifier=1;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
                         $result = $cnx->prepare($request);
                         $result->execute();
                         $result = $result->fetchAll();
 
                         if ((!empty($result)) && (isPasswordValid($password, $result[0]['mdp']))) {
-                            $request = "SELECT * FROM POrequete WHERE email = '".$email."';"; // On vérifie si l'utilisateur est dans la table POrequest
+                            $request = "SELECT * FROM POrequete WHERE email = '" . $email . "';"; // On vérifie si l'utilisateur est dans la table POrequest
                             $result = $cnx->prepare($request);
                             $result->execute();
                             $result = $result->fetchAll();
@@ -70,9 +72,9 @@ if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
                                 exit;
                             }
                             $_SESSION['email'] = $email;
-                            $_SESSION['tries'] = 0;                            
+                            $_SESSION['tries'] = 0;
                             print_r($_SESSION);
-                            include ('../backend/mailer.php');
+                            include('../backend/mailer.php');
                             login(); // On envoie un mail de connexion
                             header('Location: home.php');
                         } else {
@@ -109,13 +111,15 @@ if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
                                 <span class="eye-icon" onclick="togglePasswordVisibility(this)">&#x1F441;</span>
                             </div>
                         </div>
-                        <div class="button-container">
+                        <div class="form-group text-left">
                             <a class="button-forgot" href="demandereinit.html">Mot de passe oublié ?</a>
+                        </div>
+                        <div class="form-group text-left">
                             <button class="button-reset" type="reset">Réinitialiser</button>
                             <button class="button-login" type="submit">Se connecter</button>
                         </div>
-
                     </form>
+
                 </div>
 
             </div>

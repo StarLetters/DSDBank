@@ -5,9 +5,9 @@ session_start();
 require('../account/verifLogin.php');
 $verif = verifLogin();	
 switch ($verif){
-    case 0 : //CLIENT
+    case 0 : 
         break;
-    case 1 : //PRODUCT OWNER
+    case 1 : 
         header('Location: ../pages/poHome.php');
         break;
     case 2 : //ADMIN
@@ -70,7 +70,7 @@ include('../backend/cnx.php');
             <section>
                 <div class="row">
                     <div class="col-lg-12 text-center mt-3">
-                        <a href="#" class="custom-button">Voir mon profil</a>
+                        <a href="../pages/userProfile.php" class="custom-button">Voir mon profil</a>
                     </div>
                 </div>
             </section>
@@ -143,15 +143,7 @@ include('../backend/cnx.php');
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
-    <script>
-        const $button = document.querySelector('#sidebar-toggle');
-        const $wrapper = document.querySelector('#wrapper');
-
-        $button.addEventListener('click', (e) => {
-            e.preventDefault();
-            $wrapper.classList.toggle('toggled');
-        });
-    </script>
+    <script src="../scripts/button-nav.js"></script>
 </body>
 
 </html>

@@ -25,9 +25,9 @@ function verifLogin(){
     }
     
     switch ($email){
-        case "elae.dsd@gmail.com" : //ADMIN
+        case "elae.dsd@gmail.com" :
             return 2;
-        case "po@gmail.com" : //PRODUCT OWNER
+        case "po@gmail.com" :
             return 1;
         default : // CLIENT
             return 0;      

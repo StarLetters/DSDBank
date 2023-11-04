@@ -1,10 +1,8 @@
 <?php
-
-
+session_start();
 
 
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -21,6 +19,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/Register.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/varColor.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/formCorrections.css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
@@ -31,48 +30,29 @@
 <body>
     <div class="center-box">
         <div class="border-head">
-            <h1>Contact PO</h1>
+            <h1>Contacter le Responsable</h1>
         </div>
 
 
         <form method="POST" action="welcome.php" class="registration-form mt-4 needs-validation" id="registration-form" novalidate>
             <div>
                 <div class="form-row">
-                <div class="form-group col-md-12 col-sm-12 mb-4"> <!-- Utilisation des classes col-md-12 col-sm-12 pour une largeur maximale sur les petits écrans -->
-    <label for="Name">Nom</label>
-    <input class="form-control" type="text" id="Name" name="Name" placeholder="Nom" maxlength="100" required />
-    <div class="invalid-feedback">Erreur</div>
-</div>
-
-                </div>
-
-
-                <hr style="border: 2px solid white; margin-top: 20px;">
-
-                <div class="form-row">
-                    <div class="form-group col-md-12 mb-4"> <!-- Colonne de largeur 12 pour Email -->
+                <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 12 pour Email -->
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email" maxlength="50" required />
                         <div class="invalid-feedback">Erreur</div>
                     </div>
-                </div>
-
-                <hr style="border: 2px solid white; margin-top: 20px;">
-
-                <div class="form-row">
-                    <div class="form-group col-md-12 mb-4"> <!-- Colonne de largeur 12 pour Objet -->
-                        <label for="Objet">Objet</label>
-                        <input type="text" class="form-control" id="Objet" name="Objet" placeholder="Objet" maxlength="50" required />
+                    <div class="form-group col-md-6 col-sm-12 mb-4"> <!-- Utilisation des classes col-md-12 col-sm-12 pour une largeur maximale sur les petits écrans -->
+                        <label for="Name">Nom</label>
+                        <input class="form-control" type="text" id="Name" name="Name" placeholder="Nom" maxlength="100" required />
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                 </div>
 
-                <hr style="border: 2px solid white; margin-top: 20px;">
-
                 <div class="form-row">
                     <div class="form-group col-md-12 mb-4">
-                        <label for="Text">Text</label>
-                        <textarea class="form-control" id="Text" name="Text" placeholder="Text" rows="5" required></textarea>
+                        <label for="Text">Texte</label>
+                        <textarea class="form-control" id="Text" name="Text" placeholder="Bonjour..." rows="6" required></textarea>
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                 </div>
@@ -81,7 +61,6 @@
 
             <div class="form-row">
                 <div class="form-group col-md-12 text-center">
-                    <!-- Bouton "S'inscrire" -->
                     <button type="submit" class="custom-button mr-3">
                         Envoyer
                     </button>

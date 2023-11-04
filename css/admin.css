@@ -2,14 +2,11 @@
     color: white;
 }
 
-
-
 .btn-sans-decoration a{
     text-decoration: none !important;
 }
 
 .btn-deconnexion{
-    background-color: var(--couleur-fond-rouge); 
     color: var(--couleur-avertissement);
     border: 1px solid var(--couleur-avertissement);
     border-radius: 10px;

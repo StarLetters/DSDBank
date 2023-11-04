@@ -13,10 +13,10 @@
 }
 
 .profile-title{
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 600;
     margin: 0;
-    transform: translateY(-50px);
+    transform: translateY(-60px);
 }
 
 .btn{
@@ -32,21 +32,46 @@
     font-size: 0.9rem;
 }
 
-.btn-deconnexion{
-    background-color: var(--couleur-fond-rouge); 
-    color: var(--couleur-avertissement);
-    border: 1px solid var(--couleur-avertissement);
-    border-radius: 10px;
-    padding: 10px 25px;
-    font-size: 0.9rem;
-}
-
 .banner{
     background: url(../data/img/clouds.jpg) no-repeat center center/cover;
 }
 
 .infos p{
     color:var(--couleur-text)
+}
+
+.infos{
+    background-color: rgba(255, 255, 255, 0.05);
+    padding-top: 3%;
+    margin-bottom: 2%;
+}
+
+.information>p{
+    margin-left: 3%;
+}
+
+.titres-2{
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.5;
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+
+/*
+.infos>div:hover{
+    border: 1px solid var(--couleur-text);
+    border-radius: 10px;    
+}*/
+
+button:hover{
+    transform: scale(1.1);
+    transition: all 0.5s ease;
+}
+
+button:hover>a{
+    color: var(--couleur-text)!important;
 }
 
 /* CODE POUR LA CARTE BANCAIRE*/
@@ -124,6 +149,55 @@
     right: 40px;
 }
 
+/*
+    CSS Pour la fenêtre ouvrante
+*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 8;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    margin: 50px auto;
+    border: 1px solid #999;
+    width: 60%;
+    background-color: var(--couleur-bouton);
+    
+  }
+
+  .modal-content div{
+    color: var(--couleur-text);
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .modal-content>div>div,
+  .option{
+    padding : 5%;
+  }
+
+  .option:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .close{
+    color: var(--couleur-text);
+    float: right;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
 @media (max-width: 767px) {
 
     .card-group > .card {
@@ -142,5 +216,32 @@
         overflow: hidden;
       }
 
+      .chip{
+        display: none;
+      }
 
+      .modal-content{
+        background-color: var(--couleur-hover);
+      }
+
+      .modal-content div{
+        font-size: 1rem;
+      }
+      .option{
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+}
+
+@media (max-width: 315px){
+    p{
+        font-size: 0.8rem;
+    }
+
+    .col{
+        flex-direction: column;
+    }
+
+    .btn{
+        margin: 20px;
+    }
 }

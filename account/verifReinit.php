@@ -64,8 +64,9 @@ else {
     }
 
     echo "Vous n'êtes pas autorisé ici";
-    echo $_SESSION['email'];
     exit;
+
+    
 }
 ?>
 <!DOCTYPE html>
