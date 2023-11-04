@@ -236,12 +236,4 @@ button:hover>a{
     p{
         font-size: 0.8rem;
     }
-
-    .col{
-        flex-direction: column;
-    }
-
-    .btn{
-        margin: 20px;
-    }
 }
