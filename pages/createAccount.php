@@ -172,7 +172,7 @@ header('Location: ./home.php');
 
 
             <!-- Bouton "Retour" -->
-            <a href="welcome.php" class="custom-button btn-secondary"><span class="arrow-left">&#x2190;</span> Retour</a>
+            <a href="javascript:history.back()" class="custom-button btn-secondary"><span class="arrow-left">&#x2190;</span> Retour</a>
         </form>
     </div>
 

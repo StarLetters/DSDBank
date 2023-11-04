@@ -49,14 +49,20 @@ table th {
     color:var(--couleur-text)
 }
 
-button{
+button, .creer {
     background-color: var(--couleur-bouton);
-    color: var(--couleur-text);
+    color: var(--couleur-text)!important;
     border: 1px solid var(--couleur-text);
     border-radius: 10px;
     padding: 10px 15px;
     font-size: 0.8rem;
     margin: 10px;
+}
+
+.creer:hover {
+    text-decoration: none;
+    transform: scale(1.1);
+    transition: all 0.5s ease;
 }
 
 .hiding-check{

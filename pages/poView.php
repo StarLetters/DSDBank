@@ -50,7 +50,7 @@ if (isset($_GET['todotransaction'])) {
                     <p class="d-md-block text-white h2 text-center text-md-left">PROFILS</p>
                     <div class="d-flex align-items-center">
                         <!-- TODO : Bouton Créer compte href="createAccount.php" -->
-                        <a href="createAccount.php"><button id="btnCreer">Créer un compte</button></a>
+                        <a href="createAccount.php" class="creer" id="btnCreer">Créer un compte</a>
                         <button id="btnSupp" onclick="suppCompte()"> Supprimer compte(s)</button>
                         <button id="btnValider" type="submit" style="display:none">Valider</button>
                         <button id="btnAnnuler" type="reset" style="display:none">Annuler</button>
@@ -81,8 +81,17 @@ if (isset($_GET['todotransaction'])) {
 
 
                         foreach ($result as $row) { // Afficher les infos de chaque client
+                            $request2 = "SELECT * FROM POrequete WHERE email = '" . $row['email'] . "' AND type_requete = 'suppression';";
+                            $result2 = $cnx->prepare($request2);
+                            $result2->execute();
+                            $result2 = $result2->fetchAll();
                             echo "<tr>";
-                            echo "<td class=\"hiding-check\" scope=\"row\" id=\"selectUser\" style=\"display:none\"><input type=\"checkbox\" id=\"selectUser\" name=\"" . $row['email'] . "\" style=\"display:none\" /></th>"; // Checkbox pour sélectionner les comptes à supprimer
+                            // Checkbox pour sélectionner les comptes qui demandent à être supprimés
+                            if (!empty($result2))  {
+                                echo "<td class=\"hiding-check\" scope=\"row\" id=\"selectUser\" style=\"display:none\"><input type=\"checkbox\" id=\"selectUser\" name=\"" . $row['email'] . "\" style=\"display:none\" /></th>";
+                            } else {
+                                echo "<td class=\"hiding-check\" scope=\"row\" id=\"selectUser\" style=\"display:none\"></th>";
+                            }
                             // Informations du client
                             echo "<td scope=\"row\" data-label=\"SIREN\">";
                             echo $row['numSiren'];
@@ -102,7 +111,14 @@ if (isset($_GET['todotransaction'])) {
                             $result3 = $result3->fetchAll();
                             if (!empty($result3)) {
                                 echo "class=\"statusDemande\">"; // Status Demande
-                                echo $result3[0]['type_requete'] . " demandée"; // Afficher la demande
+                                $date_requete = $result3[0]['date_requete'];
+                                foreach ($result3 as $row2) { // Vérifier la dernière demande
+                                    if ($row2['date_requete'] >= $date_requete) {
+                                        $date_request = $row2['date_requete'];
+                                        $last_request = $row2;
+                                    }
+                                }
+                                echo $last_request['type_requete'] . " demandée"; // Afficher la demande
                             } else {
                                 $request4 = "SELECT * FROM Utilisateur WHERE email ='" . $row['email'] . "' AND verifier=0;";
                                 $result4 = $cnx->prepare($request4);
@@ -158,7 +174,6 @@ if (isset($_GET['todotransaction'])) {
                 element.style.display = 'table-cell';
             });
         }
-
 
         document.getElementById("btnAnnuler").onclick = function() {
             // Code d'annulation
