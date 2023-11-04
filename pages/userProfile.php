@@ -1,15 +1,26 @@
 <?php
-/*
+
 session_start();
 
 require('../account/verifLogin.php');
-$verif = verifLogin();	
-if ($verif !== 0){
-    header('Location: ../pages/welcome.php');
+$verif = verifLogin();
+if ($verif !== 0) {
+    if ($verif === 1) {
+        header('Location: ../pages/poProfile.php');
+    } else if ($verif === 2) {
+        header('Location: ../pages/adminHome.php');
+    } else {
+        header('Location: ../pages/welcome.php');
+    }
 }
 
-*/
-
+include('../backend/cnx.php');
+$email = $_SESSION['email'];
+$request = "SELECT * FROM Utilisateur JOIN Entreprise ON Utilisateur.idUtilisateur = Entreprise.idUtilisateur WHERE email = :email;";
+$result = $cnx->prepare($request);
+$result->bindParam(':email', $email);
+$result->execute();
+$result = $result->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -36,9 +47,6 @@ if ($verif !== 0){
 
         <?php include('../includes/header.html'); ?>
 
-        <!-- TODO : Afficher les informations de l'utilisateur -->
-
-        <!-- TODO : Bouton modifier profil -> popup modifier mdp (href=demandereinit.html) -->
         <div id="modal" class="modal">
             <div class="modal-content">
                 <div class="col-12 p-0">
@@ -57,7 +65,7 @@ if ($verif !== 0){
             <div class="row-1 d-flex justify-content-between flex-column flex-md-row">
                 <div class="col d-flex flex-column">
                     <img src="../data/img/Mochi.jpg" alt="Photo de profil" class="rounded-circle profilepic mx-auto ml-md-5 img-thumbnail" style="height: 150px;">
-                    <p class="text-white profile-title mx-auto ml-md-4">Lucaski SARL</p>
+                    <p class="text-white profile-title mx-auto ml-md-4"> <?php echo $result[0]['raisonSociale'] ?></p>
                 </div>
                 <div class="col my-auto d-flex justify-content-center justify-content-md-end ">
                     <button class="btn btn-modifier" onclick="openModifier()">Modifier profil</button>
@@ -70,11 +78,11 @@ if ($verif !== 0){
                     <hr>
                     <div class="information">
                         <p class="titres-2">Votre N° de SIREN</p>
-                        <p>123 456 789</p>
+                        <p><?php echo $result[0]['numSiren'] ?></p>
                     </div>
                     <div class="information">
                         <p class="titres-2">Date d'inscription</p>
-                        <p>31/10/2023</p>
+                        <p><?php echo $result[0]['inscriptionDate'] ?></p>
                     </div>
                 </div>
                 <hr class="d-md-none">
@@ -83,25 +91,51 @@ if ($verif !== 0){
                     <hr>
                     <div class="information">
                         <p class="titres-2">Email</p>
-                        <p>merlin.lucas@gmail.com</p>
+                        <p><?php echo $result[0]['email'] ?></p>
                     </div>
                     <div class="information">
                         <p class="titres-2">Numéro de téléphone</p>
-                        <p>Non renseigné</p>
+                        <p><?php echo (empty($result[0]['numTel'])) ? "Non renseigné" : $result[0]['numTel'] ?></p>
                     </div>
                 </div>
                 <div class="col-12 my-5">
                     <div class="row-1 d-flex">
                         <div class="col-lg-12 d-flex justify-content-center">
                             <div class="card">
+                                <div class="amount" 
+                                <?php
+                                $request1 = "SELECT * FROM Transaction WHERE idUtilisateur = :idUtilisateur;";
+                                $result1 = $cnx->prepare($request1);
+                                $result1->bindParam(':idUtilisateur', $result[0]['idUtilisateur']);
+                                $result1->execute();
+                                $result1 = $result1->fetchAll();
+                                $montant = 0;
+                                for ($i = 0; $i < count($result1); $i++) {
+                                    if ($result1[$i]['sens'] == "-") {
+                                        $montant -= $result1[$i]['montant'];
+                                    } else {
+                                        $montant += $result1[$i]['montant'];
+                                    }
+                                }
+                                echo "style = \" ";
+                                if ($montant < 0) {
+                                    echo "color: red;";
+                                } else {
+                                    echo "color: green;";
+                                } 
+                                echo "\"";
+                                ?>                                
+                                ><?php
+                                    echo $montant;
+                                    ?></div>
                                 <div class="logo">
                                     <img src="../data/img/LogoDSD.png" alt="logo">
                                 </div>
                                 <div class="chip"><img src="../data/img/chip.png" alt="chip"></div>
-                                <div class="number">1234 5678 9012 3456</div>
-                                <div class="name">Prenom Nom</div>
-                                <div class="from">10/19</div>
-                                <div class="to">06/21</div>
+                                <div class="number"><?php echo $result[0]['numCarteEntreprise'] ?></div>
+                                <div class="name"><?php echo $result[0]['raisonSociale'] ?></div>
+                                <div class="from"></div>
+                                <div class="to"><?php echo $result[0]['reseauEntreprise'] ?></div>
                                 <div class="ring"></div> <!-- les cercles en fond -->
                             </div>
                         </div>
