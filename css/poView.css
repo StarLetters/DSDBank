@@ -21,7 +21,8 @@ table {
     width: 100%;
     table-layout: fixed;
     background-color: rgba(255, 255, 255, 0.05);
-    margin: 50px auto;
+    margin: 0 auto;
+    margin-bottom: 50px;
 }
 
 table caption {
@@ -95,7 +96,21 @@ tr:hover{
     max-height: 300px;
     overflow-y: auto;
   }
+
   
+.page-item{
+    background-color: var(--couleur-bouton);
+}
+
+.page-link{
+    color: var(--couleur-text);
+    background: none;
+}
+
+.activePage{
+    background-color:var(--couleur-text-violet);
+    color: var(--couleur-hover);
+}
 
 @media screen and (max-width: 1500px) {
     table {
@@ -143,5 +158,11 @@ tr:hover{
 
     table td:last-child {
         border-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 389px) {
+    .page-item{
+        width:17%;
     }
 }

@@ -143,15 +143,7 @@ include('../backend/cnx.php');
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
-    <script>
-        const $button = document.querySelector('#sidebar-toggle');
-        const $wrapper = document.querySelector('#wrapper');
-
-        $button.addEventListener('click', (e) => {
-            e.preventDefault();
-            $wrapper.classList.toggle('toggled');
-        });
-    </script>
+    <script src="../scripts/button-nav.js"></script>
 </body>
 
 </html>
