@@ -62,11 +62,7 @@ body {
 }
 
 .card-group {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding-top: 30%;
+    width:fit-content;
 }
 
 .card {
@@ -167,9 +163,6 @@ body {
     border-radius: 30px;
 }
 
-.mt-3, .my-3 {
-    margin-top: 18rem !important;
-  }
 
 .img-fluid {
     width: 100px;
@@ -217,7 +210,7 @@ body {
       .card {
         position: relative;
         height: 270px;
-        width: 370px;
+        width: 300px;
         border-radius: 25px;
         background: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(30px);
@@ -226,5 +219,18 @@ body {
         overflow: hidden;
       }
 
+      .chip{
+        display: none;
+      }
 
+}
+
+@media (max-width: 315px){
+    p{
+        font-size: 0.8rem;
+    }
+
+    .card {
+        width:200px;
+    }
 }

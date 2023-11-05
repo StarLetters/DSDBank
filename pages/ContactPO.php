@@ -1,17 +1,12 @@
 <?php
 session_start();
 
-if (isset($_POST['email']) && isset($_POST['name']) && isset($_POST['body'])) {
+
+if (isset($_POST['subject']) && isset($_POST['name']) && isset($_POST['text']) && isset($_POST['sender'])) {
     $email = $_POST['email'];
     $name = $_POST['name'];
-    $body = $_POST['body'];
-
-    
-    
-
-
-}
-
+    $body = $_POST['text'];
+    $sender = $_POST['sender'];
 
 ?>
 <!DOCTYPE html>
@@ -48,10 +43,17 @@ if (isset($_POST['email']) && isset($_POST['name']) && isset($_POST['body'])) {
         </div>
 
 
-        <form method="POST" action="welcome.php" class="registration-form mt-4 needs-validation" id="registration-form" novalidate>
+        <form method="POST" action="../backend/mailer.php" class="registration-form mt-4 needs-validation" id="registration-form" novalidate>
             <div>
+                <?php
+                    echo '<input type="hidden" name="which" value="contact">';
+                    if (isset($_POST['sender'])){
+                        echo '<input type="hidden" name="sender" value="'.$sender.'">';
+                    }
+                    else{
+                        echo '
                 <div class="form-row">
-                <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 12 pour Email -->
+                    <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 12 pour Email -->
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email" maxlength="50" required />
                         <div class="invalid-feedback">Erreur</div>
@@ -59,14 +61,27 @@ if (isset($_POST['email']) && isset($_POST['name']) && isset($_POST['body'])) {
                     <div class="form-group col-md-6 col-sm-12 mb-4"> <!-- Utilisation des classes col-md-12 col-sm-12 pour une largeur maximale sur les petits écrans -->
                         <label for="name">Nom</label>
                         <input class="form-control" type="text" id="name" name="name" placeholder="Nom" maxlength="100" required />
+
+                        <div class="invalid-feedback">Erreur</div>
+                    </div>
+                </div>';
+                    }
+                ?>
+                <div class="form-row">
+                <div class="form-group col-md-12 mb-4">
+                        <label for="subject">Objet</label>
+                        <textarea class="form-control" id="subject" name="subject" placeholder="Demande" rows="1" required></textarea>
+
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-12 mb-4">
-                        <label for="body">Texte</label>
-                        <textarea class="form-control" id="body" name="body" placeholder="Bonjour..." rows="6" required></textarea>
+
+                        <label for="text">Texte</label>
+                        <textarea class="form-control" id="text" name="text" placeholder="Bonjour..." rows="6" required></textarea>
+
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                 </div>

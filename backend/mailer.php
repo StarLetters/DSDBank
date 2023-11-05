@@ -45,7 +45,7 @@ function envoi_mail($name, $email, $subject, $body)
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body = $body;
-        //$mail->send();
+        $mail->send();
         return true;
     } catch (Exception $e) {
         return false;
@@ -116,13 +116,13 @@ function verification()
 */
 
 function login()
-{   
-    
+{
+
     if (isset($_SESSION['email'])) {
         $email = $_SESSION['email'];
         if (isset($_SESSION['socialReason'])) {
             $socialReason = $_SESSION['socialReason'];
-        }else{
+        } else {
             $socialReason = "Monsieur/Madame";
         }
     }
@@ -180,10 +180,58 @@ function forgot($socialReason)
     }
 }
 
+/* 
+    Fonction de contact
+    Retour :
+        - true si le mail a été envoyé
+        - false si le mail n'a pas été envoyé
+*/
+function contact()
+{
+    include('../backend/cnx.php');
+    $request = "SELECT email FROM Utilisateur WHERE role = 'PO';";
+    $result = $cnx->prepare($request);
+    $result->execute();
+    $result = $result->fetchAll();
+
+    if (isset($_POST['sender'])) {
+        $sender = "Product Owner de DSDBank";
+        $recipient = "Admin";
+        $email = SMTP_HOST;
+        $emailsender = $result[0]['email'];
+    } else {
+        $sender = $_POST['name'];
+        $recipient = "PO";
+        $email = $result[0]['email'];
+        $emailsender = $_POST['email'];
+    }
+    $subject = $_POST['subject'];
+    $text = $_POST['text'];
+    
+    $body = "<h1> DSDBank </h1>";
+    $body .= "<br><br>";
+    $body .= "Vous avez reçu un message de la part de " . $sender . " (" . $emailsender . ") :";
+    $body .= "<br><br>";
+    $body .= $text;
+    $body .= "<br><br>";
+    $body .= "Merci,";
+    $body .= "<br>";
+    $body .= "L'équipe DSDBank";
+    if (envoi_mail($recipient, $email, $subject, $body)) {
+        echo 'OK';
+        header('Location:../account/confirmMailSent.php');
+        exit();
+    } else {
+        echo "Une erreur s'est produite";
+        header('Location:../pages/welcome.php');
+    }
+}
+
+
 
 /*
     Permet de décider quel mail sera envoyé en fonction de la valeur de $_POST['which']
-*/ 
+*/
 if (isset($_POST['which'])) {
     $which = $_POST['which'];
     switch ($which) {
@@ -192,6 +240,9 @@ if (isset($_POST['which'])) {
             break;
         case 'login':
             login();
+            break;
+        case 'contact':
+            contact();
             break;
         default:
             break;
