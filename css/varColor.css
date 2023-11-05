@@ -9,5 +9,6 @@
     --couleur-fond-rouge:rgba(158, 35, 35,0.25); /* Couleur fond rouge  */
     --couleur-fond-non-transparent: rgba(31, 23, 80); /* Couleur violette non transparente */
     --couleur-fond-sombre:rgb(31, 27, 56); /* Couleur fond sombre */
-    --couleur-text-violet:rgb(193, 200, 228); 
+    --couleur-text-violet:rgb(193, 200, 228); /* Couleur texte violet */
+    --couleur-bleu-beau:rgb(100, 207, 246); /* Couleur bleu beau */
 }
