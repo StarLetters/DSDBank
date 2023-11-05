@@ -1,6 +1,17 @@
 <?php
 session_start();
 
+if (isset($_POST['email']) && isset($_POST['name']) && isset($_POST['body'])) {
+    $email = $_POST['email'];
+    $name = $_POST['name'];
+    $body = $_POST['body'];
+
+    
+    
+
+
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -9,7 +20,7 @@ session_start();
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>ContactPO</title>
+    <title>Contact Responsable</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,6 +31,9 @@ session_start();
     <link rel="stylesheet" href="../css/Register.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/varColor.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/formCorrections.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/global.css" />
+
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
@@ -30,7 +44,7 @@ session_start();
 <body>
     <div class="center-box">
         <div class="border-head">
-            <h1>Contacter le Responsable</h1>
+            <p class="text-white h4  ">Contacter le Responsable</p>
         </div>
 
 
@@ -43,16 +57,16 @@ session_start();
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                     <div class="form-group col-md-6 col-sm-12 mb-4"> <!-- Utilisation des classes col-md-12 col-sm-12 pour une largeur maximale sur les petits écrans -->
-                        <label for="Name">Nom</label>
-                        <input class="form-control" type="text" id="Name" name="Name" placeholder="Nom" maxlength="100" required />
+                        <label for="name">Nom</label>
+                        <input class="form-control" type="text" id="name" name="name" placeholder="Nom" maxlength="100" required />
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-12 mb-4">
-                        <label for="Text">Texte</label>
-                        <textarea class="form-control" id="Text" name="Text" placeholder="Bonjour..." rows="6" required></textarea>
+                        <label for="body">Texte</label>
+                        <textarea class="form-control" id="body" name="body" placeholder="Bonjour..." rows="6" required></textarea>
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                 </div>

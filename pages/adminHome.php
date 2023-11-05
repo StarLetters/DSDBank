@@ -45,7 +45,7 @@ $nbSupp = $result['suppression'] ?? 0;
     <script src="../scripts/load.js"></script>
 </head>
 
-<body>
+<body class="adminHome">
 
 
 <div class="center-box">
@@ -54,14 +54,14 @@ $nbSupp = $result['suppression'] ?? 0;
         </div>
 
 
-        <div class="form-row justify-content-around m-5">
+        <div class="form-row justify-content-around align-items-center m-5">
 
-            <div>
-            <a href="../pages/adminInscrSupp.php?InscrSupp=inscription"><button id="btnInscr" class="btn btn-success btn-lg btn-sans-decoration btn-texte-blanc">Demandes d'inscription (<?php echo $nbInscr; ?>)</button> </a>
+            <div class="w-35">
+            <a href="../pages/adminInscrSupp.php?InscrSupp=inscription"><button id="btnInscr" class="btn btn-success btn-lg btn-sans-decoration btn-texte-blanc w-100">Demandes d'inscription (<?php echo $nbInscr; ?>)</button> </a>
             </div>
 
-            <div>
-            <a href="../pages/adminInscrSupp.php?InscrSupp=suppression"><button id="btnSupp" class="btn btn-danger btn-lg btn-sans-decoration btn-texte-blanc">Demandes de suppression (<?php echo $nbSupp; ?>)</button> </a>
+            <div class="w-35">
+            <a class="w-100" href="../pages/adminInscrSupp.php?InscrSupp=suppression"><button id="btnSupp" class="btn btn-danger btn-lg btn-sans-decoration btn-texte-blanc w-100">Demandes de suppression (<?php echo $nbSupp; ?>)</button> </a>
             </div>
 
         </div>
