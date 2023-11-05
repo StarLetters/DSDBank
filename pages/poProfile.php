@@ -1,5 +1,5 @@
 <?php
-/*
+
 session_start();
 
 include('../account/verifLogin.php');
@@ -7,7 +7,7 @@ $role = verifLogin();
 if ($role != 1) {
     header('Location: ../pages/welcome.php');
 }
-*/
+
 
 ?>
 <!DOCTYPE html>
@@ -30,9 +30,6 @@ if ($role != 1) {
 
         <?php include('../includes/header.html'); ?>
 
-        <!-- TODO : Afficher les informations de l'utilisateur -->
-
-        <!-- TODO : Bouton modifier profil -> popup modifier mdp (href=demandereinit.html) -->
         <div id="modal" class="modal">
             <div class="modal-content">
                 <div class="col-12 p-0">
@@ -62,7 +59,11 @@ if ($role != 1) {
                 <p class="titres">Gérer le site</p>
                 <div class="row-3 d-flex flex-wrap justify-content-around my-5">
                     <a href="poView.php"><button class="btn btn-option">Voir les profils</button></a>
-                    <a href=""><button class="btn btn-option">Contacter l'admin</button></a>
+                    <form method="POST" action="../pages/ContactPO.php">
+                    <input type="hidden" name="sender" value="PO">
+                    <button type="submit" class="btn btn-option">Contacter l'admin</button>
+                    </form>
+                    
 
                 </div>
             </div>

@@ -95,7 +95,7 @@ button:hover>a{
     overflow: hidden;
 }
 
-.logo img, .chip img, .number, .name, .from, .to, .ring {
+.logo img, .chip img, .number, .name, .from, .to, .ring, .amount{
     position: absolute;
 }
 
@@ -115,6 +115,7 @@ button:hover>a{
     opacity: 0.8;
 }
 
+.amount,
 .number,
 .name,
 .from,
@@ -123,6 +124,12 @@ button:hover>a{
     font-weight: 400;
     letter-spacing: 2px;
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+}
+
+.amount {
+    font-size: 1.3rem;
+    left: 40px;
+    top: 35px;
 }
 
 .number {
@@ -147,6 +154,30 @@ button:hover>a{
     font-size: 0.5rem;
     bottom: 35px;
     right: 40px;
+}
+
+.ring {
+    height: 500px;
+    width: 500px;
+    border-radius: 50%;
+    background: transparent;
+    border: 50px solid rgba(255, 255, 255, 0.1);
+    bottom: -250px;
+    right: -250px;
+    box-sizing: border-box;
+}
+
+.ring::after {
+    content: "";
+    position: absolute;
+    height: 600px;
+    width: 600px;
+    border-radius: 50%;
+    background: transparent;
+    border: 30px solid rgba(255, 255, 255, 0.1);
+    bottom: -80px;
+    right: -110px;
+    box-sizing: border-box;
 }
 
 /*
@@ -230,18 +261,14 @@ button:hover>a{
       .option{
         background-color: rgba(0, 0, 0, 0.2);
       }
+
+      .logo{
+        display: none;
+      }
 }
 
 @media (max-width: 315px){
     p{
         font-size: 0.8rem;
-    }
-
-    .col{
-        flex-direction: column;
-    }
-
-    .btn{
-        margin: 20px;
     }
 }

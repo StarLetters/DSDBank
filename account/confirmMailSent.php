@@ -7,7 +7,7 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Confirmation</title>
+    <title>Confirmation envoi mail</title>
     <link rel="shortcut icon" href="../data/img/LogoDSD.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/varColor.css">
     <link rel="stylesheet" href="../css/Confirm.css">
@@ -21,13 +21,13 @@ session_start();
             </div>
             <div class="content">
                 <div class="center">
-                    <img src="../data/img/LogoDSD.png"  style="width:50%">
+                    <img src="../data/img/LogoDSD.png" style="width:50%">
                 </div>
                 <div class="message">
-                    Bienvenue!
+                    Bonjour,
                 </div>
                 <div class="message">
-                    Un mail de confirmation vient de vous être envoyé!
+                    Votre mail a bien été envoyé.
                 </div>
                 <div class="message">
                     Meilleures salutations,
@@ -35,19 +35,8 @@ session_start();
                 <div class="message">
                     DSD Bank
                 </div>
-                <div class="center">
-                    <div class="message">
-                        Mail non reçu ?
-                    </div>
-                </div>
-                <div class="center">
-                    <form method="POST" action="../backend/mailer.php">
-                        <input type="hidden" name="which" value="register" />
-                        <input type="submit" value="Renvoyer le mail" class="button">
-                    </form>
-                </div>
                 <div class="center top-left-button">
-                    <a href="welcome.php" class="back-button">Retour</a>
+                    <a href="home.php" class="back-button">Retour</a>
                 </div>
 
             </div>
