@@ -5,7 +5,7 @@
 
   .btn-deconnexion{
     background-color: var(--couleur-fond-rouge); 
-    color: var(--couleur-avertissement);
+    color: white;
     border: 1px solid var(--couleur-avertissement);
     border-radius: 10px;
     padding: 10px 25px;
@@ -26,6 +26,11 @@ button:hover{
   font-weight: 550;
 }
 
+/* Extension de famille de classe Bootstrap */
+.w-35{
+  width: 35%;
+}
+
 @media (max-width: 315px){
   p{
       font-size: 0.8rem;
@@ -41,7 +46,23 @@ button:hover{
 }
 
   @media (max-width: 1050px) {
-    body{
+    body:not(.adminHome){
         height: auto;
     }
-}
+  }
+
+  /* adminHome.php responsive */
+  @media (max-width: 870px){
+    body{
+      height: 100vh;
+    }
+
+    .form-row{
+      flex-direction: column;
+      height: 35vh;
+    }
+
+    .form-row div{
+      width: auto;
+    }
+  }
