@@ -162,7 +162,7 @@ tr:hover{
 }
 
 @media screen and (max-width: 389px) {
-    .page-item{
-        width:17%;
+    .form-control{
+        width:50%!important;
     }
 }
