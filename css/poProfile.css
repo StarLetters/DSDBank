@@ -39,16 +39,18 @@
 }
 
 .infos {
+    display: flex;
+    flex-direction: column;
     background-color: rgba(255, 255, 255, 0.05);
-    padding-top: 3%;
+    padding: 3% 20px;
     margin-bottom: 2%;
-    height: 50vh;
 }
 
 .btn-option {
     color: var(--couleur-text);
     border: 1px solid var(--couleur-text);
     background-color: var(--couleur-bouton);
+    font-size: 1rem;
 }
 
 /*

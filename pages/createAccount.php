@@ -2,7 +2,7 @@
 session_start();
 
 include('../account/verifLogin.php');
-if  (verifLogin() != 1) {
+if  (verifLogin() != 2) {
     header('Location: ../pages/welcome.php');
 }
 
