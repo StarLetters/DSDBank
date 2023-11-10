@@ -4,8 +4,8 @@ session_start();
 
 include('../account/verifLogin.php');
 $role = verifLogin();
-if ($role != 1) { // Si ce n'est pas un PO
-    //header('Location: ../pages/welcome.php');
+if ($role != 2) { // Si ce n'est pas un admin
+    header('Location: ../pages/welcome.php');
 }
 
 
@@ -13,11 +13,10 @@ include('../backend/cnx.php');
 if ($cnx->inTransaction()) {
     $cnx->rollBack();
 }
-$cnx->beginTransaction();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -26,52 +25,33 @@ $cnx->beginTransaction();
 </head>
 
 <body>
-    <p> Etes vous sûr de vouloir supprimer ces utilisateurs ? </p>
+    <form action="suppAccount.php" method="POST">
+        <p> Etes vous sûr de vouloir supprimer ces utilisateurs ? </p>
 
-    <p> Ces utilisateurs seront demandés à être supprimés </p>
-    <?php
-    $request = "SELECT * 
+        <p> Ces utilisateurs seront demandés à être supprimés </p>
+        <?php
+        $request = "SELECT * 
         FROM Utilisateur
         JOIN Entreprise ON Entreprise.idUtilisateur = Utilisateur.idUtilisateur
         WHERE role = 'Client';";
-    $result = $cnx->prepare($request);
-    $result->execute();
-    $result = $result->fetchAll();
+        $result = $cnx->prepare($request);
+        $result->execute();
+        $result = $result->fetchAll();
 
-    foreach ($result as $row) { // Afficher quel(s) client(s) vont être suppimé(s)
-        if (isset($_POST[$row['email']])) {
-            echo $row['raisonSociale'];
-            echo "<br>";
-        }
-    }
-    ?>
-    <form action="suppAccount.php" method="post">
-        <?php
-        foreach ($result as $row) {
-            if (isset($_POST[$row['email']])) {
-                // Supprimer les demandes d'inscription et ajouter les demandes de suppression
-                $requete = "DELETE FROM POrequete WHERE email = '" . $row['email'] . "';";
-                $cnx->exec($requete);
-                $requete = "INSERT INTO POrequete (email, type_requete) VALUES ('" . $row['email'] . "', 'suppression');";
-                $cnx->exec($requete);
+        foreach ($result as $row) { // Afficher quel(s) client(s) vont être suppimé(s)
+            $email = $row['email'];
+            $email = str_replace(".", "_", $email);
+            if (isset($_POST[$email]) && $_POST[$email] == "on") {
+                echo $row['raisonSociale'];
+                echo "<br>";
+                echo "<input type=\"hidden\" id=\"selectUser\" name=\"" . $row['email'] . "\" value=\"on\">";
+                echo $row['email'];
             }
         }
         ?>
-        <button id="btnAnnuler">Non, retour</button>
-            <button id="btnValider">Oui, supprimer</button>
-
+        <button type="reset" onclick="window.location.href = '../pages/adminView.php';">Annuler</button>
+        <button type="submit">Valider</button>
     </form>
-
-    <script>
-        document.getElementById("btnAnnuler").onclick = function() {
-            window.location.href ='../pages/poView.php?todotransaction=rollback' // Annuler la transaction
-            
-        };
-
-        document.getElementById("btnValider").onclick = function() {            
-            window.location.href ='../pages/poView.php?todotransaction=commit' // Valider la transaction  
-        };
-    </script>
 </body>
 
 </html>

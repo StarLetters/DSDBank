@@ -7,7 +7,7 @@ if (isset($_POST['subject']) && isset($_POST['name']) && isset($_POST['text']) &
     $name = $_POST['name'];
     $body = $_POST['text'];
     $sender = $_POST['sender'];
-
+}
 ?>
 <!DOCTYPE html>
 <html>

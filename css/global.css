@@ -12,6 +12,13 @@
     font-size: 0.9rem;
 }
 
+.btn-option {
+  color: var(--couleur-text);
+  border: 1px solid var(--couleur-text);
+  background-color: var(--couleur-bouton);
+  font-size: 1rem;
+}
+
 button:hover{
   transform: scale(1.1);
   transition: all 0.5s ease;
@@ -22,7 +29,7 @@ button:hover{
 }
 
 .titres{
-  font-size: 3vw;
+  font-size: 2rem;
   font-weight: 550;
 }
 
@@ -42,6 +49,9 @@ button:hover{
 
   .btn{
       margin: 20px;
+  }
+  .titres{
+    font-size: 1rem;
   }
 }
 

@@ -10,12 +10,7 @@ if ($role != 2) {
 
 include('../backend/cnx.php');
 
-$request = "SELECT type_requete, COUNT(*) FROM POrequete WHERE type_requete IN ('inscription', 'suppression') GROUP BY type_requete;";
-$result = $cnx->prepare($request);
-$result->execute();
-$result = $result->fetchAll(PDO::FETCH_KEY_PAIR);
-$nbInscr = $result['inscription'] ?? 0;
-$nbSupp = $result['suppression'] ?? 0;
+
 
 
 ?>
@@ -53,18 +48,12 @@ $nbSupp = $result['suppression'] ?? 0;
             <h1>Menu Admin</h1>
         </div>
 
+        <div class="form-group text-center m-3">
 
-        <div class="form-row justify-content-around align-items-center m-5">
-
-            <div class="w-35">
-            <a href="../pages/adminInscrSupp.php?InscrSupp=inscription"><button id="btnInscr" class="btn btn-success btn-lg btn-sans-decoration btn-texte-blanc w-100">Demandes d'inscription (<?php echo $nbInscr; ?>)</button> </a>
-            </div>
-
-            <div class="w-35">
-            <a class="w-100" href="../pages/adminInscrSupp.php?InscrSupp=suppression"><button id="btnSupp" class="btn btn-danger btn-lg btn-sans-decoration btn-texte-blanc w-100">Demandes de suppression (<?php echo $nbSupp; ?>)</button> </a>
-            </div>
+            <a  href="../pages/adminView.php"><button class="btn btn-option my-5 p-3" style="font-size:1.5rem">Voir les profils</button></a>
 
         </div>
+        
         <a href="../account/deco.php"><button class="float-right btn-deconnexion text-decoration-none">Se déconnecter</button></a>
 
         </div>
