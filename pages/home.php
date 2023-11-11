@@ -8,7 +8,7 @@ switch ($verif) {
     case 0:
         break;
     case 1:
-        header('Location: ../pages/poHome.php');
+        header('Location: ../pages/poProfile.php');
         break;
     case 2: //ADMIN
         header('Location: ../pages/adminHome.php');
@@ -41,7 +41,7 @@ include('../backend/cnx.php');
     <div class="">
         <div id="wrapper">
 
-            <?php include('../includes/header.html'); ?>
+            <?php include('../includes/header.php'); ?>
 
             <div id="content">
                 <section id="content-wrapper">
@@ -49,10 +49,7 @@ include('../backend/cnx.php');
                         <div class="col-lg-12">
                             <h2 class="content-title text-white">Bonjour, <span>
                                     <?php
-                                    $request = "SELECT * FROM Utilisateur JOIN Entreprise on Utilisateur.idUtilisateur=Entreprise.idUtilisateur WHERE email = '" . $_SESSION['email'] . "';";
-                                    $result = $cnx->query($request);
-                                    $row = $result->fetch(PDO::FETCH_ASSOC);
-                                    echo $row['raisonSociale'];
+                                    echo $_SESSION['displayName'];
                                     ?>
                                 </span></h2>
                         </div>

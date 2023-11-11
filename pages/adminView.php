@@ -66,7 +66,7 @@ $result = $result->fetchAll();
 
 <body>
     <div id="wrapper">
-        <?php include('../includes/header.html'); ?>
+        <?php include('../includes/header.php'); ?>
         <div class="col-12">
             <div class="row">
                 <a href="welcome.php" class="custom-button btn-secondary"><span class="arrow-left">&#x2190;</span> Retour</a>
@@ -111,17 +111,20 @@ $result = $result->fetchAll();
                             <?php if ($currentPage > 1) {
                                 echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?page=";
                                 echo $currentPage - 1;
+                                echo "&rowsPerPage=".$rowsPerPage;
+
                                 echo "\">&laquo;</a></li>";
                             }
                             ?>
 
                             <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                                <li class="page-item"><a class="page-link <?php if ($i == $currentPage) echo ' activePage'; ?>" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                                <li class="page-item"><a class="page-link <?php if ($i == $currentPage) echo ' activePage'; ?>" href="?page=<?php echo $i."&rowsPerPage=".$rowsPerPage; ?>"><?php echo $i; ?></a></li>
                             <?php endfor; ?>
 
                             <?php if ($currentPage < $totalPages) {
                                 echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?page=";
                                 echo $currentPage + 1;
+                                echo "&rowsPerPage=".$rowsPerPage;
                                 echo "\">&raquo;</a></li>";
                             }
                             ?>

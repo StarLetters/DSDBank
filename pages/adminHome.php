@@ -11,7 +11,13 @@ if ($role != 2) {
 include('../backend/cnx.php');
 
 
-
+//
+//
+//
+// A SUPPRIMER
+//
+//
+//
 
 ?>
 <!DOCTYPE html>
@@ -31,6 +37,7 @@ include('../backend/cnx.php');
     <link rel="stylesheet" href="../css/Register.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/varColor.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/global.css" />
+    
 
 
     

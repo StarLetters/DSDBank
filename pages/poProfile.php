@@ -36,7 +36,7 @@ $nbSupp = $result['suppression'] ?? 0;
 <body>
     <div id="wrapper">
 
-        <?php include('../includes/header.html'); ?>
+        <?php include('../includes/header.php'); ?>
 
         <div id="modal" class="modal">
             <div class="modal-content">
@@ -80,7 +80,7 @@ $nbSupp = $result['suppression'] ?? 0;
                     </div>
 
                     <div class="m-2">
-                        <a class="w-100" href="../pages/poInscrSupp.php?InscrSupp=suppression"><button id="btnSupp" class="btn btn-option btn-lg btn-sans-decoration btn-texte-blanc w-100" style="background-color:red!important">Demandes de suppression (<?php echo $nbSupp; ?>)</button> </a>
+                        <a class="w-100" href="../pages/poInscrSupp.php?InscrSupp=suppression"><button id="btnSupp" class="btn btn-option btn-lg btn-sans-decoration btn-texte-blanc w-100" style="background-color:#dc3545">Demandes de suppression (<?php echo $nbSupp; ?>)</button> </a>
                     </div>
 
                 </div>

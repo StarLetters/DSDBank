@@ -1,3 +1,4 @@
+
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
         <img src="../data/img/LogoDSD.png" alt="Logo" class="img-fluid">
@@ -9,8 +10,6 @@
         <li class="nav-item"><a class="nav-link" href="../pages/userProfile.php">Compte</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Paramètres</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Sécurité</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Centre d'assistance</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Mode sombre</a></li>
         <!-- TEMPORAIRE -->
         <li class="nav-item"><a class="nav-link" style="color:tomato" href="../account/deco.php">Se déconnecter</a></li>
     </ul>
@@ -21,8 +20,8 @@
             <img src="../data/img/LogoDSD.png" alt="Photo de profil" class="img-fluid rounded-circle">
         </div>
         <div class="profile-info text-center">
-            <div class="profile-name text-white">Nom Prénom</div>
-            <div class="profile-profession text-white">Profession</div>
+            <div class="profile-name text-white"><?php echo $_SESSION['displayName']?></div>
+            <div class="profile-profession text-white">heee</div>
         </div>
     </div>
 </aside>
