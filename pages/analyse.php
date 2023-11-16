@@ -18,7 +18,12 @@
             <?php include('../includes/header.html'); ?>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <select id="chartType" class="form-control mt-3">
+                        <option value="bar">Graphique à Barres</option>
+                        <option value="line">Graphique à Courbes</option>
+                    </select>
+
+                    <div class="col-md-12 mt-5" id="barChartSection">
                         <h3>Graphique à Barres</h3>
                         <div class="form-row align-items-center">
                             <div class="col-auto">
@@ -33,7 +38,9 @@
                         </div>
                         <canvas id="barChart"></canvas>
                     </div>
-                    <div class="col-md-12 mt-5">
+
+
+                    <div class="col-md-12 mt-5" id="lineChartSection">
                         <h3>Total de visites</h3>
                         <div class="form-row align-items-center">
                             <div class="col-auto">
@@ -57,6 +64,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
     <script src="../scripts/graphic.js"></script>
     <script src="../scripts/button-nav.js"></script>
+    <script src="../scripts/header.js"></script>
 </body>
 
 </html>

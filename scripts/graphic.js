@@ -2,7 +2,7 @@
 function generateFixedData(year) {
     const data = [];
     for (let month = 0; month < 12; month++) {
-        data.push(`${month + 1}/${year}`); // +1 car getMonth() renvoie 0 pour janvier, 1 pour février, etc.
+        data.push(`${month + 1}/${year}`);
     }
     return data;
 }
@@ -16,7 +16,7 @@ function createBarChart(data, year) {
             labels: data,
             datasets: [{
                 label: 'Valeurs fixes',
-                data: generateFixedData(year).map(() => 50), // à changer pour les valeurs
+                data: generateFixedData(year).map(() => 50),
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
@@ -34,14 +34,13 @@ function createBarChart(data, year) {
     });
 }
 
-
 // Fonction pour générer des données pour le graphique de courbes
 function generateLineData(numMonths) {
     const data = [];
     for (let i = numMonths; i >= 0; i--) {
         const date = new Date();
         date.setMonth(date.getMonth() - i);
-        data.push(Math.floor(Math.random() * 100)); // on mettra nos vraies données
+        data.push(Math.floor(Math.random() * 100));
     }
     return data;
 }
@@ -73,36 +72,42 @@ function createLineChart(labels, data) {
     });
 }
 
-// Ajoute un événement de changement de sélection de mois pour le graphique de courbes
-document.getElementById('monthsLine').addEventListener('change', function () {
-    const numMonths = parseInt(this.value, 10);
-    const labels = [];
-    for (let i = numMonths; i >= 0; i--) {
-        const date = new Date();
-        date.setMonth(date.getMonth() - i);
-        labels.push(date.toLocaleDateString('fr-FR', { month: 'long' }));
+// Fonction pour basculer entre les graphiques
+function toggleCharts(selectedChart) {
+    const barChartSection = document.getElementById('barChartSection');
+    const lineChartSection = document.getElementById('lineChartSection');
+
+    if (selectedChart === 'bar') {
+        barChartSection.style.display = 'block';
+        lineChartSection.style.display = 'none';
+    } else if (selectedChart === 'line') {
+        barChartSection.style.display = 'none';
+        lineChartSection.style.display = 'block';
+
+        // Ajout de l'appel à createLineChart lorsque vous choisissez le graphique à courbes
+        const numMonths = parseInt(document.getElementById('monthsLine').value, 10);
+        const labels = [];
+        for (let i = numMonths; i >= 0; i--) {
+            const date = new Date();
+            date.setMonth(date.getMonth() - i);
+            labels.push(date.toLocaleDateString('fr-FR', { month: 'long' }));
+        }
+        const lineData = generateLineData(numMonths);
+        createLineChart(labels, lineData);
     }
-    const lineData = generateLineData(numMonths);
-    createLineChart(labels, lineData);
-});
-
-// Initialise le graphique de courbes avec une sélection de 6 mois par défaut
-document.getElementById('monthsLine').value = '6';
-const labels2 = [];
-for (let i = 6; i >= 0; i--) {
-    const date = new Date();
-    date.setMonth(date.getMonth() - i);
-    labels2.push(date.toLocaleDateString('fr-FR', { month: 'long' }));
 }
-const lineData2 = generateLineData(6);
-createLineChart(labels2, lineData2);
+
+const lineChartSection = document.getElementById('lineChartSection');
+lineChartSection.style.display = 'none';
 
 
-// Ajoute un événement de changement de sélection d'année
-document.getElementById('year').addEventListener('change', function () {
-    const selectedYear = parseInt(this.value, 10);
-    createBarChart(generateFixedData(selectedYear), selectedYear);
+document.getElementById('chartType').addEventListener('change', function () {
+    const selectedChart = this.value;
+    toggleCharts(selectedChart);
 });
+
+// Initialisation avec le graphique à barres par défaut
+document.getElementById('chartType').value = 'bar';
 
 // Appele la fonction createBarChart avec les données générées pour l'année actuelle
 const currentYear = new Date().getFullYear();
