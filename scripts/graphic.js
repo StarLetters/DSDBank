@@ -1,12 +1,13 @@
-import { getDataFromServer } from './dataTable.js';
+import { getStatsFromServer } from './dataTable.js';
 
-
-// fonction generateFixedData pour générer des mois triés par année jusqu'à aujourd'hui
-function generateFixedData(year) {
-    const data = [];
+//return : { "1/2021": 100, "2/2021": 200, ... }
+function GetMonths(year) {
+    const data = {};
+    const res = getStatsFromServer();
     for (let month = 0; month < 12; month++) {
-        data.push(`${month + 1}/${year}`); // +1 car getMonth() renvoie 0 pour janvier, 1 pour février, etc.
+        data[(`${month + 1}/${year}`)] = res[month];
     }
+
     return data;
 }
 
@@ -18,8 +19,8 @@ function createBarChart(data, year) {
         data: {
             labels: data,
             datasets: [{
-                label: 'Valeurs fixes',
-                data: generateFixedData(year).map(() => 50), // à changer pour les valeurs
+                label: '€',
+                data: GetMonths(year), // à changer pour les valeurs
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
@@ -76,9 +77,6 @@ function createLineChart(labels, data) {
     });
 }
 
-
-getDataFromServer();
-
 // Ajoute un événement de changement de sélection de mois pour le graphique de courbes
 document.getElementById('monthsLine').addEventListener('change', function () {
     const numMonths = parseInt(this.value, 10);
@@ -107,9 +105,9 @@ createLineChart(labels2, lineData2);
 // Ajoute un événement de changement de sélection d'année
 document.getElementById('year').addEventListener('change', function () {
     const selectedYear = parseInt(this.value, 10);
-    createBarChart(generateFixedData(selectedYear), selectedYear);
+    createBarChart(GetMonths(selectedYear), selectedYear);
 });
 
 // Appele la fonction createBarChart avec les données générées pour l'année actuelle
 const currentYear = new Date().getFullYear();
-createBarChart(generateFixedData(currentYear), currentYear);
+createBarChart(GetMonths(currentYear), currentYear);

@@ -56,7 +56,7 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
-    <script src="../scripts/graphic.js"></script>
+    <script type="module" src="../scripts/graphic.js"></script>
     <script src="../scripts/button-nav.js"></script>
 </body>
 
