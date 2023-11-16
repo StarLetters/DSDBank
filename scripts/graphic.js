@@ -1,3 +1,6 @@
+import { getDataFromServer } from './dataTable.js';
+
+
 // fonction generateFixedData pour générer des mois triés par année jusqu'à aujourd'hui
 function generateFixedData(year) {
     const data = [];
@@ -72,6 +75,9 @@ function createLineChart(labels, data) {
         }
     });
 }
+
+
+getDataFromServer();
 
 // Ajoute un événement de changement de sélection de mois pour le graphique de courbes
 document.getElementById('monthsLine').addEventListener('change', function () {

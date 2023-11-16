@@ -5,5 +5,7 @@ try {
 }
 catch (PDOException $e) {
     echo $e;
+    echo "\n\n\n\n\nProblème de connexion";
+    exit;
 }
 ?>

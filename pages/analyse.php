@@ -16,6 +16,7 @@
     <div class="">
         <div id="wrapper">
             <?php include('../includes/header.php'); ?>
+            <div id="table-container"></div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
