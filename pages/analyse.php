@@ -27,33 +27,33 @@
                         <h3>Graphique à Barres</h3>
                         <div class="form-row align-items-center">
                             <div class="col-auto">
-                                <label for="year">Sélectionnez l'année :</label>
-                                <select id="year" class="form-control form-control-sm">
-                                    <!-- années -->
-                                    <option value="2023">2023</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2021">2021</option>
-                                </select>
+                                <label for="startDate">Date de début :</label>
+                                <input type="date" id="startDate" class="form-control form-control-sm">
                             </div>
+                            <div class="col-auto">
+                                <label for="endDate">Date de fin :</label>
+                                <input type="date" id="endDate" class="form-control form-control-sm">
+                            </div>                    
                         </div>
                         <canvas id="barChart"></canvas>
+                        <button onclick="exportChartToPDF('barChart', 'graphique_barres')">Exporter en PDF</button>
                     </div>
-
 
                     <div class="col-md-12 mt-5" id="lineChartSection">
                         <h3>Total de visites</h3>
                         <div class="form-row align-items-center">
                             <div class="col-auto">
-                                <label for="monthsLine">Sélectionnez le mois :</label>
-                                <select id="monthsLine" class="form-control form-control-sm">
-                                    <option value="6">6 mois</option>
-                                    <option value="12">12 mois</option>
-                                    <option value="24">24 mois</option>
-                                </select>
+                                <label for="startDateLine">Date de début :</label>
+                                <input type="date" id="startDateLine" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-auto">
+                                <label for="endDateLine">Date de fin :</label>
+                                <input type="date" id="endDateLine" class="form-control form-control-sm">
                             </div>
                         </div>
                         <canvas id="lineChart"></canvas>
                     </div>
+
                 </div>
             </div>
 
@@ -65,6 +65,59 @@
     <script src="../scripts/graphic.js"></script>
     <script src="../scripts/button-nav.js"></script>
     <script src="../scripts/header.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+    
+    function exportChartToPDF(chartId, fileName) {
+    const canvas = document.getElementById(chartId);
+
+    // Récupère le contexte du canvas
+    const ctx = canvas.getContext('2d');
+
+    // Créer un nouvel objet Chart en utilisant le contexte du canvas
+    const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Dataset',
+                data: [10, 20, 30],
+                backgroundColor: ['red', 'green', 'blue']
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    display: false
+                }],
+                yAxes: [{
+                    display: false
+                }]
+            },
+            legend: {
+                display: false
+            }
+        }
+    });
+
+    // Créer un nouvel objet jsPDF
+    const pdf = new jsPDF();
+
+    // Obtiens les dimensions du canvas
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
+
+    // Créer une image à partir des données du canvas
+    const imgData = canvas.toDataURL('image/png');
+
+    // Ajoute l'image au PDF
+    pdf.addImage(imgData, 'PNG', 10, 10, canvasWidth, canvasHeight);
+
+    // Enregistrez le PDF
+    pdf.save(fileName + '.pdf');
+}
+
+    </script>
 </body>
 
 </html>

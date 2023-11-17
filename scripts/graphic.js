@@ -1,50 +1,95 @@
-// fonction generateFixedData pour générer des mois triés par année jusqu'à aujourd'hui
-function generateFixedData(year) {
+// Fonction pour générer des données pour le graphique à barres
+function generateBarData(startDate, endDate) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const labels = [];
     const data = [];
-    for (let month = 0; month < 12; month++) {
-        data.push(`${month + 1}/${year}`);
+    let currentDate = new Date(start);
+
+    while (currentDate <= end) {
+        const month = currentDate.toLocaleString('default', { month: 'short' });
+        const year = currentDate.getFullYear();
+        labels.push(`${month} ${year}`);
+        data.push(50);
+        currentDate.setMonth(currentDate.getMonth() + 1);
     }
-    return data;
+
+    return { labels, data };
 }
 
 // fonction createBarChart pour utiliser les données générées
-function createBarChart(data, year) {
+function createBarChart(data, startDate, endDate) {
     const ctx = document.getElementById('barChart').getContext('2d');
-    const barChart = new Chart(ctx, {
+    new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: data,
+            labels: data.labels,
             datasets: [{
-                label: 'Valeurs fixes',
-                data: generateFixedData(year).map(() => 50),
+                label: 'Data',
+                data: data.data,
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
             }]
         },
         options: {
+            plugins: {
+                annotation: {
+                    annotations: [
+                        {
+                            type: 'box',
+                            xScaleID: 'x',
+                            yScaleID: 'y',
+                            xMin: -0.5,
+                            xMax: -0.5,
+                            yMin: 0,
+                            yMax: 100,
+                            backgroundColor: 'rgba(0, 0, 0, 0)',
+                            borderColor: 'rgba(0, 0, 0, 0)',
+                            label: {
+                                content: startDate,
+                                enabled: true,
+                                position: 'left'
+                            }
+                        },
+                        {
+                            type: 'box',
+                            xScaleID: 'x',
+                            yScaleID: 'y',
+                            xMin: data.labels.length - 0.5,
+                            xMax: data.labels.length - 0.5,
+                            yMin: 0,
+                            yMax: 100,
+                            backgroundColor: 'rgba(0, 0, 0, 0)',
+                            borderColor: 'rgba(0, 0, 0, 0)',
+                            label: {
+                                content: endDate,
+                                enabled: true,
+                                position: 'right'
+                            }
+                        }
+                    ]
+                }
+            },
             scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+                y: {
+                    beginAtZero: true
+                }
             }
         }
     });
 }
-
 // Fonction pour générer des données pour le graphique de courbes
-function generateLineData(numMonths) {
+function generateLineData(startDate, endDate) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
     const data = [];
-    for (let i = numMonths; i >= 0; i--) {
-        const date = new Date();
-        date.setMonth(date.getMonth() - i);
-        data.push(Math.floor(Math.random() * 100)); // vraies données à mettre ici
+    while (start <= end) {
+        data.push(Math.floor(Math.random() * 100)); // on génère les vraies données ici
+        start.setDate(start.getDate() + 1); // Incrémentation d'un jour
     }
     return data;
 }
-
 
 // graphique de courbes
 function createLineChart(labels, data) {
@@ -81,19 +126,19 @@ function toggleCharts(selectedChart) {
     if (selectedChart === 'bar') {
         barChartSection.style.display = 'block';
         lineChartSection.style.display = 'none';
+
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+        const barData = generateBarData(startDate, endDate);
+        createBarChart(barData);
     } else if (selectedChart === 'line') {
         barChartSection.style.display = 'none';
         lineChartSection.style.display = 'block';
 
-        // Ajout de l'appel à createLineChart lorsque vous choisissez le graphique à courbes
-        const numMonths = parseInt(document.getElementById('monthsLine').value, 10);
-        const labels = [];
-        for (let i = numMonths; i >= 0; i--) {
-            const date = new Date();
-            date.setMonth(date.getMonth() - i);
-            labels.push(date.toLocaleDateString('fr-FR', { month: 'long' }));
-        }
-        const lineData = generateLineData(numMonths);
+        const startDateLine = document.getElementById('startDateLine').value;
+        const endDateLine = document.getElementById('endDateLine').value;
+        const lineData = generateLineData(startDateLine, endDateLine);
+        const labels = generateLabels(startDateLine, endDateLine);
         createLineChart(labels, lineData);
     }
 }
@@ -101,24 +146,46 @@ function toggleCharts(selectedChart) {
 const lineChartSection = document.getElementById('lineChartSection');
 lineChartSection.style.display = 'none';
 
-document.getElementById('year').addEventListener('change', function () {
-    const selectedYear = parseInt(this.value, 10);
+document.getElementById('startDate').addEventListener('change', updateCharts);
+document.getElementById('endDate').addEventListener('change', updateCharts);
+document.getElementById('startDateLine').addEventListener('change', updateCharts);
+document.getElementById('endDateLine').addEventListener('change', updateCharts);
+
+document.getElementById('chartType').addEventListener('change', function () {
+    toggleCharts(this.value);
+    updateCharts();
+});
+
+function generateLabels(startDate, endDate) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const labels = [];
+    while (start <= end) {
+        labels.push(`${start.getMonth() + 1}/${start.getDate()}`);
+        start.setDate(start.getDate() + 1);
+    }
+    return labels;
+}
+
+function updateCharts() {
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    const startDateLine = document.getElementById('startDateLine').value;
+    const endDateLine = document.getElementById('endDateLine').value;
     const selectedChart = document.getElementById('chartType').value;
 
     if (selectedChart === 'bar') {
-        createBarChart(generateFixedData(selectedYear), selectedYear);
+        const data = generateBarData(startDate, endDate);
+        createBarChart(data);
+    } else if (selectedChart === 'line') {
+        const lineData = generateLineData(startDateLine, endDateLine);
+        const labels = generateLabels(startDateLine, endDateLine);
+        createLineChart(labels, lineData);
     }
-});
+}
 
-document.getElementById('chartType').addEventListener('change', function () {
-    const selectedChart = this.value;
-    toggleCharts(selectedChart);
-});
 
-// Initialisation avec le graphique à barres par défaut
 document.getElementById('chartType').value = 'bar';
 toggleCharts('bar');
 
-// Appele la fonction createBarChart avec les données générées pour l'année actuelle
 const currentYear = new Date().getFullYear();
-createBarChart(generateFixedData(currentYear), currentYear);
