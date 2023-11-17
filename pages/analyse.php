@@ -21,7 +21,6 @@
                     <select id="chartType" class="form-control mt-3">
                         <option value="bar">Graphique à Barres</option>
                         <option value="line">Graphique à Courbes</option>
-                        <option value="pie">Graphique en Camembert</option>
                     </select>
 
                     <div class="col-md-12 mt-5" id="barChartSection">
