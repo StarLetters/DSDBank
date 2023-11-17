@@ -26,32 +26,37 @@
                     <div class="col-md-12 mt-5" id="barChartSection">
                         <h3>Graphique à Barres</h3>
                         <div class="form-row align-items-center">
-                            <div class="col-auto">
+                            <div class="col-auto mt-5">
                                 <label for="startDate">Date de début :</label>
                                 <input type="date" id="startDate" class="form-control form-control-sm">
                             </div>
-                            <div class="col-auto">
+                            <div class="col-auto mt-5">
                                 <label for="endDate">Date de fin :</label>
                                 <input type="date" id="endDate" class="form-control form-control-sm">
                             </div>                    
                         </div>
                         <canvas id="barChart"></canvas>
-                        <button onclick="exportChartToPDF('barChart', 'graphique_barres')">Exporter en PDF</button>
+                        <div class="col-auto mt-3">
+                        <button style="border-radius: 10px;" onclick="exportChartToPDF('barChart', 'graphique_barres')">Exporter en PDF</button>
+                        </div>
                     </div>
 
                     <div class="col-md-12 mt-5" id="lineChartSection">
                         <h3>Total de visites</h3>
                         <div class="form-row align-items-center">
-                            <div class="col-auto">
+                            <div class="col-auto mt-5">
                                 <label for="startDateLine">Date de début :</label>
                                 <input type="date" id="startDateLine" class="form-control form-control-sm">
                             </div>
-                            <div class="col-auto">
+                            <div class="col-auto mt-5">
                                 <label for="endDateLine">Date de fin :</label>
                                 <input type="date" id="endDateLine" class="form-control form-control-sm">
                             </div>
                         </div>
                         <canvas id="lineChart"></canvas>
+                        <div class="col-auto mt-3">
+                        <button style="border-radius: 10px;" onclick="exportChartToPDF('courbeChart', 'graphique_courbes')">Exporter en PDF</button>
+                        </div>
                     </div>
 
                 </div>
@@ -66,6 +71,8 @@
     <script src="../scripts/button-nav.js"></script>
     <script src="../scripts/header.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+    <!-- guette pas ça -->
     <script>
     
     function exportChartToPDF(chartId, fileName) {
