@@ -40,10 +40,11 @@ function generateLineData(numMonths) {
     for (let i = numMonths; i >= 0; i--) {
         const date = new Date();
         date.setMonth(date.getMonth() - i);
-        data.push(Math.floor(Math.random() * 100));
+        data.push(Math.floor(Math.random() * 100)); // vraies données à mettre ici
     }
     return data;
 }
+
 
 // graphique de courbes
 function createLineChart(labels, data) {
@@ -100,6 +101,14 @@ function toggleCharts(selectedChart) {
 const lineChartSection = document.getElementById('lineChartSection');
 lineChartSection.style.display = 'none';
 
+document.getElementById('year').addEventListener('change', function () {
+    const selectedYear = parseInt(this.value, 10);
+    const selectedChart = document.getElementById('chartType').value;
+
+    if (selectedChart === 'bar') {
+        createBarChart(generateFixedData(selectedYear), selectedYear);
+    }
+});
 
 document.getElementById('chartType').addEventListener('change', function () {
     const selectedChart = this.value;
@@ -108,6 +117,7 @@ document.getElementById('chartType').addEventListener('change', function () {
 
 // Initialisation avec le graphique à barres par défaut
 document.getElementById('chartType').value = 'bar';
+toggleCharts('bar');
 
 // Appele la fonction createBarChart avec les données générées pour l'année actuelle
 const currentYear = new Date().getFullYear();
