@@ -1,18 +1,3 @@
-// return : Liste comprenant les valeurs de chaque mois
-function getStatsFromServer() {
-    console.log("Fetch stats from server");
-    fetch('../api/statistics.php')
-        .then(response => response.json())
-        .then(data => {return data;})
-        .catch(error => {
-            console.error(error);
-        });
-    }
-
-/* SELECT i.*
-FROM Impaye i, Transaction t, Utilisateur u 
-WHERE i.idTransaction = t.idTransaction
-AND t.idUtilisateur = 34; */
 
 function createTable(data){
     {
@@ -99,6 +84,3 @@ function createTable(data){
     }
     }
 }
-
-
-export {getDataFromServer};

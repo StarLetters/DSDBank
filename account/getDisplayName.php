@@ -3,7 +3,7 @@
 // On récupère la raison sociale de l'utilisateur, et si il en a pas, (PO et admin) alors
 // on prend son rôle.
 
-function getDisplay( $id, $cnx ) {
+function getDisplayName( $id, $cnx ) {
     $req = $cnx->prepare(
     'SELECT coalesce(e.raisonSociale, u.role) as displayName
     FROM Utilisateur u
