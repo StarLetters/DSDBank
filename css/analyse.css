@@ -1,0 +1,18 @@
+.slide, .date, .btn-export {
+    background-color: var(--couleur-bouton);
+    color: var(--couleur-text);
+    border: 1px solid var(--couleur-text);
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 0.8rem;
+    margin: 10px;
+}
+
+.slide {
+    width: 100%;
+}
+
+option {
+    background-color: var(--couleur-fond);
+    color: var(--couleur-text);
+}
