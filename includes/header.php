@@ -8,6 +8,8 @@
         <li class="nav-item"><a class="nav-link" href="#">Trésorerie</a></li>
         <li class="nav-item"><a class="nav-link" href="../pages/impayes.php">Impayés</a></li>
         <li class="nav-item"><a class="nav-link" href="../pages/userProfile.php">Mon profil</a></li>
+        <li class="nav-item"><a class="nav-link" href="../pages/remises.php">Remises</a></li>
+
         <!-- TEMPORAIRE -->
         <li class="nav-item"><a class="nav-link" style="color:tomato" href="../account/deco.php">Se déconnecter</a></li>
     </ul>

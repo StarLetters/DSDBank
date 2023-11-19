@@ -1,24 +1,5 @@
-import { getUnpaid } from "./fetchData.js";
+import { getUnpaidsPerMonth } from "./fetchData.js";
 import { createTable } from "./dataTable.js";
-
-// Fonction pour générer des données pour le graphique à barres
-function generateBarData(startDate, endDate) {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-  const labels = [];
-  const data = [];
-  let currentDate = new Date(start);
-
-  while (currentDate <= end) {
-    const month = currentDate.toLocaleString("default", { month: "short" });
-    const year = currentDate.getFullYear();
-    labels.push(`${month} ${year}`);
-    data.push(50);
-    currentDate.setMonth(currentDate.getMonth() + 1);
-  }
-
-  return { labels, data };
-}
 
 // fonction createBarChart pour utiliser les données générées
 function createBarChart(labels, data) {
@@ -29,7 +10,7 @@ function createBarChart(labels, data) {
       labels: labels,
       datasets: [
         {
-          label: "Data",
+          label: "Montant des impayés",
           data: data,
           backgroundColor: "rgba(75, 192, 192, 0.2)",
           borderColor: "rgba(75, 192, 192, 1)",
@@ -90,7 +71,7 @@ async function fetchData(startDate, endDate) {
   console.log(endDate);
 
   try {
-    const data = await getUnpaid(startDate, endDate);
+    const data = await getUnpaidsPerMonth(startDate, endDate);
 
     return data;
   } catch (error) {
@@ -109,13 +90,13 @@ function dataForChart(data) {
 // graphique de courbes
 function createLineChart(labels, data) {
   const ctx = document.getElementById("lineChart").getContext("2d");
-  const lineChart = new Chart(ctx, {
+  new Chart(ctx, {
     type: "line",
     data: {
       labels: labels,
       datasets: [
         {
-          label: "Données de ligne",
+          label: "Montant des impayés",
           data: data,
           fill: false,
           borderColor: "rgba(75, 192, 192, 1)",

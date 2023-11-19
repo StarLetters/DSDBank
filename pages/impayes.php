@@ -40,10 +40,22 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <label for="startDate">Date de début :</label>
                         <input type="date" id="startDate" class="form-control form-control-sm">
                     </div>
+
                     <div class="col-auto mt-5">
                         <label for="endDate">Date de fin :</label>
                         <input type="date" id="endDate" class="form-control form-control-sm">
-                    </div>                    
+                    </div>                
+
+                    <div class="col-auto mt-5">
+                        <label for="nImp">N° Dossier Impayés :</label>
+                        <input type="text" id="nImp" class="form-control form-control-sm">
+                    </div>
+
+                    <div class="col-auto mt-5">
+                        <label for="nSiren">N° SIREN :</label>
+                        <input type="text" id="nSiren" class="form-control form-control-sm">
+                    </div>
+
                 </div>
 
                 <div id="table-container"></div>

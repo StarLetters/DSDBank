@@ -12,8 +12,8 @@ function getCookie(name) {
 
 
 
-function getUnpaid(leftBound, rightBound) {
-    console.log("Fetching via getUnpaid()");
+function getUnpaidsPerMonth(leftBound, rightBound) {
+    console.log("Fetching via getUnpaidsPerMonth()");
 
     if (getCookie("cnxToken") === null){
         document.location.href = "../index.html";
@@ -26,7 +26,7 @@ function getUnpaid(leftBound, rightBound) {
 
     if (rightBound !== "" ){ right = '&rightBound='+rightBound }
 
-    return fetch('../api/unpaid.php?id='+getCookie("cnxToken")+left+right, {
+    return fetch('../api/unpaidsPerMonth.php?token='+getCookie("cnxToken")+left+right, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -45,4 +45,4 @@ function getUnpaid(leftBound, rightBound) {
 
 
 
-export {getUnpaid};
+export {getUnpaidsPerMonth};
