@@ -45,7 +45,7 @@ $result = $result->fetchAll();
 <body>
     <div id="wrapper">
 
-        <?php include('../includes/header.html'); ?>
+        <?php include('../includes/header.php'); ?>
 
         <div id="modal" class="modal">
             <div class="modal-content">

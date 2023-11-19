@@ -4,7 +4,7 @@ session_start();
 
 include('../account/verifLogin.php');
 $role = verifLogin();
-if ($role != 2 || !isset($_GET['InscrSupp'])) { // Si ce n'est pas un admin, ou qu'on ne vient pas de adminInscrSupp.php
+if ($role != 1 || !isset($_GET['InscrSupp'])) { // Si ce n'est pas un PO, ou qu'on ne vient pas de adminInscrSupp.php
     header('Location: ../pages/welcome.php');
 }
 
@@ -54,23 +54,8 @@ header('Location: ../pages/adminHome.php');
 
 
 function inscription($cnx, $action, $id){
-    // Si l'inscription est validée, on dit que l'utilisateur est vérifié
-    if ($action === "+"){
-        $requete = 
-        "UPDATE Utilisateur
-        SET verifier = 1
-        WHERE idUtilisateur = '" . $id . "';";
-        $cnx->exec($requete);
-
-        $requete =
-        "UPDATE Entreprise
-        SET verifier = 1
-        WHERE idUtilisateur = '" . $id . "';";
-        $cnx->exec($requete);
-
-    }
+    if ($action === "-"){
     // Si l'inscription est refusée, on supprime l'utilisateur
-    else{
         suppression($cnx, "+", $id);
     }
 }

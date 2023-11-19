@@ -5,11 +5,18 @@
 
   .btn-deconnexion{
     background-color: var(--couleur-fond-rouge); 
-    color: var(--couleur-avertissement);
+    color: white;
     border: 1px solid var(--couleur-avertissement);
     border-radius: 10px;
     padding: 10px 25px;
     font-size: 0.9rem;
+}
+
+.btn-option {
+  color: var(--couleur-text);
+  border: 1px solid var(--couleur-text);
+  background-color: var(--couleur-bouton);
+  font-size: 1rem;
 }
 
 button:hover{
@@ -22,8 +29,13 @@ button:hover{
 }
 
 .titres{
-  font-size: 3vw;
+  font-size: 2rem;
   font-weight: 550;
+}
+
+/* Extension de famille de classe Bootstrap */
+.w-35{
+  width: 35%;
 }
 
 @media (max-width: 315px){
@@ -38,10 +50,29 @@ button:hover{
   .btn{
       margin: 20px;
   }
+  .titres{
+    font-size: 1rem;
+  }
 }
 
   @media (max-width: 1050px) {
-    body{
+    body:not(.adminHome){
         height: auto;
     }
-}
+  }
+
+  /* adminHome.php responsive */
+  @media (max-width: 870px){
+    body{
+      height: 100vh;
+    }
+
+    .form-row{
+      flex-direction: column;
+      height: 35vh;
+    }
+
+    .form-row div{
+      width: auto;
+    }
+  }

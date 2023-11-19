@@ -10,13 +10,14 @@ if ($role != 2) {
 
 include('../backend/cnx.php');
 
-$request = "SELECT type_requete, COUNT(*) FROM POrequete WHERE type_requete IN ('inscription', 'suppression') GROUP BY type_requete;";
-$result = $cnx->prepare($request);
-$result->execute();
-$result = $result->fetchAll(PDO::FETCH_KEY_PAIR);
-$nbInscr = $result['inscription'] ?? 0;
-$nbSupp = $result['suppression'] ?? 0;
 
+//
+//
+//
+// A SUPPRIMER
+//
+//
+//
 
 ?>
 <!DOCTYPE html>
@@ -36,6 +37,7 @@ $nbSupp = $result['suppression'] ?? 0;
     <link rel="stylesheet" href="../css/Register.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/varColor.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/global.css" />
+    
 
 
     
@@ -45,7 +47,7 @@ $nbSupp = $result['suppression'] ?? 0;
     <script src="../scripts/load.js"></script>
 </head>
 
-<body>
+<body class="adminHome">
 
 
 <div class="center-box">
@@ -53,18 +55,12 @@ $nbSupp = $result['suppression'] ?? 0;
             <h1>Menu Admin</h1>
         </div>
 
+        <div class="form-group text-center m-3">
 
-        <div class="form-row justify-content-around m-5">
-
-            <div>
-            <a href="../pages/adminInscrSupp.php?InscrSupp=inscription"><button id="btnInscr" class="btn btn-success btn-lg btn-sans-decoration btn-texte-blanc">Demandes d'inscription (<?php echo $nbInscr; ?>)</button> </a>
-            </div>
-
-            <div>
-            <a href="../pages/adminInscrSupp.php?InscrSupp=suppression"><button id="btnSupp" class="btn btn-danger btn-lg btn-sans-decoration btn-texte-blanc">Demandes de suppression (<?php echo $nbSupp; ?>)</button> </a>
-            </div>
+            <a  href="../pages/adminView.php"><button class="btn btn-option my-5 p-3" style="font-size:1.5rem">Voir les profils</button></a>
 
         </div>
+        
         <a href="../account/deco.php"><button class="float-right btn-deconnexion text-decoration-none">Se déconnecter</button></a>
 
         </div>

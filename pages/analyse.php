@@ -16,7 +16,7 @@
 <body>
     <div class="">
         <div id="wrapper">
-            <?php include('../includes/header.html'); ?>
+            <?php include('../includes/header.php'); ?>
             <div class="container">
                 <div class="row">
                     <select id="chartType" class="form-select mt-3 slide">

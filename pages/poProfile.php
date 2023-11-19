@@ -8,6 +8,14 @@ if ($role != 1) {
     header('Location: ../pages/welcome.php');
 }
 
+include('../backend/cnx.php');
+
+$request = "SELECT type_requete, COUNT(*) FROM POrequete WHERE type_requete IN ('inscription', 'suppression') GROUP BY type_requete;";
+$result = $cnx->prepare($request);
+$result->execute();
+$result = $result->fetchAll(PDO::FETCH_KEY_PAIR);
+$nbInscr = $result['inscription'] ?? 0;
+$nbSupp = $result['suppression'] ?? 0;
 
 ?>
 <!DOCTYPE html>
@@ -29,7 +37,7 @@ if ($role != 1) {
 <body>
     <div id="wrapper">
 
-        <?php include('../includes/header.html'); ?>
+        <?php include('../includes/header.php'); ?>
 
         <div id="modal" class="modal">
             <div class="modal-content">
@@ -56,19 +64,29 @@ if ($role != 1) {
                     <a href="../account/deco.php" class="text-reset text-decoration-none"><button class="btn btn-deconnexion">Se déconnecter</button></a>
                 </div>
             </div>
-            <div class="col-11 infos mx-auto mt-5 mt-md-0 "> 
+            <div class="col-11 infos mx-auto my-5 mt-md-0 ">
                 <p class="titres">Gérer le site</p>
                 <div class="row-3 d-flex flex-wrap justify-content-around my-5">
-                    <a href="poView.php"><button class="btn btn-option">Voir les profils</button></a>
-                    <form method="POST" action="../pages/ContactPO.php">
-                    <input type="hidden" name="sender" value="PO">
-                    <button type="submit" class="btn btn-option">Contacter l'admin</button>
+                    <a href="poView.php"><button class="btn btn-option m-2" style="font-size:1.2rem!important">Voir les profils</button></a>
+                    <form method="POST" action="../pages/ContactPO.php" class="m-2">
+                        <input type="hidden" name="sender" value="PO">
+                        <button type="submit" class="btn btn-option" style="font-size:1.2rem!important">Contacter l'admin</button>
                     </form>
-                    
 
                 </div>
-            </div>
+                <div class="row-1 d-flex flex-wrap justify-content-around align-items-center">
 
+                    <div class="m-2">
+                        <a href="../pages/poInscrSupp.php?InscrSupp=inscription"><button id="btnInscr" class="btn btn-option btn-lg btn-sans-decoration btn-texte-blanc w-100" style="background-color:green!important">Demandes d'inscription (<?php echo $nbInscr; ?>)</button> </a>
+                    </div>
+
+                    <div class="m-2">
+                        <a class="w-100" href="../pages/poInscrSupp.php?InscrSupp=suppression"><button id="btnSupp" class="btn btn-option btn-lg btn-sans-decoration btn-texte-blanc w-100" style="background-color:#dc3545">Demandes de suppression (<?php echo $nbSupp; ?>)</button> </a>
+                    </div>
+
+                </div>
+
+            </div>
 
         </section>
 

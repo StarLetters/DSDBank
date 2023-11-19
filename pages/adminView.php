@@ -4,12 +4,14 @@ session_start();
 
 include('../account/verifLogin.php');
 $role = verifLogin();
-if ($role != 1) { // Si ce n'est pas un PO
+if ($role != 2) { // Si ce n'est pas un Admin
     header('Location: ../pages/welcome.php');
 }
 
 include('../backend/cnx.php');
-
+if ($cnx->inTransaction()) {
+    $cnx->rollBack();
+}
 $request = "SELECT * 
 FROM Utilisateur
 JOIN Entreprise ON Entreprise.idUtilisateur = Utilisateur.idUtilisateur
@@ -27,6 +29,7 @@ if (isset($_GET['rowsPerPage'])) {
 } else {
     $rowsPerPage = 20;
 }
+
 
 // Récupère le numéro de page actuel depuis l'URL
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -57,7 +60,6 @@ $result = $result->fetchAll();
 
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/varColor.css">
     <link rel="stylesheet" href="../css/poView.css">
 </head>
@@ -69,13 +71,6 @@ $result = $result->fetchAll();
             <div class="row">
                 <a href="welcome.php" class="custom-button btn-secondary"><span class="arrow-left">&#x2190;</span> Retour</a>
             </div>
-            <div class="row d-flex flex-column flex-md-row flex-wrap justify-content-between mx-2 mb-4 mt-5 mt-md-0">
-                <p class="d-md-block text-white h2 text-center text-md-left">PROFILS</p>
-                <div class="d-flex align-items-center">
-                </div>
-            </div>
-            <hr>
-
             <form class="form-group px-2 md-px-5 py-1 d-flex flex-column align-items-center" id="formRows">
                 <label for="exampleSelect" style="color:var(--couleur-text)">Sélectionnez le nombre de lignes à afficher :</label>
                 <select name="rowsPerPage" class="form-control form-control-sm" style="width:15%" onchange="submitForm()">
@@ -91,7 +86,19 @@ $result = $result->fetchAll();
                     ?>
                 </select>
             </form>
-            <form action="poView.php" method="GET">
+
+            <form method="post" action="validateSupp.php">
+                <div class="row d-flex flex-column flex-md-row flex-wrap justify-content-between mx-2 mb-4 mt-5 mt-md-0">
+                    <p class="d-md-block text-white h2 text-center text-md-left">PROFILS</p>
+                    <div class="d-flex align-items-center">
+                        <!-- TODO : Bouton Créer compte href="createAccount.php" -->
+                        <a href="createAccount.php" class="creer" id="btnCreer">Créer un compte</a>
+                        <button id="btnSupp" onclick="suppCompte()"> Supprimer compte(s)</button>
+                        <button id="btnValider" type="submit" style="display:none">Valider</button>
+                        <button id="btnAnnuler" type="reset" style="display:none">Annuler</button>
+                    </div>
+                </div>
+                <hr>
 
                 <div class="row justify-content-between align-items-end px-4">
                     <p class="text-white align-bottom">
@@ -105,6 +112,7 @@ $result = $result->fetchAll();
                                 echo "<li class=\"page-item\"><a class=\"page-link\" href=\"?page=";
                                 echo $currentPage - 1;
                                 echo "&rowsPerPage=".$rowsPerPage;
+
                                 echo "\">&laquo;</a></li>";
                             }
                             ?>
@@ -138,6 +146,17 @@ $result = $result->fetchAll();
 
 
                         for ($i = $startIndex; $i < $endIndex; $i++) { // Afficher les infos de chaque client
+                            $request2 = "SELECT * FROM POrequete WHERE email = '" . $result[$i]['email'] . "' AND type_requete = 'suppression';";
+                            $result2 = $cnx->prepare($request2);
+                            $result2->execute();
+                            $result2 = $result2->fetchAll();
+                            echo "<tr>";
+                            echo "<td class=\"hiding-check\" scope=\"row\" id=\"selectUser\" style=\"display:none\"><input type=\"checkbox\" id=\"selectUser\" name=\"" . $result[$i]['email'] . "\" style=\"display:none\" ";
+                            if (!empty($result2)) {
+                                echo "checked disabled ";
+                            }
+                            echo "/></th>"; // Checkbox pour sélectionner les comptes à supprimer
+                            // Informations du client
                             echo "<td scope=\"row\" data-label=\"SIREN\">";
                             echo $result[$i]['numSiren'];
                             echo "</td>";
@@ -194,6 +213,36 @@ $result = $result->fetchAll();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
     <script src="../scripts/header.js"></script>
     <script>
+        function suppCompte() {
+            // Code de sélection de comptes à supprimer
+
+            event.preventDefault(); // On empêche le formulaire de s'envoyer
+
+            document.getElementById("btnSupp").style.display = "none";
+            document.getElementById("btnCreer").style.display = "none";
+            document.getElementById("btnValider").style.display = "block";
+            document.getElementById("btnAnnuler").style.display = "block";
+            const elements = document.querySelectorAll('[id="selectUser"]');
+            // Parcourir tous les éléments
+            elements.forEach((element) => {
+                // Effectuer les modifications souhaitées sur chaque élément
+                element.style.display = 'table-cell';
+            });
+        }
+
+        document.getElementById("btnAnnuler").onclick = function() {
+            // Code d'annulation
+
+            document.getElementById("btnSupp").style.display = "block";
+            document.getElementById("btnCreer").style.display = "block";
+            document.getElementById("btnValider").style.display = "none";
+            document.getElementById("btnAnnuler").style.display = "none";
+            const elements = document.querySelectorAll('[id="selectUser"]');
+            elements.forEach((element) => {
+                element.style.display = 'none';
+            });
+        };
+
         function submitForm() {
             document.getElementById("formRows").submit();
         }

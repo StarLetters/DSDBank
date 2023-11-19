@@ -57,12 +57,13 @@ if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
                         $password = $_POST['password'];
 
 
-                        $request = "SELECT * FROM Utilisateur WHERE email = '" . $email . "'  AND verifier=1;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
+                        $request = "SELECT mdp, idUtilisateur FROM Utilisateur WHERE email = '" . $email . "'  AND verifier=1;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
                         $result = $cnx->prepare($request);
                         $result->execute();
                         $result = $result->fetchAll();
 
                         if ((!empty($result)) && (isPasswordValid($password, $result[0]['mdp']))) {
+                            $id = $result[0]['idUtilisateur'];
                             $request = "SELECT * FROM POrequete WHERE email = '" . $email . "';"; // On vérifie si l'utilisateur est dans la table POrequest
                             $result = $cnx->prepare($request);
                             $result->execute();
@@ -75,7 +76,11 @@ if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
                             }
                             $_SESSION['email'] = $email;
                             $_SESSION['tries'] = 0;
-                            print_r($_SESSION);
+
+                            // On récupère le nom de l'utilisateur
+                            include('../account/getDisplayName.php');
+                            $_SESSION['displayName'] = getDisplay( $id, $cnx );
+
                             include('../backend/mailer.php');
                             login(); // On envoie un mail de connexion
                             header('Location: home.php');

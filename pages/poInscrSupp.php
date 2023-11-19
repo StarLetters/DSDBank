@@ -2,7 +2,7 @@
 
 session_start();
 
-if (!isset($_GET['InscrSupp'])) { // Si l'admin n'a pas cliqué sur un bouton
+if (!isset($_GET['InscrSupp'])) { // Si le po n'a pas cliqué sur un bouton
     header('Location: ../pages/welcome.php');
 }else{
     $inscrsupp = $_GET['InscrSupp'];
@@ -10,11 +10,12 @@ if (!isset($_GET['InscrSupp'])) { // Si l'admin n'a pas cliqué sur un bouton
 
 require('../account/verifLogin.php');
 $verif = verifLogin();	
-if ($verif !== 2){
+if ($verif !== 1){ // Si le po n'est pas connecté
     header('Location: ../pages/welcome.php');
 }
 
 include('../backend/cnx.php');
+
 ?>
 
 <!DOCTYPE html>
