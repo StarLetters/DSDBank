@@ -84,16 +84,20 @@ function createBarChart(data, startDate, endDate) {
 }
 // Fonction pour générer des données pour le graphique de courbes
 function generateLineData(startDate, endDate) {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
+
+    return convertToCumulativeBalance(getUnpaid(startDate, endDate), startDate, endDate).then(convertRes => {
     const data = [];
-    const fetchData = convertToCumulativeBalance(getUnpaid(startDate, endDate), start, end);
-    console.log(fetchData);
-    while (start <= end) {
-        data.push(); // on génère les vraies données ici
-        start.setDate(start.getDate() + 1); // Incrémentation d'un jour
+
+    const fetchedData = convertRes.cumulativeBalanceC;
+
+    for (let key in fetchedData){
+        const maxIndex = fetchedData[key];
+        for (let i = 0; i < maxIndex; i++){
+            data.push(key);
+        }
     }
-    return data;
+    return {data, startDate:convertRes.startDate, endDate:convertRes.endDate};
+});
 }
 
 // graphique de courbes
@@ -142,9 +146,20 @@ function toggleCharts(selectedChart) {
 
         const startDateLine = document.getElementById('startDateLine').value;
         const endDateLine = document.getElementById('endDateLine').value;
-        const lineData = generateLineData(startDateLine, endDateLine);
-        const labels = generateLabels(startDateLine, endDateLine);
-        createLineChart(labels, lineData);
+        generateLineData(startDateLine, endDateLine).then(fetchedData => {
+
+            const { data, startDate, endDate } = fetchedData;
+            console.log(
+                data
+            );
+
+            const labels = generateLabels(startDate, endDate);
+
+            console.log(data);
+            console.log(labels);
+
+            createLineChart(labels, data);
+        });
     }
 }
 
@@ -165,6 +180,7 @@ function generateLabels(startDate, endDate) {
     const start = new Date(startDate);
     const end = new Date(endDate);
     const labels = [];
+    console.log(startDate, endDate);
     while (start <= end) {
         labels.push(`${start.getMonth() + 1}/${start.getDate()}`);
         start.setDate(start.getDate() + 1);

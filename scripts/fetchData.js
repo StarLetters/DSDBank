@@ -22,8 +22,6 @@ function getUnpaid(leftBound, rightBound) {
 
     if (rightBound !== "" ){ right = '&rightBound='+rightBound }
 
-    console.log(leftBound);
-    console.log(rightBound);
     return fetch('../api/unpaid.php?id='+getCookie("cnxToken")+left+right, {
         method: 'POST',
         headers: {
@@ -32,8 +30,7 @@ function getUnpaid(leftBound, rightBound) {
     })
     
         .then(response => response.json())
-        .then(data => {
-            console.log(data);
+        .then(data => { console.log(data);
             return data;
         })
         .catch(error => {

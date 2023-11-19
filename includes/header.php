@@ -5,11 +5,9 @@
     </div>
     <ul class="sidebar-nav">
         <li class="nav-item"><a class="nav-link" href="../pages/home.php">Accueil</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Analyse</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Mon portefeuille</a></li>
-        <li class="nav-item"><a class="nav-link" href="../pages/userProfile.php">Compte</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Paramètres</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Sécurité</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Trésorerie</a></li>
+        <li class="nav-item"><a class="nav-link" href="../pages/impayes.php">Impayés</a></li>
+        <li class="nav-item"><a class="nav-link" href="../pages/userProfile.php">Mon profil</a></li>
         <!-- TEMPORAIRE -->
         <li class="nav-item"><a class="nav-link" style="color:tomato" href="../account/deco.php">Se déconnecter</a></li>
     </ul>
