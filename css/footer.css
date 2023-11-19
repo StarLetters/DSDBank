@@ -1,0 +1,31 @@
+.footer {
+    background-image: url("../data/img/clouds.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.blurred-footer {
+    background-color: rgba(255, 255, 255, 10%);
+    border-radius: 10px;
+    margin: 30px;
+}
+
+.footer-container {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.logo-container {
+    width: 15%;
+    padding: 20px;
+}
+
+.mentions {
+    color: white;
+    text-decoration: none;
+}
+
+.mentions:hover {
+    color: white;
+}

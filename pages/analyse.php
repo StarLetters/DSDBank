@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/poProfile.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/analyse.css">
     <link rel="stylesheet" href="../css/varColor.css">
 </head>
 
@@ -18,7 +19,7 @@
             <?php include('../includes/header.html'); ?>
             <div class="container">
                 <div class="row">
-                    <select id="chartType" class="form-control mt-3">
+                    <select id="chartType" class="form-select mt-3 slide">
                         <option value="bar">Graphique à Barres</option>
                         <option value="line">Graphique à Courbes</option>
                     </select>
@@ -28,16 +29,16 @@
                         <div class="form-row align-items-center">
                             <div class="col-auto mt-5">
                                 <label for="startDate">Date de début :</label>
-                                <input type="date" id="startDate" class="form-control form-control-sm">
+                                <input type="date" id="startDate" class="form-control form-control-sm date">
                             </div>
                             <div class="col-auto mt-5">
                                 <label for="endDate">Date de fin :</label>
-                                <input type="date" id="endDate" class="form-control form-control-sm">
+                                <input type="date" id="endDate" class="form-control form-control-sm date">
                             </div>                    
                         </div>
                         <canvas id="barChart"></canvas>
                         <div class="col-auto mt-3">
-                        <button style="border-radius: 10px;" onclick="exportChartToPDF('barChart', 'graphique_barres')">Exporter en PDF</button>
+                        <button class="btn-export" style="border-radius: 10px;" onclick="exportChartToPDF('barChart', 'graphique_barres')">Exporter en PDF</button>
                         </div>
                     </div>
 
@@ -55,7 +56,7 @@
                         </div>
                         <canvas id="lineChart"></canvas>
                         <div class="col-auto mt-3">
-                        <button style="border-radius: 10px;" onclick="exportChartToPDF('courbeChart', 'graphique_courbes')">Exporter en PDF</button>
+                        <button class="btn-export" style="border-radius: 10px;" onclick="exportChartToPDF('courbeChart', 'graphique_courbes')">Exporter en PDF</button>
                         </div>
                     </div>
 
