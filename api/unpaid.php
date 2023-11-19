@@ -1,39 +1,49 @@
 <?php
 // Pas autorisé ici
-if (empty($_GET)){
+if (empty($_GET) || $_GET['id'] == "null"){
     header('Location: ../index.html');
+    exit;
     
 }
 
 include('../backend/cnx.php');
+$id = htmlspecialchars($_GET['id']);
 
 
 $request = 
-"SELECT t.montant, t.dateVente
+"SELECT SUM(t.montant) as montant, month(t.dateVente) as mois, year(t.dateVente) as annee
 FROM Transaction t, Impaye i
-WHERE t.idTransaction = i.idTransaction
-AND t.idUtilisateur = 35 
-AND t.idUtilisateur IN (
-SELECT DISTINCT tra.idUtilisateur
-FROM Transaction tra, Token tok, Utilisateur uti
-WHERE tra.idUtilisateur = uti.idUtilisateur 
-AND uti.email = tok.email 
-AND tok.token = :id) "; //On vérifie si l'utilisateur existe et si son compte est vérifié
+WHERE t.idTransaction = i.idTransaction 
+"; 
 
-$id = htmlspecialchars($_GET['id']);
 
 if (isset($_GET['leftBound'])){
-    $request .= "AND dateVente >= '".htmlspecialchars($_GET['leftBound'])."' ";
+    $request .= "AND t.dateVente >= '".htmlspecialchars($_GET['leftBound'])."' ";
 }
 
 if (isset($_GET['rightBound'])){
-    $request .= "AND dateVente <= '".htmlspecialchars($_GET['rightBound'])."' ";
+    $request .= "AND t.dateVente <= '".htmlspecialchars($_GET['rightBound'])."' ";
 }
 
+if (isset($_GET['reason'])){
+    $request .= "AND i.libelleImpaye = '".htmlspecialchars($_GET['reason'])."' ";
+}
+
+if (isset($_GET['number'])){
+    $request .= "AND i.libelleImpaye = '".htmlspecialchars($_GET['reason'])."' ";
+}
+
+$request .= 
+"AND t.idUtilisateur IN (
+    SELECT DISTINCT tra.idUtilisateur
+    FROM Transaction tra, Token tok, Utilisateur uti
+    WHERE tra.idUtilisateur = uti.idUtilisateur
+     AND uti.email = tok.email
+    AND tok.token = :id)
+    GROUP BY mois, annee
+    ORDER BY annee, mois;";
 
 
-
-$request .= " ORDER BY dateVente ASC;";
 $result = $cnx->prepare($request);
 $result->bindParam(":id", $id);
 $result->execute();

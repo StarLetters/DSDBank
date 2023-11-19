@@ -15,6 +15,10 @@ function getCookie(name) {
 function getUnpaid(leftBound, rightBound) {
     console.log("Fetching via getUnpaid()");
 
+    if (getCookie("cnxToken") === null){
+        document.location.href = "../index.html";
+    }
+
     let left="";
     let right="";
 

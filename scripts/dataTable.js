@@ -84,3 +84,5 @@ function createTable(data){
     }
     }
 }
+
+export { createTable };

@@ -1,21 +1,27 @@
 <?php 
 session_start();
 
-if (!isset($_SESSION['cnxToken'])) {echo "<p>oulaa</p>"; exit;}
-setcookie('cnxToken', $_SESSION['cnxToken'], time() + 60 * 60);
-?>
+if (!isset($_SESSION['cnxToken'])) {
+    header('Location: ../index.html');
+}
+setcookie('cnxToken', $_SESSION['cnxToken'], [
+    'expires' => time() + 60 * 60 * 24,
+    
+    'secure' => true,
+    'samesite' => 'None'
+]);?>
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PO Profile</title>
+    <title>Mes impayés</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/poProfile.css">
     <link rel="stylesheet" href="../css/varColor.css">
+    <link rel="stylesheet" href="../css/table.css">
 </head>
 
 <body>
@@ -24,23 +30,31 @@ setcookie('cnxToken', $_SESSION['cnxToken'], time() + 60 * 60);
             <?php include('../includes/header.php'); ?>
             <div class="container">
                 <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="mt-5">Mes impayés</h1>
+                    </div>
+                </div>
+                
+                <div class="form-row align-items-center">
+                    <div class="col-auto mt-5">
+                        <label for="startDate">Date de début :</label>
+                        <input type="date" id="startDate" class="form-control form-control-sm">
+                    </div>
+                    <div class="col-auto mt-5">
+                        <label for="endDate">Date de fin :</label>
+                        <input type="date" id="endDate" class="form-control form-control-sm">
+                    </div>                    
+                </div>
+
+                <div id="table-container"></div>
+                <div class="row">
                     <select id="chartType" class="form-control mt-3">
                         <option value="bar">Graphique à Barres</option>
                         <option value="line">Graphique à Courbes</option>
                     </select>
 
                     <div class="col-md-12 mt-5" id="barChartSection">
-                        <h3>Graphique à Barres</h3>
-                        <div class="form-row align-items-center">
-                            <div class="col-auto mt-5">
-                                <label for="startDate">Date de début :</label>
-                                <input type="date" id="startDate" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-auto mt-5">
-                                <label for="endDate">Date de fin :</label>
-                                <input type="date" id="endDate" class="form-control form-control-sm">
-                            </div>                    
-                        </div>
+                        <h3>Somme des impayés par mois</h3>
                         <canvas id="barChart"></canvas>
                         <div class="col-auto mt-3">
                         <button style="border-radius: 10px;" onclick="exportChartToPDF('barChart', 'graphique_barres')">Exporter en PDF</button>
@@ -48,17 +62,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], time() + 60 * 60);
                     </div>
 
                     <div class="col-md-12 mt-5" id="lineChartSection">
-                        <h3>Total de visites</h3>
-                        <div class="form-row align-items-center">
-                            <div class="col-auto mt-5">
-                                <label for="startDateLine">Date de début :</label>
-                                <input type="date" id="startDateLine" class="form-control form-control-sm">
-                            </div>
-                            <div class="col-auto mt-5">
-                                <label for="endDateLine">Date de fin :</label>
-                                <input type="date" id="endDateLine" class="form-control form-control-sm">
-                            </div>
-                        </div>
+                        <h3>Somme des impayés par mois</h3>
                         <canvas id="lineChart"></canvas>
                         <div class="col-auto mt-3">
                         <button style="border-radius: 10px;" onclick="exportChartToPDF('courbeChart', 'graphique_courbes')">Exporter en PDF</button>
