@@ -76,10 +76,11 @@ if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
                             }
                             $_SESSION['email'] = $email;
                             $_SESSION['tries'] = 0;
+                            
 
                             // On récupère le nom de l'utilisateur
                             include('../account/getDisplayName.php');
-                            $_SESSION['displayName'] = getDisplay( $id, $cnx );
+                            $_SESSION['displayName'] = getDisplayName( $id, $cnx );
 
                             include('../backend/mailer.php');
                             login(); // On envoie un mail de connexion
