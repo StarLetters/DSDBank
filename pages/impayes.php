@@ -23,6 +23,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <link rel="stylesheet" href="../css/varColor.css">
     <link rel="stylesheet" href="../css/table.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/impayes.css">
 </head>
 
 <body>
@@ -39,29 +40,29 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 <div class="form-row align-items-center">
                     <div class="col-auto mt-5">
                         <label for="startDate">Date de début :</label>
-                        <input type="date" id="startDate" class="form-control form-control-sm">
+                        <input type="date" id="startDate" class="form-control form-control-sm date">
                     </div>
 
                     <div class="col-auto mt-5">
                         <label for="endDate">Date de fin :</label>
-                        <input type="date" id="endDate" class="form-control form-control-sm">
+                        <input type="date" id="endDate" class="form-control form-control-sm date">
                     </div>                
 
                     <div class="col-auto mt-5">
                         <label for="nImp">N° Dossier Impayés :</label>
-                        <input type="text" id="nImp" class="form-control form-control-sm">
+                        <input type="text" id="nImp" class="form-control form-control-sm date">
                     </div>
 
                     <div class="col-auto mt-5">
                         <label for="nSiren">N° SIREN :</label>
-                        <input type="text" id="nSiren" class="form-control form-control-sm">
+                        <input type="text" id="nSiren" class="form-control form-control-sm date">
                     </div>
 
                 </div>
 
                 <div id="table-container"></div>
                 <div class="row">
-                    <select id="chartType" class="form-control mt-3">
+                    <select id="chartType" class="form-control mt-3 slide">
                         <option value="bar">Graphique à Barres</option>
                         <option value="line">Graphique à Courbes</option>
                     </select>
