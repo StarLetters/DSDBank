@@ -1,15 +1,18 @@
-<?php 
+<?php
 session_start();
+
+include('../account/verifLogin.php');
+$role = verifLogin();
 
 if (!isset($_SESSION['cnxToken'])) {
     header('Location: ../index.html');
 }
 setcookie('cnxToken', $_SESSION['cnxToken'], [
     'expires' => time() + 60 * 60 * 24,
-    
+
     'secure' => true,
     'samesite' => 'None'
-]);?>
+]); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -30,14 +33,15 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <div class="">
         <div id="wrapper">
             <?php include('../includes/header.php'); ?>
-            <div class="container">
-                <div class="row">
+            <div class="col-12">
+                <div class="row mb-3">
                     <div class="col-md-12">
                         <h1 class="mt-5">Mes impayés</h1>
                     </div>
                 </div>
-                
+
                 <div class="form-row align-items-center">
+                    <div class="col-12 col-md-6 d-flex flex-row">
                     <div class="col-auto mt-5">
                         <label for="startDate">Date de début :</label>
                         <input type="date" id="startDate" class="form-control form-control-sm date">
@@ -46,21 +50,46 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <div class="col-auto mt-5">
                         <label for="endDate">Date de fin :</label>
                         <input type="date" id="endDate" class="form-control form-control-sm date">
-                    </div>                
-
+                    </div>
+                    </div>
                     <div class="col-auto mt-5">
                         <label for="nImp">N° Dossier Impayés :</label>
                         <input type="text" id="nImp" class="form-control form-control-sm date">
+                        <button id="resetButton">Effacer</button>
+                        <button id="searchButton">Rechercher</button>
                     </div>
-
-                    <div class="col-auto mt-5">
-                        <label for="nSiren">N° SIREN :</label>
-                        <input type="text" id="nSiren" class="form-control form-control-sm date">
+                    <?php
+                    if ($role == 1) {
+                        echo "
+                    <div class=\"col-auto mt-5\">
+                        <label for=\"nSiren\">N° SIREN :</label>
+                        <input type=\"text\" id=\"nSiren\" class=\"form-control form-control-sm date\">
+                    </div>";
+                    }
+                    ?>
+                </div>
+                <div class="row align-items-center">
+                    <div id="items-per-page-container" class="mx-3">
+                        <label for="items-per-page">Éléments par page:</label>
+                        <select id="items-per-page" class="item-selecteur">
+                            <option value="3">3</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                        </select>
                     </div>
+                    <div id="order-by-container">
+                        <label for="order-by">Trier par:</label>
+                        <select id="order-by" class="item-selecteur">
+                            <option value="datevente">Date Vente</option>
+                            <option value="montant desc">Montant</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="results-container" class="text-right">
 
                 </div>
-
                 <div id="table-container"></div>
+                <nav id="pagination-container"></nav>
                 <div class="row">
                     <select id="chartType" class="form-control mt-3 slide">
                         <option value="bar">Graphique à Barres</option>
@@ -71,7 +100,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <h3>Somme des impayés par mois</h3>
                         <canvas id="barChart"></canvas>
                         <div class="col-auto mt-3">
-                        <button style="border-radius: 10px;" onclick="exportChartToPDF('barChart', 'graphique_barres')">Exporter en PDF</button>
+                            <button style="border-radius: 10px;" onclick="exportChartToPDF('barChart', 'graphique_barres')">Exporter en PDF</button>
                         </div>
                     </div>
 
@@ -79,7 +108,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <h3>Somme des impayés par mois</h3>
                         <canvas id="lineChart"></canvas>
                         <div class="col-auto mt-3">
-                        <button style="border-radius: 10px;" onclick="exportChartToPDF('courbeChart', 'graphique_courbes')">Exporter en PDF</button>
+                            <button style="border-radius: 10px;" onclick="exportChartToPDF('courbeChart', 'graphique_courbes')">Exporter en PDF</button>
                         </div>
                     </div>
 
@@ -99,64 +128,65 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+
     <script defer type="module" src="../scripts/graphic.js"></script>
     <script defer type="module" src="../scripts/tempGraphics.js"></script>
     <script src="../scripts/button-nav.js"></script>
+    <script defer type="module" src="../scripts/toggleDisplay.js"></script>
+
     <script src="../scripts/header.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
     <!-- guette pas ça -->
     <script>
-    
-    function exportChartToPDF(chartId, fileName) {
-    const canvas = document.getElementById(chartId);
+        function exportChartToPDF(chartId, fileName) {
+            const canvas = document.getElementById(chartId);
 
-    // Récupère le contexte du canvas
-    const ctx = canvas.getContext('2d');
+            // Récupère le contexte du canvas
+            const ctx = canvas.getContext('2d');
 
-    // Créer un nouvel objet Chart en utilisant le contexte du canvas
-    const chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: [],
-            datasets: [{
-                label: 'Dataset',
-                data: [10, 20, 30],
-                backgroundColor: ['red', 'green', 'blue']
-            }]
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    display: false
-                }],
-                yAxes: [{
-                    display: false
-                }]
-            },
-            legend: {
-                display: false
-            }
+            // Créer un nouvel objet Chart en utilisant le contexte du canvas
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Dataset',
+                        data: [10, 20, 30],
+                        backgroundColor: ['red', 'green', 'blue']
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            display: false
+                        }],
+                        yAxes: [{
+                            display: false
+                        }]
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            });
+
+            // Créer un nouvel objet jsPDF
+            const pdf = new jsPDF();
+
+            // Obtiens les dimensions du canvas
+            const canvasWidth = canvas.width;
+            const canvasHeight = canvas.height;
+
+            // Créer une image à partir des données du canvas
+            const imgData = canvas.toDataURL('image/png');
+
+            // Ajoute l'image au PDF
+            pdf.addImage(imgData, 'PNG', 10, 10, canvasWidth, canvasHeight);
+
+            // Enregistrez le PDF
+            pdf.save(fileName + '.pdf');
         }
-    });
-
-    // Créer un nouvel objet jsPDF
-    const pdf = new jsPDF();
-
-    // Obtiens les dimensions du canvas
-    const canvasWidth = canvas.width;
-    const canvasHeight = canvas.height;
-
-    // Créer une image à partir des données du canvas
-    const imgData = canvas.toDataURL('image/png');
-
-    // Ajoute l'image au PDF
-    pdf.addImage(imgData, 'PNG', 10, 10, canvasWidth, canvasHeight);
-
-    // Enregistrez le PDF
-    pdf.save(fileName + '.pdf');
-}
-
     </script>
 </body>
 

@@ -1,10 +1,13 @@
 import { getUnpaidsPerMonth } from "./fetchData.js";
-import { createTable } from "./dataTable.js";
 
+let myChart;
 // fonction createBarChart pour utiliser les données générées
 function createBarChart(labels, data) {
+  if (myChart) {
+    myChart.destroy();
+  }
   const ctx = document.getElementById("barChart").getContext("2d");
-  new Chart(ctx, {
+  myChart = new Chart(ctx, {
     type: "bar",
     data: {
       labels: labels,
@@ -65,20 +68,6 @@ function createBarChart(labels, data) {
     },
   });
 }
-// Fonction pour générer des données pour le graphique de courbes
-async function fetchData(startDate, endDate) {
-  console.log(startDate);
-  console.log(endDate);
-
-  try {
-    const data = await getUnpaidsPerMonth(startDate, endDate);
-
-    return data;
-  } catch (error) {
-    console.error(error);
-    throw new Error("Erreur lors de la récupération des données");
-  }
-}
 
 function dataForChart(data) {
   const montants = data.map((item) => item.montant);
@@ -89,8 +78,11 @@ function dataForChart(data) {
 
 // graphique de courbes
 function createLineChart(labels, data) {
+  if (myChart) {
+    myChart.destroy();
+  }
   const ctx = document.getElementById("lineChart").getContext("2d");
-  new Chart(ctx, {
+  myChart = new Chart(ctx, {
     type: "line",
     data: {
       labels: labels,
@@ -130,8 +122,7 @@ async function toggleCharts(selectedChart) {
   console.log(endDate);
 
   try {
-    const fetchedData = await fetchData(startDate, endDate);
-    createTable(fetchedData);
+    const fetchedData = await getUnpaidsPerMonth(startDate, endDate);
     const { montants, dates } = dataForChart(fetchedData);
 
     if (selectedChart === "bar") {
@@ -150,21 +141,6 @@ async function toggleCharts(selectedChart) {
   }
 }
 
-function updateCharts() {
-  toggleCharts(document.getElementById("chartType").value);
-}
 
-// Par défaut, cacher le graphique à courbe
-const lineChartSection = document.getElementById("lineChartSection");
-lineChartSection.style.display = "none";
 
-// Ajouter des écouteurs d'événements
-document.getElementById("startDate").addEventListener("change", updateCharts);
-document.getElementById("endDate").addEventListener("change", updateCharts);
-document.getElementById("chartType").addEventListener("change", function () {
-  toggleCharts(this.value);
-});
-
-// Par défaut, afficher le graphique à barres
-document.getElementById("chartType").value = "bar";
-toggleCharts("bar");
+export { toggleCharts };
