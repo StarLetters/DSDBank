@@ -112,6 +112,14 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </div>
                     </div>
 
+                    <div class="col-md-12 mt-5">
+                        <h3>Motifs d'impayés</h3>
+                        <canvas id="pieChart"></canvas>
+                        <div class="col-auto mt-3">
+                        <button style="border-radius: 10px;" onclick="exportChartToPDF('pieChart', 'graphique_courbes')">Exporter en PDF</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -120,7 +128,12 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+
+    <script defer type="module" src="../scripts/graphic.js"></script>
+    <script defer type="module" src="../scripts/tempGraphics.js"></script>
+    <script src="../scripts/button-nav.js"></script>
     <script defer type="module" src="../scripts/toggleDisplay.js"></script>
+
     <script src="../scripts/header.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
