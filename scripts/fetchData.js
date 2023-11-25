@@ -10,8 +10,6 @@ function getCookie(name) {
 }
   
 
-
-
 function getUnpaidsPerMonth(leftBound, rightBound) {
     console.log("Fetching via getUnpaidsPerMonth()");
 
@@ -42,7 +40,40 @@ function getUnpaidsPerMonth(leftBound, rightBound) {
         });
     }
 
+function getUnpaidsForEach(leftBound, rightBound, orderby, nImpaye){
+    console.log("Fetching via getUnpaidsForEach()");
 
+    if (getCookie("cnxToken") === null){
+        document.location.href = "../index.html";
+    }
 
+    let left="";
+    let right="";
+    let order="";
+    let nImp="";
 
-export {getUnpaidsPerMonth};
+    if (leftBound !== ""){ left = '&leftBound='+leftBound }
+
+    if (rightBound !== "" ){ right = '&rightBound='+rightBound }
+
+    if (orderby !== "" ){ order = '&orderby='+orderby }
+
+    if (nImpaye !== "" ){ nImp = '&nImp='+nImpaye }
+
+    return fetch('../api/unpaidsForEach.php?token='+getCookie("cnxToken")+left+right+order+nImp, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    
+        .then(response => response.json())
+        .then(data => { console.log(data);
+            return data;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+export {getUnpaidsForEach, getUnpaidsPerMonth};

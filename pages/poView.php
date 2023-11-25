@@ -77,7 +77,7 @@ $result = $result->fetchAll();
             <hr>
 
             <form class="form-group px-2 md-px-5 py-1 d-flex flex-column align-items-center" id="formRows">
-                <label for="exampleSelect" style="color:var(--couleur-text)">Sélectionnez le nombre de lignes à afficher :</label>
+                <label for="rowsPerPage" style="color:var(--couleur-text)">Sélectionnez le nombre de lignes à afficher :</label>
                 <select name="rowsPerPage" class="form-control form-control-sm" style="width:15%" onchange="submitForm()">
                     <?php
                     echo "<option value=\"" . $rowsPerPage . "\" selected>" . $rowsPerPage . "</option>";
