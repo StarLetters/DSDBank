@@ -76,4 +76,35 @@ function getUnpaidsForEach(leftBound, rightBound, orderby, nImpaye){
         });
 }
 
-export {getUnpaidsForEach, getUnpaidsPerMonth};
+function getUnpaidReasons(leftBound, rightBound) {
+    console.log("Fetching via getUnpaidsPerMonth()");
+
+    if (getCookie("cnxToken") === null){
+        document.location.href = "../index.html";
+    }
+
+    let left="";
+    let right="";
+
+    if (leftBound !== ""){ left = '&leftBound='+leftBound }
+
+    if (rightBound !== "" ){ right = '&rightBound='+rightBound }
+
+    return fetch('../api/unpaidReasons.php?token='+getCookie("cnxToken")+left+right, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    
+        .then(response => response.json())
+        .then(data => { console.log(data);
+            return data;
+        })
+        .catch(error => {
+            console.error(error);
+            console.log(data);
+        });
+    }
+
+export {getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons};

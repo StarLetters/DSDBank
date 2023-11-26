@@ -1,4 +1,4 @@
-export function rgbToHsl(color) {
+function rgbToHsl(color) {
     const r = color >> 16 & 255;
     const g = color >> 8 & 255;
     const b = color & 255;
@@ -30,7 +30,7 @@ export function rgbToHsl(color) {
     return { h, s, l };
   }
   
-  export function hslToRgb(h, s, l) {
+function hslToRgb(h, s, l) {
     const c = (1 - Math.abs(2 * l - 1)) * s;
     const x = c * (1 - Math.abs((h / 60) % 2 - 1));
     const m = l - c / 2;
@@ -69,3 +69,46 @@ export function rgbToHsl(color) {
   
     return (r << 16) | (g << 8) | b;
   }
+
+  function rgbToHex(color) {
+    const r = (color >> 16) & 255;
+    const g = (color >> 8) & 255;
+    const b = color & 255;
+
+    const hex = ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
+
+    return `#${hex}`;
+  }
+
+function generateHarmoniousColors(baseColor, numberOfColors) {
+  const baseHSL = rgbToHsl(baseColor);
+  const hueIncrement = 360 / numberOfColors;
+  const harmoniousColors = [];
+
+  for (let i = 0; i < numberOfColors; i++) {
+    const hue = (baseHSL.h + hueIncrement * i) % 360;
+    const color = hslToRgb(hue, baseHSL.s, baseHSL.l);
+    harmoniousColors.push(rgbToHex(color));
+  }
+
+  
+
+  return harmoniousColors;
+}
+
+function nHarmoniousColors(baseColor, numberOfColors){
+    switch(baseColor){
+        case 'red':
+            return generateHarmoniousColors(0xff6384, numberOfColors);
+        case 'blue':
+            return generateHarmoniousColors(0x36a2eb, numberOfColors);
+        case 'yellow':
+            return generateHarmoniousColors(0xffcd56, numberOfColors);
+        case 'cyan':
+            return generateHarmoniousColors(0x00ffff, numberOfColors);
+        default:
+            return generateHarmoniousColors(baseColor, numberOfColors);
+        }
+}
+
+export { nHarmoniousColors };

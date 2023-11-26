@@ -1,6 +1,8 @@
-import { getUnpaidsPerMonth } from "./fetchData.js";
+import { getUnpaidsPerMonth, getUnpaidReasons } from "./fetchData.js";
+import { nHarmoniousColors } from "./colors.js";
 
 let myChart;
+let pieChart;
 // fonction createBarChart pour utiliser les données générées
 function createBarChart(labels, data) {
   if (myChart) {
@@ -76,6 +78,15 @@ function dataForChart(data) {
   return { montants, dates };
 }
 
+function dataForPieChart(data) {
+  const reasonCount = data.map((item) => item.count);
+  const reasons = data.map((item) => item.libelle);
+
+  return { reasonCount, reasons };
+}
+
+
+
 // graphique de courbes
 function createLineChart(labels, data) {
   if (myChart) {
@@ -110,6 +121,33 @@ function createLineChart(labels, data) {
   });
 }
 
+const makePieChart = (fetchedData, labels, colors) => {
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        label: "Motifs d'impayés",
+        data: fetchedData,
+        backgroundColor: colors,
+        hoverOffset: 4,
+      },
+    ],
+  };
+
+  const ctx = document.getElementById("pieChart").getContext("2d");
+  pieChart = new Chart(ctx, {
+    type: "pie",
+    data: data,
+    options: {
+      plugins: {
+        legend: {
+          position: "bottom",
+        },
+      },
+    },
+  });
+};
+
 // Fonction pour basculer entre les graphiques
 async function toggleCharts(selectedChart) {
   const barChartSection = document.getElementById("barChartSection");
@@ -124,6 +162,16 @@ async function toggleCharts(selectedChart) {
   try {
     const fetchedData = await getUnpaidsPerMonth(startDate, endDate);
     const { montants, dates } = dataForChart(fetchedData);
+
+    const fetchedReasons = await getUnpaidReasons(startDate, endDate);
+
+    const { reasonCount, reasons} = dataForPieChart(fetchedReasons);
+
+    console.log(reasonCount);
+    console.log(reasons);
+
+
+    makePieChart(reasonCount, reasons, nHarmoniousColors("blue",reasons.length));
 
     if (selectedChart === "bar") {
       barChartSection.style.display = "block";
