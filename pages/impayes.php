@@ -5,10 +5,10 @@ include('../account/verifLogin.php');
 $role = verifLogin();
 
 if (!isset($_SESSION['cnxToken'])) {
-    header('Location: ../index.html');
+    header('Location: home.php');
 }
 setcookie('cnxToken', $_SESSION['cnxToken'], [
-    'expires' => time() + 60 * 60 * 24,
+    'expires' => time() + 60 * 60 * 24 * 30,
 
     'secure' => true,
     'samesite' => 'None'
@@ -127,20 +127,18 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
 
         </div>
     </div>
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 
     <script defer type="module" src="../scripts/graphic.js"></script>
-    <script defer type="module" src="../scripts/tempGraphics.js"></script>
-    <script src="../scripts/button-nav.js"></script>
     <script defer type="module" src="../scripts/toggleDisplay.js"></script>
-
     <script src="../scripts/header.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
     <!-- guette pas ça -->
     <script>
         function exportChartToPDF(chartId, fileName) {
-            const canvas = document.getElementById(chartId);
+            const canvas = document.getElementById("chartId");
 
             // Récupère le contexte du canvas
             const ctx = canvas.getContext('2d');
