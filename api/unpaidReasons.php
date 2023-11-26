@@ -23,11 +23,11 @@ if (isset($_GET['rightBound'])){
 }
 
 $request .= 
-"AND t.idUtilisateur IN (
+"AND tra.idUtilisateur IN (
     SELECT DISTINCT tra.idUtilisateur
     FROM Transaction tra, Token tok, Utilisateur uti
     WHERE tra.idUtilisateur = uti.idUtilisateur
-     AND uti.email = tok.email
+     AND uti.email = tok.email  
     AND tok.token = :token)
     GROUP BY libelleImpaye;";
 
