@@ -137,9 +137,16 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <script src="../scripts/header.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
+    <script>
+    window.jsPDF = window.jspdf.jsPDF;
+    
+    
+  </script>
     <!-- guette pas ça -->
     <script>
         function exportChartToPDF(chartId, fileName) {
+
+            
             const canvas = document.getElementById(chartId);
 
             // Récupère le contexte du canvas
