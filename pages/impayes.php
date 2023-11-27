@@ -42,31 +42,34 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
 
                 <div class="form-row align-items-center">
                     <div class="col-12 col-md-6 d-flex flex-row">
-                    <div class="col-auto mt-5">
-                        <label for="startDate">Date de début :</label>
-                        <input type="date" id="startDate" class="form-control form-control-sm date">
-                    </div>
+                        <div class="col-auto mt-5">
+                            <label for="startDate">Date de début :</label>
+                            <input type="date" id="startDate" class="form-control form-control-sm date">
+                        </div>
 
-                    <div class="col-auto mt-5">
-                        <label for="endDate">Date de fin :</label>
-                        <input type="date" id="endDate" class="form-control form-control-sm date">
-                    </div>
+                        <div class="col-auto mt-5">
+                            <label for="endDate">Date de fin :</label>
+                            <input type="date" id="endDate" class="form-control form-control-sm date">
+                        </div>
                     </div>
                     <div class="col-auto mt-5">
                         <label for="nImp">N° Dossier Impayés :</label>
                         <input type="text" id="nImp" class="form-control form-control-sm date">
+                        <?php
+                        if ($role == 1) {
+                            echo "
+                        <label for=\"nSIREN\">N° SIREN :</label>
+                        <input type=\"text\" id=\"nSIREN\" class=\"form-control form-control-sm date\">
+                        
+                        <label for=\"raisonSociale\">Raison Sociale :</label>
+                        <input type=\"text\" id=\"raisonSociale\" class=\"form-control form-control-sm date\">
+                        ";
+                        }
+                        ?>
                         <button id="resetButton">Effacer</button>
                         <button id="searchButton">Rechercher</button>
+
                     </div>
-                    <?php
-                    if ($role == 1) {
-                        echo "
-                    <div class=\"col-auto mt-5\">
-                        <label for=\"nSiren\">N° SIREN :</label>
-                        <input type=\"text\" id=\"nSiren\" class=\"form-control form-control-sm date\">
-                    </div>";
-                    }
-                    ?>
                 </div>
                 <div class="row align-items-center">
                     <div id="items-per-page-container" class="mx-3">
@@ -80,8 +83,9 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <div id="order-by-container">
                         <label for="order-by">Trier par:</label>
                         <select id="order-by" class="item-selecteur">
-                            <option value="datevente">Date Vente</option>
                             <option value="montant desc">Montant</option>
+                            <option value="datevente" id="datevente">Date Vente</option>
+                            <option value="numSiren" id="orderSiren">N° SIREN</option>
                         </select>
                     </div>
                 </div>
@@ -90,7 +94,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 </div>
                 <div id="table-container"></div>
                 <nav id="pagination-container"></nav>
-                <div class="row">
+                <div class="row" id="graphics">
                     <select id="chartType" class="form-control mt-3 slide">
                         <option value="bar">Graphique à Barres</option>
                         <option value="line">Graphique à Courbes</option>
@@ -111,15 +115,13 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             <button style="border-radius: 10px;" onclick="exportChartToPDF('courbeChart', 'graphique_courbes')">Exporter en PDF</button>
                         </div>
                     </div>
-
-                    <div class="col-md-12 mt-5">
-                        <h3>Motifs d'impayés</h3>
-                        <canvas id="pieChart"></canvas>
-                        <div class="col-auto mt-3">
+                </div>
+                <div class="col-md-12 mt-5">
+                    <h3>Motifs d'impayés</h3>
+                    <canvas id="pieChart"></canvas>
+                    <div class="col-auto mt-3">
                         <button style="border-radius: 10px;" onclick="exportChartToPDF('pieChart', 'graphique_courbes')">Exporter en PDF</button>
-                        </div>
                     </div>
-
                 </div>
             </div>
 
