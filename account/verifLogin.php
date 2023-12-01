@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 function verifLogin(){
     include('../backend/cnx.php');
     	

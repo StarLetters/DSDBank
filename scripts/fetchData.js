@@ -19,12 +19,15 @@ function getUnpaidsPerMonth(leftBound, rightBound) {
 
     let left="";
     let right="";
+    
+    let nS = (document.getElementById("nSIREN") && document.getElementById("nSIREN").value!="") ? '&nSIREN='+document.getElementById("nSIREN").value : "";
+    let rS = (document.getElementById("raisonSociale") && document.getElementById("raisonSociale").value!="") ? '&raisonSociale='+document.getElementById("raisonSociale").value : "";
 
     if (leftBound !== ""){ left = '&leftBound='+leftBound }
 
     if (rightBound !== "" ){ right = '&rightBound='+rightBound }
 
-    return fetch('../api/unpaidsPerMonth.php?token='+getCookie("cnxToken")+left+right, {
+    return fetch('../api/unpaidsPerMonth.php?token='+getCookie("cnxToken")+left+right+nS+rS, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -40,7 +43,7 @@ function getUnpaidsPerMonth(leftBound, rightBound) {
         });
     }
 
-function getUnpaidsForEach(leftBound, rightBound, orderby, nImpaye){
+function getUnpaidsForEach(leftBound, rightBound, orderby, nImpaye, nSIREN, raisonSociale){
     console.log("Fetching via getUnpaidsForEach()");
 
     if (getCookie("cnxToken") === null){
@@ -51,6 +54,8 @@ function getUnpaidsForEach(leftBound, rightBound, orderby, nImpaye){
     let right="";
     let order="";
     let nImp="";
+    let nS="";
+    let rS="";
 
     if (leftBound !== ""){ left = '&leftBound='+leftBound }
 
@@ -60,7 +65,12 @@ function getUnpaidsForEach(leftBound, rightBound, orderby, nImpaye){
 
     if (nImpaye !== "" ){ nImp = '&nImp='+nImpaye }
 
-    return fetch('../api/unpaidsForEach.php?token='+getCookie("cnxToken")+left+right+order+nImp, {
+    if (nSIREN !== "" ){ nS = '&nSIREN='+nSIREN }
+
+    if (raisonSociale !== "" ){ rS = '&raisonSociale='+raisonSociale }
+
+    console.log('../api/unpaidsForEach.php?token='+getCookie("cnxToken")+left+right+order+nImp+nS+rS);
+    return fetch('../api/unpaidsForEach.php?token='+getCookie("cnxToken")+left+right+order+nImp+nS+rS, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -77,7 +87,7 @@ function getUnpaidsForEach(leftBound, rightBound, orderby, nImpaye){
 }
 
 function getUnpaidReasons(leftBound, rightBound) {
-    console.log("Fetching via getUnpaidsPerMonth()");
+    console.log("Fetching via getUnpaidReasons()");
 
     if (getCookie("cnxToken") === null){
         document.location.href = "../index.html";
@@ -86,11 +96,15 @@ function getUnpaidReasons(leftBound, rightBound) {
     let left="";
     let right="";
 
+    let nS = (document.getElementById("nSIREN") && document.getElementById("nSIREN").value!="") ? '&nSIREN='+document.getElementById("nSIREN").value : "";
+    let rS = (document.getElementById("raisonSociale") && document.getElementById("raisonSociale").value!="") ? '&raisonSociale='+document.getElementById("raisonSociale").value : "";
+
+
     if (leftBound !== ""){ left = '&leftBound='+leftBound }
 
     if (rightBound !== "" ){ right = '&rightBound='+rightBound }
 
-    return fetch('../api/unpaidReasons.php?token='+getCookie("cnxToken")+left+right, {
+    return fetch('../api/unpaidReasons.php?token='+getCookie("cnxToken")+left+right+nS+rS, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
