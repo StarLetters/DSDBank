@@ -34,4 +34,5 @@
             </div>
         </div>
     </nav>
+    <span id="close-navbar"></span>
 </div>

@@ -5,10 +5,10 @@ include('../account/verifLogin.php');
 $role = verifLogin();
 
 if (!isset($_SESSION['cnxToken'])) {
-    header('Location: home.php');
+    header('Location: ../index.html');
 }
 setcookie('cnxToken', $_SESSION['cnxToken'], [
-    'expires' => time() + 60 * 60 * 24 * 30,
+    'expires' => time() + 60 * 60 * 24,
 
     'secure' => true,
     'samesite' => 'None'
@@ -27,6 +27,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <link rel="stylesheet" href="../css/table.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/impayes.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="../scripts/exportPDF.js"></script>
 </head>
 
 <body>
@@ -83,7 +85,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <div id="order-by-container">
                         <label for="order-by">Trier par:</label>
                         <select id="order-by" class="item-selecteur">
-                            <option value="montant desc">Montant</option>
+                            <option value="montantDesc">Montant</option>
                             <option value="datevente" id="datevente">Date Vente</option>
                             <option value="numSiren" id="orderSiren">N° SIREN</option>
                         </select>
@@ -104,15 +106,14 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <h3>Somme des impayés par mois</h3>
                         <canvas id="barChart"></canvas>
                         <div class="col-auto mt-3">
-                            <button style="border-radius: 10px;" onclick="exportChartToPDF('barChart', 'graphique_barres')">Exporter en PDF</button>
-                        </div>
+                        <button style="border-radius: 10px;" onclick="exportChartToPDF('barChart', 'graphique_barres')">Exporter en PDF</button></div>
                     </div>
 
                     <div class="col-md-12 mt-5" id="lineChartSection">
                         <h3>Somme des impayés par mois</h3>
                         <canvas id="lineChart"></canvas>
                         <div class="col-auto mt-3">
-                            <button style="border-radius: 10px;" onclick="exportChartToPDF('courbeChart', 'graphique_courbes')">Exporter en PDF</button>
+                            <button style="border-radius: 10px;" onclick="exportChartToPDF('lineChart', 'graphique_courbes')">Exporter en PDF</button>
                         </div>
                     </div>
                 </div>
@@ -129,65 +130,16 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
 
         </div>
     </div>
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 
     <script defer type="module" src="../scripts/graphic.js"></script>
+    <script defer type="module" src="../scripts/tempGraphics.js"></script>
+    <script src="../scripts/button-nav.js"></script>
     <script defer type="module" src="../scripts/toggleDisplay.js"></script>
+
     <script src="../scripts/header.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
-    <!-- guette pas ça -->
-    <script>
-        function exportChartToPDF(chartId, fileName) {
-            const canvas = document.getElementById("chartId");
-
-            // Récupère le contexte du canvas
-            const ctx = canvas.getContext('2d');
-
-            // Créer un nouvel objet Chart en utilisant le contexte du canvas
-            const chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [],
-                    datasets: [{
-                        label: 'Dataset',
-                        data: [10, 20, 30],
-                        backgroundColor: ['red', 'green', 'blue']
-                    }]
-                },
-                options: {
-                    scales: {
-                        xAxes: [{
-                            display: false
-                        }],
-                        yAxes: [{
-                            display: false
-                        }]
-                    },
-                    legend: {
-                        display: false
-                    }
-                }
-            });
-
-            // Créer un nouvel objet jsPDF
-            const pdf = new jsPDF();
-
-            // Obtiens les dimensions du canvas
-            const canvasWidth = canvas.width;
-            const canvasHeight = canvas.height;
-
-            // Créer une image à partir des données du canvas
-            const imgData = canvas.toDataURL('image/png');
-
-            // Ajoute l'image au PDF
-            pdf.addImage(imgData, 'PNG', 10, 10, canvasWidth, canvasHeight);
-
-            // Enregistrez le PDF
-            pdf.save(fileName + '.pdf');
-        }
-    </script>
 </body>
 
 </html>

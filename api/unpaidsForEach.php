@@ -52,7 +52,19 @@ function getUnpaidsClient($token, $nImp = null, $leftBound = null, $rightBound =
     }
 
     if ($orderby !== null) {
-        $request .= "ORDER BY :orderby";
+        if ($orderby == "montantDesc"){
+            $orderby = "Transaction.montant desc";
+        }
+        else if ($orderby == "montantAsc"){
+            $orderby = "Transaction.montant asc";
+        }
+        else if ($orderby == "datevente"){
+            $orderby = "Transaction.dateVente desc";
+        }
+        else if ($orderby == "numSiren"){
+            $orderby = "Entreprise.numSiren asc";
+        }
+        $request .= "ORDER BY $orderby";
     }
 
     $request .= ";";
@@ -72,10 +84,6 @@ function getUnpaidsClient($token, $nImp = null, $leftBound = null, $rightBound =
         $result->bindParam(":rightBound", $rightBound);
     }
 
-    if ($orderby !== null) {
-        $result->bindParam(":orderby", $orderby);
-    }
-
     $result->execute();
     $result = $result->fetchAll();
     return $result;
@@ -89,12 +97,12 @@ function getUnpaidsPO($token, $nImp = null, $leftBound = null, $rightBound = nul
         JOIN Entreprise ON Entreprise.idUtilisateur = Transaction.idUtilisateur
         GROUP BY Entreprise.numSiren 
         ";
-        if ($orderby !== null) {
+        if ($orderby != null) {
             $request .= "ORDER BY :orderby";
         }
         $request .= ";";
         $result = $cnx->prepare($request);
-        if ($orderby !== null) {
+        if ($orderby != null) {
             if ($orderby == "montant desc") {
                $orderby = "SUM(Transaction.montant) desc";
             } 
@@ -195,3 +203,5 @@ if ($role == 1) {
     $result = getUnpaidsClient($token, $nImp, $leftBound, $rightBound, $orderby);
 }
 outputJson($result);
+
+

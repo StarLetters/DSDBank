@@ -215,13 +215,6 @@ hr {
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-    #wrapper {
-        padding-left: 60px;
-    }
-
-    #sidebar-wrapper {
-        width: 60px;
-    }
 
     #wrapper.toggled #navbar-wrapper {
         position: absolute;
@@ -263,7 +256,7 @@ hr {
     }
 
     #wrapper.toggled #sidebar-wrapper {
-        width: 250px;
+        width: 100%;
     }
 
     #wrapper.toggled #navbar-wrapper {
@@ -281,7 +274,7 @@ hr {
     }
 
     #wrapper.toggled {
-        padding-left: 250px;
+        padding-left: 0;
     }
 
     #content-wrapper {
@@ -294,6 +287,42 @@ hr {
         position: relative;
         margin-right: 250px;
     }
+
+    .sidebar-nav {
+        top: 150px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-align: center;
+      }
+
+
+      
+      #close-navbar {
+        display: none;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 20px;
+        z-index: 2; /* Valeur de z-index élevée pour garantir que la croix est au-dessus des autres éléments */
+    }
+    
+    #close-navbar:before {
+        content: "\00D7"; /* Utilisez le caractère '✖' pour une croix stylisée */
+    }
+    
+    /* Styles pour l'effet de survol */
+    #close-navbar:hover {
+        color: red; /* Couleur de survol de la croix */
+    }
+    
+    #wrapper.toggled #close-navbar {
+        display: block;
+    }
+    
+    
 }
 
 
