@@ -131,6 +131,16 @@ body {
     right: 40px;
 }
 
+.content-show {
+    display: block !important;
+}
+
+@media (max-width: 768px) {
+    .navbar-collapse:not(.show) + #content {
+        display: block !important;
+    }
+}
+
 .ring {
     height: 500px;
     width: 500px;
