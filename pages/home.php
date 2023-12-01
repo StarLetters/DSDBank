@@ -43,7 +43,7 @@ include('../backend/cnx.php');
 
             <?php include('../includes/header.php'); ?>
 
-            <div id="content">
+            <div id="content" class="content-show">
                 <section id="content-wrapper">
                     <div class="row-1">
                         <div class="col-lg-12">
