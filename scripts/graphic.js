@@ -122,6 +122,9 @@ function createLineChart(labels, data) {
 }
 
 const makePieChart = (fetchedData, labels, colors) => {
+  if (pieChart) {
+    pieChart.destroy();
+  }
   const data = {
     labels: labels,
     datasets: [

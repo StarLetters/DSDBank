@@ -52,17 +52,16 @@ function getUnpaidsClient($token, $nImp = null, $leftBound = null, $rightBound =
     }
 
     if ($orderby !== null) {
-        if ($orderby == "montantDesc"){
+        if ($orderby == "montantDesc") {
             $orderby = "Transaction.montant desc";
-        }
-        else if ($orderby == "montantAsc"){
+        } else if ($orderby == "montantAsc") {
             $orderby = "Transaction.montant asc";
-        }
-        else if ($orderby == "datevente"){
+        } else if ($orderby == "datevente") {
             $orderby = "Transaction.dateVente desc";
-        }
-        else if ($orderby == "numSiren"){
-            $orderby = "Entreprise.numSiren asc";
+        } else if ($orderby == "dateventeAsc") {
+            $orderby = "Transaction.dateVente asc";
+        } else if ($orderby == "motif") {
+            $orderby = "Impaye.libelleImpaye";
         }
         $request .= "ORDER BY $orderby";
     }
@@ -98,16 +97,17 @@ function getUnpaidsPO($token, $nImp = null, $leftBound = null, $rightBound = nul
         GROUP BY Entreprise.numSiren 
         ";
         if ($orderby != null) {
-            $request .= "ORDER BY :orderby";
+            if ($orderby == "montantDesc") {
+                $orderby = "SUM(Transaction.montant) desc";
+            } else if ($orderby == "montantAsc") {
+                $orderby = "SUM(Transaction.montant) ASC";
+            } else if ($orderby == "numSiren") {
+                $orderby = "Entreprise.numSiren asc";
+            }
+            $request .= "ORDER BY $orderby";
         }
         $request .= ";";
         $result = $cnx->prepare($request);
-        if ($orderby != null) {
-            if ($orderby == "montant desc") {
-               $orderby = "SUM(Transaction.montant) desc";
-            } 
-            $result->bindParam(":orderby", $orderby);
-        }
     } else {
         $request =
             "SELECT Entreprise.numSiren as N°SIREN, Transaction.dateVente, IFNULL(Remise.dateRemise,'" . "Pas encore" . "') as dateRemise, ClientFinal.numCarteClient as N°Carte, ClientFinal.reseauClient, Impaye.numDossierImpaye as N°DossierImpaye, Transaction.devise, Transaction.montant, Transaction.sens, Impaye.libelleImpaye FROM Impaye
@@ -139,7 +139,20 @@ function getUnpaidsPO($token, $nImp = null, $leftBound = null, $rightBound = nul
         }
 
         if ($orderby !== null) {
-            $request .= "ORDER BY :orderby";
+            if ($orderby == "montantDesc") {
+                $orderby = "Transaction.montant desc";
+            } else if ($orderby == "montantAsc") {
+                $orderby = "Transaction.montant ASC";
+            } else if ($orderby == "datevente") {
+                $orderby = "Transaction.dateVente desc";
+            } else if ($orderby == "dateventeAsc") {
+                $orderby = "Transaction.dateVente asc";
+            } else if ($orderby == "numSiren") {
+                $orderby = "Entreprise.numSiren asc";
+            } else if ($orderby == "motif") {
+                $orderby = "Impaye.libelleImpaye";
+            }
+            $request .= "ORDER BY $orderby";
         }
 
         $request .= ";";
@@ -154,10 +167,6 @@ function getUnpaidsPO($token, $nImp = null, $leftBound = null, $rightBound = nul
 
         if ($rightBound !== null) {
             $result->bindParam(":rightBound", $rightBound);
-        }
-
-        if ($orderby !== null) {
-            $result->bindParam(":orderby", $orderby);
         }
 
         if ($nSiren !== null) {
@@ -203,5 +212,3 @@ if ($role == 1) {
     $result = getUnpaidsClient($token, $nImp, $leftBound, $rightBound, $orderby);
 }
 outputJson($result);
-
-
