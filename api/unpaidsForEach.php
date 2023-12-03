@@ -1,32 +1,13 @@
 <?php
 include('../backend/cnx.php');
 
-function verifRole($token)
-{
-    global $cnx;
-    $request = "SELECT * FROM Token WHERE token = :token AND type = 'connexion';";
-    $result = $cnx->prepare($request);
-    $result->bindParam(':token', $token);
-    $result->execute();
-    $result = $result->fetchAll();
-    if (empty($result)) {
-        header('Location: ../pages/welcome.php');
-        return 0;
-    }
-    if ($result[0]['email'] == "po@gmail.com") {
-        return 1;
-    } else if ($result[0]['email'] == "elae.dsd@gmail.com") {
-        return 2;
-    } else {
-        return 0;
-    }
-}
+include('../api/utilities.php');
 
 function getUnpaidsClient($token, $nImp = null, $leftBound = null, $rightBound = null, $orderby = null)
 {
     global $cnx;
     $request =
-        "SELECT Entreprise.numSiren as N°SIREN, Transaction.dateVente, IFNULL(Remise.dateRemise,'" . "Pas encore" . "') as dateRemise, ClientFinal.numCarteClient as N°Carte, ClientFinal.reseauClient, Impaye.numDossierImpaye as N°DossierImpaye, Transaction.devise, Transaction.montant, Transaction.sens, Impaye.libelleImpaye FROM Impaye
+        "SELECT Entreprise.numSiren as N°SIREN, Transaction.dateVente, IFNULL(Remise.dateRemise,'" . "Pas encore" . "') as dateRemise, ClientFinal.numCarteClient as N°Carte, ClientFinal.reseauClient, Impaye.numDossierImpaye as N°DossierImpaye, Transaction.devise, -Transaction.montant as montant, Transaction.sens, Impaye.libelleImpaye FROM Impaye
         LEFT JOIN Transaction ON Impaye.idTransaction = Transaction.idTransaction
         LEFT JOIN Utilisateur ON Utilisateur.idUtilisateur = Transaction.idUtilisateur
         LEFT JOIN ClientFinal ON ClientFinal.idClient = Transaction.idClient
@@ -37,7 +18,7 @@ function getUnpaidsClient($token, $nImp = null, $leftBound = null, $rightBound =
             FROM Transaction tra, Token tok, Utilisateur uti
             WHERE tra.idUtilisateur = uti.idUtilisateur
             AND uti.email = tok.email
-            AND tok.token = :token) ";
+            AND tok.token = :token)";
 
     if ($nImp !== null) {
         $request .= "AND Impaye.numDossierImpaye = :nImp ";
@@ -91,7 +72,7 @@ function getUnpaidsPO($token, $nImp = null, $leftBound = null, $rightBound = nul
 {
     global $cnx;
     if ($nSiren == null && $raisonSociale == null && $nImp == null) {
-        $request = "SELECT Entreprise.numSiren, SUM(Transaction.montant) as \"Somme Impayés\" FROM Impaye
+        $request = "SELECT Entreprise.numSiren, -SUM(Transaction.montant) as \"Somme Impayés\" FROM Impaye
         JOIN Transaction ON Transaction.idTransaction = Impaye.idTransaction
         JOIN Entreprise ON Entreprise.idUtilisateur = Transaction.idUtilisateur
         GROUP BY Entreprise.numSiren 
@@ -110,7 +91,7 @@ function getUnpaidsPO($token, $nImp = null, $leftBound = null, $rightBound = nul
         $result = $cnx->prepare($request);
     } else {
         $request =
-            "SELECT Entreprise.numSiren as N°SIREN, Transaction.dateVente, IFNULL(Remise.dateRemise,'" . "Pas encore" . "') as dateRemise, ClientFinal.numCarteClient as N°Carte, ClientFinal.reseauClient, Impaye.numDossierImpaye as N°DossierImpaye, Transaction.devise, Transaction.montant, Transaction.sens, Impaye.libelleImpaye FROM Impaye
+            "SELECT Entreprise.numSiren as N°SIREN, Transaction.dateVente, IFNULL(Remise.dateRemise,'" . "Pas encore" . "') as dateRemise, ClientFinal.numCarteClient as N°Carte, ClientFinal.reseauClient, Impaye.numDossierImpaye as N°DossierImpaye, Transaction.devise, -Transaction.montant as montant, Transaction.sens, Impaye.libelleImpaye FROM Impaye
         LEFT JOIN Transaction ON Impaye.idTransaction = Transaction.idTransaction
         LEFT JOIN Utilisateur ON Utilisateur.idUtilisateur = Transaction.idUtilisateur
         LEFT JOIN ClientFinal ON ClientFinal.idClient = Transaction.idClient
@@ -182,13 +163,6 @@ function getUnpaidsPO($token, $nImp = null, $leftBound = null, $rightBound = nul
     $result = $result->fetchAll();
     return $result;
 }
-
-function outputJson($data)
-{
-    header('Content-Type: application/json');
-    echo json_encode($data);
-}
-
 
 // Pas autorisé ici
 if (empty($_GET) || $_GET['token'] == "null") {

@@ -1,6 +1,8 @@
-import { toggleCharts } from "./graphic.js";
-import { updateTable, changeItemsPerPage, search } from "./dataTable.js";
+import { toggleUnpaidCharts } from "./graphic.js";
+import { updateDataTable, changeItemsPerPage} from "./dataTable.js";
 import { displayElements } from "./utilities.js";
+import { getUnpaidsForEach } from "./fetchData.js";
+
 
 // Constantes pour les éléments HTML réutilisés
 const startDateElement = document.getElementById("startDate");
@@ -16,11 +18,30 @@ const raisonSocialeElement = document.getElementById("raisonSociale");
 const choiceDateImpElement = document.getElementById("choiceDateImp");
 const lineChartSection = document.getElementById("lineChartSection");
 
+let startDate = document.getElementById("startDate").value;
+let endDate = document.getElementById("endDate").value;
+let order = document.getElementById("order-by").value;
+let data = await getUnpaidsForEach(startDate, endDate, order);
+
+let nImp = document.getElementById("nImp").value;
+let raisonSociale = document.getElementById("raisonSociale") ? document.getElementById("raisonSociale").value : "";
+let nSIREN = document.getElementById("nSIREN") ? document.getElementById("nSIREN").value : "";
+
 
 function updateAll() {
   displayOrderBy();
   search();
-  toggleCharts(document.getElementById("chartType").value);
+  toggleUnpaidCharts(document.getElementById("chartType").value);
+}
+
+// Fonction pour mettre à jour le tableau et les graphiques
+async function updateTable() {
+  startDate = document.getElementById("startDate").value;
+  endDate = document.getElementById("endDate").value;
+  order = document.getElementById("order-by").value;
+  data = await getUnpaidsForEach(startDate, endDate, order, nImp, nSIREN, raisonSociale);
+
+  updateDataTable(data);
 }
 
 function displayOrderBy() {
@@ -51,7 +72,7 @@ function addListener() {
     updateAll();
   });
   chartTypeElement.addEventListener("change", () => {
-    toggleCharts(chartTypeElement.value);
+    toggleUnpaidCharts(chartTypeElement.value);
   });
   itemsPerPageElement.addEventListener("change", changeItemsPerPage);
   orderByElement.addEventListener("change", updateTable);
@@ -105,13 +126,25 @@ function addListener() {
   });
 }
 
+async function search() {
+  startDate = startDateElement.value;
+  endDate = endDateElement.value;
+  order = orderByElement.value;
+  nImp = nImpElement.value;
+  nSIREN = nSIRENElement ? nSIRENElement.value : "";
+  raisonSociale = raisonSocialeElement ? raisonSocialeElement.value : "";
 
+  displayOrderBy();
+  data = await getUnpaidsForEach(startDate, endDate, order, nImp, nSIREN, raisonSociale);
+  console.log(data);
+  updateTable(data);
+}
 
 function initializeImp() {
   // Par défaut, afficher le graphique à barres
   lineChartSection.style.display = "none";
   chartTypeElement.value = "bar";
-  toggleCharts("bar");
+  toggleUnpaidCharts("bar");
 
   addListener();
   displayOrderBy();

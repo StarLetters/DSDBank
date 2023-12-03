@@ -1,4 +1,4 @@
-import { getUnpaidsPerMonth, getUnpaidReasons } from "./fetchData.js";
+import { getUnpaidsPerMonth, getUnpaidReasons, getTreasuryPerMonth } from "./fetchData.js";
 import { nHarmoniousColors } from "./colors.js";
 
 let myChart;
@@ -88,7 +88,7 @@ function dataForPieChart(data) {
 
 
 // graphique de courbes
-function createLineChart(labels, data) {
+function createLineChart(title, labels, data) {
   if (myChart) {
     myChart.destroy();
   }
@@ -99,7 +99,7 @@ function createLineChart(labels, data) {
       labels: labels,
       datasets: [
         {
-          label: "Montant des impayés",
+          label: title,
           data: data,
           fill: false,
           borderColor: "rgba(75, 192, 192, 1)",
@@ -152,7 +152,7 @@ const makePieChart = (fetchedData, labels, colors) => {
 };
 
 // Fonction pour basculer entre les graphiques
-async function toggleCharts(selectedChart) {
+async function toggleUnpaidCharts(selectedChart) {
   const barChartSection = document.getElementById("barChartSection");
   const lineChartSection = document.getElementById("lineChartSection");
 
@@ -185,13 +185,26 @@ async function toggleCharts(selectedChart) {
       barChartSection.style.display = "none";
       lineChartSection.style.display = "block";
 
-      createLineChart(dates, montants);
+      createLineChart("Montant des impayés",dates, montants);
     }
   } catch (error) {
     console.error(error);
   }
 }
 
+function dataForChart2(data) {
+  const montants = data.map((item) => item.totalmontant);
+  const dates = data.map((item) => `${item.mois}`);
 
+  return { montants, dates };
+}
 
-export { toggleCharts };
+async function toggleTreasury(){
+  const fetchedData = await getTreasuryPerMonth("","");
+  console.log(fetchedData);
+  const { montants, dates } = dataForChart2(fetchedData);
+  createLineChart("Evolution de la trésorerie", dates, montants);
+  console.log("toggleTreasury");
+}
+
+export { toggleUnpaidCharts, toggleTreasury};

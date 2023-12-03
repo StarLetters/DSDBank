@@ -42,16 +42,63 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <h1 class="mt-5">Annonces de trésorerie</h1>
                     </div>
                 </div>
+                <div>
+                    <?php
+                    if ($role == 1) {
+                        echo "
+                    <label for=\"nSIREN\">N° SIREN :</label>
+                    <input type=\"text\" id=\"nSIREN\" class=\"form-control form-control-sm date\">
+                    
+                    
+                    <button id=\"resetButton\">Effacer</button>
+                    <button id=\"searchButton\">Rechercher</button>";
+                    }
+                    ?>
+                </div>
+                <div id="order-by-container">
+                    <?php
+                    if ($role == 1) {
+                        echo "
+                    <label for=\"order-by\">Trier par:</label>
+                    <select id=\"order-by\" class=\"item-selecteur\">
+                        <option value=\"montantDesc\">Montant décroissant</option>
+                        <option value=\"montantAsc\">Montant croissant</option>
+                        <option value=\"numSiren\" id=\"orderSiren\">N° SIREN</option> 
+                    </select>";
+                    }
+                    ?>
+                </div>
+                <div>
+                    <div id="items-per-page-container" class="mx-3">
+                        <label for="items-per-page">Éléments par page:</label>
+                        <select id="items-per-page" class="item-selecteur">
+                            <option value="3">3</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div id="results-container" class="text-right"></div>
+                    <div id="table-container"></div>
+                    <nav id="pagination-container"></nav>
 
+                </div>
+                <div class="col-md-12 mt-5" id="lineChartSection">
+                    <h3 id="chartTitle">Evolution de la trésorerie</h3>
+                    <canvas id="lineChart"></canvas>
+                    <div class="col-auto mt-3">
+                        <button style="border-radius: 10px;" onclick="exportChartToPDF('lineChart', 'graphique_courbes')">Exporter en PDF</button>
+                    </div>
+                </div>
+                <?php include('../includes/footer.html'); ?>
 
-            <!--<?php include('../includes/footer.html'); ?>-->
-
+            </div>
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 
-    <script src="../scripts/header.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script defer type="module" src="../scripts/treasury.js"></script>
+
+        <script src="../scripts/header.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
 </body>
 

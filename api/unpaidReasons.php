@@ -6,17 +6,10 @@ if (empty($_GET) || $_GET['token'] == "null"){
 }
 
 include('../backend/cnx.php');
+include('../api/utilities.php');
 $token = htmlspecialchars($_GET['token']);
-$po = false;
 
-$request = "SELECT * FROM Token WHERE token = :token AND type = 'connexion';";
-$result = $cnx->prepare($request);
-$result->bindParam(':token', $token);
-$result->execute();
-$result = $result->fetchAll();
-if ($result[0]['email'] == "po@gmail.com") {
-    $po = true;
-}
+$role = verifRole($token);
 
 $request = 
 "SELECT libelleImpaye as libelle, count(libelleImpaye) as count 
@@ -33,7 +26,7 @@ if (isset($_GET['rightBound'])){
     $request .= "AND t.dateVente <= '".htmlspecialchars($_GET['rightBound'])."' ";
 }
 
-if ($po) {
+if ($role==1) {
     if (isset($_GET['nSIREN'])) {
         $request .= "AND e.numSiren = " . htmlspecialchars($_GET['nSIREN']) . " ";
     } else if (isset($_GET['raisonSociale'])) {
@@ -57,7 +50,6 @@ if ($po) {
 $result->execute();
 $result = $result->fetchAll();
 
-header('Content-Type: application/json');
-echo json_encode($result);
+outputJson($result);
 
 ?>

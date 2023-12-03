@@ -6,6 +6,8 @@ if (empty($_GET) || $_GET['token'] == "null") {
 }
 
 include('../backend/cnx.php');
+include('../api/utilities.php');
+
 $token = htmlspecialchars($_GET['token']);
 
 $request =
@@ -49,5 +51,4 @@ if (isset($_GET['nSIREN']) || isset($_GET['raisonSociale'])) {
 $result->execute();
 $result = $result->fetchAll();
 
-header('Content-Type: application/json');
-echo json_encode($result);
+outputJson($result);
