@@ -5,15 +5,25 @@
     background-size: cover;
 }
 
+footer {
+    background-color: var(--couleur-fond);
+    color: white;
+    padding: 5px 0;
+    width: 100%;
+    bottom: 0; 
+}
+
 .blurred-footer {
     background-color: rgba(255, 255, 255, 10%);
     border-radius: 10px;
-    margin: 30px;
+    margin: 30px; 
+    text-align: center;
 }
 
 .footer-container {
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 0;
+    margin-left: 0;
+    padding-top: 3em;
 }
 
 .logo-container {
@@ -24,6 +34,8 @@
 .mentions {
     color: white;
     text-decoration: none;
+    font-size: 15px;
+    margin-top: 50px;
 }
 
 .mentions:hover {
