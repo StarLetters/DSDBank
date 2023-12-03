@@ -101,7 +101,6 @@ $nbSupp = $result['suppression'] ?? 0;
             document.getElementById("modal").style.display = "block";
             const $wrapper = document.querySelector('#wrapper');
             const largeurEcran = window.innerWidth;
-            console.log(largeurEcran);
             if (($wrapper.classList.contains('toggled') && window.innerWidth < 992) || (!$wrapper.classList.contains('toggled') && window.innerWidth > 992)) {
                 $wrapper.classList.toggle('toggled'); //toggle the left sidebar
             }

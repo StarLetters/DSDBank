@@ -1,32 +1,13 @@
 <?php
 include('../backend/cnx.php');
 
-function verifRole($token)
-{
-    global $cnx;
-    $request = "SELECT * FROM Token WHERE token = :token AND type = 'connexion';";
-    $result = $cnx->prepare($request);
-    $result->bindParam(':token', $token);
-    $result->execute();
-    $result = $result->fetchAll();
-    if (empty($result)) {
-        header('Location: ../pages/welcome.php');
-        return 0;
-    }
-    if ($result[0]['email'] == "po@gmail.com") {
-        return 1;
-    } else if ($result[0]['email'] == "elae.dsd@gmail.com") {
-        return 2;
-    } else {
-        return 0;
-    }
-}
+include('../api/utilities.php');
 
 function getUnpaidsClient($token, $nImp = null, $leftBound = null, $rightBound = null, $orderby = null)
 {
     global $cnx;
     $request =
-        "SELECT Entreprise.numSiren as N°SIREN, Transaction.dateVente, IFNULL(Remise.dateRemise,'" . "Pas encore" . "') as dateRemise, ClientFinal.numCarteClient as N°Carte, ClientFinal.reseauClient, Impaye.numDossierImpaye as N°DossierImpaye, Transaction.devise, Transaction.montant, Transaction.sens, Impaye.libelleImpaye FROM Impaye
+        "SELECT Entreprise.numSiren as N°SIREN, Transaction.dateVente, IFNULL(Remise.dateRemise,'" . "Pas encore" . "') as dateRemise, ClientFinal.numCarteClient as N°Carte, ClientFinal.reseauClient, Impaye.numDossierImpaye as N°DossierImpaye, Transaction.devise, -Transaction.montant as montant, Transaction.sens, Impaye.libelleImpaye FROM Impaye
         LEFT JOIN Transaction ON Impaye.idTransaction = Transaction.idTransaction
         LEFT JOIN Utilisateur ON Utilisateur.idUtilisateur = Transaction.idUtilisateur
         LEFT JOIN ClientFinal ON ClientFinal.idClient = Transaction.idClient
@@ -37,7 +18,7 @@ function getUnpaidsClient($token, $nImp = null, $leftBound = null, $rightBound =
             FROM Transaction tra, Token tok, Utilisateur uti
             WHERE tra.idUtilisateur = uti.idUtilisateur
             AND uti.email = tok.email
-            AND tok.token = :token) ";
+            AND tok.token = :token)";
 
     if ($nImp !== null) {
         $request .= "AND Impaye.numDossierImpaye = :nImp ";
@@ -52,17 +33,16 @@ function getUnpaidsClient($token, $nImp = null, $leftBound = null, $rightBound =
     }
 
     if ($orderby !== null) {
-        if ($orderby == "montantDesc"){
+        if ($orderby == "montantDesc") {
             $orderby = "Transaction.montant desc";
-        }
-        else if ($orderby == "montantAsc"){
+        } else if ($orderby == "montantAsc") {
             $orderby = "Transaction.montant asc";
-        }
-        else if ($orderby == "datevente"){
+        } else if ($orderby == "datevente") {
             $orderby = "Transaction.dateVente desc";
-        }
-        else if ($orderby == "numSiren"){
-            $orderby = "Entreprise.numSiren asc";
+        } else if ($orderby == "dateventeAsc") {
+            $orderby = "Transaction.dateVente asc";
+        } else if ($orderby == "motif") {
+            $orderby = "Impaye.libelleImpaye";
         }
         $request .= "ORDER BY $orderby";
     }
@@ -92,25 +72,26 @@ function getUnpaidsPO($token, $nImp = null, $leftBound = null, $rightBound = nul
 {
     global $cnx;
     if ($nSiren == null && $raisonSociale == null && $nImp == null) {
-        $request = "SELECT Entreprise.numSiren, SUM(Transaction.montant) as \"Somme Impayés\" FROM Impaye
+        $request = "SELECT Entreprise.numSiren, -SUM(Transaction.montant) as \"Somme Impayés\" FROM Impaye
         JOIN Transaction ON Transaction.idTransaction = Impaye.idTransaction
         JOIN Entreprise ON Entreprise.idUtilisateur = Transaction.idUtilisateur
         GROUP BY Entreprise.numSiren 
         ";
         if ($orderby != null) {
-            $request .= "ORDER BY :orderby";
+            if ($orderby == "montantDesc") {
+                $orderby = "SUM(Transaction.montant) desc";
+            } else if ($orderby == "montantAsc") {
+                $orderby = "SUM(Transaction.montant) ASC";
+            } else if ($orderby == "numSiren") {
+                $orderby = "Entreprise.numSiren asc";
+            }
+            $request .= "ORDER BY $orderby";
         }
         $request .= ";";
         $result = $cnx->prepare($request);
-        if ($orderby != null) {
-            if ($orderby == "montant desc") {
-               $orderby = "SUM(Transaction.montant) desc";
-            } 
-            $result->bindParam(":orderby", $orderby);
-        }
     } else {
         $request =
-            "SELECT Entreprise.numSiren as N°SIREN, Transaction.dateVente, IFNULL(Remise.dateRemise,'" . "Pas encore" . "') as dateRemise, ClientFinal.numCarteClient as N°Carte, ClientFinal.reseauClient, Impaye.numDossierImpaye as N°DossierImpaye, Transaction.devise, Transaction.montant, Transaction.sens, Impaye.libelleImpaye FROM Impaye
+            "SELECT Entreprise.numSiren as N°SIREN, Transaction.dateVente, IFNULL(Remise.dateRemise,'" . "Pas encore" . "') as dateRemise, ClientFinal.numCarteClient as N°Carte, ClientFinal.reseauClient, Impaye.numDossierImpaye as N°DossierImpaye, Transaction.devise, -Transaction.montant as montant, Transaction.sens, Impaye.libelleImpaye FROM Impaye
         LEFT JOIN Transaction ON Impaye.idTransaction = Transaction.idTransaction
         LEFT JOIN Utilisateur ON Utilisateur.idUtilisateur = Transaction.idUtilisateur
         LEFT JOIN ClientFinal ON ClientFinal.idClient = Transaction.idClient
@@ -139,7 +120,20 @@ function getUnpaidsPO($token, $nImp = null, $leftBound = null, $rightBound = nul
         }
 
         if ($orderby !== null) {
-            $request .= "ORDER BY :orderby";
+            if ($orderby == "montantDesc") {
+                $orderby = "Transaction.montant desc";
+            } else if ($orderby == "montantAsc") {
+                $orderby = "Transaction.montant ASC";
+            } else if ($orderby == "datevente") {
+                $orderby = "Transaction.dateVente desc";
+            } else if ($orderby == "dateventeAsc") {
+                $orderby = "Transaction.dateVente asc";
+            } else if ($orderby == "numSiren") {
+                $orderby = "Entreprise.numSiren asc";
+            } else if ($orderby == "motif") {
+                $orderby = "Impaye.libelleImpaye";
+            }
+            $request .= "ORDER BY $orderby";
         }
 
         $request .= ";";
@@ -156,10 +150,6 @@ function getUnpaidsPO($token, $nImp = null, $leftBound = null, $rightBound = nul
             $result->bindParam(":rightBound", $rightBound);
         }
 
-        if ($orderby !== null) {
-            $result->bindParam(":orderby", $orderby);
-        }
-
         if ($nSiren !== null) {
             $result->bindParam(":nSiren", $nSiren);
         }
@@ -173,13 +163,6 @@ function getUnpaidsPO($token, $nImp = null, $leftBound = null, $rightBound = nul
     $result = $result->fetchAll();
     return $result;
 }
-
-function outputJson($data)
-{
-    header('Content-Type: application/json');
-    echo json_encode($data);
-}
-
 
 // Pas autorisé ici
 if (empty($_GET) || $_GET['token'] == "null") {
@@ -203,5 +186,3 @@ if ($role == 1) {
     $result = getUnpaidsClient($token, $nImp, $leftBound, $rightBound, $orderby);
 }
 outputJson($result);
-
-

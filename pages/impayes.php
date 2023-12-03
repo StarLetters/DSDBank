@@ -43,7 +43,15 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 </div>
 
                 <div class="form-row align-items-center">
-                    <div class="col-12 col-md-6 d-flex flex-row">
+                    <div class="hidePO col-12" id="date-container">
+                        <label for="choiceDateImp">Dater par:</label>
+                        <select id="choiceDateImp" class="item-selecteur">
+                            <option value="custom" id="dateCustomImp">Dates personnalisés</option>
+                            <option value="4months">Evolution sur 4 mois glissants</option>
+                            <option value="12months">Evolution sur 12 mois glissants</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6 d-flex flex-row" id="selectDate">
                         <div class="col-auto mt-5">
                             <label for="startDate">Date de début :</label>
                             <input type="date" id="startDate" class="form-control form-control-sm date">
@@ -85,9 +93,16 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <div id="order-by-container">
                         <label for="order-by">Trier par:</label>
                         <select id="order-by" class="item-selecteur">
-                            <option value="montantDesc">Montant</option>
-                            <option value="datevente" id="datevente">Date Vente</option>
-                            <option value="numSiren" id="orderSiren">N° SIREN</option>
+                            <option value="montantDesc">Montant décroissant</option>
+                            <option value="montantAsc">Montant croissant</option>
+                            <option value="motif" id="motifImp" class="hidePO">Motif</option>
+                            <option value="datevente" id="datevente" class="hidePO">Plus ancien</option>
+                            <option value="dateventeAsc" id="dateventeAsc" class="hidePO">Plus récent</option>
+                            <?php
+                            if ($role == 1) {
+                                echo "<option value=\"numSiren\" id=\"orderSiren\">N° SIREN</option>";
+                            }
+                            ?>
                         </select>
                     </div>
                 </div>
@@ -96,7 +111,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 </div>
                 <div id="table-container"></div>
                 <nav id="pagination-container"></nav>
-                <div class="row" id="graphics">
+                <div class="hidePO row" id="graphics">
                     <select id="chartType" class="form-control mt-3 slide">
                         <option value="bar">Graphique à Barres</option>
                         <option value="line">Graphique à Courbes</option>
@@ -106,7 +121,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <h3>Somme des impayés par mois</h3>
                         <canvas id="barChart"></canvas>
                         <div class="col-auto mt-3">
-                        <button style="border-radius: 10px;" onclick="exportChartToPDF('barChart', 'graphique_barres')">Exporter en PDF</button></div>
+                            <button style="border-radius: 10px;" onclick="exportChartToPDF('barChart', 'graphique_barres')">Exporter en PDF</button>
+                        </div>
                     </div>
 
                     <div class="col-md-12 mt-5" id="lineChartSection">
@@ -133,9 +149,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 
     <script defer type="module" src="../scripts/graphic.js"></script>
-    <script defer type="module" src="../scripts/tempGraphics.js"></script>
-    <script src="../scripts/button-nav.js"></script>
-    <script defer type="module" src="../scripts/toggleDisplay.js"></script>
+    <script defer type="module" src="../scripts/unpaid.js"></script>
 
     <script src="../scripts/header.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
