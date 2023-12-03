@@ -20,7 +20,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes impayés</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/varColor.css">
@@ -43,7 +44,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 </div>
 
                 <div class="form-row align-items-center">
-                    <div class="hidePO col-12" id="date-container">
+                    <div class="hidePO col-12 col-md-6" id="date-container">
                         <label for="choiceDateImp">Dater par:</label>
                         <select id="choiceDateImp" class="item-selecteur">
                             <option value="custom" id="dateCustomImp">Dates personnalisés</option>
@@ -51,6 +52,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             <option value="12months">Evolution sur 12 mois glissants</option>
                         </select>
                     </div>
+                                </div>
                     <div class="col-12 col-md-6 d-flex flex-row" id="selectDate">
                         <div class="col-auto mt-5">
                             <label for="startDate">Date de début :</label>
@@ -62,25 +64,31 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             <input type="date" id="endDate" class="form-control form-control-sm date">
                         </div>
                     </div>
-                    <div class="col-auto mt-5">
-                        <label for="nImp">N° Dossier Impayés :</label>
-                        <input type="text" id="nImp" class="form-control form-control-sm date">
-                        <?php
-                        if ($role == 1) {
-                            echo "
+
+
+
+                <div class="col-2 mt-4 col-md-6">
+                    <label for="nImp">N° Dossier Impayés :</label>
+                    <input type="text" id="nImp" class="form-control form-control-sm date">
+                    <?php
+                    if ($role == 1) {
+                        echo "
                         <label for=\"nSIREN\">N° SIREN :</label>
                         <input type=\"text\" id=\"nSIREN\" class=\"form-control form-control-sm date\">
                         
                         <label for=\"raisonSociale\">Raison Sociale :</label>
                         <input type=\"text\" id=\"raisonSociale\" class=\"form-control form-control-sm date\">
                         ";
-                        }
-                        ?>
+                    }
+                    ?>
+                <div class="col-12">
+                    <div class="d-flex">
                         <button id="resetButton">Effacer</button>
                         <button id="searchButton">Rechercher</button>
-
                     </div>
                 </div>
+                </div>
+
                 <div class="row align-items-center">
                     <div id="items-per-page-container" class="mx-3">
                         <label for="items-per-page">Éléments par page:</label>
@@ -106,14 +114,13 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </select>
                     </div>
                 </div>
-                <div id="results-container" class="text-right">
-
-                </div>
+                <div id="results-container" class="text-right"></div>
                 <div id="table-container"></div>
-                <button style="border-radius: 10px;" onclick="exportTableToCSV('table-container')">Exporter en CSV</button>
-                <button style="border-radius: 10px;" onclick="exportTableToXLS('table-container')">Exporter en XLS</button>
-
                 <nav id="pagination-container"></nav>
+                <button class="export-csv-button" onclick="exportTableToCSV('table-container')">Exporter en CSV</button>
+                <button class="export-xls-button" onclick="exportTableToXLS('table-container')">Exporter en XLS</button>
+
+
                 <div class="hidePO row" id="graphics">
                     <select id="chartType" class="form-control mt-3 slide">
                         <option value="bar">Graphique à Barres</option>
@@ -121,11 +128,14 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     </select>
 
                     <div class="col-md-12 mt-5" id="barChartSection">
+
                         <h3>Somme des impayés par mois</h3>
                         <canvas id="barChart"></canvas>
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
-                                <button style="border-radius: 10px;" onclick="exportTableToPDF('barChart', 'graphique_barres', 'pdf', 750, 400)">Exporter en PDF</button>
+                                <button class="export-pdf-button"
+                                    onclick="exportTableToPDF('barChart', 'graphique_barres', 'pdf', 750, 400)">Exporter
+                                    en PDF</button>
                             </div>
                         </div>
 
@@ -134,16 +144,20 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             <canvas id="lineChart"></canvas>
                             <div class="col-auto mt-3">
                                 <div class="col-auto mt-3">
-                                    <button style="border-radius: 10px;" onclick="exportTableToPDF('lineChart', 'graphique_courbes', 'pdf', 750, 400)">Exporter en PDF</button>
+                                    <button
+                                        onclick="exportTableToPDF('lineChart', 'graphique_courbes', 'pdf', 750, 400)">Exporter
+                                        en PDF</button>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-12 mt-5">
+                        <div class="col-md-12 mt-5 mb-4">
                             <h3>Motifs d'impayés</h3>
                             <canvas id="pieChart"></canvas>
                             <div class="col-auto mt-3">
-                                <button style="border-radius: 10px;" onclick="exportTableToPDF('pieChart', 'graphique_cam', 'pdf', 750, 400)">Exporter en PDF</button>
+                                <button class="export-pdf-button"
+                                    onclick="exportTableToPDF('pieChart', 'graphique_cam', 'pdf', 750, 400)">Exporter en
+                                    PDF</button>
                             </div>
                         </div>
 

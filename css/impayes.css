@@ -31,3 +31,81 @@ option {
     }
     
 }
+
+#selectDate {
+    margin-top: 5px;
+}
+
+#selectDate label,
+#selectDate input {
+    margin-bottom: 5px;
+}
+
+#selectDate input[type="date"] {
+    width: 100%;
+}
+
+#selectDate .col-auto {
+    flex: 0 0 auto;
+}
+
+#nImp,
+#nSIREN,
+#raisonSociale {
+    margin-bottom: 15px;
+    margin-left: 20px;
+    width: 12.5em;
+}
+
+#resetButton,
+#searchButton {
+    border-radius: 10px;
+    margin-left: 0.5em;
+}
+
+.row.align-items-center {
+    margin-top: 2.5em;
+}
+
+button[onclick^="exportTable"],
+nav#pagination-container {
+    margin-top: 2em;
+    margin-right: 1em;
+}
+
+#pagination-container {
+    display: flex;
+    justify-content: center;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    padding-top: 3em;
+  }
+
+  button.export-pdf-button, button.export-csv-button,
+  button.export-xls-button, button#resetButton,
+  button#searchButton {
+    border-radius: 15px;
+    background-color: var(--couleur-bouton);
+    color: #fff;
+    padding: 2px 6px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid #fff;
+  }
+
+  @media (max-width: 870px) {
+    .form-row {
+      flex-direction: column;
+      height: 10vh;
+      
+    }
+  }
+
+  
