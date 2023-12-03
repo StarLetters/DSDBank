@@ -28,7 +28,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/impayes.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="../scripts/exportPDF.js"></script>
+    <script src="../scripts/exportData.js"></script>
 </head>
 
 <body>
@@ -110,6 +110,9 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
 
                 </div>
                 <div id="table-container"></div>
+                <button style="border-radius: 10px;" onclick="exportTableToCSV('table-container')">Exporter en CSV</button>
+                <button style="border-radius: 10px;" onclick="exportTableToXLS('table-container')">Exporter en XLS</button>
+
                 <nav id="pagination-container"></nav>
                 <div class="hidePO row" id="graphics">
                     <select id="chartType" class="form-control mt-3 slide">
@@ -122,9 +125,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <canvas id="barChart"></canvas>
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
-                                <button style="border-radius: 10px;" onclick="exportData('barChart', 'graphique_barres', 'pdf', 750, 400)">Exporter en PDF</button>
-                                <button style="border-radius: 10px;" onclick="exportData('barChart', 'graphique_barres', 'xls', 750, 400)">Exporter en XLS</button>
-                                <button style="border-radius: 10px;" onclick="exportData('barChart', 'graphique_barres', 'csv', 750, 400)">Exporter en CSV</button>
+                                <button style="border-radius: 10px;" onclick="exportTableToPDF('barChart', 'graphique_barres', 'pdf', 750, 400)">Exporter en PDF</button>
                             </div>
                         </div>
 
@@ -133,9 +134,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             <canvas id="lineChart"></canvas>
                             <div class="col-auto mt-3">
                                 <div class="col-auto mt-3">
-                                    <button style="border-radius: 10px;" onclick="exportData('lineChart', 'graphique_courbes', 'pdf', 750, 400)">Exporter en PDF</button>
-                                    <button style="border-radius: 10px;" onclick="exportData('lineChart', 'graphique_courbes', 'xls', 750, 400)">Exporter en XLS</button>
-                                    <button style="border-radius: 10px;" onclick="exportData('lineChart', 'graphique_courbes', 'csv', 750, 400)">Exporter en CSV</button>
+                                    <button style="border-radius: 10px;" onclick="exportTableToPDF('lineChart', 'graphique_courbes', 'pdf', 750, 400)">Exporter en PDF</button>
                                 </div>
                             </div>
                         </div>
@@ -144,9 +143,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             <h3>Motifs d'impayés</h3>
                             <canvas id="pieChart"></canvas>
                             <div class="col-auto mt-3">
-                                <button style="border-radius: 10px;" onclick="exportData('pieChart', 'graphique_cam', 'pdf', 750, 400)">Exporter en PDF</button>
-                                <button style="border-radius: 10px;" onclick="exportData('pieChart', 'graphique_cam', 'xls', 750, 400)">Exporter en XLS</button>
-                                <button style="border-radius: 10px;" onclick="exportData('pieChart', 'graphique_cam', 'csv', 750, 400)">Exporter en CSV</button>
+                                <button style="border-radius: 10px;" onclick="exportTableToPDF('pieChart', 'graphique_cam', 'pdf', 750, 400)">Exporter en PDF</button>
                             </div>
                         </div>
 
