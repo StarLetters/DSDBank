@@ -1,30 +1,26 @@
-import { getUnpaidsForEach } from "./fetchData.js";
-
 let itemsPerPage = 3;
 let currentPage = 1;
-let startDate = document.getElementById("startDate").value;
-let endDate = document.getElementById("endDate").value;
-let order = document.getElementById("order-by").value;
-let data = await getUnpaidsForEach(startDate, endDate, order);
-let nImp = document.getElementById("nImp").value;
+let data;
+
 
 function changeItemsPerPage() {
     const selectElement = document.getElementById('items-per-page');
     itemsPerPage = parseInt(selectElement.value);
 
-    const paginatedData = paginateTable(data, itemsPerPage, currentPage);
+    const paginatedData = paginateTable(data, itemsPerPage);
     createTable(paginatedData);
-    renderPagination(data, itemsPerPage, currentPage);
+    renderPagination(data, itemsPerPage);
+    showResult();
 }
 
-function paginateTable(data, itemsPerPage, currentPage) {
+function paginateTable(data, itemsPerPage) {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const paginatedData = data.slice(startIndex, endIndex);
     return paginatedData;
 }
 
-function renderPagination(data, itemsPerPage, currentPage) {
+function renderPagination(data, itemsPerPage) {
     const paginationContainer = document.getElementById('pagination-container');
     paginationContainer.innerHTML = '';
 
@@ -39,9 +35,10 @@ function renderPagination(data, itemsPerPage, currentPage) {
         }
         button.addEventListener('click', () => {
             currentPage = i;
-            const paginatedData = paginateTable(data, itemsPerPage, currentPage);
+            const paginatedData = paginateTable(data, itemsPerPage);
             createTable(paginatedData);
-            renderPagination(data, itemsPerPage, currentPage);
+            renderPagination(data, itemsPerPage);
+            showResult();
         });
         paginationContainer.appendChild(button);
     }
@@ -49,7 +46,6 @@ function renderPagination(data, itemsPerPage, currentPage) {
 
 
 function createTable(data) {
-
     let tableContainer = document.getElementById('table-container');
     tableContainer.innerHTML = '';
 
@@ -99,36 +95,22 @@ function createTable(data) {
     tableContainer.appendChild(table);
 }
 
-function showResult(){
+function showResult() {
     let result = document.getElementById("results-container");
-    result.innerHTML = "Nombre d'impayés : " + data.length;
+    let nbResult = data.length - (currentPage * itemsPerPage) < 0 ? data.length - (currentPage - 1) * itemsPerPage : itemsPerPage;
+    result.innerHTML = "Affichage de "+ nbResult +" sur "+ data.length+" résultats";
 }
 
-// Fonction pour mettre à jour le tableau et les graphiques
-async function updateTable() {
-    startDate = document.getElementById("startDate").value;
-    endDate = document.getElementById("endDate").value;
-    order = document.getElementById("order-by").value;
-    data = await getUnpaidsForEach(startDate, endDate, order,nImp);
 
-    updateDataTable(data);
-}
 
-async function updateDataTable(data) {
+async function updateDataTable(externdata) {
+    data = externdata 
     showResult();
-    const paginatedData = paginateTable(data, itemsPerPage, currentPage);
+    const paginatedData = paginateTable(data, itemsPerPage);
     createTable(paginatedData);
-    renderPagination(data, itemsPerPage, currentPage);
+    renderPagination(data, itemsPerPage);
 }
 
-async function search() {
-    startDate = document.getElementById("startDate").value;
-    endDate = document.getElementById("endDate").value;
-    order = document.getElementById("order-by").value;
-    nImp = document.getElementById("nImp").value;
-    data = await getUnpaidsForEach(startDate, endDate, order, nImp);
-    console.log(data);
-    updateTable(data);
-}
 
-export { updateTable, changeItemsPerPage, search};
+
+export { updateDataTable, changeItemsPerPage};
