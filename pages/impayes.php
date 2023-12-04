@@ -20,8 +20,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes impayés</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/varColor.css">
@@ -52,18 +51,18 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             <option value="12months">Evolution sur 12 mois glissants</option>
                         </select>
                     </div>
-                                </div>
-                    <div class="col-12 col-md-6 d-flex flex-row" id="selectDate">
-                        <div class="col-auto mt-5">
-                            <label for="startDate">Date de début :</label>
-                            <input type="date" id="startDate" class="form-control form-control-sm date">
-                        </div>
-
-                        <div class="col-auto mt-5">
-                            <label for="endDate">Date de fin :</label>
-                            <input type="date" id="endDate" class="form-control form-control-sm date">
-                        </div>
+                </div>
+                <div class="col-12 col-md-6 d-flex flex-row" id="selectDate">
+                    <div class="col-auto mt-5">
+                        <label for="startDate">Date de début :</label>
+                        <input type="date" id="startDate" class="form-control form-control-sm date">
                     </div>
+
+                    <div class="col-auto mt-5">
+                        <label for="endDate">Date de fin :</label>
+                        <input type="date" id="endDate" class="form-control form-control-sm date">
+                    </div>
+                </div>
 
 
 
@@ -81,12 +80,12 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         ";
                     }
                     ?>
-                <div class="col-12">
-                    <div class="d-flex">
-                        <button id="resetButton">Effacer</button>
-                        <button id="searchButton">Rechercher</button>
+                    <div class="col-12">
+                        <div class="d-flex">
+                            <button id="resetButton">Effacer</button>
+                            <button id="searchButton">Rechercher</button>
+                        </div>
                     </div>
-                </div>
                 </div>
 
                 <div class="row align-items-center">
@@ -133,52 +132,50 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <canvas id="barChart"></canvas>
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
-                                <button class="export-pdf-button"
-                                    onclick="exportTableToPDF('barChart', 'graphique_barres', 'pdf', 750, 400)">Exporter
+                                <button class="export-pdf-button" onclick="exportTableToPDF('barChart', 'graphique_barres', 'pdf', 750, 400)">Exporter
                                     en PDF</button>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-12 mt-5" id="lineChartSection">
-                            <h3>Somme des impayés par mois</h3>
-                            <canvas id="lineChart"></canvas>
+                    <div class="col-md-12 mt-5" id="lineChartSection">
+                        <h3>Somme des impayés par mois</h3>
+                        <canvas id="lineChart"></canvas>
+                        <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
-                                <div class="col-auto mt-3">
-                                    <button
-                                        onclick="exportTableToPDF('lineChart', 'graphique_courbes', 'pdf', 750, 400)">Exporter
-                                        en PDF</button>
-                                </div>
+                                <button onclick="exportTableToPDF('lineChart', 'graphique_courbes', 'pdf', 750, 400)">Exporter
+                                    en PDF</button>
                             </div>
                         </div>
-
-                        <div class="col-md-12 mt-5 mb-4">
-                            <h3>Motifs d'impayés</h3>
-                            <canvas id="pieChart"></canvas>
-                            <div class="col-auto mt-3">
-                                <button class="export-pdf-button"
-                                    onclick="exportTableToPDF('pieChart', 'graphique_cam', 'pdf', 750, 400)">Exporter en
-                                    PDF</button>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
+                    <div class="col-md-12 mt-5 mb-4">
+                        <h3>Motifs d'impayés</h3>
+                        <canvas id="pieChart"></canvas>
+                        <div class="col-auto mt-3">
+                            <button class="export-pdf-button" onclick="exportTableToPDF('pieChart', 'graphique_cam', 'pdf', 750, 400)">Exporter en
+                                PDF</button>
+                        </div>
+                    </div>
 
-                <?php include('../includes/footer.html'); ?>
-
+                </div>
             </div>
+
+            <?php include('../includes/footer.html'); ?>
+
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 
-        <script defer type="module" src="../scripts/graphic.js"></script>
-        <script defer type="module" src="../scripts/unpaid.js"></script>
+    <script defer type="module" src="../scripts/graphic.js"></script>
+    <script defer type="module" src="../scripts/unpaid.js"></script>
 
-        <script src="../scripts/header.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-        <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+    <script src="../scripts/header.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 </body>
 
 </html>
