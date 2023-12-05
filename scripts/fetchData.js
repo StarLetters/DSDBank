@@ -190,9 +190,9 @@ function getDiscount() {
     if (getCookie("cnxToken") === null) {
         document.location.href = "../index.html";
     }
-    let nS = (document.getElementById("nSIREN") && document.getElementById("nSIREN").value != "") ? '&nSIREN=' + document.getElementById("nSIREN").value : "";
+    let nR = (document.getElementById("nRemise") && document.getElementById("nRemise").value != "") ? '&nRemise=' + document.getElementById("nRemise").value : "";
 
-    return fetch('../api/discountForEach.php?token=' + getCookie("cnxToken") + nS, {
+    return fetch('../api/discountForEach.php?token=' + getCookie("cnxToken") + nR, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

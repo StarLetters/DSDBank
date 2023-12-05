@@ -3,14 +3,14 @@ include('../backend/cnx.php');
 
 include('../api/utilities.php');
 
-function getDiscount($token, $numSiren)
+function getDiscount($token, $numRemise)
 {
     global $cnx;
     $request = "SELECT 
     Entreprise.numSiren AS `N°SIREN`, 
     Entreprise.raisonSociale AS `Raison sociale`,
     Transaction.numRemise AS `N°Remise`,
-    Remise.dateRemise AS `Date de traitement`,
+    dateRemise AS `Date de traitement`,
     COUNT(*) AS `Nombre de remises`,
     Transaction.devise,
     SUM(
@@ -33,18 +33,18 @@ function getDiscount($token, $numSiren)
             AND uti.email = tok.email
             AND tok.token = :token)";
     }
-    else if ($numSiren !== null) {
-        $request .= " WHERE Entreprise.numSiren = :numSiren";
+    else if ($numRemise !== null) {
+        $request .= " WHERE Transaction.numRemise = :numRemise";
     }
     $request .=" GROUP BY 
-    Entreprise.numSiren, Entreprise.raisonSociale, Transaction.devise, Transaction.numRemise, Remise.dateRemise";
+    Entreprise.numSiren, Entreprise.raisonSociale, Transaction.devise, Transaction.numRemise, dateRemise";
     $request .= " ORDER BY CONVERT(Transaction.numRemise, INTEGER) asc;";
     $result = $cnx->prepare($request);
     if ($token !== null) {
         $result->bindParam(":token", $token);
     }
-    else if ($numSiren !== null) {
-        $result->bindParam(":numSiren", $numSiren);
+    else if ($numRemise !== null) {
+        $result->bindParam(":numRemise", $numRemise);
     }
     $result->execute();
     $result = $result->fetchAll();
@@ -60,11 +60,11 @@ if (empty($_GET) || $_GET['token'] == "null") {
 
 $token = htmlspecialchars($_GET['token']);
 $role = verifRole($token);
-$numSiren = null;
+$numRemise = null;
 if ($role == 1){
-    $numSiren = isset($_GET['nSIREN']) ? htmlspecialchars($_GET['nSIREN']) : null;
+    $numRemise = isset($_GET['nRemise']) ? htmlspecialchars($_GET['nRemise']) : null;
     $token = null;
 }
-$result = getDiscount($token, $numSiren);
+$result = getDiscount($token, $numRemise);
 outputJson($result);
 ?>

@@ -3,7 +3,7 @@ import { getDiscount } from "./fetchData.js";
 
 // Constantes pour les éléments HTML réutilisés
 const itemsPerPageElement = document.getElementById("items-per-page");
-const nSIRENElement = document.getElementById("nSIREN");
+const nRemiseElement = document.getElementById("nRemise");
 const resetButtonElement = document.getElementById("resetButton");
 const searchButtonElement = document.getElementById("searchButton");
 
@@ -28,8 +28,8 @@ function addRedClassToLastRowIfNegative() {
 async function addListener(){
 itemsPerPageElement.addEventListener("change", ()=>{changeItemsPerPage(); addRedClassToLastRowIfNegative();});
 searchButtonElement.addEventListener("click", updateTable);
-if (nSIRENElement) {
-    nSIRENElement.addEventListener("keyup", function (event) {
+if (nRemiseElement) {
+    nRemiseElement.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
             event.preventDefault();
             document.getElementById("searchButton").click();
@@ -37,8 +37,8 @@ if (nSIRENElement) {
     });
 }
 resetButtonElement.addEventListener("click", () => {
-    if (nSIRENElement) {
-      nSIRENElement.value = "";
+    if (nRemiseElement) {
+      nRemiseElement.value = "";
     }
 });
 }

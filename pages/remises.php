@@ -46,8 +46,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <?php
                     if ($role == 1) {
                         echo "
-                    <label for=\"nSIREN\">N° SIREN :</label>
-                    <input type=\"text\" id=\"nSIREN\" class=\"form-control form-control-sm date\">
+                    <label for=\"nRemise\">N° Remise :</label>
+                    <input type=\"text\" id=\"nRemise\" class=\"form-control form-control-sm date\">
                     
                     
                     <button id=\"resetButton\">Effacer</button>
