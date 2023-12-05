@@ -185,4 +185,29 @@ function getTreasuryPerMonth(leftBound, rightBound) {
         });
 }
 
-export { getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons, getTreasury, getTreasuryPerMonth};
+function getDiscount() {
+    console.log("Fetching via getDiscount()");
+    if (getCookie("cnxToken") === null) {
+        document.location.href = "../index.html";
+    }
+    let nS = (document.getElementById("nSIREN") && document.getElementById("nSIREN").value != "") ? '&nSIREN=' + document.getElementById("nSIREN").value : "";
+
+    return fetch('../api/discountForEach.php?token=' + getCookie("cnxToken") + nS, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+        .catch(error => {
+            console.error(error);
+            console.log(data);
+        });
+}
+
+export { getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons, getTreasury, getTreasuryPerMonth, getDiscount};
