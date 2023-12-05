@@ -16,4 +16,4 @@ function addRedClassToRowIfNegative(tableRows) {
   }
 }
 
-export { displayElements, addRedClassToRowIfNegative, updateIfChangingPage };
+export { displayElements, addRedClassToRowIfNegative };
