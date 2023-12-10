@@ -1,6 +1,6 @@
-import { updateDataTable, changeItemsPerPage } from "./dataTable.js";
-import { getDiscount } from "./fetchData.js";
-import { addRedClassToRowIfNegative } from "./utilities.js";
+import { changeItemsPerPage, updateDetailedDataTable } from "./dataTable.js";
+import { getDiscount, getDiscountDetails } from "./fetchData.js";
+import { addRedClassToRowIfNegative, displayElements } from "./utilities.js";
 
 // Constantes pour les éléments HTML réutilisés
 const itemsPerPageElement = document.getElementById("items-per-page");
@@ -11,13 +11,15 @@ const searchButtonElement = document.getElementById("searchButton");
 
 // Fonction pour mettre à jour le tableau
 async function updateTable() {
-    updateDataTable(await getDiscount());
+    updateDetailedDataTable(await getDiscount(), await getDiscountDetails());
     addRedClassToRowIfNegative(document.querySelectorAll("#table-container tbody tr"));
 }
 
 // Fonction pour ajouter des écouteurs d'évènements
 async function addListener() {
-    itemsPerPageElement.addEventListener("change", () => { changeItemsPerPage(); addRedClassToRowIfNegative(document.querySelectorAll("#table-container tbody tr")); });
+    itemsPerPageElement.addEventListener("change", () => {
+        changeItemsPerPage();
+        addRedClassToRowIfNegative(document.querySelectorAll("#table-container tbody tr")); });
     searchButtonElement.addEventListener("click", updateTable);
     if (nRemiseElement) {
         nRemiseElement.addEventListener("keyup", function (event) {
@@ -37,7 +39,6 @@ async function addListener() {
 function initializeDiscount() {
     addListener();
     updateTable();
-    updateIfChangingPage();
 }
 
 initializeDiscount();

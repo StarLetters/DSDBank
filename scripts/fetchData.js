@@ -210,4 +210,29 @@ function getDiscount() {
         });
 }
 
-export { getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons, getTreasury, getTreasuryPerMonth, getDiscount};
+function getDiscountDetails() {
+    console.log("Fetching via getDiscountDetails()");
+    if (getCookie("cnxToken") === null) {
+        document.location.href = "../index.html";
+    }
+    let nR = (document.getElementById("nRemise") && document.getElementById("nRemise").value != "") ? '&nRemise=' + document.getElementById("nRemise").value : "";
+
+    return fetch('../api/discountDetails.php?token=' + getCookie("cnxToken") + nR, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+        .catch(error => {
+            console.error(error);
+            console.log(data);
+        });
+}
+
+export { getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons, getTreasury, getTreasuryPerMonth, getDiscount, getDiscountDetails, getDiscountDetailsWithDiscountNumber};

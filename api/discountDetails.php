@@ -3,28 +3,24 @@ include('../backend/cnx.php');
 
 include('../api/utilities.php');
 
-function getDiscount($token, $numRemise)
+function getDiscountDetails($token, $numRemise)
 {
     global $cnx;
     $request = "SELECT 
-    Entreprise.numSiren AS `N° SIREN`, 
-    Entreprise.raisonSociale AS `Raison sociale`,
-    Transaction.numRemise AS `N° Remise`,
-    dateRemise AS `Date de traitement`,
-    COUNT(*) AS `Nombre de remises`,
-    Transaction.devise,
-    SUM(
-      CASE 
-        WHEN Transaction.sens = '-' THEN -Transaction.montant
-        ELSE Transaction.montant
-      END
-    ) AS `Montant total`
+    Entreprise.numSiren AS `N°SIREN`, 
+    Transaction.dateVente AS `Date de vente`,
+    ClientFinal.numCarteClient AS `N° Carte`,
+    ClientFinal.reseauClient AS `Réseau`,
+    Transaction.numAutorisation AS `N° autorisation`,
+    Transaction.devise AS `Devise`,
+    Transaction.montant AS `Montant`,
+    Transaction.sens AS `Sens`
   FROM 
     Transaction 
   JOIN 
     Entreprise ON Entreprise.idUtilisateur = Transaction.idUtilisateur
   JOIN
-    Remise ON Remise.numRemise = Transaction.numRemise";
+    ClientFinal ON ClientFinal.idClient = Transaction.idClient";
     if ($token !== null) {
         $request .= " WHERE Transaction.idUtilisateur IN (
             SELECT DISTINCT tra.idUtilisateur
@@ -36,9 +32,7 @@ function getDiscount($token, $numRemise)
     else if ($numRemise !== null) {
         $request .= " WHERE Transaction.numRemise = :numRemise";
     }
-    $request .=" GROUP BY 
-    Entreprise.numSiren, Entreprise.raisonSociale, Transaction.devise, Transaction.numRemise, dateRemise";
-    $request .= " ORDER BY CONVERT(Transaction.numRemise, INTEGER) asc;";
+    $request .= " ORDER BY Transaction.dateVente asc;";
     $result = $cnx->prepare($request);
     if ($token !== null) {
         $result->bindParam(":token", $token);
@@ -50,7 +44,6 @@ function getDiscount($token, $numRemise)
     $result = $result->fetchAll();
     return $result;
 }
-
 
 // Pas autorisé ici
 if (empty($_GET) || $_GET['token'] == "null") {
@@ -65,6 +58,6 @@ if ($role == 1){
     $numRemise = isset($_GET['nRemise']) ? htmlspecialchars($_GET['nRemise']) : null;
     $token = null;
 }
-$result = getDiscount($token, $numRemise);
+$result = getDiscountDetails($token, $numRemise);
 outputJson($result);
 ?>
