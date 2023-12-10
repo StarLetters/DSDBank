@@ -7,7 +7,7 @@ body {
     padding: 0;
     background-color: var(--couleur-fond-sombre); 
     font-family: "Josefin Sans", sans-serif;
-
+    max-width: 100vw;
 }
 
 /* Styles CSS pour la section profil */
@@ -324,14 +324,3 @@ hr {
     
     
 }
-
-
-/* Footer avec position fixe en bas */
-/* footer {
-    background-color: var(--couleur-fond);
-    color: white;
-    padding: 5px 0;
-    width: 100%;
-    bottom: 0; 
-    
-} */

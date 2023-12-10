@@ -26,23 +26,34 @@ function renderPagination(data, itemsPerPage) {
 
     const totalPages = Math.ceil(data.length / itemsPerPage);
 
-    for (let i = 1; i <= totalPages; i++) {
-        const button = document.createElement('button');
-        button.textContent = i;
-        button.classList.add('pagination-button');
-        if (i === currentPage) {
-            button.disabled = true;
+        // Ajoute des boutons numérotés avec flèches
+        for (let i = 1; i <= totalPages; i++) {
+            const button = document.createElement('button');
+
+            if (i === 1) {
+                button.innerHTML = '&larr;'; // Flèche gauche pour le premier bouton
+            } else if (i === totalPages) {
+                button.innerHTML = '&rarr;'; // Flèche droite pour le dernier bouton
+            } else {
+                button.textContent = i;
+            }
+
+            button.classList.add('pagination-button');
+            if (i === currentPage) {
+                button.disabled = true;
+            }
+            button.addEventListener('click', () => {
+                currentPage = i;
+                const paginatedData = paginateTable(data, itemsPerPage);
+                createTable(paginatedData);
+                renderPagination(data, itemsPerPage);
+                showResult();
+            });
+            paginationContainer.appendChild(button);
         }
-        button.addEventListener('click', () => {
-            currentPage = i;
-            const paginatedData = paginateTable(data, itemsPerPage);
-            createTable(paginatedData);
-            renderPagination(data, itemsPerPage);
-            showResult();
-        });
-        paginationContainer.appendChild(button);
-    }
+
 }
+
 
 
 function createTable(data) {
@@ -79,8 +90,18 @@ function createTable(data) {
         Object.entries(item).forEach(([key, value]) => {
             if (!/^\d+$/.test(key)) {
                 let cell = document.createElement('td');
+
+                // Ajoute une classe en fonction du montant
+                if (key === 'montant') {
+                    if (parseFloat(value) > 0) {
+                        cell.classList.add('positive-amount');
+                    } else if (parseFloat(value) < 0) {
+                        cell.classList.add('negative-amount');
+                    }
+                }
+
                 cell.textContent = value;
-                cell.setAttribute('data-label', key); // Ajouter l'attribut data-th pour la correspondance avec les en-têtes de colonnes
+                cell.setAttribute('data-label', key); // Ajoute l'attribut data-th pour la correspondance avec les en-têtes de colonnes
                 row.appendChild(cell);
             }
         });
@@ -90,10 +111,10 @@ function createTable(data) {
 
     table.appendChild(tbody);
 
-    // Ajouter le tableau au document
-
+    // Ajoute le tableau au document
     tableContainer.appendChild(table);
 }
+
 
 function showResult() {
     let result = document.getElementById("results-container");

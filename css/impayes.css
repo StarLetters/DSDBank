@@ -1,7 +1,7 @@
 .slide, .date, .btn-export {
-    background-color: var(--couleur-bouton);
-    color: var(--couleur-text);
-    border: 1px solid var(--couleur-text);
+    background-color: var(--couleur-violet-bouton);
+    color: var(--couleur-fond-sombre);
+    border: 1px solid var(--couleur-violet-bouton);
     border-radius: 10px;
     padding: 10px 15px;
     font-size: 0.8rem;
@@ -9,13 +9,26 @@
 }
 
 .slide {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
 }
 
 option {
     background-color: var(--couleur-fond);
     color: var(--couleur-text);
 }
+
+ .chart {
+    display: block;
+    width: 90%;
+    height: 80%;
+    margin-left: 5%;
+}
+
+.h3, h3 {
+    font-size: 1.75rem;
+    margin-left: 5%;
+  }
 
 #wrapper{
     color: var(--couleur-text);
@@ -32,8 +45,14 @@ option {
     
 }
 
+.form-row > .col, .form-row > [class*="col-"] {
+    padding-right: 5px;
+    padding-left: 5%;
+  }
+
 #selectDate {
     margin-top: 5px;
+    margin-left: 2%;
 }
 
 #selectDate label,
@@ -53,8 +72,8 @@ option {
 #nSIREN,
 #raisonSociale {
     margin-bottom: 15px;
-    margin-left: 20px;
-    width: 12.5em;
+    margin-left: 40px;
+    width: 14em;
 }
 
 #resetButton,
@@ -65,6 +84,7 @@ option {
 
 .row.align-items-center {
     margin-top: 2.5em;
+    margin-left: 4%;
 }
 
 button[onclick^="exportTable"],
@@ -88,16 +108,40 @@ nav#pagination-container {
     padding-top: 3em;
   }
 
-  button.export-pdf-button, button.export-csv-button,
-  button.export-xls-button, button#resetButton,
-  button#searchButton {
+  button.export-button {
     border-radius: 15px;
-    background-color: var(--couleur-bouton);
-    color: #fff;
+    background-color: var(--couleur-violet-bouton);
+    color: var(--couleur-fond-sombre);
     padding: 2px 6px;
     border: none;
     cursor: pointer;
-    border: 1px solid #fff;
+    border: 1px solid var(--couleur-violet-bouton);
+    margin-left: 5%;
+  }
+
+  select {
+    word-wrap: normal;
+    border-radius: 15px;
+    background-color: var(--couleur-violet-bouton);
+    color: var(--couleur-fond-sombre);
+    padding: 2px 6px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid var(--couleur-violet-bouton);
+    margin-left: 6%;
+    margin-bottom: 2%;
+  }
+
+  button.export-pdf-button, button#resetButton,
+  button#searchButton {
+    border-radius: 15px;
+    background-color: var(--couleur-violet-bouton);
+    color: var(--couleur-fond-sombre);
+    padding: 2px 6px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid var(--couleur-violet-bouton);
+    margin-left: 5%;
   }
 
   @media (max-width: 870px) {

@@ -88,6 +88,17 @@ function exportTableToXLS(data) {
     updateDataTable(data);
 }
 
+function exportTable() {
+    var selectElement = document.getElementById("export-select");
+    var selectedValue = selectElement.value;
+    
+    if (selectedValue === "csv") {
+      exportTableToCSV('table-container');
+    } else if (selectedValue === "xls") {
+      exportTableToXLS('table-container');
+    }
+  }
+
 const exportButton = document.getElementById('export-button');
 exportButton.addEventListener('click', () => {
     exportTableToCSV(data);
