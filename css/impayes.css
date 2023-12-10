@@ -142,7 +142,7 @@ nav#pagination-container {
     cursor: pointer;
     border: 1px solid var(--couleur-violet-bouton);
     margin-left: 5%;
-    margin-top: 10px;
+    margin-top: 2%;
   }
 
   @media (max-width: 870px) {
@@ -154,7 +154,7 @@ nav#pagination-container {
   }
 
 
-  @media (min-width: 768px) {
+  @media (max-width: 768px) {
     .col-md-6 {
       -ms-flex: 0 0 50%;
       flex: 0 0 50%;
@@ -163,7 +163,7 @@ nav#pagination-container {
 
     button.export-pdf-button, button#resetButton,
     button#searchButton {
-      margin-top: 10px;
+      margin-top: 0px;
     }
   }
   
