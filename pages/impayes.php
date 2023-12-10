@@ -121,12 +121,12 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 </div>
                 <div class="row">
                     <select id="export-select">
-                        <option value="csv" onclick="exportTable()">Exporter en CSV</option>
-                        <option value="xls" onclick="exportTable()">Exporter en XLS</option>
+                        <option value="csv">Exporter en CSV</option>
+                        <option value="xls">Exporter en XLS</option>
                     </select>
                     <div id="results-container" class="col-9 text-right"></div>
                 </div>
-                <!-- <button class="export-button" >Exporter</button> -->
+                <button class="export-button" onclick="exportTable()">Exporter</button>
                 <div id="table-container"></div>
                 <nav id="pagination-container"></nav>
 
