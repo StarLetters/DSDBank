@@ -142,7 +142,6 @@ nav#pagination-container {
     cursor: pointer;
     border: 1px solid var(--couleur-violet-bouton);
     margin-left: 5%;
-    margin-top: 2%;
   }
 
   @media (max-width: 870px) {

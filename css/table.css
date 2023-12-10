@@ -19,17 +19,12 @@ table tr {
 }
 
 
-.positive-amount,
-.negative-amount {
-    background-color: green; 
-    color: white;
-    border-radius: 35px;
-    padding: 5px 10px; 
-    background-size: 20px 20px cover;
+.positive-amount {
+  color: green;
 }
 
 .negative-amount {
-    background-color: red;
+    color: red;
 }
 
 #pagination-container {
@@ -38,6 +33,7 @@ table tr {
   align-items: center;
   margin-top: 20px;
 }
+
 
 .pagination-button {
   list-style: none;
