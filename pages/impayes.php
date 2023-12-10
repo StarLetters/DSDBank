@@ -57,8 +57,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 </div>
 
 
-
-                <div class="col-12 col-md-12 d-flex flex-row">
+                <div class="col-12 col-md-12 d-flex flex-column">
                     <div class="col-12 col-md-6 d-flex flex-row" id="selectDate">
                         <div class="col-auto mt-5">
                             <label for="startDate">Date de début :</label>
@@ -71,18 +70,18 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </div>
                     </div>
 
-                    <div class="col-2 mt-5 col-md-6">
+                    <div class="col-2 mt-5 col-md-6" id="numImp">
                         <label for="nImp">N° Dossier Impayés :</label>
                         <input type="text" id="nImp" class="form-control form-control-sm date">
                         <?php
                         if ($role == 1) {
                             echo "
-                        <label for=\"nSIREN\">N° SIREN :</label>
-                        <input type=\"text\" id=\"nSIREN\" class=\"form-control form-control-sm date\">
-                        
-                        <label for=\"raisonSociale\">Raison Sociale :</label>
-                        <input type=\"text\" id=\"raisonSociale\" class=\"form-control form-control-sm date\">
-                        ";
+        <label for=\"nSIREN\">N° SIREN :</label>
+        <input type=\"text\" id=\"nSIREN\" class=\"form-control form-control-sm date\">
+        
+        <label for=\"raisonSociale\">Raison Sociale :</label>
+        <input type=\"text\" id=\"raisonSociale\" class=\"form-control form-control-sm date\">
+        ";
                         }
                         ?>
                         <div class="col-12">
@@ -93,6 +92,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </div>
                     </div>
                 </div>
+
 
 
                 <div class="row align-items-center">

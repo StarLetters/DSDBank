@@ -50,7 +50,7 @@ option {
     padding-left: 5%;
   }
 
-#selectDate {
+#selectDate, #numImp {
     margin-top: 5px;
     margin-left: 2%;
 }
@@ -166,9 +166,5 @@ nav#pagination-container {
       margin-top: 0px;
     }
 
-    .fl {
-        display: flex;
-        flex-direction: column;
-      }
   }
   
