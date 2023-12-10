@@ -106,9 +106,11 @@ nav#pagination-container {
     margin-right: -15px;
     margin-left: -15px;
     padding-top: 3em;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  button.export-button {
+  button.export-button, #export-select {
     border-radius: 15px;
     background-color: var(--couleur-violet-bouton);
     color: var(--couleur-fond-sombre);
