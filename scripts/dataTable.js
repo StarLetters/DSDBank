@@ -133,56 +133,65 @@ function createDetailedTable(principalData, detailedData) {
                 let cell = document.createElement('td');
                 cell.textContent = value;
                 cell.setAttribute('data-label', key); // Ajouter l'attribut data-th pour la correspondance avec les en-têtes de colonnes
+                if (key === 2) {
+                    cell.setAttribute('id', 'discount-number');
+                }
                 row.appendChild(cell);
             }
         });
-        
+        row.addEventListener("click", () => {
+            details = true;
+            createDetailedTable(principalData, detailedData);
+        });
         tbody.appendChild(row);
 
-        
-        let secondRow = document.createElement('tr');
-        let tableCell = document.createElement('td');
-        tableCell.setAttribute('colspan', '7');
-        
-        // Créer un tableau HTML détaillé
-        let detailedTable = document.createElement('table', 'detailed-table');
+        if (details) {
+            let secondRow = document.createElement('tr');
+            let tableCell = document.createElement('td');
+            tableCell.setAttribute('colspan', '7');
+            
+            // Créer un tableau HTML détaillé
+            let detailedTable = document.createElement('table', 'detailed-table');
 
-        // Créer l'en-tête du tableau détaillé
-        let detailedThead = document.createElement('thead');
-        let detailedHeaderRow = document.createElement('tr');
+            // Créer l'en-tête du tableau détaillé
+            let detailedThead = document.createElement('thead');
+            let detailedHeaderRow = document.createElement('tr');
 
-        Object.keys(detailedData[0]).forEach(key => {
-            if (!/^\d+$/.test(key)) {
-                let th = document.createElement('th');
-                th.textContent = key.toString();
-                detailedHeaderRow.appendChild(th);
-            }
-        });
-        detailedThead.appendChild(detailedHeaderRow);
-        detailedTable.appendChild(detailedThead);
-
-        // Créer le corps du tableau détaillé
-        let detailedTbody = document.createElement('tbody');
-
-        // Parcourir les données JSON et créer les lignes du tableau détaillé
-        detailedData.forEach(detailedItem => {
-            let detailedRow = document.createElement('tr');
-
-            Object.entries(detailedItem).forEach(([key, value]) => {
+            Object.keys(detailedData[0]).forEach(key => {
                 if (!/^\d+$/.test(key)) {
-                    let cell = document.createElement('td');
-                    cell.textContent = value;
-                    cell.setAttribute('data-label', key); // Ajouter l'attribut data-th pour la correspondance avec les en-têtes de colonnes
-                    detailedRow.appendChild(cell);
+                    let th = document.createElement('th');
+                    th.textContent = key.toString(); // Convertir la clé en chaîne de caractères
+                    detailedHeaderRow.appendChild(th);
                 }
             });
-            
-            detailedTbody.appendChild(detailedRow);
-            detailedTable.appendChild(detailedTbody);
-        });
-        tableCell.appendChild(detailedTable);
-        secondRow.appendChild(tableCell);
-        tbody.appendChild(secondRow);
+            detailedThead.appendChild(detailedHeaderRow);
+            detailedTable.appendChild(detailedThead);
+
+            // Créer le corps du tableau détaillé
+            let detailedTbody = document.createElement('tbody');
+
+            detailedData = getDiscountDetailsWithDiscountNumber(document.getElementById('discount-number').value);
+
+            // Parcourir les données JSON et créer les lignes du tableau détaillé
+            detailedData.forEach(detailedItem => {
+                let detailedRow = document.createElement('tr');
+
+                Object.entries(detailedItem).forEach(([key, value]) => {
+                    if (!/^\d+$/.test(key)) {
+                        let cell = document.createElement('td');
+                        cell.textContent = value;
+                        cell.setAttribute('data-label', key); // Ajouter l'attribut data-th pour la correspondance avec les en-têtes de colonnes
+                        detailedRow.appendChild(cell);
+                    }
+                });
+                
+                detailedTbody.appendChild(detailedRow);
+                detailedTable.appendChild(detailedTbody);
+            });
+            tableCell.appendChild(detailedTable);
+            secondRow.appendChild(tableCell);
+            tbody.appendChild(secondRow);
+        }
     });
 
     table.appendChild(tbody);
