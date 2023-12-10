@@ -165,5 +165,10 @@ nav#pagination-container {
     button#searchButton {
       margin-top: 0px;
     }
+
+    .fl {
+        display: flex;
+        flex-direction: column;
+      }
   }
   

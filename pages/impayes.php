@@ -38,21 +38,25 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
             <?php include('../includes/header.php'); ?>
             <div class="col-12">
                 <div class="row mb-5">
-                    <div class="col-md-12">
-                        <h1 class="mt-5 text-center">Mes impayés</h1>
+                    <div class="col-12 col-md-12 text-center mt-5">
+                        <h1 class="mt-4">Mes impayés</h1>
                     </div>
                 </div>
 
+
                 <div class="form-row align-items-center">
-                    <div class="hidePO col-12 col-md-6" id="date-container">
-                        <label for="choiceDateImp">Dater par:</label>
-                        <select id="choiceDateImp" class="item-selecteur">
-                            <option value="custom" id="dateCustomImp">Dates personnalisés</option>
-                            <option value="4months">Evolution sur 4 mois glissants</option>
-                            <option value="12months">Evolution sur 12 mois glissants</option>
-                        </select>
+                    <div class="col-12 col-md-6 mx-auto">
+                        <div class="hidePO text-center" id="date-container">
+                            <label for="choiceDateImp">Dater par : </label>
+                            <select id="choiceDateImp" class="item-selecteur">
+                                <option value="custom" id="dateCustomImp">Dates personnalisées</option>
+                                <option value="4months">Évolution sur 4 mois glissants</option>
+                                <option value="12months">Évolution sur 12 mois glissants</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
+
 
 
                 <div class="col-12 col-md-12 d-flex flex-row">
