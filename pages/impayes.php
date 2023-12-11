@@ -58,7 +58,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
 
 
 
-                <div class="col-12 col-md-12 d-flex flex-row">
+                <div class="col-12 col-md-12 d-flex flex-row impayes-po">
                     <div class="col-12 col-md-6 d-flex flex-row" id="selectDate">
                         <div class="col-auto mt-5">
                             <label for="startDate">Date de début :</label>
@@ -72,8 +72,9 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     </div>
 
                     <div class="col-2 mt-5 col-md-6">
+                        <div class="d-flex flex-column">
                         <label for="nImp">N° Dossier Impayés :</label>
-                        <div class="d-flex">
+                        <div class="d-flex flex-column">
                             <input type="text" id="nImp" class="form-control form-control-sm date">
                             <?php
                             if ($role == 1) {
@@ -86,8 +87,11 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
             ";
                             }
                             ?>
+                            <div class="d-flex flex-row">
                             <button id="resetButton" class="align-self-center">Effacer</button>
                             <button id="searchButton" class="align-self-center">Rechercher</button>
+                            </div>
+                            </div>
                         </div>
                     </div>
 
