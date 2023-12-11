@@ -116,7 +116,7 @@ body {
     text-decoration: none;
     color: #fff;
     opacity: 100%;
-    background: var(--couleur-hover);
+    background: var(--couleur-violet-bouton);
 }
 
 .sidebar-nav>li>a i.fa {
