@@ -249,46 +249,21 @@ hr {
     }
 }
 
+/* Pour les petits écrans, la barre de navigation occupe toute la largeur */
 @media (max-width: 767px) {
-    #wrapper {
-        padding-left: 0;
-    }
 
-    #sidebar-wrapper {
-        width: 0;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
+    
+    #navbar-wrapper.active {
+        max-width: 400px;
         width: 100%;
     }
 
-    #wrapper.toggled #navbar-wrapper {
-        position: absolute;
-        margin-right: -250px;
+    #content-wrapper.active {
+        margin-right: 0;
     }
 
-    #wrapper.toggled #content-wrapper {
-        position: absolute;
-        margin-right: -250px;
-    }
-
-    #navbar-wrapper {
-        position: relative;
-    }
-
-    #wrapper.toggled {
-        padding-left: 0;
-    }
-
-    #content-wrapper {
-        position: relative;
-        top: 0;
-    }
-
-    #wrapper.toggled #navbar-wrapper,
-    #wrapper.toggled #content-wrapper {
-        position: relative;
-        margin-right: 250px;
+    #navbar-wrapper.active #close-navbar {
+        display: block;
     }
 
     .sidebar-nav {
@@ -298,32 +273,23 @@ hr {
         padding: 0;
         list-style: none;
         text-align: center;
-      }
+    }
 
-
-      
-      #close-navbar {
+    #close-navbar {
         display: none;
         position: absolute;
         top: 10px;
         right: 10px;
         cursor: pointer;
         font-size: 20px;
-        z-index: 2; /* Valeur de z-index élevée pour garantir que la croix est au-dessus des autres éléments */
+        z-index: 2;
     }
-    
+
     #close-navbar:before {
-        content: "\00D7"; /* Utilisez le caractère '✖' pour une croix stylisée */
+        content: "\00D7";
     }
-    
-    /* Styles pour l'effet de survol */
+
     #close-navbar:hover {
-        color: red; /* Couleur de survol de la croix */
+        color: red;
     }
-    
-    #wrapper.toggled #close-navbar {
-        display: block;
-    }
-    
-    
 }
