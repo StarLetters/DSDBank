@@ -89,9 +89,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <button class="export-pdf-button" onclick="exportTableToPDF('lineChart', 'graphique_courbes', 'pdf', 750, 400)">Exporter en PDF</button>
                     </div>
                 </div>
-                <?php include('../includes/footer.html'); ?>
-
             </div>
+            <?php include('../includes/footer.html'); ?>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 

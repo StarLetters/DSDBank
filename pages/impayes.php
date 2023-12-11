@@ -23,6 +23,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/varColor.css">
     <link rel="stylesheet" href="../css/table.css">
@@ -188,9 +189,10 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 </div>
 
             </div>
+            <?php include('../includes/footer.html'); ?>
         </div>
 
-        <?php include('../includes/footer.html'); ?>
+
 
     </div>
     </div>
