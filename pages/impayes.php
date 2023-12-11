@@ -103,7 +103,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             <option value="10">10</option>
                         </select>
                     </div>
-                    <div id="order-by-container">
+                    <div id="order-by-container" class="order-by">
                         <label for="order-by">Trier par:</label>
                         <select id="order-by" class="item-selecteur">
                             <option value="montantDesc">Montant décroissant</option>
@@ -118,16 +118,23 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             ?>
                         </select>
                     </div>
+
                 </div>
-                <div class="row">
-                    <select id="export-select">
-                        <option value="csv">Exporter en CSV</option>
-                        <option value="xls">Exporter en XLS</option>
-                    </select>
-                    <div id="results-container" class="col-9 text-right"></div>
+                <div class="col-12 mt-5 d-flex flex-row">
+                    <div class="col-5 mb-5 ml-3">
+                        <select id="export-select">
+                            <option value="csv">Exporter en CSV</option>
+                            <option value="xls">Exporter en XLS</option>
+                        </select>       
+                        <button class="export-button" onclick="exportTable()">Exporter</button>
+                    </div>
+                    <div class="col-7"> 
+                        <div id="results-container" class="text-right"></div>
+                    </div>
                 </div>
-                <button class="export-button" onclick="exportTable()">Exporter</button>
+                
                 <div id="table-container"></div>
+                
                 <nav id="pagination-container"></nav>
 
 

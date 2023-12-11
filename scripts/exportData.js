@@ -97,7 +97,7 @@ function exportTable() {
     } else if (selectedValue === "xls") {
       exportTableToXLS('table-container');
     }
-  }
+}
 
 const exportButton = document.getElementById('export-button');
 exportButton.addEventListener('click', () => {

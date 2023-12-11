@@ -83,9 +83,20 @@ option {
 }
 
 .row.align-items-center {
-    margin-top: 2.5em;
+    margin-top: 0.5em;
     margin-left: 4%;
 }
+
+.order-by {
+    margin-top: 0.5em;
+    margin-right: 25%;
+}
+
+.text-right {
+    text-align: right !important;
+    margin-right: 10%;
+    padding-top: 7%;
+  }
 
 button[onclick^="exportTable"],
 nav#pagination-container {
@@ -110,11 +121,11 @@ nav#pagination-container {
     justify-content: space-between;
   }
 
-  button.export-button, #export-select {
-    border-radius: 15px;
+  button.export-button {
+    border-radius: 30px;
     background-color: var(--couleur-violet-bouton);
     color: var(--couleur-fond-sombre);
-    padding: 2px 6px;
+    padding: 0px 6px;
     border: none;
     cursor: pointer;
     border: 1px solid var(--couleur-violet-bouton);
@@ -131,7 +142,7 @@ nav#pagination-container {
     cursor: pointer;
     border: 1px solid var(--couleur-violet-bouton);
     margin-left: 6%;
-    margin-bottom: 2%;
+    margin-top: 2%;
   }
 
   button.export-pdf-button, button#resetButton,
