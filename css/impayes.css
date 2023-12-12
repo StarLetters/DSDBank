@@ -1,13 +1,19 @@
-.slide, .date, .btn-export {
+.slide, .date, .btn-export, .nImp {
     background-color: var(--couleur-violet-bouton);
     color: var(--couleur-fond-sombre);
     border: 1px solid var(--couleur-violet-bouton);
     border-radius: 10px;
     padding: 10px 15px;
     font-size: 0.8rem;
-    margin: 10px;
 }
 
+.ct1 {
+    padding-left: 1%;
+}
+
+.ct2 {
+    padding-right: 1%;
+}
 .slide {
     width: 90%;
     margin-left: 5%;
@@ -50,10 +56,9 @@ option {
     padding-left: 5%;
   }
 
-#selectDate, #numImp {
-    margin-top: 5px;
-    margin-left: 2%;
-}
+/* #selectDate, #numImp {
+
+} */
 
 #selectDate label,
 #selectDate input {
@@ -71,9 +76,7 @@ option {
 #nImp,
 #nSIREN,
 #raisonSociale {
-    margin-bottom: 15px;
-    margin-left: 40px;
-    width: 14em;
+    width: 100%;
 }
 
 #resetButton,
@@ -87,15 +90,11 @@ option {
     margin-left: 4%;
 }
 
-.order-by {
-    margin-top: 0.5em;
-    margin-right: 25%;
-}
+/* .order-by {
+} */
 
 .text-right {
     text-align: right !important;
-    margin-right: 10%;
-    padding-top: 7%;
   }
 
 button[onclick^="exportTable"],
@@ -116,7 +115,6 @@ nav#pagination-container {
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
-    padding-top: 3em;
     align-items: center;
     justify-content: space-between;
   }
@@ -129,7 +127,6 @@ nav#pagination-container {
     border: none;
     cursor: pointer;
     border: 1px solid var(--couleur-violet-bouton);
-    margin-left: 5%;
   }
 
   select {
@@ -141,8 +138,7 @@ nav#pagination-container {
     border: none;
     cursor: pointer;
     border: 1px solid var(--couleur-violet-bouton);
-    margin-left: 6%;
-    margin-top: 2%;
+    width: 100%;
   }
 
   button.export-pdf-button, button#resetButton,
@@ -154,7 +150,8 @@ nav#pagination-container {
     border: none;
     cursor: pointer;
     border: 1px solid var(--couleur-violet-bouton);
-    margin-left: 5%;
+    margin-left: 0;
+    margin-right: 5%;
   }
 
   @media (max-width: 870px) {
