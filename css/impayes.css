@@ -176,4 +176,31 @@ nav#pagination-container {
     }
 
   }
+
+
+  @media (max-width: 480px) {
+    .col-sm-6 {
+      -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+      max-width: 73%;
+    }
+
+    .col-sm-4 {
+      -ms-flex: 0 0 33.333333%;
+      flex: 0 0 33.333333%;
+      max-width: 45%;
+    }
+
+    button.export-pdf-button, button#resetButton,
+    button#searchButton {
+      margin-top: 0px;
+    }
+
+    .col-4 {
+        -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+        max-width: 60.333%;
+      }
+
+  }
   
