@@ -6,13 +6,12 @@
     background-color: red!important;
 }
 
-.details {
+.hidden, #details{
     display: none;
 }
 
 #details-close {
     color: red;
-    text-decoration: none;
 }
 
 .details-back {

@@ -185,14 +185,26 @@ function getTreasuryPerMonth(leftBound, rightBound) {
         });
 }
 
-function getDiscount() {
+function getDiscount(email) {
     console.log("Fetching via getDiscount()");
     if (getCookie("cnxToken") === null) {
         document.location.href = "../index.html";
     }
-    let nR = (document.getElementById("nRemise") && document.getElementById("nRemise").value != "") ? '&nRemise=' + document.getElementById("nRemise").value : "";
-
-    return fetch('../api/discountForEach.php?token=' + getCookie("cnxToken") + nR, {
+    let file;
+    let value;
+    if (document.getElementById("nSiren") && document.getElementById("nSiren").value != "") {
+        value = '&nSiren=' + document.getElementById("nSiren").value;
+        file = "discountForEach.php";
+    }
+    else if (email !== null) {
+        value = "&email=" + email;
+        file = "discountFromEmail.php";
+    }
+    else {
+        value = "";
+        file = "discountForEach.php";
+    }
+    return fetch('../api/' + file + '?token=' + getCookie("cnxToken") + value, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

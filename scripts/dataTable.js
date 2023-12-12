@@ -58,7 +58,6 @@ function renderPagination(data, itemsPerPage) {
         });
         paginationContainer.appendChild(button);
     }
-
 }
 
 function createTable(data, tableId) {
