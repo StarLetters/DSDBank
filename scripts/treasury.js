@@ -1,6 +1,7 @@
 import { updateDataTable, changeItemsPerPage } from "./dataTable.js";
 import { getTreasury } from "./fetchData.js";
 import { toggleTreasury } from "./graphic.js";
+import { addRedClassToCellIfNegative } from "./utilities.js";
 
 // Constantes pour les éléments HTML réutilisés
 const itemsPerPageElement = document.getElementById("items-per-page");
@@ -20,17 +21,9 @@ async function updateTable() {
     }else{
         chartTitle.style.display = "none";
     }
-    addRedClassToLastRowIfNegative();
+    addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"));
 }
-function addRedClassToLastRowIfNegative() {
-    const tableRows = document.querySelectorAll("#table-container tbody tr");
-    const lastRow = tableRows[tableRows.length - 1];
-    const lastCellValue = parseFloat(lastRow.lastElementChild.textContent);
 
-    if (lastCellValue < 0) {
-        lastRow.classList.add("red");
-    }
-}
 
 
 // Fonction pour ajouter des écouteurs d'évènements
