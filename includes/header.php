@@ -1,4 +1,3 @@
-
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
         <img src="../data/img/LogoDSD.png" alt="Logo" class="img-fluid">
