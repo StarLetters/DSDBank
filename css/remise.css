@@ -1,0 +1,38 @@
+.red{
+    background-color: rgba(255, 0, 0, 0.609)!important;
+}
+
+.red:hover {
+    background-color: red!important;
+}
+
+.details {
+    display: none;
+}
+
+#details-close {
+    color: red;
+    text-decoration: none;
+}
+
+.details-back {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba( 0, 0, 0, .25 )
+}
+.details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: fixed;
+    max-height: 75%;
+    overflow-y: scroll;
+    top: 50%;
+    left: 50%;
+    padding: 25px;
+    background: var(--couleur-fond-sombre);
+    transform: translate(-50%, -50%); 
+}
