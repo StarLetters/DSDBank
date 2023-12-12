@@ -185,11 +185,21 @@ nav#pagination-container {
       max-width: 73%;
     }
 
+    .col-sm-1 {
+        -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+        max-width: 15%;
+      }
+
     .col-sm-4 {
       -ms-flex: 0 0 33.333333%;
       flex: 0 0 33.333333%;
       max-width: 45%;
     }
+
+    .col-sm-12 {
+        max-width: 100%;
+      }
 
     button.export-pdf-button, button#resetButton,
     button#searchButton {

@@ -45,7 +45,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <div class="col-12 col-md-12 col-lg-6 mx-auto">
                         <div class="hidePO text-center" id="date-container">
                             <label for="choiceDateImp">Dater par : </label>
-                            <select id="choiceDateImp" class="item-selecteur col-5">
+                            <select id="choiceDateImp" class="item-selecteur col-5 col-sm-6">
                                 <option value="custom" id="dateCustomImp">Dates personnalisées</option>
                                 <option value="4months">Évolution sur 4 mois glissants</option>
                                 <option value="12months">Évolution sur 12 mois glissants</option>
@@ -55,22 +55,22 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 </div>
 
                 <div class="row mt-4 ct1">
-                    <div class="col-md-12 col-lg-6"  id="selectDate">
+                    <div class="col-md-12 col-lg-6" id="selectDate">
                         <div class="row">
                             <div class="col-md-12 col-lg-6 mt-2">
                                 <label for="startDate">Date de début :</label>
-                                <input type="date" id="startDate" class="form-control form-control-sm date col-10">
+                                <input type="date" id="startDate" class="form-control form-control-sm date col-12">
                             </div>
                             <div class="col-md-12 col-lg-6 mt-2">
                                 <label for="endDate">Date de fin :</label>
-                                <input type="date" id="endDate" class="form-control form-control-sm date col-10">
+                                <input type="date" id="endDate" class="form-control form-control-sm date col-12">
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-12 col-lg-6">
+                    <div class="col-md-12 col-lg-6 col-sm-12">
                         <label class="mt-5" for="nImp">N° Dossier Impayés :</label>
-                        <input type="text" id="nImp" class="form-control form-control-sm nImp col-8">
+                        <input type="text" id="nImp" class="form-control form-control-sm nImp">
 
                         <div class="d-flex flex-row mt-2">
                             <button id="resetButton" class="align-self-center">Effacer</button>
@@ -84,7 +84,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
 
                 <?php
                 if ($role == 1) {
-                    echo '
+                    echo '            
         <div class="row">
                     <div class="col-12">
             <div class="col-md-6 col-6 mt-2">
@@ -105,7 +105,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 <div class="row mt-5 ct1">
                     <div id="items-per-page-container" class="col-md-12 col-lg-6">
                         <label for="items-per-page">Éléments par page:</label>
-                        <select id="items-per-page" class="item-selecteur col-1">
+                        <select id="items-per-page" class="item-selecteur col-1 col-sm-1">
                             <option value="3">3</option>
                             <option value="5">5</option>
                             <option value="10">10</option>
