@@ -139,7 +139,7 @@ function createTableWithDetails(data) {
         });
 
         // Créer le tableau des détails de la remise sur un pop up
-        row.addEventListener("click", async () => {
+        row.addEventListener('click', async () => {
             nRemise = row.getAttribute('id');
             document.getElementById('details').style.display = 'block';
             createTable(await getDiscountDetails(nRemise), 'detailed-table-container');
