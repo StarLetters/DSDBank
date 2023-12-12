@@ -185,4 +185,56 @@ function getTreasuryPerMonth(leftBound, rightBound) {
         });
 }
 
-export { getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons, getTreasury, getTreasuryPerMonth};
+function getDiscount() {
+    console.log("Fetching via getDiscount()");
+    if (getCookie("cnxToken") === null) {
+        document.location.href = "../index.html";
+    }
+    let nR = (document.getElementById("nRemise") && document.getElementById("nRemise").value != "") ? '&nRemise=' + document.getElementById("nRemise").value : "";
+
+    return fetch('../api/discountForEach.php?token=' + getCookie("cnxToken") + nR, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+        .catch(error => {
+            console.error(error);
+            console.log(data);
+        });
+}
+
+function getDiscountDetails(nRemise) {
+    console.log("Fetching via getDiscountDetails()");
+    if (getCookie("cnxToken") === null) {
+        document.location.href = "../index.html";
+    }
+    let nR = "";
+    if (nRemise !== null) {
+        nR = '&nRemise=' + nRemise;
+    }
+    return fetch('../api/discountDetails.php?token=' + getCookie("cnxToken") + nR, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+        .catch(error => {
+            console.error(error);
+            console.log(data);
+        });
+}
+
+export { getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons, getTreasury, getTreasuryPerMonth, getDiscount, getDiscountDetails };
