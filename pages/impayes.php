@@ -23,13 +23,11 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/varColor.css">
     <link rel="stylesheet" href="../css/table.css">
     <link rel="stylesheet" href="../css/impayes.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="../scripts/exportData.js"></script>
 </head>
 
 <body>
@@ -57,7 +55,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 </div>
 
                 <div class="row mt-4 ct1">
-                    <div class="col-md-12 col-lg-6">
+                    <div class="col-md-12 col-lg-6"  id="selectDate">
                         <div class="row">
                             <div class="col-md-12 col-lg-6 mt-2">
                                 <label for="startDate">Date de début :</label>
@@ -207,6 +205,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
 
     <script defer type="module" src="../scripts/graphic.js"></script>
     <script defer type="module" src="../scripts/unpaid.js"></script>
+    <script src="../scripts/exportData.js"></script>
 
     <script src="../scripts/header.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
