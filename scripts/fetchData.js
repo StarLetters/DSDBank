@@ -216,10 +216,7 @@ function getDiscountDetails(nRemise) {
         document.location.href = "../index.html";
     }
     let nR = "";
-    if (nRemise === null && document.getElementById("nRemise") && document.getElementById("nRemise").value != "") {
-        nR = '&nRemise=' + document.getElementById("nRemise").value;
-    }
-    else if (nRemise !== null) {
+    if (nRemise !== null) {
         nR = '&nRemise=' + nRemise;
     }
     return fetch('../api/discountDetails.php?token=' + getCookie("cnxToken") + nR, {
