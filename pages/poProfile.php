@@ -10,6 +10,7 @@ if ($role != 1) {
 
 include('../backend/cnx.php');
 
+// Récupération du nombre de demandes d'inscription et de suppression
 $request = "SELECT type_requete, COUNT(*) FROM POrequete WHERE type_requete IN ('inscription', 'suppression') GROUP BY type_requete;";
 $result = $cnx->prepare($request);
 $result->execute();

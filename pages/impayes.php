@@ -1,15 +1,19 @@
 <?php
 session_start();
 
+// L'admin ne peut pas accéder à cette page
 include('../account/verifLogin.php');
 $role = verifLogin();
+if ($role == 2) {
+    header('Location: home.php');
+}
 
 if (!isset($_SESSION['cnxToken'])) {
     header('Location: ../index.html');
 }
+// On crée un cookie qui va servir au JS pour les requêtes
 setcookie('cnxToken', $_SESSION['cnxToken'], [
     'expires' => time() + 60 * 60 * 24,
-
     'secure' => true,
     'samesite' => 'None'
 ]); ?>
