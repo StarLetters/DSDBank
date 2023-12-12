@@ -18,7 +18,7 @@ function changeItemsPerPage() {
 }
 
 function paginateTable(data, itemsPerPage) {
-    if (itemsPerPage * (currentPage-1) >= data.length) {
+    if (itemsPerPage * (currentPage - 1) >= data.length) {
         currentPage = 1;
     }
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -32,31 +32,21 @@ function renderPagination(data, itemsPerPage) {
     paginationContainer.innerHTML = '';
 
     const totalPages = Math.ceil(data.length / itemsPerPage);
+    // Ajoute des boutons numérotés avec flèches
+    for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement('button');
 
-        // Ajoute des boutons numérotés avec flèches
-        for (let i = 1; i <= totalPages; i++) {
-            const button = document.createElement('button');
+        if (i === 1) {
+            button.innerHTML = '&larr;'; // Flèche gauche pour le premier bouton
+        } else if (i === totalPages) {
+            button.innerHTML = '&rarr;'; // Flèche droite pour le dernier bouton
+        } else {
+            button.textContent = i;
+        }
 
-            if (i === 1) {
-                button.innerHTML = '&larr;'; // Flèche gauche pour le premier bouton
-            } else if (i === totalPages) {
-                button.innerHTML = '&rarr;'; // Flèche droite pour le dernier bouton
-            } else {
-                button.textContent = i;
-            }
-
-            button.classList.add('pagination-button');
-            if (i === currentPage) {
-                button.disabled = true;
-            }
-            button.addEventListener('click', () => {
-                currentPage = i;
-                const paginatedData = paginateTable(data, itemsPerPage);
-                createTable(paginatedData);
-                renderPagination(data, itemsPerPage);
-                showResult();
-            });
-            paginationContainer.appendChild(button);
+        button.classList.add('pagination-button');
+        if (i === currentPage) {
+            button.disabled = true;
         }
 
         button.addEventListener('click', () => {
@@ -68,6 +58,7 @@ function renderPagination(data, itemsPerPage) {
         });
         paginationContainer.appendChild(button);
     }
+
 }
 
 function createTable(data, tableId) {
@@ -184,11 +175,11 @@ function createTableWithDetails(data) {
 function showResult() {
     let result = document.getElementById("results-container");
     let nbResult = data.length - (currentPage * itemsPerPage) < 0 ? data.length - (currentPage - 1) * itemsPerPage : itemsPerPage;
-    result.innerHTML = "Affichage de "+ nbResult +" sur "+ data.length+" résultats";
+    result.innerHTML = "Affichage de " + nbResult + " sur " + data.length + " résultats";
 }
 
 async function updateDataTable(externdata) {
-    data = externdata ;
+    data = externdata;
     showResult();
     const paginatedData = paginateTable(data, itemsPerPage);
     createTable(paginatedData, 'table-container');
@@ -197,7 +188,7 @@ async function updateDataTable(externdata) {
 
 async function updateDetailedDataTable(externdata) {
     details = true;
-    data = externdata ;
+    data = externdata;
     showResult();
     const paginatedData = paginateTable(data, itemsPerPage);
     createTableWithDetails(paginatedData);

@@ -1,7 +1,7 @@
 import { updateDataTable, changeItemsPerPage } from "./dataTable.js";
 import { getTreasury } from "./fetchData.js";
 import { toggleTreasury } from "./graphic.js";
-import { addRedClassToRowIfNegative } from "./utilities.js";
+import { addRedClassToCellIfNegative } from "./utilities.js";
 
 // Constantes pour les éléments HTML réutilisés
 const itemsPerPageElement = document.getElementById("items-per-page");
@@ -21,7 +21,7 @@ async function updateTable() {
     }else{
         chartTitle.style.display = "none";
     }
-    addRedClassToRowIfNegative(document.querySelectorAll("#table-container tbody tr"));
+    addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"));
 }
 
 
