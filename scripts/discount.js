@@ -6,14 +6,9 @@ import { addRedClassToCellIfNegative } from "./utilities.js";
 let role = document.getElementById("role").textContent;
 
 const itemsPerPageElement = document.getElementById("items-per-page");
-const nSirenElement = null;
-const resetButtonElement = null;
-const searchButtonElement = null;
-if (role === "1") {
-    nSirenElement = document.getElementById("nSiren");
-    resetButtonElement = document.getElementById("resetButton");
-    searchButtonElement = document.getElementById("searchButton");
-}
+const nSirenElement = document.getElementById("nSiren");
+const resetButtonElement = document.getElementById("resetButton");
+const searchButtonElement = document.getElementById("searchButton");
 
 const paginationElement = document.getElementById("pagination-container");
 const closeButtonElement = document.getElementById("details-close");
