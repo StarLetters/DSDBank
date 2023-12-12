@@ -161,7 +161,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
                                 <button class="export-pdf-button"
-                                    onclick="exportTableToPDF('barChart', 'graphique_barres', 'pdf', 750, 400)">Exporter
+                                    onclick="exportTableToPDF('barChart', 'GRAPHIQUE', 'pdf', 500, 400)">Exporter
                                     en PDF</button>
                             </div>
                         </div>
@@ -175,7 +175,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
                                 <button class="export-pdf-button"
-                                    onclick="exportTableToPDF('lineChart', 'graphique_courbes', 'pdf', 750, 400)">Exporter
+                                    onclick="exportTableToPDF('lineChart', 'GRAPHIQUE', 'pdf', 500, 400)">Exporter
                                     en PDF</button>
                             </div>
                         </div>
@@ -187,7 +187,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <div class="col-auto mt-3">
 
                         <button class="export-pdf-button"
-                            onclick="exportTableToPDF('pieChart', 'graphique_cam', 'pdf', 750, 400)">Exporter en
+                            onclick="exportTableToPDF('pieChart', 'GRAPHIQUE', 'pdf', 500, 400)">Exporter en
                             PDF</button>
                     </div>
                 </div>
