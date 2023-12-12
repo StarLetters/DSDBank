@@ -29,7 +29,6 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <link rel="stylesheet" href="../css/impayes.css">
     <link rel="stylesheet" href="../css/tresorerie.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="../scripts/exportPDF.js"></script>
 </head>
 
 <body>
