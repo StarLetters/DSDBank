@@ -3,18 +3,35 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-top: 7em;
+}
+
+footer {
+    background-color: var(--couleur-fond);
+    color: white;
+    padding: 5px 0;
+    width: 100%;
+    bottom: 0; 
 }
 
 .blurred-footer {
     background-color: rgba(255, 255, 255, 10%);
     border-radius: 10px;
-    margin: 30px;
+    margin: 30px auto;
+    text-align: center;
+    max-width: 1200px; /* Ajustez la valeur de max-width selon votre mise en page */
 }
 
 .footer-container {
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 0;
+    margin-left: 0;
+    padding-top: 3em;
 }
+
+
 
 .logo-container {
     width: 15%;
@@ -24,6 +41,8 @@
 .mentions {
     color: white;
     text-decoration: none;
+    font-size: 15px;
+    margin-top: 50px;
 }
 
 .mentions:hover {

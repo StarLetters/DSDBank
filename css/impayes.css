@@ -1,7 +1,7 @@
 .slide, .date, .btn-export {
-    background-color: var(--couleur-bouton);
-    color: var(--couleur-text);
-    border: 1px solid var(--couleur-text);
+    background-color: var(--couleur-violet-bouton);
+    color: var(--couleur-fond-sombre);
+    border: 1px solid var(--couleur-violet-bouton);
     border-radius: 10px;
     padding: 10px 15px;
     font-size: 0.8rem;
@@ -9,13 +9,26 @@
 }
 
 .slide {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
 }
 
 option {
     background-color: var(--couleur-fond);
     color: var(--couleur-text);
 }
+
+ .chart {
+    display: block;
+    width: 90%;
+    height: 80%;
+    margin-left: 5%;
+}
+
+.h3, h3 {
+    font-size: 1.75rem;
+    margin-left: 5%;
+  }
 
 #wrapper{
     color: var(--couleur-text);
@@ -31,3 +44,139 @@ option {
     }
     
 }
+
+.form-row > .col, .form-row > [class*="col-"] {
+    padding-right: 5px;
+    padding-left: 5%;
+  }
+
+#selectDate, #numImp {
+    margin-top: 5px;
+    margin-left: 2%;
+}
+
+#selectDate label,
+#selectDate input {
+    margin-bottom: 5px;
+}
+
+#selectDate input[type="date"] {
+    width: 100%;
+}
+
+#selectDate .col-auto {
+    flex: 0 0 auto;
+}
+
+#nImp,
+#nSIREN,
+#raisonSociale {
+    margin-bottom: 15px;
+    margin-left: 40px;
+    width: 14em;
+}
+
+#resetButton,
+#searchButton {
+    border-radius: 10px;
+    margin-left: 0.5em;
+}
+
+.row.align-items-center {
+    margin-top: 0.5em;
+    margin-left: 4%;
+}
+
+.order-by {
+    margin-top: 0.5em;
+    margin-right: 25%;
+}
+
+.text-right {
+    text-align: right !important;
+    margin-right: 10%;
+    padding-top: 7%;
+  }
+
+button[onclick^="exportTable"],
+nav#pagination-container {
+    margin-top: 2em;
+    margin-right: 1em;
+}
+
+#pagination-container {
+    display: flex;
+    justify-content: center;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    padding-top: 3em;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  button.export-button {
+    border-radius: 30px;
+    background-color: var(--couleur-violet-bouton);
+    color: var(--couleur-fond-sombre);
+    padding: 0px 6px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid var(--couleur-violet-bouton);
+    margin-left: 5%;
+  }
+
+  select {
+    word-wrap: normal;
+    border-radius: 15px;
+    background-color: var(--couleur-violet-bouton);
+    color: var(--couleur-fond-sombre);
+    padding: 2px 6px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid var(--couleur-violet-bouton);
+    margin-left: 6%;
+    margin-top: 2%;
+  }
+
+  button.export-pdf-button, button#resetButton,
+  button#searchButton {
+    border-radius: 15px;
+    background-color: var(--couleur-violet-bouton);
+    color: var(--couleur-fond-sombre);
+    padding: 2px 6px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid var(--couleur-violet-bouton);
+    margin-left: 5%;
+  }
+
+  @media (max-width: 870px) {
+    .form-row {
+      flex-direction: column;
+      height: 10vh;
+      
+    }
+  }
+
+
+  @media (max-width: 768px) {
+    .col-md-6 {
+      -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+      max-width: 100%;
+    }
+
+    button.export-pdf-button, button#resetButton,
+    button#searchButton {
+      margin-top: 0px;
+    }
+
+  }
+  
