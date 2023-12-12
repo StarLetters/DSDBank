@@ -80,27 +80,29 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </div>
 
 
-                        
+
                     </div>
                 </div>
 
                 <?php
-if ($role == 1) {
-    echo '
+                if ($role == 1) {
+                    echo '
         <div class="row">
-            <div class="col-md-12 col-lg-6 mt-2">
+                    <div class="col-12">
+            <div class="col-md-6 col-6 mt-2">
                 <label for="nSIREN">N° SIREN :</label>
                 <input type="text" id="nSIREN" class="form-control form-control-sm date">
             </div>
             
-            <div class="col-md-12 col-lg-6 mt-2">
+            <div class="col-md-6 col-6 mt-2">
                 <label for="raisonSociale">Raison Sociale :</label>
                 <input type="text" id="raisonSociale" class="form-control form-control-sm date">
             </div>
+            </div>
         </div>
     ';
-}
-?>
+                }
+                ?>
 
                 <div class="row mt-5 ct1">
                     <div id="items-per-page-container" class="col-md-12 col-lg-6">
