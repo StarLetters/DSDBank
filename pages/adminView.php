@@ -65,8 +65,7 @@ $result = $result->fetchAll();
 </head>
 
 <body>
-    <div id="wrapper">
-        <?php include('../includes/header.php'); ?>
+    <div id="wrapper" style="padding-left: 0;">
         <div class="col-12">
             <div class="row">
                 <a href="welcome.php" class="custom-button btn-secondary"><span class="arrow-left">&#x2190;</span> Retour</a>

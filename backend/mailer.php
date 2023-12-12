@@ -62,49 +62,34 @@ include('token.php');
         - false si l'adresse mail n'a pas été vérifiée
 */
 
-function verification()
+function verification($socialReason, $email)
 {
-    if ((isset($_POST['socialReason']) && isset($_POST['email'])) || (isset($_SESSION['email']) && isset($_SESSION['token']) && isset($_SESSION['socialReason']))) {
-        if (isset($_SESSION['email']) && isset($_SESSION['token']) && isset($_SESSION['socialReason'])) {
-            $email = $_SESSION['email'];
-            $token = $_SESSION['token'];
-            $socialReason = $_SESSION['socialReason'];
-        } else {
-            $socialReason = $_POST['socialReason'];
-            $email = $_POST['email'];
-            $string = sha1(rand());
-            $token = substr($string, 0, 16); // Génération du token
-            $_SESSION['email'] = $email;
-            $_SESSION['token'] = $token;
-            $_SESSION['socialReason'] = $socialReason;
-        }
 
-        $subject = "Verification de votre adresse mail";
+    $string = sha1(rand());
+    $token = substr($string, 0, 16); // Génération du token
 
-        $body = "<h1> DSDBank </h1>";
-        $body .= "Bonjour " . $socialReason . ",";
-        $body .= "<br><br>";
-        $body .= "Il ne vous reste qu'une étape pour vérifier votre nouvelle adresse e-mail.";
-        $body .= "<br><br>";
-        $body .= "Veuillez cliquer sur ce lien : <a href='" . VERIF_SITE . "?email=" . $email . "&token=" . $token . "'>Cliquer ici</a>";
-        $body .= "<br><br>";
-        $body .= "Si vous n'avez pas demandé à vérifier cette adresse e-mail, vous pouvez ignorer cet e-mail.";
-        $body .= "<br><br>";
-        $body .= "Merci,";
-        $body .= "<br>";
-        $body .= "L'équipe DSDBank";
+    $subject = "Verification de votre adresse mail";
 
-        if (envoi_mail($socialReason, $email, $subject, $body)) {
-            //echo 'OK';
-            insertToken($email, $token, "verification");
-            header('Location: ../account/confirmMail.php');
-            exit();
-        } else {
-            echo "Une erreur s'est produite";
-        }
+    $body = "<h1> DSDBank </h1>";
+    $body .= "Bonjour " . $socialReason . ",";
+    $body .= "<br><br>";
+    $body .= "Il ne vous reste qu'une étape pour vérifier votre nouvelle adresse e-mail.";
+    $body .= "<br><br>";
+    $body .= "Veuillez cliquer sur ce lien : <a href='" . VERIF_SITE . "?email=" . $email . "&token=" . $token . "'>Cliquer ici</a>";
+    $body .= "<br><br>";
+    $body .= "Si vous n'avez pas demandé à vérifier cette adresse e-mail, vous pouvez ignorer cet e-mail.";
+    $body .= "<br><br>";
+    $body .= "Merci,";
+    $body .= "<br>";
+    $body .= "L'équipe DSDBank";
+
+    if (envoi_mail($socialReason, $email, $subject, $body)) {
+        //echo 'OK';
+        insertToken($email, $token, "verification");
+        header('Location: ../account/confirmMailSent.php');
+        exit();
     } else {
-        //test_mail("lucas", "houangkeo@gmail.com", $token);
-        header('Location: ../pages/register.php');
+        echo "Une erreur s'est produite";
     }
 }
 
@@ -207,7 +192,7 @@ function contact()
     }
     $subject = $_POST['subject'];
     $text = $_POST['text'];
-    
+
     $body = "<h1> DSDBank </h1>";
     $body .= "<br><br>";
     $body .= "Vous avez reçu un message de la part de " . $sender . " (" . $emailsender . ") :";
@@ -235,9 +220,6 @@ function contact()
 if (isset($_POST['which'])) {
     $which = $_POST['which'];
     switch ($which) {
-        case 'register':
-            verification();
-            break;
         case 'login':
             login();
             break;
