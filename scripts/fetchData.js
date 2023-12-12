@@ -210,13 +210,18 @@ function getDiscount() {
         });
 }
 
-function getDiscountDetails() {
+function getDiscountDetails(nRemise) {
     console.log("Fetching via getDiscountDetails()");
     if (getCookie("cnxToken") === null) {
         document.location.href = "../index.html";
     }
-    let nR = (document.getElementById("nRemise") && document.getElementById("nRemise").value != "") ? '&nRemise=' + document.getElementById("nRemise").value : "";
-
+    let nR = "";
+    if (nRemise === null && document.getElementById("nRemise") && document.getElementById("nRemise").value != "") {
+        nR = '&nRemise=' + document.getElementById("nRemise").value;
+    }
+    else if (nRemise !== null) {
+        nR = '&nRemise=' + nRemise;
+    }
     return fetch('../api/discountDetails.php?token=' + getCookie("cnxToken") + nR, {
         method: 'POST',
         headers: {
@@ -235,28 +240,4 @@ function getDiscountDetails() {
         });
 }
 
-function getDiscountDetailsWithDiscountNumber(numRemise) {
-    console.log("Fetching via getDiscountDetails()");
-    if (getCookie("cnxToken") === null) {
-        document.location.href = "../index.html";
-    }
-    let nR = '&nRemise=' + numRemise;
-    return fetch('../api/discountDetails.php?token=' + getCookie("cnxToken") + nR, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    })
-
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            return data;
-        })
-        .catch(error => {
-            console.error(error);
-            console.log(data);
-        });
-}
-
-export { getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons, getTreasury, getTreasuryPerMonth, getDiscount, getDiscountDetails, getDiscountDetailsWithDiscountNumber};
+export { getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons, getTreasury, getTreasuryPerMonth, getDiscount, getDiscountDetails };

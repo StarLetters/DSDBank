@@ -1,9 +1,10 @@
-import { getDiscountDetailsWithDiscountNumber } from "./fetchData.js";
+import { getDiscountDetails } from "./fetchData.js";
 
 let itemsPerPage = 3;
 let currentPage = 1;
-let data;
 let details = false;
+let data;
+let nRemise = null;
 
 
 function changeItemsPerPage() {
@@ -11,12 +12,15 @@ function changeItemsPerPage() {
     itemsPerPage = parseInt(selectElement.value);
 
     const paginatedData = paginateTable(data, itemsPerPage);
-    createTable(paginatedData);
+    details ? createTableWithDetails(paginatedData) : createTable(paginatedData, 'table-container');
     renderPagination(data, itemsPerPage);
     showResult();
 }
 
 function paginateTable(data, itemsPerPage) {
+    if (itemsPerPage * (currentPage-1) >= data.length) {
+        currentPage = 1;
+    }
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const paginatedData = data.slice(startIndex, endIndex);
@@ -39,7 +43,7 @@ function renderPagination(data, itemsPerPage) {
         button.addEventListener('click', () => {
             currentPage = i;
             const paginatedData = paginateTable(data, itemsPerPage);
-            createTable(paginatedData);
+            details ? createTableWithDetails(paginatedData) : createTable(paginatedData, 'table-container');
             renderPagination(data, itemsPerPage);
             showResult();
         });
@@ -47,8 +51,8 @@ function renderPagination(data, itemsPerPage) {
     }
 }
 
-function createTable(data) {
-    let tableContainer = document.getElementById('table-container');
+function createTable(data, tableId) {
+    let tableContainer = document.getElementById(tableId);
     tableContainer.innerHTML = '';
 
     // Créer un tableau HTML
@@ -97,19 +101,19 @@ function createTable(data) {
     tableContainer.appendChild(table);
 }
 
-function createDetailedTable(principalData, detailedData) {
+function createTableWithDetails(data) {
     let tableContainer = document.getElementById('table-container');
     tableContainer.innerHTML = '';
 
     // Créer un tableau HTML
-    let table = document.createElement('table', 'principal-table');
+    let table = document.createElement('table');
 
     // Créer l'en-tête du tableau
     let thead = document.createElement('thead');
     let headerRow = document.createElement('tr');
 
     // Parcourir les clés de la première entrée pour créer les en-têtes de colonnes
-    Object.keys(principalData[0]).forEach(key => {
+    Object.keys(data[0]).forEach(key => {
         if (!/^\d+$/.test(key)) {
             let th = document.createElement('th');
             th.textContent = key.toString(); // Convertir la clé en chaîne de caractères
@@ -124,7 +128,7 @@ function createDetailedTable(principalData, detailedData) {
     let tbody = document.createElement('tbody');
 
     // Parcourir les données JSON et créer les lignes du tableau
-    principalData.forEach(item => {
+    data.forEach(item => {
         let row = document.createElement('tr');
 
         // Parcourir les valeurs de chaque entrée pour créer les cellules de données
@@ -133,23 +137,24 @@ function createDetailedTable(principalData, detailedData) {
                 let cell = document.createElement('td');
                 cell.textContent = value;
                 cell.setAttribute('data-label', key); // Ajouter l'attribut data-th pour la correspondance avec les en-têtes de colonnes
-                if (key === 2) {
-                    cell.setAttribute('id', 'discount-number');
+                if (key === 'N° Remise') {
+                    row.setAttribute('id', value);
                 }
                 row.appendChild(cell);
             }
         });
-        row.addEventListener("click", () => {
-            details = true;
-            createDetailedTable(principalData, detailedData);
-        });
-        tbody.appendChild(row);
 
-        if (details) {
+        row.addEventListener("click", async () => {
+            nRemise = row.getAttribute('id');
+            document.getElementById('details').style.display = 'block';
+            createTable(await getDiscountDetails(nRemise), 'detailed-table-container');
+        });
+
+        tbody.appendChild(row);
+        /*if (details && row.getAttribute('id') === nRemise) {
             let secondRow = document.createElement('tr');
             let tableCell = document.createElement('td');
             tableCell.setAttribute('colspan', '7');
-            
             // Créer un tableau HTML détaillé
             let detailedTable = document.createElement('table', 'detailed-table');
 
@@ -170,12 +175,10 @@ function createDetailedTable(principalData, detailedData) {
             // Créer le corps du tableau détaillé
             let detailedTbody = document.createElement('tbody');
 
-            detailedData = getDiscountDetailsWithDiscountNumber(document.getElementById('discount-number').value);
-
             // Parcourir les données JSON et créer les lignes du tableau détaillé
             detailedData.forEach(detailedItem => {
                 let detailedRow = document.createElement('tr');
-
+                
                 Object.entries(detailedItem).forEach(([key, value]) => {
                     if (!/^\d+$/.test(key)) {
                         let cell = document.createElement('td');
@@ -186,12 +189,12 @@ function createDetailedTable(principalData, detailedData) {
                 });
                 
                 detailedTbody.appendChild(detailedRow);
-                detailedTable.appendChild(detailedTbody);
             });
+            detailedTable.appendChild(detailedTbody);
             tableCell.appendChild(detailedTable);
-            secondRow.appendChild(tableCell);
+            secondRow.appendChild();
             tbody.appendChild(secondRow);
-        }
+        }*/
     });
 
     table.appendChild(tbody);
@@ -211,15 +214,16 @@ async function updateDataTable(externdata) {
     data = externdata ;
     showResult();
     const paginatedData = paginateTable(data, itemsPerPage);
-    createTable(paginatedData);
+    createTable(paginatedData, 'table-container');
     renderPagination(data, itemsPerPage);
 }
 
-async function updateDetailedDataTable(principalData, detailedData) {
-    data = principalData;
+async function updateDetailedDataTable(externdata) {
+    details = true;
+    data = externdata ;
     showResult();
     const paginatedData = paginateTable(data, itemsPerPage);
-    createDetailedTable(paginatedData, detailedData);
+    createTableWithDetails(paginatedData);
     renderPagination(data, itemsPerPage);
 }
 

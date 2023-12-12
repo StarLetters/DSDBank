@@ -66,6 +66,13 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     </div>
                     <div id="results-container" class="text-right"></div>
                     <div id="table-container"></div>
+                    <div id="details">
+                        <div class="details-back"></div>
+                        <div class="details-container">
+                        <a href="#" id="details-close">X</a>
+                        <div id="detailed-table-container"></div>
+                        </div>  
+                    </div>
                     <nav id="pagination-container"></nav>
 
                 </div>
