@@ -39,7 +39,7 @@ if (isset($_POST['subject']) && isset($_POST['name']) && isset($_POST['text']) &
 <body>
     <div class="center-box">
         <div class="border-head">
-            <p class="text-white h4  ">Contacter le Responsable</p>
+            <p class="text-white h4">Contacter l<?php echo isset($_POST['sender']) ? "'administrateur" : "e Responsable"; ?></p>
         </div>
 
 
@@ -48,7 +48,7 @@ if (isset($_POST['subject']) && isset($_POST['name']) && isset($_POST['text']) &
                 <?php
                     echo '<input type="hidden" name="which" value="contact">';
                     if (isset($_POST['sender'])){
-                        echo '<input type="hidden" name="sender" value="'.$sender.'">';
+                        echo '<input type="hidden" name="sender" value="'.$_POST['sender'].'">';
                     }
                     else{
                         echo '

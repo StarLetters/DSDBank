@@ -20,19 +20,20 @@ if (!isset($_GET['email']) || !isset($_GET['token'])) {
     $email = $_GET['email'];
     $token = $_GET['token'];
 
-    include('cnx.php');
-    $requete = "SELECT * FROM token WHERE email = '" . $email . "' AND token = '" . $token . "' AND type = 'verification';"; // On vérifie si le token existe
+    include('../backend/cnx.php');
+    $requete = "SELECT * FROM Token WHERE email = '" . $email . "' AND token = '" . $token . "' AND type = 'verification';"; // On vérifie si le token existe
     $cnx->prepare($requete);
+
     $resultat = $cnx->query($requete);
 
     if($resultat->rowCount() == 0){ // Si le token n'existe pas
         echo "Erreur lors de la vérification";
         exit;
     }
-    while ($donnees = $reponse->fetch()) {
+    while ($donnees = $resultat->fetch()) {
         $date = $donnees['date_valid'];
         if ($date > date("Y-m-d H:i:s")) { // Si le token est valide
-            $requete = "UPDATE users SET verifier = 1 WHERE email = " . $email . ";"; // On vérifie le compte
+            $requete = "UPDATE Utilisateur SET verifier = 1 WHERE email = '" . $email . "';"; // On vérifie le compte
             $cnx->prepare($requete);
             $cnx->exec($requete);
             echo "Votre compte a été vérifié";
@@ -40,6 +41,8 @@ if (!isset($_GET['email']) || !isset($_GET['token'])) {
             echo "Le lien a expiré";
         }
     }
+    header('Location: deco.php');
+
 
     ?>
 </body>

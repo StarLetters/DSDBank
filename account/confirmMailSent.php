@@ -15,7 +15,7 @@ session_start();
 
 <body>
     <div class="outer-container">
-        <div class="content-container">
+        <div class="content-container" style="width: auto;">
             <div class="header">
                 CONFIRMATION MAIL
             </div>
@@ -36,7 +36,7 @@ session_start();
                     DSD Bank
                 </div>
                 <div class="center top-left-button">
-                    <a href="home.php" class="back-button">Retour</a>
+                    <a href="../pages/home.php" class="back-button">Retour</a>
                 </div>
 
             </div>

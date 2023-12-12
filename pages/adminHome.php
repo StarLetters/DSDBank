@@ -11,14 +11,6 @@ if ($role != 2) {
 include('../backend/cnx.php');
 
 
-//
-//
-//
-// A SUPPRIMER
-//
-//
-//
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">

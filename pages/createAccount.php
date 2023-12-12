@@ -72,10 +72,12 @@ $result->execute();
 
 $result->closeCursor(); 
 
-header('Location: ./home.php');
 
-//include('../backend/mailer.php');
-//verification();
+include('../backend/mailer.php');
+verification($socialReason, $email);
+
+
+header('Location: ./adminView.php');
 }
 ?>
 <!DOCTYPE html>
