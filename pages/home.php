@@ -35,6 +35,7 @@ include('../backend/cnx.php');
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/Home.css">
     <link rel="stylesheet" href="../css/varColor.css">
+
 </head>
 
 <body>
@@ -47,7 +48,7 @@ include('../backend/cnx.php');
                 <section id="content-wrapper">
                     <div class="row-1">
                         <div class="col-lg-12">
-                            <h2 class="content-title text-white">Bonjour, <span>
+                            <h2 class="content-title text-white mt-5">Bonjour, <span>
                                     <?php
                                     echo $_SESSION['displayName'];
                                     ?>
@@ -57,7 +58,7 @@ include('../backend/cnx.php');
 
                     <div class="row-1">
                         <div class="col-lg-12 d-flex justify-content-center">
-                            <div class="card-group">
+                            <div class="card-group mt-3">
                                 <div class="card">
                                     <div class="logo">
                                         <img src="../data/img/LogoDSD.png" alt="logo">
@@ -138,11 +139,12 @@ include('../backend/cnx.php');
                         </div>
                     </div>
                 </div>
-                <footer class="text-center text-white footer">
+                <!-- <footer class="text-center text-white footer">
                     Mentions légales
                     <br><br><br>
                     © 2023, DSDBank Ltd, All Rights Reserved.
-                </footer>
+                </footer> -->
+                <?php include('../includes/footer.html'); ?>
             </div>
 
         </div>

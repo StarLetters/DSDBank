@@ -1,12 +1,11 @@
 table {
-  border: 1px solid #ccc;
   border-collapse: collapse;
   margin: 0;
   padding: 0;
-  width: 100%;
+  width: 90%;
   table-layout: fixed;
   background-color: rgba(255, 255, 255, 0.05);
-  margin: 50px auto;
+  margin-left: 5%;
 }
 
 table caption {
@@ -15,13 +14,71 @@ table caption {
 }
 
 table tr {
-  border: 1px solid #ddd;
-  padding: 0.35em;
+  border: 2px solid var(--couleur-fond-sombre);
+  padding: 0.35em !important;
 }
+
+
+/* .positive-amount {
+  color: green;
+} */
+
+.negative-amount {
+    color: red;
+}
+
+
+#pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+
+.pagination-button {
+  list-style: none;
+  margin: 0 6px;
+  padding: 0px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: var(--couleur-violet-bouton);
+}
+
+.pagination-button:hover {
+  background-color: var(--couleur-violet-bouton);
+}
+
+/* Style spécifique pour les flèches */
+.pagination-arrow {
+  font-size: 15px;
+  color: white;
+}
+
+
+.item-selecteur {
+  list-style: none;
+  margin: 0 6px;
+  padding: 6px 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: var(--couleur-violet-bouton);
+  color: var(--couleur-fond-sombre); 
+}
+
+.item-selecteur:hover {
+  background-color: var(--couleur-violet-bouton);
+}
+
+#order-by {
+  width: 11em;
+}
+
+
 
 table th,
 table td {
-  padding: 0.625em;
+  padding: 1.625em;
   text-align: center;
   color: var(--couleur-text);
 }
@@ -32,6 +89,7 @@ table th {
   text-transform: uppercase;
   background-color: var(--couleur-hover);
   color: var(--couleur-text);
+  padding: 2.5em 0 2.5em 0;
 }
 
 tr:hover {
@@ -56,6 +114,8 @@ tr:hover {
   background-color: var(--couleur-text-violet);
   color: var(--couleur-hover);
 }
+
+
 
 @media screen and (max-width: 1500px) {
   table {

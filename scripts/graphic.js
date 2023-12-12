@@ -1,4 +1,4 @@
-import { getUnpaidsPerMonth, getUnpaidReasons, getTreasuryPerMonth } from "./fetchData.js";
+import { getUnpaidsPerMonth, getUnpaidReasons, getTreasuryPerMonth, getDiscount } from "./fetchData.js";
 import { nHarmoniousColors } from "./colors.js";
 
 let myChart;

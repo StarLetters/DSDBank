@@ -20,15 +20,16 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes impayés</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/varColor.css">
     <link rel="stylesheet" href="../css/table.css">
-    <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/impayes.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="../scripts/exportPDF.js"></script>
+    <script src="../scripts/exportData.js"></script>
 </head>
 
 <body>
@@ -36,21 +37,29 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
         <div id="wrapper">
             <?php include('../includes/header.php'); ?>
             <div class="col-12">
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <h1 class="mt-5">Mes impayés</h1>
+                <div class="row mb-5">
+                    <div class="col-12 col-md-12 text-center mt-5">
+                        <h1 class="mt-4">Mes impayés</h1>
                     </div>
                 </div>
 
+
                 <div class="form-row align-items-center">
-                    <div class="hidePO col-12" id="date-container">
-                        <label for="choiceDateImp">Dater par:</label>
-                        <select id="choiceDateImp" class="item-selecteur">
-                            <option value="custom" id="dateCustomImp">Dates personnalisés</option>
-                            <option value="4months">Evolution sur 4 mois glissants</option>
-                            <option value="12months">Evolution sur 12 mois glissants</option>
-                        </select>
+                    <div class="col-12 col-md-6 mx-auto">
+                        <div class="hidePO text-center" id="date-container">
+                            <label for="choiceDateImp">Dater par : </label>
+                            <select id="choiceDateImp" class="item-selecteur">
+                                <option value="custom" id="dateCustomImp">Dates personnalisées</option>
+                                <option value="4months">Évolution sur 4 mois glissants</option>
+                                <option value="12months">Évolution sur 12 mois glissants</option>
+                            </select>
+                        </div>
                     </div>
+                </div>
+
+
+
+                <div class="col-12 col-md-12 d-flex flex-row impayes-po">
                     <div class="col-12 col-md-6 d-flex flex-row" id="selectDate">
                         <div class="col-auto mt-5">
                             <label for="startDate">Date de début :</label>
@@ -62,25 +71,34 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             <input type="date" id="endDate" class="form-control form-control-sm date">
                         </div>
                     </div>
-                    <div class="col-auto mt-5">
-                        <label for="nImp">N° Dossier Impayés :</label>
-                        <input type="text" id="nImp" class="form-control form-control-sm date">
-                        <?php
-                        if ($role == 1) {
-                            echo "
-                        <label for=\"nSIREN\">N° SIREN :</label>
-                        <input type=\"text\" id=\"nSIREN\" class=\"form-control form-control-sm date\">
-                        
-                        <label for=\"raisonSociale\">Raison Sociale :</label>
-                        <input type=\"text\" id=\"raisonSociale\" class=\"form-control form-control-sm date\">
-                        ";
-                        }
-                        ?>
-                        <button id="resetButton">Effacer</button>
-                        <button id="searchButton">Rechercher</button>
 
+                    <div class="col-2 mt-5 col-md-6">
+                        <div class="d-flex flex-column">
+                        <label for="nImp">N° Dossier Impayés :</label>
+                        <div class="d-flex flex-column">
+                            <input type="text" id="nImp" class="form-control form-control-sm date">
+                            <?php
+                            if ($role == 1) {
+                                echo "
+                <label for=\"nSIREN\">N° SIREN :</label>
+                <input type=\"text\" id=\"nSIREN\" class=\"form-control form-control-sm date\">
+                
+                <label for=\"raisonSociale\">Raison Sociale :</label>
+                <input type=\"text\" id=\"raisonSociale\" class=\"form-control form-control-sm date\">
+            ";
+                            }
+                            ?>
+                            <div class="d-flex flex-row">
+                            <button id="resetButton" class="align-self-center">Effacer</button>
+                            <button id="searchButton" class="align-self-center">Rechercher</button>
+                            </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
+
+
                 <div class="row align-items-center">
                     <div id="items-per-page-container" class="mx-3">
                         <label for="items-per-page">Éléments par page:</label>
@@ -90,7 +108,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             <option value="10">10</option>
                         </select>
                     </div>
-                    <div id="order-by-container">
+                    <div id="order-by-container" class="order-by">
                         <label for="order-by">Trier par:</label>
                         <select id="order-by" class="item-selecteur">
                             <option value="montantDesc">Montant décroissant</option>
@@ -105,12 +123,26 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             ?>
                         </select>
                     </div>
-                </div>
-                <div id="results-container" class="text-right">
 
                 </div>
+                <div class="col-12 mt-5 d-flex flex-row flex-sm-column">
+                    <div class="col-5 mb-5 ml-3">
+                        <select id="export-select">
+                            <option value="csv">Exporter en CSV</option>
+                            <option value="xls">Exporter en XLS</option>
+                        </select>       
+                        <button class="export-button" onclick="exportTable()">Exporter</button>
+                    </div>
+                    <div class="col-7"> 
+                        <div id="results-container" class="text-right"></div>
+                    </div>
+                </div>
+                
                 <div id="table-container"></div>
+                
                 <nav id="pagination-container"></nav>
+
+
                 <div class="hidePO row" id="graphics">
                     <select id="chartType" class="form-control mt-3 slide">
                         <option value="bar">Graphique à Barres</option>
@@ -118,56 +150,66 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     </select>
 
                     <div class="col-md-12 mt-5" id="barChartSection">
+
                         <h3>Somme des impayés par mois</h3>
-                        <canvas id="barChart"></canvas>
+                        <div class="chart">
+                            <canvas id="barChart"></canvas>
+                        </div>
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
-                                <button style="border-radius: 10px;" onclick="exportData('barChart', 'graphique_barres', 'pdf', 750, 400)">Exporter en PDF</button>
-                                <button style="border-radius: 10px;" onclick="exportData('barChart', 'graphique_barres', 'xls', 750, 400)">Exporter en XLS</button>
-                                <button style="border-radius: 10px;" onclick="exportData('barChart', 'graphique_barres', 'csv', 750, 400)">Exporter en CSV</button>
+                                <button class="export-pdf-button"
+                                    onclick="exportTableToPDF('barChart', 'graphique_barres', 'pdf', 750, 400)">Exporter
+                                    en PDF</button>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-12 mt-5" id="lineChartSection">
-                            <h3>Somme des impayés par mois</h3>
+                    <div class="col-md-12 mt-5" id="lineChartSection">
+                        <h3>Somme des impayés par mois</h3>
+                        <div class="chart">
                             <canvas id="lineChart"></canvas>
+                        </div>
+                        <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
-                                <div class="col-auto mt-3">
-                                    <button style="border-radius: 10px;" onclick="exportData('lineChart', 'graphique_courbes', 'pdf', 750, 400)">Exporter en PDF</button>
-                                    <button style="border-radius: 10px;" onclick="exportData('lineChart', 'graphique_courbes', 'xls', 750, 400)">Exporter en XLS</button>
-                                    <button style="border-radius: 10px;" onclick="exportData('lineChart', 'graphique_courbes', 'csv', 750, 400)">Exporter en CSV</button>
-                                </div>
+                                <button
+                                    onclick="exportTableToPDF('lineChart', 'graphique_courbes', 'pdf', 750, 400)">Exporter
+                                    en PDF</button>
                             </div>
                         </div>
-
-                        <div class="col-md-12 mt-5">
-                            <h3>Motifs d'impayés</h3>
-                            <canvas id="pieChart"></canvas>
-                            <div class="col-auto mt-3">
-                                <button style="border-radius: 10px;" onclick="exportData('pieChart', 'graphique_cam', 'pdf', 750, 400)">Exporter en PDF</button>
-                                <button style="border-radius: 10px;" onclick="exportData('pieChart', 'graphique_cam', 'xls', 750, 400)">Exporter en XLS</button>
-                                <button style="border-radius: 10px;" onclick="exportData('pieChart', 'graphique_cam', 'csv', 750, 400)">Exporter en CSV</button>
-                            </div>
-                        </div>
-
+                    </div>
+                </div>
+                <div class="col-md-12 mt-5 mb-4">
+                    <h3>Motifs d'impayés</h3>
+                    <canvas id="pieChart"></canvas>
+                    <div class="col-auto mt-3">
+                        <button class="export-pdf-button"
+                            onclick="exportTableToPDF('pieChart', 'graphique_cam', 'pdf', 750, 400)">Exporter en
+                            PDF</button>
                     </div>
                 </div>
 
-                <?php include('../includes/footer.html'); ?>
-
             </div>
+            <?php include('../includes/footer.html'); ?>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 
-        <script defer type="module" src="../scripts/graphic.js"></script>
-        <script defer type="module" src="../scripts/unpaid.js"></script>
 
-        <script src="../scripts/header.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-        <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+
+    </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+
+    <script defer type="module" src="../scripts/graphic.js"></script>
+    <script defer type="module" src="../scripts/unpaid.js"></script>
+
+    <script src="../scripts/header.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+
+
 </body>
 
 </html>

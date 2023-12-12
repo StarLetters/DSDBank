@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--couleur-violette);
+    background-color: var(--couleur-fond-sombre);
 }
 
 /* Styles CSS pour la section profil */
@@ -55,8 +55,7 @@ body {
 }
 
 body {
-    background: #1488cc;
-    background: linear-gradient(to left, #283593, #1976d2);
+    background: var(--couleur-fond-sombre);
     height: 100vh;
     font-family: "Josefin Sans", sans-serif;
 }
@@ -166,7 +165,7 @@ body {
 }
 
 .custom-button {
-    background-color: var(--couleur-bouton); 
+    background-color: var(--couleur-violet-bouton); 
     color: var(--couleur-text); 
     border: none;
     padding: 10px 25px;
@@ -205,10 +204,6 @@ body {
     transition: transform .6s ease-in-out,-webkit-transform .6s ease-in-out;
     padding-bottom: 80px;
   }
-
-.footer {
-    background-color: var(--couleur-fond);
-}
 
   
 @media (max-width: 767px) {
