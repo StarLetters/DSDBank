@@ -10,6 +10,7 @@ if ($role != 1) { // Si ce n'est pas un PO
 
 include('../backend/cnx.php');
 
+// Récupération de la liste des clients
 $request = "SELECT * 
 FROM Utilisateur
 JOIN Entreprise ON Entreprise.idUtilisateur = Utilisateur.idUtilisateur

@@ -75,7 +75,7 @@ ini_set('display_startup_errors', 1);
                             $result = $result->fetchAll();
                             if (!empty($result)) {
                                 echo "<p class='avertissement'>";
-                                echo "Veuillez contacter l'administrateur"; // On affiche un message d'erreur
+                                echo "Veuillez contacter le responsable"; // On affiche un message d'erreur
                                 echo "</p>";
                                 exit;
                             }

@@ -4,5 +4,4 @@ define('DATABASE_USER', '');
 define('DATABASE_PASSWORD', '');
 define('SMTP_HOST', '###@gmail.com');
 define('SMTP_PASS', '###');
-define('VERIF_SITE', '###/backend/verifMail.php');
 ?>

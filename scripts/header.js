@@ -13,3 +13,5 @@ $button.addEventListener('click', (e) => {
         $content.style.display = "block";
     }1
 });
+
+$wrapper.classList.toggle('toggled');

@@ -8,7 +8,7 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
     $token = htmlspecialchars($_GET['token']);
 
     // On vérifie la validité du token
-    $requete = 'SELECT * FROM token WHERE email = :email AND token = :token AND type = "reinitialisation" AND etat != "used" ;';
+    $requete = 'SELECT * FROM Token WHERE email = :email AND token = :token AND type = "reinitialisation" AND etat != "used" ;';
     $result = $cnx->prepare($requete);
     $result->bindParam(':email', $email);
     $result->bindParam(':token', $token);
@@ -16,13 +16,16 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
 
     if ($result->rowCount() == 0) {
         echo "Erreur lors de la reinitialisation";
-        exit;
+        echo "<br>Vous allez être bientôt redirigé.";
+    sleep(3);
+    header('Location: ../pages/home.php');
+            exit;
     }
     // On enregistre l'id du token
     $idToken = $result->fetch()['idToken'];
 
     // On met le token à on
-    $requete = 'UPDATE token SET etat = "on" WHERE idToken = :idToken;';
+    $requete = 'UPDATE Token SET etat = "on" WHERE idToken = :idToken;';
     $result = $cnx->prepare($requete);
     $result->bindParam(':idToken', $idToken);
     $result->execute();
@@ -35,35 +38,42 @@ else {
         $password = htmlspecialchars($_POST['password']);
 
         // On vérifie que le token est bien à on pour que ce soit bien l'utilisateur qui a demandé la réinitialisation
-        $requete = 'SELECT * FROM token WHERE idToken = :idToken AND etat = "on" ;';
+        $requete = 'SELECT * FROM Token WHERE idToken = :idToken AND etat = "on" ;';
         $result = $cnx->prepare($requete);
         $result->bindParam(':idToken', $idToken);
         $result->execute();
 
         if ($result->rowCount() == 0) {
-            echo "Vous n'êtes pas autorisé ici";
+            echo "Vous n'êtes pas autorisé ici<br>Vous allez être bientôt redirigé.";
+            sleep(3);
+            header('Location: ../pages/home.php');
             exit;
         }
 
         $email = $result->fetch()['email'];
 
         //Modification du mot de passe dans la base de données
-        $request = "UPDATE Utilisateur SET password = SHA2(:password, 256) WHERE email = :email;";
+        $request = "UPDATE Utilisateur SET mdp = SHA2(:password, 256) WHERE email = :email;";
         $result = $cnx->prepare($request);
         $result->bindParam(':email', $email);
         $result->bindParam(':password', $password);
         $result->execute();
 
         // On met le token à used
-        $request = 'UPDATE token SET etat = "used" WHERE idToken = :idToken;';
+        $request = 'UPDATE Token SET etat = "used" WHERE idToken = :idToken;';
         $result = $cnx->prepare($request);
         $result->bindParam(':idToken', $idToken);
         $result->execute();
-        echo "Votre mot de passe a été modifié";
+        echo "Votre mot de passe a été modifié<br>Vous allez être bientôt redirigé vers votre profil";
+
+        sleep(3);
+        header('Location: ../pages/home.php');
         exit;
     }
 
-    echo "Vous n'êtes pas autorisé ici";
+    echo "Vous n'êtes pas autorisé ici<br>Vous allez être bientôt redirigé.";
+    sleep(3);
+    header('Location: ../pages/home.php');
     exit;
 
     
