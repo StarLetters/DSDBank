@@ -144,7 +144,7 @@ function forgot($socialReason)
         $string = sha1(rand());
         $token = substr($string, 0, 16); // Génération du token
 
-        $host = $_SERVER['HTTP_HOST'];
+        $host = $_SERVER['HTTP_HOST'] . str_replace('\\','',dirname($_SERVER['REQUEST_URI'],2));
         $cheminReinit = '/account/verifReinit.php';
         $lienReinit = 'http://' . $host . $cheminReinit . '?token=' . $token . '&email=' . $email;
 
