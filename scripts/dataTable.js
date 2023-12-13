@@ -131,16 +131,6 @@ async function updateDetails(data) {
         const newRow = await createRowWithDetails(nRemise, nbCol)
         row.insertAdjacentElement('afterend', newRow);
         createTableWithDetails(nRemise);
-        row.addEventListener('click', () => {
-            if (newRow.classList.contains('active')) {
-                setTimeout(function() {
-                    newRow.classList.toggle('active');
-                  }, 400);
-            }else {
-            newRow.classList.toggle('active');
-            }
-        });
-
     }
 }
 

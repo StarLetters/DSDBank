@@ -6,11 +6,15 @@
     background-color: red!important;
 }
 
-.detailsRow{
-    display: none;
-    transition : all 0.5s ease-in-out;
+.detailsRow>td{
+    padding : 0px;
 }
 
-.detailsRow.active{
-    display: table-row;
+.detailsRow:hover{
+    background-color:inherit!important;
+}
+
+.detailsRow table{
+   margin-top:20px;
+    margin-bottom:20px;
 }
