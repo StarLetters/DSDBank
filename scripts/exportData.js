@@ -24,13 +24,36 @@ function exportTableToPDF(chartId, fileName, format, width, height) {
     // Copie le contenu du graphique original sur le nouveau canvas
     exportCtx.drawImage(canvas, 0, titleHeight + dateHeight, width, height);
 
-    if (format === 'pdf') {
-        // Exporte en PDF 
+    if ((chartId === 'pieChart') && format === 'pdf') {
+        // Exporte en PDF avec les couleurs du pie chart
+        const element = document.createElement('div');
+        element.appendChild(exportCanvas);
+        html2pdf().from(element).save(fileName + '.pdf');
+    } else if (format === 'pdf') {
+        // Convertit le reste en noir pour les autres types de graphiques
+        const imageData = exportCtx.getImageData(0, titleHeight + dateHeight, width, height);
+        const data = imageData.data;
+    
+        // for (let i = 0; i < data.length; i += 4) {
+        //     // Vérifie si le pixel est transparent (transparence = 0)
+        //     if (data[i + 3] !== 0) {
+        //         // Met à jour la couleur en noir (0, 0, 0)
+        //         data[i] = 0; // Rouge
+        //         data[i + 1] = 0; // Vert
+        //         data[i + 2] = 0; // Bleu
+        //     }
+        // }
+    
+        exportCtx.putImageData(imageData, 0, titleHeight + dateHeight);
+    
+        // Exporte en PDF avec les couleurs mises à jour
         const element = document.createElement('div');
         element.appendChild(exportCanvas);
         html2pdf().from(element).save(fileName + '.pdf');
     }
 }
+
+
 
 function exportTableToCSV(data) {
     let csvContent = "data:text/csv;charset=utf-8,";

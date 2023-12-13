@@ -11,5 +11,5 @@ $button.addEventListener('click', (e) => {
         $content.style.display = "none";
     }else{
         $content.style.display = "block";
-    }
+    }1
 });

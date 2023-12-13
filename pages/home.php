@@ -82,7 +82,7 @@ include('../backend/cnx.php');
                 </section>
 
                 <section class="text-center mt-5">
-                    <h2 class="text-white">Qui sommes-nous ?</h2>
+                    <h2 class="text-white mt-3">Qui sommes-nous ?</h2>
                     <br><br>
                     <h3 class="text-white">Le meilleur site pour gérer vos finances !</h3>
                     <br><br>
