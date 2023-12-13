@@ -42,8 +42,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
             <?php include('../includes/header.php'); ?>
             <div class="col-12">
                 <div class="row mb-3">
-                    <div class="col-md-12">
-                        <h1 class="mt-5">Annonces de trésorerie</h1>
+                    <div class="col-md-12 mt-5">
+                        <h1 class="mt-5 mb-5 text-center">Annonces de trésorerie</h1>
                     </div>
                 </div>
                 <div>
@@ -73,24 +73,33 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     ?>
                 </div>
                 <div>
-                    <div id="items-per-page-container" class="mx-3">
+                    
+                    <div id="items-per-page-container" class="mx-3 mb-sm-3">
                         <label for="items-per-page">Éléments par page:</label>
-                        <select id="items-per-page" class="item-selecteur">
+                        <select id="items-per-page" class="item-selecteur col-1 col-sm-3">
                             <option value="3">3</option>
                             <option value="5">5</option>
                             <option value="10">10</option>
                         </select>
                     </div>
-                    <div id="results-container" class="text-right"></div>
+                    <div id="results-container" class="text-right mb-2"></div>
+
                     <div id="table-container"></div>
+                    <div class="col-md-12 col-lg-6 mb-5">
+                            <select id="export-select" class="col-4 col-sm-4">
+                                <option value="csv">Exporter en CSV</option>
+                                <option value="xls">Exporter en XLS</option>
+                            </select>
+                            <button class="export-button col-2 col-sm-4" onclick="exportTable()">Exporter</button>
+                        </div>
                     <nav id="pagination-container"></nav>
 
                 </div>
                 <div class="col-md-12 mt-5" id="lineChartSection">
-                    <h3 id="chartTitle">Evolution de la trésorerie</h3>
+                    <h1 id="chartTitle">Evolution de la trésorerie</h1>
                     <canvas id="lineChart"></canvas>
                     <div class="col-auto mt-3">
-                        <button class="export-pdf-button" onclick="exportTableToPDF('lineChart', 'graphique_courbes', 'pdf', 750, 400)">Exporter en PDF</button>
+                        <button class="export-pdf-button" onclick="exportTableToPDF('lineChart', 'GRAPHIQUE DES TRESORERIES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'NSIREN ' . $_SESSION['numSiren']) ?>', 'pdf', 750, 400)">Exporter en PDF</button>
                     </div>
                 </div>
             </div>

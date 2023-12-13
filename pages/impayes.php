@@ -16,7 +16,10 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     'expires' => time() + 60 * 60 * 24,
     'secure' => true,
     'samesite' => 'None'
-]); ?>
+]);
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -134,7 +137,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 <div class="mt-3 ct1">
                     <div class="row">
                         <div class="col-md-12 col-lg-6 mb-5">
-                            <select id="export-select" class="col-4">
+                            <select id="export-select" class="col-5 col-sm-6">
                                 <option value="csv">Exporter en CSV</option>
                                 <option value="xls">Exporter en XLS</option>
                             </select>
@@ -164,9 +167,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </div>
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
-                                <button class="export-pdf-button"
-                                    onclick="exportTableToPDF('barChart', 'graphique_barres', 'pdf', 750, 400)">Exporter
-                                    en PDF</button>
+                            <button class="export-pdf-button" 
+                                onclick="exportTableToPDF('barChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter en PDF</button>
                             </div>
                         </div>
                     </div>
@@ -179,7 +181,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
                                 <button class="export-pdf-button"
-                                    onclick="exportTableToPDF('lineChart', 'graphique_courbes', 'pdf', 750, 400)">Exporter
+                                    onclick="exportTableToPDF('lineChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter
                                     en PDF</button>
                             </div>
                         </div>
@@ -191,7 +193,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <div class="col-auto mt-3">
 
                         <button class="export-pdf-button"
-                            onclick="exportTableToPDF('pieChart', 'graphique_cam', 'pdf', 750, 400)">Exporter en
+                            onclick="exportTableToPDF('pieChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter
+                            en
                             PDF</button>
                     </div>
                 </div>

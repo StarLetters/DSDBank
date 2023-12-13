@@ -209,7 +209,7 @@ body {
 @media (max-width: 767px) {
 
     .card-group > .card {
-        margin-top: 75%;
+        margin-top: 30%;
       }
 
       .card {
@@ -230,12 +230,32 @@ body {
 
 }
 
-@media (max-width: 315px){
+@media (max-width: 480px){
     p{
         font-size: 0.8rem;
     }
 
     .card {
-        width:200px;
+        width: 100%;
     }
+
+    .card-group {
+        width: 100%;
+      }
+
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 3.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+      }
+
+
+      .container {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 86%;
+      }
 }

@@ -10,6 +10,9 @@ function isPasswordValid($password, $hash)
 if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
     header('Location: home.php');
 }
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,10 +60,12 @@ if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
                         $password = $_POST['password'];
 
 
-                        $request = "SELECT mdp, idUtilisateur FROM Utilisateur WHERE email = '" . $email . "'  AND verifier=1;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
+                        $request = "SELECT mdp, Utilisateur.idUtilisateur, Entreprise.numSiren FROM Utilisateur, Entreprise WHERE email = '" . $email . "'  AND Utilisateur.verifier=1 AND Entreprise.idUtilisateur = Utilisateur.idUtilisateur;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
                         $result = $cnx->prepare($request);
                         $result->execute();
                         $result = $result->fetchAll();
+
+                        $numSiren = $result[0]['numSiren'];
 
                         if ((!empty($result)) && (isPasswordValid($password, $result[0]['mdp']))) {
                             $id = $result[0]['idUtilisateur'];
@@ -75,6 +80,7 @@ if (isset($_SESSION['email'])) { // Si l'utilisateur est déjà connecté
                                 exit;
                             }
                             $_SESSION['email'] = $email;
+                            $_SESSION['numSiren'] = $numSiren;
                             $_SESSION['tries'] = 0;
                             
 

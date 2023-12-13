@@ -68,17 +68,21 @@ function verification($socialReason, $email)
     $string = sha1(rand());
     $token = substr($string, 0, 16); // Génération du token
 
+
     $host = $_SERVER['HTTP_HOST'];
     $cheminVerification = '/account/verifMail.php';
     $lienVerification = 'http://' . $host . $cheminVerification . '?token=' . $token;
 
     $subject = "Verification de votre adresse mail";
+
     $body = "<h1> DSDBank </h1>";
     $body .= "Bonjour " . $socialReason . ",";
     $body .= "<br><br>";
     $body .= "Il ne vous reste qu'une étape pour vérifier votre nouvelle adresse e-mail.";
     $body .= "<br><br>";
+
     $body .= "Veuillez cliquer sur ce lien : <a href='" .$lienVerification. "'>Cliquer ici</a>";
+
     $body .= "<br><br>";
     $body .= "Si vous n'avez pas demandé à vérifier cette adresse e-mail, vous pouvez ignorer cet e-mail.";
     $body .= "<br><br>";
