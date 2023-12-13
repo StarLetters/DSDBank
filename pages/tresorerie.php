@@ -85,7 +85,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <h1 id="chartTitle">Evolution de la trésorerie</h1>
                     <canvas id="lineChart"></canvas>
                     <div class="col-auto mt-3">
-                        <button class="export-pdf-button" onclick="exportTableToPDF('lineChart', 'GRAPHIQUE', 'pdf', 500, 400)">Exporter en PDF</button>
+                        <button class="export-pdf-button" onclick="exportTableToPDF('lineChart', 'GRAPHIQUE DES REMISES DE <?php echo $_SESSION['displayName'] . ' ' .  'NSIREN ' . $_SESSION['numSiren'] ?>', 'pdf', 500, 400)">Exporter en PDF</button>
                     </div>
                 </div>
             </div>

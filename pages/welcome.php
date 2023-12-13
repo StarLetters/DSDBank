@@ -60,7 +60,7 @@ ini_set('display_startup_errors', 1);
                         $password = $_POST['password'];
 
 
-                        $request = "SELECT mdp, Utilisateur.idUtilisateur, Entreprise.raisonSociale FROM Utilisateur, Entreprise WHERE email = '" . $email . "'  AND Utilisateur.verifier=1 AND Entreprise.idUtilisateur = Utilisateur.idUtilisateur;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
+                        $request = "SELECT mdp, Utilisateur.idUtilisateur, Entreprise.numSiren FROM Utilisateur, Entreprise WHERE email = '" . $email . "'  AND Utilisateur.verifier=1 AND Entreprise.idUtilisateur = Utilisateur.idUtilisateur;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
                         $result = $cnx->prepare($request);
                         $result->execute();
                         $result = $result->fetchAll();

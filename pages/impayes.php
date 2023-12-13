@@ -14,7 +14,6 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     'samesite' => 'None'
 ]);
 
-echo "Numéro SIREN : " . $_SESSION['numSiren'];
 ?>
 
 <!DOCTYPE html>
@@ -165,7 +164,7 @@ echo "Numéro SIREN : " . $_SESSION['numSiren'];
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
                                 <button class="export-pdf-button"
-                                    onclick="exportTableToPDF('barChart', 'GRAPHIQUE DES REMISES DE <?php echo $_SESSION['displayName']  . ' ' . $_SESSION['numSiren'] ?>', 'pdf', 500, 400)">Exporter
+                                    onclick="exportTableToPDF('barChart', 'GRAPHIQUE DES REMISES DE <?php echo $_SESSION['displayName']  . ' ' .  'NSIREN ' . $_SESSION['numSiren'] ?>', 'pdf', 500, 400)">Exporter
                                     en PDF</button>
                             </div>
                         </div>
@@ -179,7 +178,7 @@ echo "Numéro SIREN : " . $_SESSION['numSiren'];
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
                                 <button class="export-pdf-button"
-                                    onclick="exportTableToPDF('lineChart', 'GRAPHIQUE DES REMISES DE <?php echo $_SESSION['displayName'] ?>', 'pdf', 500, 400)">Exporter
+                                    onclick="exportTableToPDF('lineChart', 'GRAPHIQUE DES REMISES DE <?php echo $_SESSION['displayName'] . ' ' .  'NSIREN ' . $_SESSION['numSiren'] ?>', 'pdf', 500, 400)">Exporter
                                     en PDF</button>
                             </div>
                         </div>
@@ -191,7 +190,7 @@ echo "Numéro SIREN : " . $_SESSION['numSiren'];
                     <div class="col-auto mt-3">
 
                         <button class="export-pdf-button"
-                            onclick="exportTableToPDF('pieChart', 'GRAPHIQUE DES REMISES DE <?php echo $_SESSION['displayName'] ?>', 'pdf', 500, 400)">Exporter
+                            onclick="exportTableToPDF('pieChart', 'GRAPHIQUE DES REMISES DE <?php echo $_SESSION['displayName'] . ' ' .  'NSIREN ' . $_SESSION['numSiren'] ?>', 'pdf', 500, 400)">Exporter
                             en
                             PDF</button>
                     </div>
