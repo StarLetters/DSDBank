@@ -12,7 +12,11 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
 
     'secure' => true,
     'samesite' => 'None'
-]); ?>
+]);
+
+echo "Numéro SIREN : " . $_SESSION['numSiren'];
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -161,7 +165,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
                                 <button class="export-pdf-button"
-                                    onclick="exportTableToPDF('barChart', 'GRAPHIQUE', 'pdf', 500, 400)">Exporter
+                                    onclick="exportTableToPDF('barChart', 'GRAPHIQUE DES REMISES DE <?php echo $_SESSION['displayName']  . ' ' . $_SESSION['numSiren'] ?>', 'pdf', 500, 400)">Exporter
                                     en PDF</button>
                             </div>
                         </div>
@@ -175,7 +179,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
                                 <button class="export-pdf-button"
-                                    onclick="exportTableToPDF('lineChart', 'GRAPHIQUE', 'pdf', 500, 400)">Exporter
+                                    onclick="exportTableToPDF('lineChart', 'GRAPHIQUE DES REMISES DE <?php echo $_SESSION['displayName'] ?>', 'pdf', 500, 400)">Exporter
                                     en PDF</button>
                             </div>
                         </div>
@@ -187,7 +191,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <div class="col-auto mt-3">
 
                         <button class="export-pdf-button"
-                            onclick="exportTableToPDF('pieChart', 'GRAPHIQUE', 'pdf', 500, 400)">Exporter en
+                            onclick="exportTableToPDF('pieChart', 'GRAPHIQUE DES REMISES DE <?php echo $_SESSION['displayName'] ?>', 'pdf', 500, 400)">Exporter
+                            en
                             PDF</button>
                     </div>
                 </div>

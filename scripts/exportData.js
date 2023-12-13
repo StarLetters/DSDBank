@@ -5,17 +5,13 @@ function exportTableToPDF(chartId, fileName, format, width, height) {
     // Ajoute de l'espace pour le titre et la date
     const titleHeight = 40; // Hauteur du titre
     const dateHeight = 20; // Hauteur de la date
-    const exportWidth = width * 6;
-    const exportHeight = (height + titleHeight + dateHeight) * 2; // Double la hauteur pour une meilleure résolution
+    const exportWidth = width;
+    const exportHeight = height + titleHeight + dateHeight;
 
-    // Détermine les dimensions du canvas exporté avec une légère réduction de taille
-    const exportCanvasWidth = exportWidth * 0.30; // Réduit la largeur 
-    const exportCanvasHeight = exportHeight;
-
-    // Créer un nouveau canvas avec les dimensions réduites
+    // Créer un nouveau canvas avec la taille spécifiée
     const exportCanvas = document.createElement('canvas');
-    exportCanvas.width = exportCanvasWidth;
-    exportCanvas.height = exportCanvasHeight;
+    exportCanvas.width = exportWidth;
+    exportCanvas.height = exportHeight;
     const exportCtx = exportCanvas.getContext('2d');
 
     // Dessine le titre et la date
@@ -25,43 +21,39 @@ function exportTableToPDF(chartId, fileName, format, width, height) {
     exportCtx.font = '12px Arial';
     exportCtx.fillText('Date: ' + currentDate, 10, titleHeight);
 
-    // Dézoome légèrement le graphique en ajustant les coordonnées de la fonction drawImage()
-    const zoomFactor = 3.3; // Facteur de dézoom
-    const zoomedWidth = width * zoomFactor;
-    const zoomedHeight = height * zoomFactor;
-    const xOffset = 0; // Décalage de 0 pour l'axe des x
-    const yOffset = (height - zoomedHeight) / 2;
+    // Copie le contenu du graphique original sur le nouveau canvas
+    exportCtx.drawImage(canvas, 0, titleHeight + dateHeight, width, height);
 
-    exportCtx.drawImage(canvas, xOffset, titleHeight + dateHeight + yOffset, zoomedWidth, zoomedHeight, 0, titleHeight + dateHeight, exportCanvasWidth, exportCanvasHeight);
-
-    if (chartId === 'pieChart') {
-        if (format ==='pdf') {
-            // Exporte en PDF 
-            const element = document.createElement('div');
-            element.appendChild(exportCanvas);
-            html2pdf().from(element).save(fileName + '.pdf');
-        }
-    } else {
-        const imageData = exportCtx.getImageData(0, 0, exportCanvasWidth, exportCanvasHeight);
+    if ((chartId === 'pieChart') && format === 'pdf') {
+        // Exporte en PDF avec les couleurs du pie chart
+        const element = document.createElement('div');
+        element.appendChild(exportCanvas);
+        html2pdf().from(element).save(fileName + '.pdf');
+    } else if (format === 'pdf') {
+        // Convertit le reste en noir pour les autres types de graphiques
+        const imageData = exportCtx.getImageData(0, titleHeight + dateHeight, width, height);
         const data = imageData.data;
-
+    
         for (let i = 0; i < data.length; i += 4) {
-            // Met à jour la couleur en noir (0, 0, 0)
-            data[i] = 0; // Rouge
-            data[i + 1] = 0; // Vert
-            data[i + 2] = 0; // Bleu
+            // Vérifie si le pixel est transparent (transparence = 0)
+            if (data[i + 3] !== 0) {
+                // Met à jour la couleur en noir (0, 0, 0)
+                data[i] = 0; // Rouge
+                data[i + 1] = 0; // Vert
+                data[i + 2] = 0; // Bleu
+            }
         }
-
-        exportCtx.putImageData(imageData, 0, 0);
-
-        if (format === 'pdf') {
-            // Exporte en PDF 
-            const element = document.createElement('div');
-            element.appendChild(exportCanvas);
-            html2pdf().from(element).save(fileName + '.pdf');
-        }
+    
+        exportCtx.putImageData(imageData, 0, titleHeight + dateHeight);
+    
+        // Exporte en PDF avec les couleurs mises à jour
+        const element = document.createElement('div');
+        element.appendChild(exportCanvas);
+        html2pdf().from(element).save(fileName + '.pdf');
     }
 }
+
+
 
 function exportTableToCSV(data) {
     let csvContent = "data:text/csv;charset=utf-8,";
