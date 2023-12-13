@@ -68,14 +68,17 @@ function verification($socialReason, $email)
     $string = sha1(rand());
     $token = substr($string, 0, 16); // Génération du token
 
-    $subject = "Verification de votre adresse mail";
+    $host = $_SERVER['HTTP_HOST'];
+    $cheminVerification = '/account/verifMail.php';
+    $lienVerification = 'http://' . $host . $cheminVerification . '?token=' . $token;
 
+    $subject = "Verification de votre adresse mail";
     $body = "<h1> DSDBank </h1>";
     $body .= "Bonjour " . $socialReason . ",";
     $body .= "<br><br>";
     $body .= "Il ne vous reste qu'une étape pour vérifier votre nouvelle adresse e-mail.";
     $body .= "<br><br>";
-    $body .= "Veuillez cliquer sur ce lien : <a href='" . VERIF_SITE . "?email=" . $email . "&token=" . $token . "'>Cliquer ici</a>";
+    $body .= "Veuillez cliquer sur ce lien : <a href='" .$lienVerification. "'>Cliquer ici</a>";
     $body .= "<br><br>";
     $body .= "Si vous n'avez pas demandé à vérifier cette adresse e-mail, vous pouvez ignorer cet e-mail.";
     $body .= "<br><br>";
@@ -141,10 +144,14 @@ function forgot($socialReason)
         $string = sha1(rand());
         $token = substr($string, 0, 16); // Génération du token
 
+        $host = $_SERVER['HTTP_HOST'];
+        $cheminReinit = '/account/verifReinit.php';
+        $lienReinit = 'http://' . $host . $cheminReinit . '?token=' . $token . '&email=' . $email;
+
         $subject = "Réinitialisation de votre mot de passe";
         $body = "<h1> DSDBank </h1>";
         $body .= "<br><br>";
-        $body .= "Pour réinitialiser votre mot de passe, veuillez cliquer sur ce lien." . "<a href='" . VERIF_SITE . "?email=" . $email . "&token=" . $token . "'>Cliquer ici</a>";
+        $body .= "Pour réinitialiser votre mot de passe, veuillez cliquer sur ce lien." . "<a href='" . $lienReinit . "'>Cliquer ici</a>";
 
         $body .= "<br><br>";
         $body .= "Si vous n'avez pas demandé à réinitialiser votre mot de passe, veuillez nous contacter.";
@@ -156,7 +163,7 @@ function forgot($socialReason)
         if (envoi_mail($socialReason, $email, $subject, $body)) {
             //echo 'OK';
             insertToken($email, $token, "reinitialisation");
-            header('Location: ../account/confirmReinit.html');
+            header('Location: ../account/confirmMailSent.php');
             exit();
         } else {
             echo "Une erreur s'est produite";
