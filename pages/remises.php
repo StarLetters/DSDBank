@@ -42,7 +42,6 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 </div>
                 <div>
                     <?php
-                    echo "<div class=\"hidden\" id=\"role\">".$role."</div>";
                     if ($role == 1) {
                         echo "
                     <label for=\"nSiren\">N° Siren :</label>
