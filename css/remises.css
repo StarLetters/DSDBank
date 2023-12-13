@@ -15,6 +15,7 @@
 }
 
 .detailsRow table{
-   margin-top:20px;
-    margin-bottom:20px;
+    width:90%;
+    margin : 20px auto;
+
 }
