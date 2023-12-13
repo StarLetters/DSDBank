@@ -133,7 +133,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 <div class="mt-3 ct1">
                     <div class="row">
                         <div class="col-md-12 col-lg-6 mb-5">
-                            <select id="export-select" class="col-5">
+                            <select id="export-select" class="col-5 col-sm-6">
                                 <option value="csv">Exporter en CSV</option>
                                 <option value="xls">Exporter en XLS</option>
                             </select>
