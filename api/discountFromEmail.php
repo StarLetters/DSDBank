@@ -3,7 +3,7 @@ include('../backend/cnx.php');
 
 include('../api/utilities.php');
 
-function getDiscount($token, $numSiren)
+function getDiscount($token, $email)
 {
     global $cnx;
     $request = "SELECT 
@@ -20,11 +20,14 @@ function getDiscount($token, $numSiren)
       END
     ) AS `Montant total`
   FROM 
-    Transaction 
-  JOIN 
+    Transaction
+  JOIN
     Entreprise ON Entreprise.idUtilisateur = Transaction.idUtilisateur
+  JOIN 
+    Utilisateur ON Utilisateur.idUtilisateur = Entreprise.idUtilisateur
   JOIN
     Remise ON Remise.numRemise = Transaction.numRemise";
+    
     if ($token !== null) {
         $request .= " WHERE Transaction.idUtilisateur IN (
             SELECT DISTINCT tra.idUtilisateur
@@ -33,8 +36,8 @@ function getDiscount($token, $numSiren)
             AND uti.email = tok.email
             AND tok.token = :token)";
     }
-    else if ($numSiren !== null) {
-        $request .= " WHERE Entreprise.numSiren = :numSiren";
+    else if ($email !== null) {
+        $request .= " WHERE Utilisateur.email = :email";
     }
     $request .=" GROUP BY 
     Entreprise.numSiren, Entreprise.raisonSociale, Transaction.devise, Transaction.numRemise, dateRemise";
@@ -43,8 +46,8 @@ function getDiscount($token, $numSiren)
     if ($token !== null) {
         $result->bindParam(":token", $token);
     }
-    else if ($numSiren !== null) {
-        $result->bindParam(":numSiren", $numSiren);
+    else if ($email !== null) {
+        $result->bindParam(":email", $email);
     }
     $result->execute();
     $result = $result->fetchAll();
@@ -60,11 +63,11 @@ if (empty($_GET) || $_GET['token'] == "null") {
 
 $token = htmlspecialchars($_GET['token']);
 $role = verifRole($token);
-$numSiren = null;
+$email = null;
 if ($role == 1){
-    $numSiren = isset($_GET['nSiren']) ? htmlspecialchars($_GET['nSiren']) : null;
+    $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : null;
     $token = null;
 }
-$result = getDiscount($token, $numSiren);
+$result = getDiscount($token, $email);
 outputJson($result);
 ?>

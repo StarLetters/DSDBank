@@ -20,7 +20,7 @@
         </div>
         <div class="profile-info text-center">
             <div class="profile-name text-white"><?php echo $_SESSION['displayName']?></div>
-            <div class="profile-profession text-white"><?php echo $_SESSION['email']?></div>
+            <div id="profile-email" class="profile-profession text-white"><?php echo $_SESSION['email']?></div>
         </div>
     </div>
 </aside>

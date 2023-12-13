@@ -1,0 +1,20 @@
+.red{
+    background-color: rgba(255, 0, 0, 0.609)!important;
+}
+
+.red:hover {
+    background-color: red!important;
+}
+
+.detailsRow>td{
+    padding : 0px;
+}
+
+.detailsRow:hover{
+    background-color:inherit!important;
+}
+
+.detailsRow table{
+   margin-top:20px;
+    margin-bottom:20px;
+}

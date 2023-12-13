@@ -32,9 +32,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <link rel="stylesheet" href="../css/table.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/impayes.css">
-    <link rel="stylesheet" href="../css/remise.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="../scripts/exportPDF.js"></script>
+    <link rel="stylesheet" href="../css/remises.css">
 </head>
 
 <body>
@@ -49,12 +47,11 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 </div>
                 <div>
                     <?php
+                    echo "<div class=\"hidden\" id=\"role\">".$role."</div>";
                     if ($role == 1) {
                         echo "
-                    <label for=\"nRemise\">N° Remise :</label>
-                    <input type=\"text\" id=\"nRemise\" class=\"form-control form-control-sm date\">
-                    
-                    
+                    <label for=\"nSiren\">N° Siren :</label>
+                    <input type=\"text\" id=\"nSiren\" class=\"form-control form-control-sm date\">
                     <button id=\"resetButton\">Effacer</button>
                     <button id=\"searchButton\">Rechercher</button>";
                     }
@@ -71,15 +68,19 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     </div>
                     <div id="results-container" class="text-right"></div>
                     <div id="table-container"></div>
-                    <div id="details">
-                        <div class="details-back"></div>
-                        <div class="details-container">
-                        <a href="#" id="details-close">X</a>
-                        <div id="detailed-table-container"></div>
-                        </div>  
+                </div>
+                <nav id="pagination-container"></nav>
+                <div class="col-12 mt-5 d-flex flex-row flex-sm-column">
+                    <div class="col-5 mb-5 ml-3">
+                        <select id="export-select">
+                            <option value="csv">Exporter en CSV</option>
+                            <option value="xls">Exporter en XLS</option>
+                        </select>       
+                        <button id="export-button" class="export-button" onclick="exportTable()">Exporter</button>
                     </div>
-                    <nav id="pagination-container"></nav>
-
+                    <div class="col-7"> 
+                        <div id="results-container" class="text-right"></div>
+                    </div>
                 </div>
                 <?php include('../includes/footer.html'); ?>
 
@@ -87,11 +88,14 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 
-        <script defer type="module" src="../scripts/discount.js"></script>
+        <script defer type="module" src="../scripts/remittance.js"></script>
 
         <script src="../scripts/header.js"></script>
+        <script src="../scripts/exportData.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

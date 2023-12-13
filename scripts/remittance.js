@@ -3,16 +3,24 @@ import { getDiscount } from "./fetchData.js";
 import { addRedClassToCellIfNegative } from "./utilities.js";
 
 // Constantes pour les éléments HTML réutilisés
+let role = document.getElementById("role").textContent;
+
 const itemsPerPageElement = document.getElementById("items-per-page");
-const nRemiseElement = document.getElementById("nRemise");
+const nSirenElement = document.getElementById("nSiren");
 const resetButtonElement = document.getElementById("resetButton");
 const searchButtonElement = document.getElementById("searchButton");
-const closeButtonElement = document.getElementById("details-close");
+
 const paginationElement = document.getElementById("pagination-container");
+const closeButtonElement = document.getElementById("details-close");
+
+let email = null;
+if (role === "0") {
+    email = document.getElementById("profile-email").textContent;
+}
 
 // Fonction pour mettre à jour le tableau
 async function updateTable() {
-    updateDetailedDataTable(await getDiscount());
+    updateDetailedDataTable(await getDiscount(email));
     addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"));
 }
 
@@ -25,23 +33,22 @@ async function addListener() {
     paginationElement.addEventListener("click", () => {
         addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"));
     });
-    searchButtonElement.addEventListener("click", updateTable);
-    if (nRemiseElement) {
-        nRemiseElement.addEventListener("keyup", function (event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                document.getElementById("searchButton").click();
+    if (role === "1") {
+        searchButtonElement.addEventListener("click", updateTable);
+        if (nSirenElement) {
+            nSirenElement.addEventListener("keyup", function (event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    document.getElementById("searchButton").click();
+                }
+            });
+        }
+        resetButtonElement.addEventListener("click", () => {
+            if (nSirenElement) {
+                nSirenElement.value = "";
             }
         });
     }
-    resetButtonElement.addEventListener("click", () => {
-        if (nRemiseElement) {
-            nRemiseElement.value = "";
-        }
-    });
-    closeButtonElement.addEventListener("click", () => {
-        document.getElementById("details").style.display = "none";
-    });
 }
 
 function initializeDiscount() {
