@@ -166,7 +166,7 @@ function getUnpaidsPO($token, $nImp = null, $leftBound = null, $rightBound = nul
 
 // Pas autorisé ici
 if (empty($_GET) || $_GET['token'] == "null") {
-    header('Location: ' . $location);
+    header('Location: ../index.html');
     exit;
 }
 

@@ -109,24 +109,15 @@ function getTreasuryPerMonth(leftBound, rightBound) {
     });
 }
 
-function getDiscount(email) {
+function getDiscount() {
     console.log("Fetching via getDiscount()");
-
-    let file;
-    let value;
+    let value="";
 
     if (document.getElementById("nSiren") && document.getElementById("nSiren").value !== "") {
         value = '&nSiren=' + document.getElementById("nSiren").value;
-        file = "discountForEach.php";
-    } else if (email !== null) {
-        value = "&email=" + email;
-        file = "discountFromEmail.php";
-    } else {
-        value = "";
-        file = "discountForEach.php";
     }
-
-    return fetchData(`../api/${file}?token=${getCookie("cnxToken")}${value}`, {
+    console.log(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`);
+    return fetchData(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
