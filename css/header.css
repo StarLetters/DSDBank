@@ -143,7 +143,7 @@ body {
     border-radius: 0;
     position: fixed;
     width: 100%;
-
+    top: 0;
 }
 
 #navbar-wrapper .navbar a:hover {
