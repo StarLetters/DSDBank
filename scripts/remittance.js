@@ -49,9 +49,6 @@ async function addListener() {
             }
         });
     }
-    closeButtonElement.addEventListener("click", () => {
-        document.getElementById("details").style.display = "none";
-    });
 }
 
 function initializeDiscount() {

@@ -28,6 +28,9 @@ function getDiscountDetails($token, $numRemise)
             WHERE tra.idUtilisateur = uti.idUtilisateur
             AND uti.email = tok.email
             AND tok.token = :token)";
+        if ($numRemise !== null) {
+            $request .= " AND Transaction.numRemise = :numRemise";
+        }
     }
     else if ($numRemise !== null) {
         $request .= " WHERE Transaction.numRemise = :numRemise";
@@ -37,7 +40,7 @@ function getDiscountDetails($token, $numRemise)
     if ($token !== null) {
         $result->bindParam(":token", $token);
     }
-    else if ($numRemise !== null) {
+    if ($numRemise !== null) {
         $result->bindParam(":numRemise", $numRemise);
     }
     $result->execute();
@@ -53,9 +56,8 @@ if (empty($_GET) || $_GET['token'] == "null") {
 
 $token = htmlspecialchars($_GET['token']);
 $role = verifRole($token);
-$numRemise = null;
+$numRemise = isset($_GET['nRemise']) ? htmlspecialchars($_GET['nRemise']) : null;
 if ($role == 1){
-    $numRemise = isset($_GET['nRemise']) ? htmlspecialchars($_GET['nRemise']) : null;
     $token = null;
 }
 $result = getDiscountDetails($token, $numRemise);
