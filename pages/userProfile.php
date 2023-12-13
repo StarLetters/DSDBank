@@ -67,10 +67,58 @@ $result = $result->fetchAll();
                     <img src="../data/img/Mochi.jpg" alt="Photo de profil" class="rounded-circle profilepic mx-auto ml-md-5 img-thumbnail" style="height: 150px;">
                     <p class="text-white profile-title mx-auto ml-md-4"> <?php echo $result[0]['raisonSociale'] ?></p>
                 </div>
+                
+
+                <div class="col d-flex flex-column align-items-center">
+                    <p class="text-center mt-4" style="color:var(--couleur-text);"> Solde du compte au <?php 
+                    $fmt = new IntlDateFormatter(
+                        'fr_FR',
+                        IntlDateFormatter::FULL,
+                        IntlDateFormatter::NONE
+                    );
+
+                    echo $fmt->format(new DateTime());
+
+
+                    ?></p> 
+                                    <?php
+                                    echo "<p ";
+                                    $request1 = "SELECT * FROM Transaction WHERE idUtilisateur = :idUtilisateur;";
+                                    $result1 = $cnx->prepare($request1);
+                                    $result1->bindParam(':idUtilisateur', $result[0]['idUtilisateur']);
+                                    $result1->execute();
+                                    $result1 = $result1->fetchAll();
+                                    $montant = 0;
+                                    for ($i = 0; $i < count($result1); $i++) {
+                                        if ($result1[$i]['sens'] == "-") {
+                                            $montant -= $result1[$i]['montant'];
+                                        } else {
+                                            $montant += $result1[$i]['montant'];
+                                        }
+                                    }
+                                    echo "style =\"font-size:1.75rem; font-weight:450; ";
+                                    if ($montant < 0) {
+                                        echo "color: red;";
+                                    } else {
+                                        echo "color: #3be145;";
+                                    } 
+                                    echo "\"";
+                                    ?>                                
+                                    ><?php
+                                        echo $montant." €</p>";
+                                        ?>
+                        </div>
+
+
+
+
+                
+                
                 <div class="col my-auto d-flex justify-content-center justify-content-md-end ">
                     <button class="btn btn-modifier" onclick="openModifier()">Modifier profil</button>
                     <button class="btn btn-deconnexion"><a href="../account/deco.php" class="text-reset text-decoration-none">Se déconnecter</a></button>
                 </div>
+                    
             </div>
             <div class="row-1 d-flex flex-wrap justify-content-around mx-2 mt-5 mt-md-0 infos">
                 <div class="col-12 col-md-6 col-lg-4">
@@ -98,49 +146,7 @@ $result = $result->fetchAll();
                         <p><?php echo (empty($result[0]['numTel'])) ? "Non renseigné" : $result[0]['numTel'] ?></p>
                     </div>
                 </div>
-                <div class="col-12 my-5">
-                    <div class="row-1 d-flex">
-                        <div class="col-lg-12 d-flex justify-content-center">
-                            <div class="card">
-                                <div class="amount" 
-                                <?php
-                                $request1 = "SELECT * FROM Transaction WHERE idUtilisateur = :idUtilisateur;";
-                                $result1 = $cnx->prepare($request1);
-                                $result1->bindParam(':idUtilisateur', $result[0]['idUtilisateur']);
-                                $result1->execute();
-                                $result1 = $result1->fetchAll();
-                                $montant = 0;
-                                for ($i = 0; $i < count($result1); $i++) {
-                                    if ($result1[$i]['sens'] == "-") {
-                                        $montant -= $result1[$i]['montant'];
-                                    } else {
-                                        $montant += $result1[$i]['montant'];
-                                    }
-                                }
-                                echo "style = \" ";
-                                if ($montant < 0) {
-                                    echo "color: red;";
-                                } else {
-                                    echo "color: green;";
-                                } 
-                                echo "\"";
-                                ?>                                
-                                ><?php
-                                    echo $montant;
-                                    ?></div>
-                                <div class="logo">
-                                    <img src="../data/img/LogoDSD.png" alt="logo">
-                                </div>
-                                <div class="chip"><img src="../data/img/chip.png" alt="chip"></div>
-                                <div class="number"><?php echo $result[0]['numCarteEntreprise'] ?></div>
-                                <div class="name"><?php echo $result[0]['raisonSociale'] ?></div>
-                                <div class="from"></div>
-                                <div class="to"><?php echo $result[0]['reseauEntreprise'] ?></div>
-                                <div class="ring"></div> <!-- les cercles en fond -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
 
         </section>
 

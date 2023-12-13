@@ -95,10 +95,6 @@ button:hover>a{
     overflow: hidden;
 }
 
-.logo img, .chip img, .number, .name, .from, .to, .ring, .amount{
-    position: absolute;
-}
-
 .logo img {
     top: 35px;
     right: 40px;
@@ -234,6 +230,10 @@ button:hover>a{
     .card-group > .card {
         margin-top: 75%;
       }
+
+      .btn-modifier{
+        margin: 20px;
+    }
 
       .card {
         position: relative;
