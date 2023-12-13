@@ -60,14 +60,15 @@ ini_set('display_startup_errors', 1);
                         $password = $_POST['password'];
 
 
-                        $request = "SELECT mdp, Utilisateur.idUtilisateur, Entreprise.numSiren FROM Utilisateur, Entreprise WHERE email = '" . $email . "'  AND Utilisateur.verifier=1 AND Entreprise.idUtilisateur = Utilisateur.idUtilisateur;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
+                        $request = "SELECT * FROM Utilisateur 
+                        LEFT JOIN Entreprise ON Utilisateur.idUtilisateur = Entreprise.idUtilisateur 
+                        WHERE email = '" . $email . "'  AND Utilisateur.verifier=1;";  // On vérifie si l'utilisateur existe et si son compte est vérifié
                         $result = $cnx->prepare($request);
                         $result->execute();
                         $result = $result->fetchAll();
 
-                        $numSiren = $result[0]['numSiren'];
-
                         if ((!empty($result)) && (isPasswordValid($password, $result[0]['mdp']))) {
+                            $numSiren = $result[0]['numSiren'];
                             $id = $result[0]['idUtilisateur'];
                             $request = "SELECT * FROM POrequete WHERE email = '" . $email . "';"; // On vérifie si l'utilisateur est dans la table POrequest
                             $result = $cnx->prepare($request);
@@ -80,7 +81,9 @@ ini_set('display_startup_errors', 1);
                                 exit;
                             }
                             $_SESSION['email'] = $email;
-                            $_SESSION['numSiren'] = $numSiren;
+                            if ($numSiren !== null) {
+                                $_SESSION['numSiren'] = $numSiren;
+                            }
                             $_SESSION['tries'] = 0;
                             
 
