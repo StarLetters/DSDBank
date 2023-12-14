@@ -36,8 +36,10 @@ option {
     margin-left: 5%;
   }
 
-#wrapper{
-    color: var(--couleur-text);
+#search-container{
+  border: 1px solid var(--couleur-violet-bouton);
+  border-radius: 10px;
+  padding-bottom: 25px;
 }
 
 @media screen and (max-width: 2250px) {
@@ -146,7 +148,7 @@ nav#pagination-container {
     border-radius: 15px;
     background-color: var(--couleur-violet-bouton);
     color: var(--couleur-fond-sombre);
-    padding: 2px 6px;
+    padding: 5px 20px;
     border: none;
     cursor: pointer;
     border: 1px solid var(--couleur-violet-bouton);
@@ -154,14 +156,9 @@ nav#pagination-container {
     margin-right: 5%;
   }
 
-  @media (max-width: 870px) {
-    .form-row {
-      flex-direction: column;
-      height: 10vh;
-      
-    }
+  .form-row{
+    height: inherit!important;
   }
-
 
   @media (max-width: 768px) {
     .col-md-6 {

@@ -51,12 +51,12 @@ function displayOrderBy() {
   if (document.getElementById("nSIREN")) {
     if (document.getElementById("raisonSociale").value == "" && document.getElementById("nSIREN").value == "" && document.getElementById("nImp").value == "") {
       displayElements(hidePOElements, "none");
-      selectDateElement.classList.remove("d-flex");
+      selectDateElement.classList.remove("d-block");
       selectDateElement.classList.add("d-none");
     } else {
       displayElements(hidePOElements, "block");
       selectDateElement.classList.remove("d-none");
-      selectDateElement.classList.add("d-flex");
+      selectDateElement.classList.add("d-block");
     }
   }
 }

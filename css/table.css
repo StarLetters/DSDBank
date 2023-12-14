@@ -1,8 +1,8 @@
 table {
   border-collapse: collapse;
-  margin: 0;
+  margin: auto;
   padding: 0;
-  width: 100%;
+  width: 95%;
   table-layout: fixed;
   background-color: rgba(255, 255, 255, 0.05);
 }
@@ -70,18 +70,19 @@ table tr {
 
 table th,
 table td {
-  padding: 1.625em;
+  padding: 1em;
   text-align: center;
   color: var(--couleur-text);
+  font-size: 0.8em;
 }
 
 table th {
-  font-size: 0.85em;
+  font-size: 0.7em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   background-color: var(--couleur-hover);
   color: var(--couleur-text);
-  padding: 2.5em 0 2.5em 0;
+  padding: 1.5em 0 1.5em 0;
 }
 
 tr:hover {
@@ -109,7 +110,7 @@ tr:hover {
 
 
 
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: 1200px) {
   table {
     border: 0;
   }

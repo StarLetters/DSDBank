@@ -33,7 +33,7 @@ include('../backend/cnx.php');
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/Home.css">
+    <link rel="stylesheet" href="../css/home.css">
     <link rel="stylesheet" href="../css/varColor.css">
 
 </head>
@@ -56,23 +56,7 @@ include('../backend/cnx.php');
                         </div>
                     </div>
 
-                    <div class="row-1">
-                        <div class="col-lg-12 d-flex justify-content-center">
-                            <div class="card-group mt-3">
-                                <div class="card">
-                                    <div class="logo">
-                                        <img src="../data/img/LogoDSD.png" alt="logo">
-                                    </div>
-                                    <div class="chip"><img src="../data/img/chip.png" alt="chip"></div>
-                                    <div class="number">1234 5678 9012 3456</div>
-                                    <div class="name">Prenom Nom</div>
-                                    <div class="from">10/19</div>
-                                    <div class="to">06/21</div>
-                                    <div class="ring"></div> <!-- les cercles en fond -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
 
                     <div class="row-1">
                         <div class="col-lg-12 text-center mt-3">
@@ -144,7 +128,7 @@ include('../backend/cnx.php');
                     <br><br><br>
                     © 2023, DSDBank Ltd, All Rights Reserved.
                 </footer> -->
-                <?php include('../includes/footer.html'); ?>
+                    <?php include('../includes/footer.html'); ?>
             </div>
 
         </div>

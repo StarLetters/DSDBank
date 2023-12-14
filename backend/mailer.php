@@ -71,7 +71,7 @@ function verification($socialReason, $email)
 
     $host = $_SERVER['HTTP_HOST'];
     $cheminVerification = '/account/verifMail.php';
-    $lienVerification = 'http://' . $host . $cheminVerification . '?token=' . $token;
+    $lienVerification = 'http://' . $host . $cheminVerification . '?token=' . $token .' &email=' . $email;
 
     $subject = "Verification de votre adresse mail";
 

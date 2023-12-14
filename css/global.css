@@ -42,6 +42,10 @@ button:hover{
   width: 35%;
 }
 
+#wrapper{
+  color: var(--couleur-text);
+}
+
 @media (max-width: 315px){
   p{
       font-size: 0.8rem;

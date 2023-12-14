@@ -23,7 +23,6 @@ if (!isset($_GET['email']) || !isset($_GET['token'])) {
     include('../backend/cnx.php');
     $requete = "SELECT * FROM Token WHERE email = '" . $email . "' AND token = '" . $token . "' AND type = 'verification';"; // On vérifie si le token existe
     $cnx->prepare($requete);
-
     $resultat = $cnx->query($requete);
 
     if($resultat->rowCount() == 0){ // Si le token n'existe pas
