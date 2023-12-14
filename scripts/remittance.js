@@ -10,6 +10,7 @@ const resetButtonSirenElement = document.getElementById("resetButton-siren");
 const resetButtonRemiseElement = document.getElementById("resetButton-remise");
 const searchButtonSirenElement = document.getElementById("searchButton-siren");
 const searchButtonRemiseElement = document.getElementById("searchButton-remise");
+const orderByElement = document.getElementById("order-by");
 
 const paginationElement = document.getElementById("pagination-container");
 
@@ -18,7 +19,7 @@ let email = document.getElementById("email").textContent;
 
 // Fonction pour mettre à jour le tableau
 async function updateTable() {
-    updateDetailedDataTable(await getDiscount(email));
+    updateDetailedDataTable(await getDiscount(email, orderByElement.value));
     addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"));
 }
 
@@ -61,6 +62,8 @@ async function addListener() {
     resetButtonRemiseElement.addEventListener("click", () => {
         nRemiseElement.value = "";
     });
+    orderByElement.addEventListener("change", updateTable);
+    orderByElement.selectedIndex = 0;
 }
 
 function initializeDiscount() {

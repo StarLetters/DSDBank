@@ -85,7 +85,13 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </select>
                     </div>
                     <div id="results-container" class="text-right"></div>
-                    
+                </div>
+                <div id="order-by-container" class="col-md-12 col-lg-6 order-by">
+                    <label for="order-by">Trier par:</label>
+                    <select id="order-by" class="item-selecteur col-6 col-sm-6">
+                        <option value="montantDesc">Montant décroissant</option>
+                        <option value="montantAsc">Montant croissant</option>
+                    </select>
                 </div>
                 <div class="row">
                 <div id="table-container"></div>

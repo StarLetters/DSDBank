@@ -3,7 +3,7 @@ include('../backend/cnx.php');
 
 include('../api/utilities.php');
 
-function getDiscount($token, $num, $filter, $email)
+function getDiscount($token, $num, $filter, $email, $order)
 {
     global $cnx;
     $request = "SELECT 
@@ -38,31 +38,36 @@ function getDiscount($token, $num, $filter, $email)
     else if ($num !== null && $filter !== null) {
       if ($filter == 0) {
         $request .= " WHERE Entreprise.numSiren = :numSiren";
-      }
-      else if ($filter == 1) {
+      } else if ($filter == 1) {
         $request .= " WHERE Transaction.numRemise = :numRemise";
       }
       if ($email !== null) {
         $request .= " AND Utilisateur.email = :email";
       }
-    }
-    else if ($email !== null) {
+    } else if ($email !== null) {
         $request .= " WHERE Utilisateur.email = :email";
     }
     $request .=" GROUP BY 
     Entreprise.numSiren, Entreprise.raisonSociale, Transaction.devise, Transaction.numRemise, dateRemise";
-    $request .= " ORDER BY CONVERT(Transaction.numRemise, INTEGER) asc;";
+    if ($order !== null) {
+        if ($order == "montantDesc") {
+            $order = "`Montant total` desc";
+        } else if ($order == "montantAsc") {
+          $order = "`Montant total` asc";
+        }
+    } else {
+        $order = "Transaction.numRemise asc";
+    }
+    $request .= " ORDER BY $order;";
     $result = $cnx->prepare($request);
     if ($token !== null) {
         $result->bindParam(":token", $token);
-    }
-    else if ($num !== null && $filter !== null) {
-      if ($filter == 0) {
-        $result->bindParam(":numSiren", $num);
-      }
-      else if ($filter == 1) {
-        $result->bindParam(":numRemise", $num);
-      }
+    } else if ($num !== null && $filter !== null) {
+        if ($filter == 0) {
+            $result->bindParam(":numSiren", $num);
+        } else if ($filter == 1) {
+            $result->bindParam(":numRemise", $num);
+        }
     }
     if ($email !== null) {
         $result->bindParam(":email", $email);
@@ -84,6 +89,7 @@ $token = htmlspecialchars($_GET['token']);
 $role = verifRole($token);
 $num = null;
 $email = null;
+$order = null;
 if ($role == 1){
     if (isset($_GET['nSiren'])) {
         $num = htmlspecialchars($_GET['nSiren']);
@@ -93,13 +99,13 @@ if ($role == 1){
         $filter = 1;
     }
     $token = null;
-}
-else if ($role == 0) {
+} else if ($role == 0) {
     $num = isset($_GET['nRemise']) ? htmlspecialchars($_GET['nRemise']) : null;
     $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : null;
     $filter = 1;
     $token = null;
 }
-$result = getDiscount($token, $num, $filter, $email);
+$order = isset($_GET['order']) ? htmlspecialchars($_GET['order']) : null;
+$result = getDiscount($token, $num, $filter, $email, $order);
 outputJson($result);
 ?>

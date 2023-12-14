@@ -109,7 +109,7 @@ function getTreasuryPerMonth(leftBound, rightBound) {
     });
 }
 
-function getDiscount(email) {
+function getDiscount(email, order) {
     console.log("Fetching via getDiscount()");
     let value="";
 
@@ -122,6 +122,7 @@ function getDiscount(email) {
     if (email !== null) {
         value = value + '&email=' + email;
     }
+    value = value + '&order=' + order;
     console.log(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`);
     return fetchData(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`, {
         method: 'POST',
