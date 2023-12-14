@@ -74,6 +74,17 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             <button id=\"searchButton-siren\" class=\"searchButton mx-1\">Rechercher</button>
                         </div>
                     </div>
+                    </div>
+                    <div class=\"row mb-5\">
+                        <div class=\"col-12 col-md-4 offset-md-4\">
+                    <input type=\"text\" id=\"raison\" class=\"form-control form-control-sm date\" placeholder=\"Raison Sociale\">
+                    </div>
+                    <div class=\"col-12 mt-2 mx-auto\">
+                        <div class=\"row justify-content-center\">
+                            <button id=\"resetButton-raison\" class=\"resetButton mx-1\">Effacer</button>
+                            <button id=\"searchButton-raison\" class=\"searchButton mx-1\">Rechercher</button>
+                        </div>
+                    </div>
                     </div>";
                     }
                     echo "

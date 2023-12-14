@@ -119,6 +119,9 @@ function getDiscount(startDate, endDate) {
     if (document.getElementById("nRemise") && document.getElementById("nRemise").value !== "") {
         value = '&nRemise=' + document.getElementById("nRemise").value;
     }
+    if (document.getElementById("raison") && document.getElementById("raison").value !== "") {
+        value = '&raison=' + document.getElementById("raison").value;
+    }
     if (document.getElementById("email") && document.getElementById("email").textContent !== "") {
         value = value + '&email=' + document.getElementById("email").textContent;
     }

@@ -5,11 +5,18 @@ import { addRedClassToCellIfNegative } from "./utilities.js";
 // Constantes pour les éléments HTML réutilisés
 const itemsPerPageElement = document.getElementById("items-per-page");
 const nSirenElement = document.getElementById("nSiren");
+const raisonElement = document.getElementById("raison");
 const nRemiseElement = document.getElementById("nRemise");
+
 const resetButtonSirenElement = document.getElementById("resetButton-siren");
-const resetButtonRemiseElement = document.getElementById("resetButton-remise");
 const searchButtonSirenElement = document.getElementById("searchButton-siren");
+
+const resetButtonRemiseElement = document.getElementById("resetButton-remise");
 const searchButtonRemiseElement = document.getElementById("searchButton-remise");
+
+const resetButtonRaisonElement = document.getElementById("resetButton-raison");
+const searchButtonRaisonElement = document.getElementById("searchButton-raison");
+
 const orderByElement = document.getElementById("order-by");
 const startDateElement = document.getElementById("startDate");
 const endDateElement = document.getElementById("endDate");
@@ -39,6 +46,7 @@ async function addListener() {
     if (nSirenElement) {
         searchButtonSirenElement.addEventListener("click", () => {
             nRemiseElement.value = "";
+            raisonElement.value="";
             updateTable();
         });
         nSirenElement.addEventListener("keyup", function (event) {
@@ -51,21 +59,39 @@ async function addListener() {
             nSirenElement.value = "";
         });
     }
-    searchButtonRemiseElement.addEventListener("click", () => {
-        if (nSirenElement) {
-            nSirenElement.value = "";
-        }
-        updateTable();
-    });
-    nRemiseElement.addEventListener("keyup", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            document.getElementById("searchButton-remise").click();
-        }
-    });
-    resetButtonRemiseElement.addEventListener("click", () => {
-        nRemiseElement.value = "";
-    });
+    if (raisonElement) {
+        searchButtonRaisonElement.addEventListener("click", () => {
+            nRemiseElement.value = "";
+            nSirenElement.value="";
+            updateTable();
+        });
+        raisonElement.addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("searchButton-raison").click();
+            }
+        });
+        resetButtonRaisonElement.addEventListener("click", () => {
+            raisonElement.value = "";
+        });
+    }
+    if (nRemiseElement) {
+        searchButtonRemiseElement.addEventListener("click", () => {
+            if (nSirenElement) {
+                nSirenElement.value = "";
+            }
+            updateTable();
+        });
+        nRemiseElement.addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("searchButton-remise").click();
+            }
+        });
+        resetButtonRemiseElement.addEventListener("click", () => {
+            nRemiseElement.value = "";
+        });
+    }
     orderByElement.addEventListener("change", updateTable);
     orderByElement.selectedIndex = 0;
     startDateElement.addEventListener("change", updateTable);
