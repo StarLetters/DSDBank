@@ -41,7 +41,7 @@ async function updateTable() {
   order = document.getElementById("order-by").value;
   data = await getUnpaidsForEach(startDate, endDate, order, nImp, nSIREN, raisonSociale);
 
-  updateDataTable(data);
+  updateDataTable(data, true);
 }
 
 function displayOrderBy() {
@@ -86,6 +86,7 @@ function addListener() {
   resetButtonElement.addEventListener("click", () => {
     nImpElement.value = "";
     if (nSIRENElement) {
+      isPO = true;
       nSIRENElement.value = "";
     }
     if (raisonSocialeElement) {
@@ -140,6 +141,7 @@ async function search() {
   updateTable(data);
 }
 
+let isPO = false;
 function initializeImp() {
   // Par défaut, afficher le graphique à barres
   lineChartSection.style.display = "none";
