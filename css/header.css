@@ -137,7 +137,6 @@ body {
 
 #navbar-wrapper .navbar {
     border-width: 0 0 0 0;
-    background-color: var(--couleur-fond);
     font-size: 24px;
     margin-bottom: 0;
     border-radius: 0;
@@ -180,6 +179,7 @@ hr {
 
     #sidebar-wrapper {
         width: 250px;
+        top: 0;
     }
 
     #wrapper.toggled #sidebar-wrapper {
