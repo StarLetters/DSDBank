@@ -1,261 +1,52 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--couleur-fond-sombre);
 }
 
-/* Styles CSS pour la section profil */
-.profile-section {
-    display: flex;
-    align-items: center;
-    padding-top: 270px;
-    margin-left: 20px;
+.h5, h5 {
+  font-size: 0.9rem;
+  color: white;
+  float: left;
 }
-
-.profile-picture img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.profile-info {
-    flex-grow: 1;
-}
-
-.profile-name {
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 5px;
-    margin-right: 35px;
-}
-
-.profile-profession {
-    font-size: 14px;
-    color: #777;
-    margin-right: 35px;
-}
-
-
-.container {
-    color: #fff;
-    padding: 20px;
-}
-
 
 .text-light {
     color: #fff;
-}
-
-
-/* card */
-
- :root {
-    font-size: 24px;
-}
-
-body {
-    background: var(--couleur-fond-sombre);
-    height: 100vh;
-    font-family: "Josefin Sans", sans-serif;
-}
-
-.card-group {
-    width:fit-content;
-}
-
-.card {
-    position: relative;
-    height: 270px;
-    width: 450px;
-    border-radius: 25px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(30px);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 80px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-}
-
-.logo img, .chip img, .number, .name, .from, .to, .ring {
-    position: absolute;
-}
-
-.logo img {
-    top: 35px;
-    right: 40px;
-    width: 80px;
-    height: auto;
-    opacity: 0.8;
-}
-
-.chip img {
-    top: 120px;
-    left: 40px;
-    width: 50px;
-    height: auto;
-    opacity: 0.8;
-}
-
-.number,
-.name,
-.from,
-.to {
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 400;
-    letter-spacing: 2px;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
-}
-
-.number {
-    left: 40px;
-    bottom: 65px;
-    font-family: "Nunito", sans-serif;
-}
-
-.name {
-    font-size: 0.5rem;
-    left: 40px;
-    bottom: 35px;
-}
-
-.from {
-    font-size: 0.5rem;
-    bottom: 35px;
-    right: 110px;
-}
-
-.to {
-    font-size: 0.5rem;
-    bottom: 35px;
-    right: 40px;
-}
-
-.content-show {
-    display: block !important;
-}
-
-@media (max-width: 768px) {
-    .navbar-collapse:not(.show) + #content {
-        display: block !important;
-    }
-}
-
-.ring {
-    height: 500px;
-    width: 500px;
-    border-radius: 50%;
-    background: transparent;
-    border: 50px solid rgba(255, 255, 255, 0.1);
-    bottom: -250px;
-    right: -250px;
-    box-sizing: border-box;
-}
-
-.ring::after {
-    content: "";
-    position: absolute;
-    height: 600px;
-    width: 600px;
-    border-radius: 50%;
-    background: transparent;
-    border: 30px solid rgba(255, 255, 255, 0.1);
-    bottom: -80px;
-    right: -110px;
-    box-sizing: border-box;
 }
 
 .custom-button {
     background-color: var(--couleur-violet-bouton); 
     color: var(--couleur-text); 
     border: none;
-    padding: 10px 25px;
     border-radius: 30px;
+    padding: 0px 0px;
 }
 
 
-.img-fluid {
-    width: 100px;
-    height: 100px;
-}
-
-
-.thumb-prev .customer-rating {
-	top: -20px;
-	left: 0;
-	right: auto;
-}
-
-.thumb-next .customer-rating {
-	top: -20px;
-	right: 0;
-}
-
-
-.carousel-item {
-    position: relative;
-    display: none;
-    float: left;
+  .blurred-background {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    margin-right: -100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transition: -webkit-transform .6s ease-in-out;
-    transition: transform .6s ease-in-out;
-    transition: transform .6s ease-in-out,-webkit-transform .6s ease-in-out;
-    padding-bottom: 80px;
+    height: 100%;
+    background-image: url('../data/img/wallpaper.webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
   }
 
-  
-@media (max-width: 767px) {
+  .content-show {
+    height: 100vh;
+  }
 
-    .card-group > .card {
-        margin-top: 30%;
-      }
+  .content-title {
+    font-size: 55px;
+    padding-top: 2em;
+  }
 
-      .card {
-        position: relative;
-        height: 270px;
-        width: 300px;
-        border-radius: 25px;
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(30px);
-        border: 2px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 0 80px rgba(0, 0, 0, 0.2);
-        overflow: hidden;
-      }
-
-      .chip{
-        display: none;
-      }
-
+  .no-margin-bottom {
+    margin-bottom: 0 !important;
 }
 
-@media (max-width: 480px){
-    p{
-        font-size: 0.8rem;
-    }
-
-    .card {
-        width: 100%;
-    }
-
-    .card-group {
-        width: 100%;
-      }
-
-    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-        margin-bottom: 3.5rem;
-        font-weight: 500;
-        line-height: 1.2;
-      }
-
-
-      .container {
-        width: 100%;
-        padding-right: 15px;
-        padding-left: 15px;
-        margin-right: auto;
-        margin-left: auto;
-        margin-top: 86%;
-      }
+footer{
+    margin-top: 0!important;
 }

@@ -1,7 +1,5 @@
 <?php
-
 session_start();
-
 require('../account/verifLogin.php');
 $verif = verifLogin();
 switch ($verif) {
@@ -14,9 +12,7 @@ switch ($verif) {
         header('Location: ../pages/adminHome.php');
         break;
 }
-
 include('../backend/cnx.php');
-
 ?>
 
 <!DOCTYPE html>
@@ -35,32 +31,29 @@ include('../backend/cnx.php');
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/home.css">
     <link rel="stylesheet" href="../css/varColor.css">
-
+    <link rel="stylesheet" href="../css/footer.css">
 </head>
 
 <body>
     <div class="">
         <div id="wrapper">
-
             <?php include('../includes/header.php'); ?>
-
+            <div class="blurred-background"></div>
             <div id="content" class="content-show">
-                <section id="content-wrapper">
+                <section id="content-wrapper" class="no-margin-bottom">
                     <div class="row-1">
-                        <div class="col-lg-12">
-                            <h2 class="content-title text-white mt-5">Bonjour, <span>
-                                    <?php
-                                    echo $_SESSION['displayName'];
-                                    ?>
+                        <div class="col-lg-12 d-flex flex-column">
+                            <h2 class="content-title text-white mt-5 text-left">Bonjour, <span>
+                                    <?php echo $_SESSION['displayName']; ?>
+                                    <br>
+                                    Bienvenue dans DSD Bank
                                 </span></h2>
-                        </div>
-                    </div>
-
-
-
-                    <div class="row-1">
-                        <div class="col-lg-12 text-center mt-3">
-                            <a href="../pages/userProfile.php" class="custom-button">Voir mon profil</a>
+                                <span>
+                                    <h5>
+                                        Profitez dès maintenant de la comptabilité à la fois simple et complète
+                                    </h5>
+                                </span>
+                                <a href="../pages/userProfile.php" class="custom-button col-2">Voir mon profil</a>
                         </div>
                     </div>
                 </section>
@@ -133,6 +126,7 @@ include('../backend/cnx.php');
 
         </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
     <script src="../scripts/header.js"></script>
