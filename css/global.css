@@ -12,6 +12,10 @@
     font-size: 0.9rem;
 }
 
+body{
+    padding-top: 50px;
+}
+
 .btn-option {
   color: var(--couleur-text);
   border: 1px solid var(--couleur-text);
