@@ -116,6 +116,9 @@ function getDiscount() {
     if (document.getElementById("nSiren") && document.getElementById("nSiren").value !== "") {
         value = '&nSiren=' + document.getElementById("nSiren").value;
     }
+    else if (document.getElementById("nRemise") && document.getElementById("nRemise").value !== "") {
+        value = '&nRemise=' + document.getElementById("nRemise").value;
+    }
     console.log(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`);
     return fetchData(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`, {
         method: 'POST',

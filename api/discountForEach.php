@@ -3,7 +3,7 @@ include('../backend/cnx.php');
 
 include('../api/utilities.php');
 
-function getDiscount($token, $numSiren)
+function getDiscount($token, $num, $filter)
 {
     global $cnx;
     $request = "SELECT 
@@ -33,8 +33,13 @@ function getDiscount($token, $numSiren)
             AND uti.email = tok.email
             AND tok.token = :token)";
     }
-    else if ($numSiren !== null) {
+    else if ($num !== null && $filter !== null) {
+      if ($filter == 0) {
         $request .= " WHERE Entreprise.numSiren = :numSiren";
+      }
+      else if ($filter == 1) {
+        $request .= " WHERE Transaction.numRemise = :numRemise";
+      }
     }
     $request .=" GROUP BY 
     Entreprise.numSiren, Entreprise.raisonSociale, Transaction.devise, Transaction.numRemise, dateRemise";
@@ -43,8 +48,13 @@ function getDiscount($token, $numSiren)
     if ($token !== null) {
         $result->bindParam(":token", $token);
     }
-    else if ($numSiren !== null) {
-        $result->bindParam(":numSiren", $numSiren);
+    else if ($num !== null && $filter !== null) {
+      if ($filter == 0) {
+        $result->bindParam(":numSiren", $num);
+      }
+      else if ($filter == 1) {
+        $result->bindParam(":numRemise", $num);
+      }
     }
     $result->execute();
     $result = $result->fetchAll();
@@ -61,11 +71,17 @@ if (empty($_GET) || $_GET['token'] == "null") {
 
 $token = htmlspecialchars($_GET['token']);
 $role = verifRole($token);
-$numSiren = null;
-if ($role == 1){
-    $numSiren = isset($_GET['nSiren']) ? htmlspecialchars($_GET['nSiren']) : null;
+$num = null;
+if ($role == 1 || $role == 0){
+    if (isset($_GET['nSiren'])) {
+        $num = htmlspecialchars($_GET['nSiren']);
+        $filter = 0;
+    } else {
+        $num = isset($_GET['nRemise']) ? htmlspecialchars($_GET['nRemise']) : null;
+        $filter = 1;
+    }
     $token = null;
 }
-$result = getDiscount($token, $numSiren);
+$result = getDiscount($token, $num, $filter);
 outputJson($result);
 ?>

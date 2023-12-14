@@ -53,15 +53,25 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <input type=\"text\" id=\"nSiren\" class=\"form-control form-control-sm date\" placeholder=\"N°SIREN\">
                     </div>
                     <div class=\"col-12 mt-2 mx-auto\">
-                    <div class=\"row justify-content-center\">
-                    <button id=\"resetButton\" class=\"mx-1\">Effacer</button>
-                    <button id=\"searchButton\" class=\"mx-1\">Rechercher</button>
-                    </div>
+                        <div class=\"row justify-content-center\">
+                            <button id=\"resetButton-siren\" class=\"resetButton mx-1\">Effacer</button>
+                            <button id=\"searchButton-siren\" class=\"searchButton mx-1\">Rechercher</button>
+                        </div>
                     </div>
                     </div>";
                     }
                     ?>
-                
+                <div class="row mb-5">
+                    <div class="col-12 col-md-4 offset-md-4">
+                        <input type="text" id="nRemise" class="form-control form-control-sm date" placeholder="N°Remise">
+                    </div>
+                    <div class="col-12 mt-2 mx-auto">
+                        <div class="row justify-content-center">
+                            <button id="resetButton-remise" class="resetButton mx-1">Effacer</button>
+                            <button id="searchButton-remise" class="searchButton mx-1">Rechercher</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="row justify-content-between align-items-start mx-3 mb-3">
                     <div id="items-per-page-container">
                         <label for="items-per-page">Éléments par page:</label>

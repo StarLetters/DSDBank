@@ -57,7 +57,7 @@ if (empty($_GET) || $_GET['token'] == "null") {
 $token = htmlspecialchars($_GET['token']);
 $role = verifRole($token);
 $numRemise = isset($_GET['nRemise']) ? htmlspecialchars($_GET['nRemise']) : null;
-if ($role == 1){
+if ($role == 1 || $role == 0){
     $token = null;
 }
 $result = getDiscountDetails($token, $numRemise);
