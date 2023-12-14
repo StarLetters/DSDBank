@@ -36,7 +36,7 @@ function envoi_mail($name, $email, $subject, $body)
         $mail->Username = SMTP_HOST;
         $mail->Password = SMTP_PASS;
         $mail->Port = 465;
-
+        
         //Destinataire
         $mail->setFrom('elae.dsd@gmail.com', 'DSDBank');
         $mail->addAddress($email, $name);
