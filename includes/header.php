@@ -29,7 +29,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="#" class="navbar-brand" id="sidebar-toggle"><img src="../data/img/hamburger.svg" width="35px" height="35px" alt=""></a>
+                <a href="#" class="navbar-brand" id="sidebar-toggle"><img src="../data/img/burger.png" width="35px" height="35px" alt=""></a>
             </div>
         </div>
     </nav>
