@@ -260,7 +260,7 @@ body {
 
 .content-after-profile {
     background-color: transparent;
-    padding-top: 25em;
+    padding-top: 5em;
   }
 
 .content-show {
@@ -272,7 +272,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 90%;
+    height: 100%;
     background-image: url('../data/img/wallpaper.webp');
     background-size: cover;
     background-position: center;
@@ -283,3 +283,7 @@ body {
     font-size: 55px;
     padding-top: 2em;
   }
+
+  .no-margin-bottom {
+    margin-bottom: 0 !important;
+}
