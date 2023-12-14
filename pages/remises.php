@@ -44,10 +44,10 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <h1 class="mt-5">Recherche de remise</h1>
                     </div>
                 </div>
-                
-                    <?php
-                    if ($role == 1) {
-                        echo "
+
+                <?php
+                if ($role == 1) {
+                    echo "
                         <div class=\"row mb-5\">
                         <div class=\"col-12 col-md-4 offset-md-4\">
                     <input type=\"text\" id=\"nSiren\" class=\"form-control form-control-sm date\" placeholder=\"N°SIREN\">
@@ -59,9 +59,9 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     </div>
                     </div>
                     </div>";
-                    }
-                    ?>
-                
+                }
+                ?>
+
                 <div class="row justify-content-between align-items-start mx-3 mb-3">
                     <div id="items-per-page-container">
                         <label for="items-per-page">Éléments par page:</label>
@@ -72,20 +72,20 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </select>
                     </div>
                     <div id="results-container" class="text-right"></div>
-                    
+
                 </div>
                 <div class="row">
-                <div id="table-container"></div>
+                    <div id="table-container"></div>
                 </div>
                 <div class="row justify-content-center">
-                <nav id="pagination-container" class="flex-row flex-wrap"></nav>
+                    <nav id="pagination-container" class="flex-row flex-wrap"></nav>
                 </div>
                 <div class="col-12 mt-5 d-flex flex-row flex-sm-column">
                     <div class="col-12 col-md-5 mb-5 ml-3">
                         <select id="export-select">
                             <option value="csv">Exporter en CSV</option>
                             <option value="xls">Exporter en XLS</option>
-                        </select>       
+                        </select>
                         <button id="export-button" class="export-button" onclick="exportTable()">Exporter</button>
                     </div>
                 </div>
@@ -97,11 +97,13 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
         <script defer type="module" src="../scripts/remittance.js"></script>
 
         <script src="../scripts/header.js"></script>
-        <script src="../scripts/exportData.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.6/xlsx.full.min.js"></script>
+
+        <script src="../scripts/exportData.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

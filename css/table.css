@@ -108,7 +108,9 @@ tr:hover {
   color: var(--couleur-hover);
 }
 
-
+#items-per-page{
+  width: 60px!important;
+}
 
 @media screen and (max-width: 1200px) {
   table {
