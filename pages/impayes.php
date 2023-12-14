@@ -46,8 +46,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <h1 class="mt-4">Mes impayés</h1>
                     </div>
                 </div>
-                <div class="row mt-4 ct1 flex-column flex-md-row">
-                <div class="hidePO col-12 col-md-6 align-items-center flex-row order-md-2">
+                <div class="row mt-4 ct1 flex-column flex-md-row mb-3">
+                    <div class="hidePO col-12 col-md-6 align-items-center flex-row order-md-2">
                         <div class="col-12 mx-auto mt-auto">
                             <div class="hidePO text-center" id="date-container">
                                 <label for="choiceDateImp">Dater par : </label>
@@ -58,7 +58,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                                 </select>
                             </div>
                         </div>
-                        <div class="col-12" id="selectDate">
+                        <div class="col-12 mb-3 mb-md-0" id="selectDate">
                             <div class="row">
                                 <div class="col-6">
                                     <label for="startDate">Date de début :</label>
@@ -84,14 +84,14 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                                 ';
                         }
                         ?>
-                        <div class="d-flex flex-column flex-md-row mt-3">
+                        <div class="d-flex flex-column flex-md-row mt-2">
                             <button id="resetButton" class="align-self-center my-1">Effacer</button>
                             <button id="searchButton" class="align-self-center my-1">Rechercher</button>
                         </div>
                     </div>
-
-
                 </div>
+                <hr class="mt-5 mb-5">
+                <div class="row"></div>
                 <div class="row mt-5 ct1">
                     <div id="items-per-page-container" class="col-md-12 col-lg-6">
                         <label for="items-per-page">Éléments par page:</label>
@@ -117,9 +117,9 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </select>
                     </div>
                 </div>
-                <div class="mt-3 ct1">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-6 mb-5">
+                <div class="ct1">
+                    <div class="row my-3">
+                        <div class="col-md-12 col-lg-6 mb-2">
                             <select id="export-select" class="col-5 col-sm-6">
                                 <option value="csv">Exporter en CSV</option>
                                 <option value="xls">Exporter en XLS</option>
@@ -136,7 +136,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
 
                 <nav id="pagination-container"></nav>
 
-                <div class="hidePO row" id="graphics">
+                <div class="hidePO row mt-5" id="graphics">
 
                     <select id="chartType" class="form-control mt-3 slide">
                         <option value="bar">Graphique à Barres</option>
@@ -171,7 +171,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     </div>
                 </div>
                 <div class="col-md-12 mt-5 mb-4">
-                    <h3>Motifs d'impayés</h3>
+                    <h3 class="pt-5">Motifs d'impayés</h3>
                     <canvas id="pieChart"></canvas>
                     <div class="col-auto mt-3">
                         <!--

@@ -119,13 +119,13 @@ function exportTable() {
       exportTableToCSV('table-container');
     } else if (selectedValue === "xls") {
       exportTableToXLS('table-container');
-    }
+    } 
 }
-
+/*
 const exportButton = document.getElementById('export-button');
 exportButton.addEventListener('click', () => {
     exportTableToCSV(data);
     exportTableToXLS(data);
 });
-
+*/
 

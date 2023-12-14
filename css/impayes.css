@@ -101,7 +101,6 @@ option {
 
 button[onclick^="exportTable"],
 nav#pagination-container {
-    margin-top: 2em;
     margin-right: 1em;
 }
 

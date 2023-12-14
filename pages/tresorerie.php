@@ -73,22 +73,24 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     ?>
                 </div>
                 <div>
-                    
-                    <div id="items-per-page-container" class="mx-3 mb-sm-3">
+                    <div class="row px-4 mb-2">
+                    <div id="items-per-page-container" class="mx-3">
                         <label for="items-per-page">Éléments par page:</label>
-                        <select id="items-per-page" class="item-selecteur col-1 col-sm-3">
+                        <select id="items-per-page" class="item-selecteur">
                             <option value="3">3</option>
                             <option value="5">5</option>
                             <option value="10">10</option>
                         </select>
                     </div>
-                    <div id="results-container" class="text-right mb-2"></div>
+                    <div id="results-container" class="text-right"></div>
+                </div>
 
                     <div id="table-container"></div>
-                    <div class="col-md-12 col-lg-6 mb-5">
+                    <div class="col-md-12 col-lg-6 my-3">
                             <select id="export-select" class="col-4 col-sm-4">
                                 <option value="csv">Exporter en CSV</option>
                                 <option value="xls">Exporter en XLS</option>
+                                <option value="pdf">Exporter en PDF</option>
                             </select>
                             <button class="export-button col-2 col-sm-4" onclick="exportTable()">Exporter</button>
                         </div>
@@ -96,7 +98,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
 
                 </div>
                 <div class="col-md-12 mt-5" id="lineChartSection">
-                    <h1 id="chartTitle">Evolution de la trésorerie</h1>
+                    <h2 id="chartTitle" class="mb-3">Evolution de la trésorerie</h2>
                     <canvas id="lineChart"></canvas>
                     <div class="col-auto mt-3">
                         <button class="export-pdf-button" onclick="exportTableToPDF('lineChart', 'GRAPHIQUE DES TRESORERIES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'NSIREN ' . $_SESSION['numSiren']) ?>', 'pdf', 750, 400)">Exporter en PDF</button>
