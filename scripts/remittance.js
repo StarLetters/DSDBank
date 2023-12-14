@@ -11,15 +11,19 @@ const resetButtonRemiseElement = document.getElementById("resetButton-remise");
 const searchButtonSirenElement = document.getElementById("searchButton-siren");
 const searchButtonRemiseElement = document.getElementById("searchButton-remise");
 const orderByElement = document.getElementById("order-by");
-
+const startDateElement = document.getElementById("startDate");
+const endDateElement = document.getElementById("endDate");
 const paginationElement = document.getElementById("pagination-container");
 
-let email = document.getElementById("email").textContent;
+let startDate = startDateElement.value;
+let endDate = endDateElement.value;
 
 
 // Fonction pour mettre à jour le tableau
 async function updateTable() {
-    updateDetailedDataTable(await getDiscount(email, orderByElement.value));
+    startDate = document.getElementById("startDate").value;
+    endDate = document.getElementById("endDate").value;
+    updateDetailedDataTable(await getDiscount(startDate, endDate));
     addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"));
 }
 
@@ -64,6 +68,8 @@ async function addListener() {
     });
     orderByElement.addEventListener("change", updateTable);
     orderByElement.selectedIndex = 0;
+    startDateElement.addEventListener("change", updateTable);
+    endDateElement.addEventListener("change", updateTable);
 }
 
 function initializeDiscount() {

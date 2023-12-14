@@ -44,6 +44,22 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <h1 class="mt-5">Recherche de remise</h1>
                     </div>
                 </div>
+                <div class="row mt-4 ct1 flex-column flex-md-row">
+                    <div class="hidePO col-12 col-md-6 align-items-center flex-row order-md-2">
+                        <div class="col-12" id="selectDate">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="startDate">Date de début :</label>
+                                    <input type="date" id="startDate" class="form-control form-control-sm date col-12">
+                                </div>
+                                <div class="col-6">
+                                    <label for="endDate">Date de fin :</label>
+                                    <input type="date" id="endDate" class="form-control form-control-sm date col-12">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
                     <?php
                     if ($role == 1) {

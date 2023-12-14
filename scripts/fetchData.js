@@ -109,20 +109,26 @@ function getTreasuryPerMonth(leftBound, rightBound) {
     });
 }
 
-function getDiscount(email, order) {
+function getDiscount(startDate, endDate) {
     console.log("Fetching via getDiscount()");
     let value="";
 
     if (document.getElementById("nSiren") && document.getElementById("nSiren").value !== "") {
         value = '&nSiren=' + document.getElementById("nSiren").value;
     }
-    else if (document.getElementById("nRemise") && document.getElementById("nRemise").value !== "") {
+    if (document.getElementById("nRemise") && document.getElementById("nRemise").value !== "") {
         value = '&nRemise=' + document.getElementById("nRemise").value;
     }
-    if (email !== null) {
-        value = value + '&email=' + email;
+    if (document.getElementById("email") && document.getElementById("email").textContent !== "") {
+        value = value + '&email=' + document.getElementById("email").textContent;
     }
-    value = value + '&order=' + order;
+    if (startDate !== null && startDate !== "") {
+        value = value + '&startDate=' + startDate;
+    }
+    if (endDate !== null && endDate !== "") {
+        value = value + '&endDate=' + endDate;
+    }
+    value = value + '&order=' + document.getElementById("order-by").value;
     console.log(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`);
     return fetchData(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`, {
         method: 'POST',
