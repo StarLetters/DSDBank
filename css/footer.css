@@ -23,12 +23,12 @@ footer {
     margin: 30px auto;
     text-align: center;
     max-width: 1200px; /* Ajustez la valeur de max-width selon votre mise en page */
+    align-items: center;
 }
 
 .footer-container {
     margin-right: 0;
     margin-left: 0;
-    padding-top: 3em;
 }
 
 

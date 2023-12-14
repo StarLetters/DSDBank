@@ -16,4 +16,19 @@ function addRedClassToCellIfNegative(tableRows) {
   }
 }
 
-export { displayElements, addRedClassToCellIfNegative };
+function addColorToCells(tableRows) {
+  for (let i = 0; i < tableRows.length; i++) {
+    const row = tableRows[i];
+    const lastCellValue = parseFloat(row.lastElementChild.textContent);
+
+    const roundedValue = Math.round(lastCellValue / 100) * 100;
+
+    console.log(roundedValue);
+
+    row.lastElementChild.classList.add("amount"+roundedValue);
+
+    
+  }
+}
+
+export { displayElements, addRedClassToCellIfNegative, addColorToCells };

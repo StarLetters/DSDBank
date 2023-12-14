@@ -54,7 +54,7 @@ function renderPagination(data, itemsPerPage) {
     }
 }
 
-function createTable(data, tableId) {
+function createTable(data, tableId, AreCellsColored = false) {
     const tableContainer = document.getElementById(tableId);
     tableContainer.innerHTML = '';
 
@@ -90,12 +90,13 @@ function createTable(data, tableId) {
                 const cell = document.createElement('td');
 
                 // Ajoute une classe en fonction du montant
-                if (key === 'montant') {
-                    if (parseFloat(value) > 0) {
-                        cell.classList.add('positive-amount');
-                    } else if (parseFloat(value) < 0) {
-                        cell.classList.add('negative-amount');
-                    }
+                if (AreCellsColored && (key === 'montant' || key === 'Somme Impayés') ) {
+                    const cellValue = parseFloat(value);
+                    const roundedValue = Math.max(Math.round(cellValue / 100) * 100, -800); // Set maximum value to 800
+                    cell.classList.add("amount"+roundedValue);
+
+                    console.log("amount"+roundedValue);
+
                 }
 
                 cell.textContent = value;
@@ -158,10 +159,10 @@ function showResult() {
     result.innerHTML = "Affichage de " + nbResult + " sur " + data.length + " résultats";
 }
 
-async function updateDataTable(externdata) {
+async function updateDataTable(externdata, AreCellsColored = false) {
     data = externdata;
     const paginatedData = paginateTable(data, itemsPerPage);
-    createTable(paginatedData, 'table-container');
+    createTable(paginatedData, 'table-container', AreCellsColored);
     renderPagination(data, itemsPerPage);
     showResult();
 }
