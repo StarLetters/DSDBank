@@ -44,24 +44,53 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <h1 class="mt-5">Recherche de remise</h1>
                     </div>
                 </div>
-
-                <?php
-                if ($role == 1) {
-                    echo "
+                <div class="row mt-4 ct1 flex-column flex-md-row">
+                    <div class="hidePO col-12 col-md-6 align-items-center flex-row order-md-2">
+                        <div class="col-12" id="selectDate">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="startDate">Date de début :</label>
+                                    <input type="date" id="startDate" class="form-control form-control-sm date col-12">
+                                </div>
+                                <div class="col-6">
+                                    <label for="endDate">Date de fin :</label>
+                                    <input type="date" id="endDate" class="form-control form-control-sm date col-12">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                    <?php
+                    if ($role == 1) {
+                        echo "
                         <div class=\"row mb-5\">
                         <div class=\"col-12 col-md-4 offset-md-4\">
                     <input type=\"text\" id=\"nSiren\" class=\"form-control form-control-sm date\" placeholder=\"N°SIREN\">
                     </div>
                     <div class=\"col-12 mt-2 mx-auto\">
-                    <div class=\"row justify-content-center\">
-                    <button id=\"resetButton\" class=\"mx-1\">Effacer</button>
-                    <button id=\"searchButton\" class=\"mx-1\">Rechercher</button>
-                    </div>
+                        <div class=\"row justify-content-center\">
+                            <button id=\"resetButton-siren\" class=\"resetButton mx-1\">Effacer</button>
+                            <button id=\"searchButton-siren\" class=\"searchButton mx-1\">Rechercher</button>
+                        </div>
                     </div>
                     </div>";
-                }
-                ?>
-
+                    }
+                    echo "
+                    <div id=\"email\" class=\"hidden\">".$_SESSION['email']."</div>
+                    ";
+                    ?>
+                <div class="row mb-5">
+                    <div class="col-12 col-md-4 offset-md-4">
+                        <input type="text" id="nRemise" class="form-control form-control-sm date" placeholder="N°Remise">
+                    </div>
+                    <div class="col-12 mt-2 mx-auto">
+                        <div class="row justify-content-center">
+                            <button id="resetButton-remise" class="resetButton mx-1">Effacer</button>
+                            <button id="searchButton-remise" class="searchButton mx-1">Rechercher</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="row justify-content-between align-items-start mx-3 mb-3">
                     <div id="items-per-page-container">
                         <label for="items-per-page">Éléments par page:</label>
@@ -72,7 +101,13 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </select>
                     </div>
                     <div id="results-container" class="text-right"></div>
-
+                </div>
+                <div id="order-by-container" class="col-md-12 col-lg-6 order-by">
+                    <label for="order-by">Trier par:</label>
+                    <select id="order-by" class="item-selecteur col-6 col-sm-6">
+                        <option value="montantDesc">Montant décroissant</option>
+                        <option value="montantAsc">Montant croissant</option>
+                    </select>
                 </div>
                 <div class="row">
                     <div id="table-container"></div>

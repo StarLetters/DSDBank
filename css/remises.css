@@ -20,8 +20,12 @@
 
 }
 
-#resetButton, 
-#searchButton,
+.hidden {
+    display: none;
+}
+
+.resetButton, 
+.searchButton,
 #export-select,
 #export-button{
     background-color: var(--couleur-violet-bouton);
