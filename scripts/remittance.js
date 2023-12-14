@@ -13,10 +13,12 @@ const searchButtonRemiseElement = document.getElementById("searchButton-remise")
 
 const paginationElement = document.getElementById("pagination-container");
 
+let email = document.getElementById("email").textContent;
+
 
 // Fonction pour mettre à jour le tableau
 async function updateTable() {
-    updateDetailedDataTable(await getDiscount());
+    updateDetailedDataTable(await getDiscount(email));
     addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"));
 }
 

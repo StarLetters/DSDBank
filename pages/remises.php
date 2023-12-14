@@ -60,6 +60,9 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     </div>
                     </div>";
                     }
+                    echo "
+                    <div id=\"email\" class=\"hidden\">".$_SESSION['email']."</div>
+                    ";
                     ?>
                 <div class="row mb-5">
                     <div class="col-12 col-md-4 offset-md-4">

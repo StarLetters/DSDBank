@@ -3,7 +3,7 @@ include('../backend/cnx.php');
 
 include('../api/utilities.php');
 
-function getDiscount($token, $num, $filter)
+function getDiscount($token, $num, $filter, $email)
 {
     global $cnx;
     $request = "SELECT 
@@ -24,6 +24,8 @@ function getDiscount($token, $num, $filter)
   JOIN 
     Entreprise ON Entreprise.idUtilisateur = Transaction.idUtilisateur
   JOIN
+    Utilisateur ON Utilisateur.idUtilisateur = Entreprise.idUtilisateur
+  JOIN
     Remise ON Remise.numRemise = Transaction.numRemise";
     if ($token !== null) {
         $request .= " WHERE Transaction.idUtilisateur IN (
@@ -40,6 +42,12 @@ function getDiscount($token, $num, $filter)
       else if ($filter == 1) {
         $request .= " WHERE Transaction.numRemise = :numRemise";
       }
+      if ($email !== null) {
+        $request .= " AND Utilisateur.email = :email";
+      }
+    }
+    else if ($email !== null) {
+        $request .= " WHERE Utilisateur.email = :email";
     }
     $request .=" GROUP BY 
     Entreprise.numSiren, Entreprise.raisonSociale, Transaction.devise, Transaction.numRemise, dateRemise";
@@ -55,6 +63,9 @@ function getDiscount($token, $num, $filter)
       else if ($filter == 1) {
         $result->bindParam(":numRemise", $num);
       }
+    }
+    if ($email !== null) {
+        $result->bindParam(":email", $email);
     }
     $result->execute();
     $result = $result->fetchAll();
@@ -72,7 +83,8 @@ if (empty($_GET) || $_GET['token'] == "null") {
 $token = htmlspecialchars($_GET['token']);
 $role = verifRole($token);
 $num = null;
-if ($role == 1 || $role == 0){
+$email = null;
+if ($role == 1){
     if (isset($_GET['nSiren'])) {
         $num = htmlspecialchars($_GET['nSiren']);
         $filter = 0;
@@ -82,6 +94,12 @@ if ($role == 1 || $role == 0){
     }
     $token = null;
 }
-$result = getDiscount($token, $num, $filter);
+else if ($role == 0) {
+    $num = isset($_GET['nRemise']) ? htmlspecialchars($_GET['nRemise']) : null;
+    $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : null;
+    $filter = 1;
+    $token = null;
+}
+$result = getDiscount($token, $num, $filter, $email);
 outputJson($result);
 ?>
