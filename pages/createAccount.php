@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('../includes/popup.php');
 
 include('../account/verifLogin.php');
 if  (verifLogin() != 2) {
@@ -30,7 +31,8 @@ $request = 'SELECT email, mdp FROM Utilisateur WHERE email = :email';
     //SI YA DEJA QUELQU'UN AVEC CET EMAIL
     //TODO
     if (count($result) > 0) {
-        echo "Cet email est déjà utilisé";
+        setPopup(0,"L'email est déjà utilisé");
+        header('Location: createAccount.php');
         exit;
     }
 
@@ -160,6 +162,8 @@ verification($socialReason, $email);
             <a href="javascript:history.back()" class="custom-button btn-secondary"><span class="arrow-left">&#x2190;</span> Retour</a>
         </form>
     </div>
+
+    <?php displayPopup(); ?>
 
 </body>
 </html>
