@@ -42,20 +42,18 @@ include('../backend/cnx.php');
             <div id="content" class="content-show">
                 <section id="content-wrapper" class="no-margin-bottom">
                     <div class="row-1">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 d-flex flex-column">
                             <h2 class="content-title text-white mt-5 text-left">Bonjour, <span>
                                     <?php echo $_SESSION['displayName']; ?>
                                     <br>
                                     Bienvenue dans DSD Bank
                                 </span></h2>
-                            <div class="col-10 d-flex flex-column">
                                 <span>
                                     <h5>
                                         Profitez dès maintenant de la comptabilité à la fois simple et complète
                                     </h5>
                                 </span>
                                 <a href="../pages/userProfile.php" class="custom-button col-2">Voir mon profil</a>
-                            </div>
                         </div>
                     </div>
                 </section>

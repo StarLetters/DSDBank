@@ -18,6 +18,7 @@ body {
     color: var(--couleur-text); 
     border: none;
     border-radius: 30px;
+    padding: 0px 0px;
 }
 
 
