@@ -27,8 +27,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes impayés</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/varColor.css">
@@ -47,68 +46,52 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <h1 class="mt-4">Mes impayés</h1>
                     </div>
                 </div>
-
-                <div class="form-row align-items-center">
-                    <div class="col-12 col-md-12 col-lg-6 mx-auto">
-                        <div class="hidePO text-center" id="date-container">
-                            <label for="choiceDateImp">Dater par : </label>
-                            <select id="choiceDateImp" class="item-selecteur col-5 col-sm-6">
-                                <option value="custom" id="dateCustomImp">Dates personnalisées</option>
-                                <option value="4months">Évolution sur 4 mois glissants</option>
-                                <option value="12months">Évolution sur 12 mois glissants</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-4 ct1">
-                    <div class="col-md-12 col-lg-6" id="selectDate">
-                        <div class="row">
-                            <div class="col-md-12 col-lg-6 mt-2">
-                                <label for="startDate">Date de début :</label>
-                                <input type="date" id="startDate" class="form-control form-control-sm date col-12">
+                <div class="row mt-4 ct1 flex-column flex-md-row">
+                <div class="hidePO col-12 col-md-6 align-items-center flex-row order-md-2">
+                        <div class="col-12 mx-auto mt-auto">
+                            <div class="hidePO text-center" id="date-container">
+                                <label for="choiceDateImp">Dater par : </label>
+                                <select id="choiceDateImp" class="item-selecteur col-5 col-sm-6">
+                                    <option value="custom" id="dateCustomImp">Dates personnalisées</option>
+                                    <option value="4months">Évolution sur 4 mois glissants</option>
+                                    <option value="12months">Évolution sur 12 mois glissants</option>
+                                </select>
                             </div>
-                            <div class="col-md-12 col-lg-6 mt-2">
-                                <label for="endDate">Date de fin :</label>
-                                <input type="date" id="endDate" class="form-control form-control-sm date col-12">
+                        </div>
+                        <div class="col-12" id="selectDate">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="startDate">Date de début :</label>
+                                    <input type="date" id="startDate" class="form-control form-control-sm date col-12">
+                                </div>
+                                <div class="col-6">
+                                    <label for="endDate">Date de fin :</label>
+                                    <input type="date" id="endDate" class="form-control form-control-sm date col-12">
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-12 col-lg-6 col-sm-12">
-                        <label class="mt-5" for="nImp">N° Dossier Impayés :</label>
-                        <input type="text" id="nImp" class="form-control form-control-sm nImp">
-
-                        <div class="d-flex flex-row mt-2">
-                            <button id="resetButton" class="align-self-center">Effacer</button>
-                            <button id="searchButton" class="align-self-center">Rechercher</button>
+                    <div class="col-12 col-md-6" id="search-container">
+                        <label class="mt-2" for="nImp">N° Dossier Impayés :</label>
+                        <input type="text" id="nImp" class="form-control form-control-sm nImp order-md-1">
+                        <?php
+                        if ($role == 1) {
+                            echo '  
+                                    <label for="nSIREN" class="mt-3">N° SIREN :</label>
+                                    <input type="text" id="nSIREN" class="form-control form-control-sm date">
+                                    <label for="raisonSociale" class="mt-3">Raison Sociale :</label>
+                                    <input type="text" id="raisonSociale" class="form-control form-control-sm date">
+                                ';
+                        }
+                        ?>
+                        <div class="d-flex flex-column flex-md-row mt-3">
+                            <button id="resetButton" class="align-self-center my-1">Effacer</button>
+                            <button id="searchButton" class="align-self-center my-1">Rechercher</button>
                         </div>
-
-
-
                     </div>
+
+
                 </div>
-
-                <?php
-                if ($role == 1) {
-                    echo '            
-        <div class="row">
-                    <div class="col-12">
-            <div class="col-md-6 col-6 mt-2">
-                <label for="nSIREN">N° SIREN :</label>
-                <input type="text" id="nSIREN" class="form-control form-control-sm date">
-            </div>
-            
-            <div class="col-md-6 col-6 mt-2">
-                <label for="raisonSociale">Raison Sociale :</label>
-                <input type="text" id="raisonSociale" class="form-control form-control-sm date">
-            </div>
-            </div>
-        </div>
-    ';
-                }
-                ?>
-
                 <div class="row mt-5 ct1">
                     <div id="items-per-page-container" class="col-md-12 col-lg-6">
                         <label for="items-per-page">Éléments par page:</label>
@@ -165,12 +148,13 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <div class="chart">
                             <canvas id="barChart"></canvas>
                         </div>
+                        <!--
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
-                            <button class="export-pdf-button" 
-                                onclick="exportTableToPDF('barChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter en PDF</button>
+                                <button class="export-pdf-button" onclick="exportTableToPDF('barChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter en PDF</button>
                             </div>
                         </div>
+                        -->
                     </div>
 
                     <div class="col-md-12 mt-5" id="lineChartSection">
@@ -180,8 +164,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </div>
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
-                                <button class="export-pdf-button"
-                                    onclick="exportTableToPDF('lineChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter
+                                <button class="export-pdf-button" onclick="exportTableToPDF('lineChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter
                                     en PDF</button>
                             </div>
                         </div>
@@ -191,11 +174,11 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <h3>Motifs d'impayés</h3>
                     <canvas id="pieChart"></canvas>
                     <div class="col-auto mt-3">
-
-                        <button class="export-pdf-button"
-                            onclick="exportTableToPDF('pieChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter
+                        <!--
+                        <button class="export-pdf-button" onclick="exportTableToPDF('pieChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter
                             en
                             PDF</button>
+                            -->
                     </div>
                 </div>
 
