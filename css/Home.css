@@ -33,6 +33,10 @@ body {
     opacity: 0.5;
   }
 
+  .content-show {
+    height: 100%;
+  }
+
   .content-title {
     font-size: 55px;
     padding-top: 2em;
