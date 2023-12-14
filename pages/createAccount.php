@@ -7,7 +7,7 @@ if  (verifLogin() != 2) {
 }
 
 // Si il manque une donnée dans le formulaire
-if ( isset($_POST['email']) && isset($_POST['password']) && isset($_POST['siren']) && isset($_POST['socialReason']) && isset($_POST['phone']) && isset($_POST['card']))
+if ( isset($_POST['email']) && isset($_POST['password']) && isset($_POST['siren']) && isset($_POST['socialReason']) && isset($_POST['phone']))
 {
 include('../backend/cnx.php');
 
@@ -18,8 +18,6 @@ $inscriptionDate = date("Y-m-d");
 $siren = htmlspecialchars($_POST['siren']);
 $socialReason = htmlspecialchars($_POST['socialReason']);
 $phone = htmlspecialchars($_POST['phone']);
-$cardNumber = htmlspecialchars($_POST['card']);
-$cardNumber = substr($cardNumber, 0, 4) . '********' . substr($cardNumber, 12, 4);
 
 // Vérification de l'unicite de l'email
 $request = 'SELECT email, mdp FROM Utilisateur WHERE email = :email';
@@ -48,20 +46,17 @@ $result->bindParam(':phone', $phone);
 $result->execute();
 
 $idUtilisateur = $result->fetchColumn();
-echo "yes";
 
 // Insertion des données de client dans la base de données
 $request = 
-'INSERT INTO `Entreprise` (`idUtilisateur`, `numSiren`, `raisonSociale`, `numCarteEntreprise`)
-VALUES (:idUtilisateur, :siren, :socialReason, :cardNumber)';
+'INSERT INTO `Entreprise` (`idUtilisateur`, `numSiren`, `raisonSociale`)
+VALUES (:idUtilisateur, :siren, :socialReason)';
 $result = $cnx->prepare($request);
 $result->bindParam(':idUtilisateur', $idUtilisateur);
 $result->bindParam(':siren', $siren);
 $result->bindParam(':socialReason', $socialReason);
-$result->bindParam(':cardNumber', $cardNumber);
 $result->execute();
 
-echo "nooooo";
 // Insertion des données de client dans la base de données
 $request = 
 'INSERT INTO `POrequete` (`email`, `type_requete`)
@@ -137,19 +132,6 @@ verification($socialReason, $email);
 
 
 
-            <div class="form-row">
-
-                <div class="form-row">
-                    <div class="form-group col-md-11 mb-4">
-                        <label for="card">Numéro de carte bancaire</label>
-                        <input type="text" class="form-control" id="card" name="card" placeholder="Numéro de carte" pattern="[0-9]{16}" maxlength="16" required />
-                        <div class="invalid-feedback">Erreur</div>
-                    </div>
-
-                </div>
-            </div>
-
-            <hr style="border: 2px solid #252029; margin-top: 20px;">
 
             <div class="form-row">
                 <div class="form-group col-md-6 mb-4">
