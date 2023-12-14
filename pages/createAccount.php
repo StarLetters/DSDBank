@@ -32,6 +32,7 @@ $request = 'SELECT email, mdp FROM Utilisateur WHERE email = :email';
     //SI YA DEJA QUELQU'UN AVEC CET EMAIL
     //TODO
     if (count($result) > 0) {
+        echo "Cet email est déjà utilisé";
         exit;
     }
 
@@ -47,7 +48,7 @@ $result->bindParam(':phone', $phone);
 $result->execute();
 
 $idUtilisateur = $result->fetchColumn();
-
+echo "yes";
 
 // Insertion des données de client dans la base de données
 $request = 
@@ -60,6 +61,7 @@ $result->bindParam(':socialReason', $socialReason);
 $result->bindParam(':cardNumber', $cardNumber);
 $result->execute();
 
+echo "nooooo";
 // Insertion des données de client dans la base de données
 $request = 
 'INSERT INTO `POrequete` (`email`, `type_requete`)
@@ -75,10 +77,9 @@ $result->closeCursor();
 
 include('../backend/mailer.php');
 verification($socialReason, $email);
-
-
-header('Location: ./adminView.php');
 }
+
+
 ?>
 <!DOCTYPE html>
 <html>
