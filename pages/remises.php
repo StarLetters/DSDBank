@@ -75,7 +75,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     </div>
                     </div>";
                     }
-                    echo "
+                    echo "  
                     <div id=\"email\" class=\"hidden\">".$_SESSION['email']."</div>
                     ";
                     ?>
@@ -120,7 +120,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             <option value="csv">Exporter en CSV</option>
                             <option value="xls">Exporter en XLS</option>
                         </select>
-                        <button id="export-button" class="export-button" onclick="exportTable()">Exporter</button>
+                        <button id="export-button" class="export-button" onclick="exportDetailledTable()">Exporter</button>
                     </div>
                 </div>
                 <?php include('../includes/footer.html'); ?>
