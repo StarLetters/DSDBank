@@ -18,10 +18,4 @@ function getReason($siren) {
     $req->closeCursor();
     return $result['raisonSociale'];
 }
-
-$numSiren = isset($_GET['nSiren']) ? htmlspecialchars($_GET['nSiren']) : null;
-$result = getReason($numSiren);
-outputJson($result);
-
-
 ?>

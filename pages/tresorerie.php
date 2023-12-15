@@ -56,6 +56,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <?php
                         if ($role == 0) {
                             echo "<div id=\"numSiren\" class=\"hidden\">" . $_SESSION['numSiren'] . "</div>";
+                            echo "<div id=\"raisonSociale\" class=\"hidden\">" . $_SESSION['displayName'] . "</div>";
                         }
                         if ($role == 1) {
                             echo '  
@@ -141,13 +142,13 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
             </div>
             <?php include('../includes/footer.html'); ?>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
         <script defer type="module" src="../scripts/treasury.js"></script>
 
         <script src="../scripts/header.js"></script>
         <script src="../scripts/exportData.js"></script>
         <script defer type="module" src="../scripts/graphic.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
         <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>

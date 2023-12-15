@@ -19,7 +19,7 @@ async function updateTable() {
     if ((nSIRENElement && nSIRENElement.value != "")) {
         toggleTreasury();
         lineChartSectionElement.style.display = "block";
-    }else{
+    }else if (lineChartSectionElement) {
         lineChartSectionElement.style.display = "none";
     }
     addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"));
@@ -42,13 +42,17 @@ resetButtonElement.addEventListener("click", () => {
       nSIRENElement.value = "";
     }
 });
-orderByElement.addEventListener("change", updateTable);
+if (orderByElement) {
+    orderByElement.addEventListener("change", updateTable);
+}
 }
 
 function initializeTreasury(){
     addListener();
     updateTable();
-    lineChartSectionElement.style.display = "none";
+    if (lineChartSectionElement) {
+        lineChartSectionElement.style.display = "none";
+    }
 }
 
 initializeTreasury();
