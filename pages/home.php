@@ -46,23 +46,19 @@ include('../backend/cnx.php');
                             <h2 class="content-title text-white mt-5 text-left">Bonjour, <span>
                                     <?php echo $_SESSION['displayName']; ?>
                                     <br>
+                                    <p class="bvn">
                                     Bienvenue dans DSD Bank
+                                    </p>
                                 </span></h2>
                                 <span>
                                     <h5>
                                         Profitez dès maintenant de la comptabilité à la fois simple et complète
                                     </h5>
                                 </span>
-                                <a href="../pages/userProfile.php" class="custom-button col-2">Voir mon profil</a>
+                                <a href="../pages/userProfile.php" class="custom-button col-md-3 col-sm-3">Voir mon profil</a>
                         </div>
                     </div>
                 </section>
-                <!-- <footer class="text-center text-white footer">
-                    Mentions légales
-                    <br><br><br>
-                    © 2023, DSDBank Ltd, All Rights Reserved.
-                </footer> -->
-                    
             </div>
             <?php include('../includes/footer.html'); ?>
         </div>
