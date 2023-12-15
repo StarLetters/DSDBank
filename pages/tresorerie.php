@@ -116,19 +116,31 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <nav id="pagination-container"></nav>
 
                 </div>
-                <div class="col-md-12 mt-5" id="lineChartSection">
-                    <h2 id="chartTitle" class="mb-3">Evolution de la trésorerie</h2>
-                    <canvas id="lineChart"></canvas>
-                    <div class="col-auto mt-3">
-                        <button class="export-pdf-button" onclick="exportTableToPDF('lineChart', 'GRAPHIQUE DES TRESORERIES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'NSIREN ' . $_SESSION['numSiren']) ?>', 'pdf', 750, 400)">Exporter en PDF</button>
+                <?php
+                    if ($role == 1) {
+                        /*$nSiren = ;
+                        include("../account/getReason.php");
+                        $raison = getReason($nSiren);
+                        $titre = "L'ENTREPRISE ".$raison." N°SIREN ".$nSiren;
+                        $button = "<button class=\"export-pdf-button\" id=\"export-pdf\" 
+                        onclick=\"exportChartToPDF('lineChart', 'GRAPHIQUE DES TRESORERIES DE ".$titre.", 'pdf', 750, 400)\">Exporter en PDF</button>";*/
+                        echo "
+                    <div class=\"col-md-12 mt-5\" id=\"lineChartSection\">
+                    <h2 id=\"chartTitle\" class=\"mb-3\">Evolution de la trésorerie</h2>
+                    <canvas id=\"lineChart\"></canvas>
+                    <div class=\"col-auto mt-3\">"
+                    /* boutton d'export */
+                    echo "
                     </div>
-                </div>
+                    </div>";
+                    }
+                ?>
             </div>
             <?php include('../includes/footer.html'); ?>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
-
         <script defer type="module" src="../scripts/treasury.js"></script>
+        <script defer type="module" src="../scripts/getData.js"></script>
 
         <script src="../scripts/header.js"></script>
         <script src="../scripts/exportData.js"></script>
