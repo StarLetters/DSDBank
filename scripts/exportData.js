@@ -1,4 +1,4 @@
-function exportTableToPDF(chartId, fileName, format, width, height) {
+function exportChartToPDF(chartId, fileName, format, width, height) {
     const canvas = document.getElementById(chartId);
     const ctx = canvas.getContext('2d');
 
@@ -111,14 +111,38 @@ function exportTableToXLS(data) {
     updateDataTable(data);
 }
 
+function exportTableToPDF(nSiren) {
+    // Ajoute de l'espace pour le titre et la date
+    const titleHeight = 40; // Hauteur du titre
+    const dateHeight = 20; // Hauteur de la date
+    const exportWidth = 750;
+    const exportHeight = 400 + titleHeight + dateHeight;
+
+    // Dessine le titre et la date
+    exportCtx.font = 'bold 16px Arial';
+    exportCtx.fillText('Titre: ' + fileName, 10, titleHeight - 20);
+    const currentDate = new Date().toLocaleDateString();
+    exportCtx.font = '12px Arial';
+    exportCtx.fillText('Date: ' + currentDate, 10, titleHeight);
+
+}
+
 function exportTable() {
     var selectElement = document.getElementById("export-select");
     var selectedValue = selectElement.value;
     
     if (selectedValue === "csv") {
-      exportTableToCSV('table-container');
+        exportTableToCSV();
     } else if (selectedValue === "xls") {
-      exportTableToXLS('table-container');
+        exportTableToXLS();
+    } else if (selectedValue === "pdf") {
+        const nSirenElement = document.getElementById("nSiren");
+        if (nSirenElement && nSirenElement.value !== "") {
+            var nSiren = nSirenElement.value;
+        } else if (document.getElementById("numSiren")) {
+            var nSiren = ;
+        }
+        exportTableToPDF(nSiren);
     } 
 }
 /*

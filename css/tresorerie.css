@@ -12,6 +12,10 @@
     max-width: 46.333%;
   }
 
+.hidden {
+  display: none;
+}
+
 @media (max-width: 480px) {
     .col-sm-3 {
         -ms-flex: 0 0 8.333333%;
