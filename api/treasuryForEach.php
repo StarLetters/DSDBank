@@ -3,7 +3,7 @@ include('../backend/cnx.php');
 
 include('../api/utilities.php');
 
-function getTreasury($token, $numSiren, $order)
+function getTreasury($token, $numSiren, $order, $raisonSociale, $dateValeur)
 {
     global $cnx;
     $request = "SELECT 
@@ -30,7 +30,13 @@ function getTreasury($token, $numSiren, $order)
             AND tok.token = :token)";
     }
     else if ($numSiren !== null) {
-        $request .= " WHERE Entreprise.numSiren = :numSiren";
+        $request .= " WHERE Entreprise.numSiren = '".$numSiren."'";
+    }
+    if ($raisonSociale !== null) {
+        $request .= " AND Entreprise.raisonSociale = '".$raisonSociale."'";
+    }
+    if ($dateValeur !== null) {
+        $request .= " AND Transaction.dateVente <= '".$dateValeur."'";
     }
     $request .=" GROUP BY 
     Entreprise.numSiren, Entreprise.raisonSociale, Transaction.devise";
@@ -49,9 +55,6 @@ function getTreasury($token, $numSiren, $order)
     if ($token !== null) {
         $result->bindParam(":token", $token);
     }
-    else if ($numSiren !== null) {
-        $result->bindParam(":numSiren", $numSiren);
-    }
     $result->execute();
     $result = $result->fetchAll();
     return $result;
@@ -68,10 +71,15 @@ $token = htmlspecialchars($_GET['token']);
 $role = verifRole($token);
 $order = isset($_GET['orderby']) ? htmlspecialchars($_GET['orderby']) : null;
 $numSiren = null;
+$raisonSociale = null;
+$dateValeur = null;
 if ($role == 1){
     $numSiren = isset($_GET['nSIREN']) ? htmlspecialchars($_GET['nSIREN']) : null;
     $token = null;
+
+    $raisonSociale = isset($_GET['raisonSociale']) ? htmlspecialchars($_GET['raisonSociale']) : null;
+    $dateValeur = isset($_GET['dateValeur']) ? htmlspecialchars($_GET['dateValeur']) : null;
 }
-$result = getTreasury($token, $numSiren, $order);
+$result = getTreasury($token, $numSiren, $order, $raisonSociale, $dateValeur);
 outputJson($result);
 ?>
