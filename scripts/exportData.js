@@ -213,50 +213,35 @@ function getRowData(row) {
     return rowData;
 }
 
-function exportTableToPDF(nSiren) {
-    const canvas = document.getElementById('table-container');
-
-    // Ajoute de l'espace pour le titre et la date
-    const titleHeight = 40; // Hauteur du titre
-    const dateHeight = 20; // Hauteur de la date
-    const exportWidth = 750;
-    const exportHeight = 400 + titleHeight + dateHeight;
+function exportTableToPDF(tableId) {
+    const title = "Mon tableau";
+    const date = "Date : 01/03/2023";
     
-    const exportCanvas = document.createElement('canvas');
-    exportCanvas.width = exportWidth;
-    exportCanvas.height = exportHeight;
-    const exportCtx = exportCanvas.getContext('2d');
-    
-    var fileName = "";
-    if (nSiren !== "") {
-        var raisonSociale = document.getElementById("raisonSociale").textContent;
-        fileName = "TRESORERIE DE L'ENTREPRISE " + raisonSociale + " N°SIREN " + nSiren;
-    } else {
-        fileName = "TRESORERIE DE TOUTES LES ENTREPRISES";
-    }
+    const element = document.getElementById(tableId);
+    const options = {
+      filename: 'mon-tableau.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' }
+    };
+  
+    const content = `
+    <style>
+      #table-container {
+        filter: grayscale(1);
+      }
 
-    // Dessine le titre et la date
-    exportCtx.font = 'bold 16px Arial';
-    exportCtx.fillText('Titre: ' + fileName, 10, titleHeight - 20);
-    const currentDate = new Date().toLocaleDateString();
-    exportCtx.font = '12px Arial';
-    exportCtx.fillText('Date: ' + currentDate, 10, titleHeight);
-    
-    const doc = new jsPDF();
-
-    // Récupérer le tableau
-    const tableau = document.getElementById('tableau');
-
-    // Générer le PDF
-    doc.autoTable({ html: tableau });
-
-    // Télécharger le PDF
-    doc.save('tableau.pdf');
-
-    const element = document.createElement('div');
-    element.appendChild(exportCanvas);
-    html2pdf().from(element).save(fileName + '.pdf');
-}
+      td{
+        color : black!important;
+      }
+    </style>
+      <h1>${title}</h1>
+      <p>${date}</p>
+      ${element.innerHTML}
+    `;
+  
+    html2pdf().set(options).from(content).save();
+  }
 
 function exportTable() {
     var selectElement = document.getElementById("export-select");
@@ -267,14 +252,7 @@ function exportTable() {
     } else if (selectedValue === "xls") {
         exportTableToXLS('table-container');
     } else if (selectedValue === "pdf") {
-        const nSirenElement = document.getElementById("nSiren");
-        var nSiren = "";
-        if (nSirenElement && nSirenElement.value !== "") {
-            nSiren = nSirenElement.value;
-        } else if (document.getElementById("numSiren")) {
-            nSiren = document.getElementById("numSiren").textContent;
-        }
-        exportTableToPDF('table-container', nSiren);
+        exportTableToPDF("table-container");
     }
 }
 
