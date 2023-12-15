@@ -128,7 +128,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <div class=\"col-md-12 mt-5\" id=\"lineChartSection\">
                     <h2 id=\"chartTitle\" class=\"mb-3\">Evolution de la trésorerie</h2>
                     <canvas id=\"lineChart\"></canvas>
-                    <div class=\"col-auto mt-3\">"
+                    <div class=\"col-auto mt-3\">";
                     /* boutton d'export */
                     echo "
                     </div>

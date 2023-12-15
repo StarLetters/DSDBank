@@ -175,11 +175,24 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <h3 class="pt-5">Motifs d'impayés</h3>
                     <canvas id="pieChart"></canvas>
                     <div class="col-auto mt-3">
-                        <!--
-                        <button class="export-pdf-button" onclick="exportTableToPDF('pieChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter
-                            en
-                            PDF</button>
-                            -->
+                        <?php
+                        $filename = 'GRAPHIQUE DES MOTIF IMPAYES DE ';
+                        $onclick = "";
+
+                        if ($role == 0) {
+                            if (isset($_SESSION['displayName'], $_SESSION['numSiren'])) {
+                                $filename .= strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']);
+                                $onclick = "exportChartToPDF('pieChart', '" . addslashes($filename) . "' , 'pdf', 750, 400)";
+                            } else {
+                                header('Location: ../index.html');
+                            }
+                        } else {
+                            
+                        }
+
+                        echo "<button class=\"export-pdf-button\" onclick=\"" . htmlspecialchars($onclick) . "\">Exporter en PDF</button>";
+                        ?>
+
                     </div>
                 </div>
 

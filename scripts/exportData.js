@@ -221,7 +221,6 @@ function exportTableToPDF(nSiren) {
     const dateHeight = 20; // Hauteur de la date
     const exportWidth = 750;
     const exportHeight = 400 + titleHeight + dateHeight;
-
     // Dessine le titre et la date
     exportCtx.font = 'bold 16px Arial';
     exportCtx.fillText('Titre: ' + fileName, 10, titleHeight - 20);
