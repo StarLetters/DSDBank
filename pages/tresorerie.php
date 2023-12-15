@@ -48,7 +48,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 </div>
                     <?php
                     if ($role == 0) {
-                        echo "<div id=\"email\" class=\"hidden\">".$_SESSION['numSiren']."</div>";
+                        echo "<div id=\"numSiren\" class=\"hidden\">".$_SESSION['numSiren']."</div>";
                     }
                     if ($role == 1) {
                         echo "
@@ -112,7 +112,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <div class=\"col-md-12 mt-5\" id=\"lineChartSection\">
                     <h2 id=\"chartTitle\" class=\"mb-3\">Evolution de la trésorerie</h2>
                     <canvas id=\"lineChart\"></canvas>
-                    <div class=\"col-auto mt-3\">"
+                    <div class=\"col-auto mt-3\">";
                     /* boutton d'export */
                     echo "
                     </div>
@@ -124,7 +124,6 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
         </div>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
         <script defer type="module" src="../scripts/treasury.js"></script>
-        <script defer type="module" src="../scripts/getData.js"></script>
 
         <script src="../scripts/header.js"></script>
         <script src="../scripts/exportData.js"></script>

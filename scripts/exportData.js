@@ -1,3 +1,5 @@
+import { getReason } from "./fetchData";
+
 function exportChartToPDF(chartId, fileName, format, width, height) {
     const canvas = document.getElementById(chartId);
     const ctx = canvas.getContext('2d');
@@ -82,8 +84,6 @@ function exportTableToCSV(data) {
     link.setAttribute('download', fileName + '.csv');
     document.body.appendChild(link);
     link.click();
-
-    updateDataTable(data);
 }
 
 function exportTableToXLS(data) {
@@ -107,8 +107,6 @@ function exportTableToXLS(data) {
     link.download = fileName + '.xlsx';
     document.body.appendChild(link);
     link.click();
-
-    updateDataTable(data);
 }
 
 function exportTableToPDF(nSiren) {
@@ -117,6 +115,16 @@ function exportTableToPDF(nSiren) {
     const dateHeight = 20; // Hauteur de la date
     const exportWidth = 750;
     const exportHeight = 400 + titleHeight + dateHeight;
+    var fileName = "";
+    if (nSiren !== "") {
+        var raisonSociale = getReason(nSiren);
+        fileName = "TRESORERIE DE L'ENTREPRISE " + raisonSociale + " N°SIREN " + nSiren;
+    } else {
+        fileName = "TRESORERIE DE TOUTES LES ENTREPRISES";
+    }
+
+
+
 
     // Dessine le titre et la date
     exportCtx.font = 'bold 16px Arial';
@@ -137,10 +145,11 @@ function exportTable() {
         exportTableToXLS();
     } else if (selectedValue === "pdf") {
         const nSirenElement = document.getElementById("nSiren");
+        var nSiren = "";
         if (nSirenElement && nSirenElement.value !== "") {
-            var nSiren = nSirenElement.value;
+            nSiren = nSirenElement.value;
         } else if (document.getElementById("numSiren")) {
-            var nSiren = ;
+            nSiren = document.getElementById("numSiren").textContent;
         }
         exportTableToPDF(nSiren);
     } 
@@ -152,4 +161,6 @@ exportButton.addEventListener('click', () => {
     exportTableToXLS(data);
 });
 */
+
+export { exportTable, exportChartToPDF };
 
