@@ -12,7 +12,44 @@
     max-width: 46.333%;
   }
 
+
+canvas{
+  background-color: var(--couleur-fond-sombre);
+
+}
+
+button.export-button{
+  border: none;
+}
+
+.dateValeur{
+  background-color: var(--couleur-violet-bouton);
+}
+
+
+button[onclick^="exportTable"], nav#pagination-container, #export-select{
+  margin-right: 0.35em;
+  border-radius: 9px;
+}
+
+
+
 @media (max-width: 480px) {
+
+    #order-by{
+      margin-bottom: 30%;
+    }
+
+    #results-container{
+      margin-top: 20%;
+    }
+
+    #items-per-page{
+      padding: 0;
+      
+    }
+
+
     .col-sm-3 {
         -ms-flex: 0 0 8.333333%;
         flex: 0 0 8.333333%;
