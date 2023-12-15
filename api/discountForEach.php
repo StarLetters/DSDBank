@@ -41,6 +41,8 @@ function getDiscount($token, $num, $filter, $email, $order, $startDate, $endDate
                 $request .= " AND Entreprise.numSiren = :numSiren";
             } else if ($filter == 1) {
                 $request .= " AND Transaction.numRemise = :numRemise";
+            } else if ($filter == 2) {
+              $request .= " AND Entreprise.raisonSociale = :raisonSociale";
             }
         }
         if ($email !== null) {
@@ -78,7 +80,9 @@ function getDiscount($token, $num, $filter, $email, $order, $startDate, $endDate
             $result->bindParam(":numSiren", $num);
         } else if ($filter == 1) {
             $result->bindParam(":numRemise", $num);
-        }
+        } else if ($filter == 2) {
+          $result->bindParam(":raisonSociale", $num);
+      }
     }
 
     if ($email !== null) {
@@ -119,6 +123,9 @@ if ($role == 1){
     if (isset($_GET['nSiren'])) {
         $num = htmlspecialchars($_GET['nSiren']);
         $filter = 0;
+    } else if (isset($_GET['raison'])) {
+        $num = htmlspecialchars($_GET['raison']);
+        $filter = 2;
     } else {
         $num = isset($_GET['nRemise']) ? htmlspecialchars($_GET['nRemise']) : null;
         $filter = 1;
