@@ -113,7 +113,7 @@ function exportTableToCSV() {
 
 }
 
-function exportTableToXLS(data) {
+function exportTableToXLS() {
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.table_to_sheet(document.getElementById('table-container'));
 
@@ -134,8 +134,6 @@ function exportTableToXLS(data) {
     link.download = fileName + '.xlsx';
     document.body.appendChild(link);
     link.click();
-
-    updateDataTable(data);
 }
 
 function exportDetailledTableToCSV(tableId) {
@@ -243,38 +241,46 @@ function getRowData(row) {
     return rowData;
 }
 
-function exportTableToPDF(nSiren) {
-    // Ajoute de l'espace pour le titre et la date
-    const titleHeight = 40; // Hauteur du titre
-    const dateHeight = 20; // Hauteur de la date
-    const exportWidth = 750;
-    const exportHeight = 400 + titleHeight + dateHeight;
-    // Dessine le titre et la date
-    exportCtx.font = 'bold 16px Arial';
-    exportCtx.fillText('Titre: ' + fileName, 10, titleHeight - 20);
-    const currentDate = new Date().toLocaleDateString();
-    exportCtx.font = '12px Arial';
-    exportCtx.fillText('Date: ' + currentDate, 10, titleHeight);
+function exportTableToPDF(tableId) {
+    const title = "Mon tableau";
+    const date = "Date : 01/03/2023";
+    
+    const element = document.getElementById(tableId);
+    const options = {
+      filename: 'mon-tableau.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' }
+    };
+  
+    const content = `
+    <style>
+      #table-container {
+        filter: grayscale(1);
+      }
 
-}
+      td{
+        color : black!important;
+      }
+    </style>
+      <h1>${title}</h1>
+      <p>${date}</p>
+      ${element.innerHTML}
+    `;
+  
+    html2pdf().set(options).from(content).save();
+  }
 
 function exportTable() {
     var selectElement = document.getElementById("export-select");
     var selectedValue = selectElement.value;
 
-
     if (selectedValue === "csv") {
-        exportTableToCSV();
+        exportTableToCSV('table-container');
     } else if (selectedValue === "xls") {
-        exportTableToXLS();
+        exportTableToXLS('table-container');
     } else if (selectedValue === "pdf") {
-        const nSirenElement = document.getElementById("nSiren");
-        if (nSirenElement && nSirenElement.value !== "") {
-            var nSiren = nSirenElement.value;
-        } else if (document.getElementById("numSiren")) {
-            var nSiren = "";
-        }
-        exportTableToPDF(nSiren);
+        exportTableToPDF("table-container");
     }
 }
 

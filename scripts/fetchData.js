@@ -153,4 +153,15 @@ function getDiscountDetails(nRemise) {
     });
 }
 
-export { getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons, getTreasury, getTreasuryPerMonth, getDiscount, getDiscountDetails };
+function getReason(nSiren) {
+    let nS = nSiren !== null ? "&nSiren" + nSiren : "";
+    console.log(`../api/getReason.php?${nS}`);
+    return fetchData(`../api/getReason.php?${nS}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+}
+
+export { getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons, getTreasury, getTreasuryPerMonth, getDiscount, getDiscountDetails, getReason };
