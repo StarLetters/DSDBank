@@ -91,3 +91,35 @@ button#resetButton, button#searchButton, #export-select, #export-button {
       }
 
   }
+
+
+  @media (max-width: 720px) {
+    
+    button.export-pdf-button, button#resetButton, button#searchButton {
+        margin-top: 20px;
+      }
+
+      .clm {
+        flex-direction: column !important;
+      }
+
+      .ml-4, .mx-4 {
+        margin-left: 0rem !important;
+      }
+
+      .col-6 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 70%;
+      }
+
+      .col-5 {
+        -ms-flex: 0 0 41.666667%;
+        flex: 0 0 41.666667%;
+        max-width: 92%;
+      }
+
+      .m2 {
+        margin-bottom: 0.5rem !important;
+      }
+  }

@@ -1,6 +1,6 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-        <img src="../data/img/LogoDSD.png" alt="Logo" class="img-fluid">
+        <img src="../data/img/LogoDSD.png" alt="Logo" class="img-f">
     </div>
     <ul class="sidebar-nav">
         <li class="nav-item"><a class="nav-link" href="../pages/home.php">Accueil</a></li>
@@ -16,7 +16,7 @@
     <div class="profile-section mt-auto">
         
         <div class="profile-picture text-center">
-            <img src="../data/img/LogoDSD.png" alt="Photo de profil" class="img-fluid rounded-circle">
+            <img src="../data/img/LogoDSD.png" alt="Photo de profil" class="img-f rounded-circle">
         </div>
         <div class="profile-info text-center">
             <div class="profile-name text-white"><?php echo $_SESSION['displayName']?></div>
