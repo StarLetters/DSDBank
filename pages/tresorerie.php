@@ -18,6 +18,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     'secure' => true,
     'samesite' => 'None'
 ]);
+
+include '../backend/utilities.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -52,7 +54,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <div class="col-12 col-md-6" id="search-container">
                         <label for="nSIREN" class="mt-3">N° SIREN :</label>
                         <input type="text" id="nSIREN" class="form-control form-control-sm date">
-                        
+
                         <?php
                         if ($role == 1) {
                             echo '  
@@ -116,25 +118,17 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <nav id="pagination-container"></nav>
 
                 </div>
-                <?php
-                    if ($role == 1) {
-                        /*$nSiren = ;
-                        include("../account/getReason.php");
-                        $raison = getReason($nSiren);
-                        $titre = "L'ENTREPRISE ".$raison." N°SIREN ".$nSiren;
-                        $button = "<button class=\"export-pdf-button\" id=\"export-pdf\" 
-                        onclick=\"exportChartToPDF('lineChart', 'GRAPHIQUE DES TRESORERIES DE ".$titre.", 'pdf', 750, 400)\">Exporter en PDF</button>";*/
-                        echo "
-                    <div class=\"col-md-12 mt-5\" id=\"lineChartSection\">
-                    <h2 id=\"chartTitle\" class=\"mb-3\">Evolution de la trésorerie</h2>
-                    <canvas id=\"lineChart\"></canvas>
-                    <div class=\"col-auto mt-3\">";
-                    /* boutton d'export */
-                    echo "
+                <div class="col-md-12 mt-5" id="lineChartSection">
+                    <h1 id="chartTitle">Evolution de la trésorerie</h1>
+                    <canvas id="lineChart"></canvas>
+                    <div class="col-auto mt-3">
+                        <?php
+                        $filename = 'GRAPHIQUE EVOLUTION DE LA TRESORERIE';
+                        $onclick = getOnclick($role, $filename, 'lineChart', 800, 400);
+                        echo "<button class=\"export-pdf-button\" onclick=\"" . htmlspecialchars($onclick) . "\">Exporter en PDF</button>";
+                        ?>
                     </div>
-                    </div>";
-                    }
-                ?>
+                </div>
             </div>
             <?php include('../includes/footer.html'); ?>
         </div>

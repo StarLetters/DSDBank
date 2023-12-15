@@ -10,9 +10,19 @@ function exportChartToPDF(chartId, fileName, format, width, height) {
 
     // Créer un nouveau canvas avec la taille spécifiée
     const exportCanvas = document.createElement('canvas');
-    exportCanvas.width = exportWidth;
-    exportCanvas.height = exportHeight;
+
     const exportCtx = exportCanvas.getContext('2d');
+
+    const ratio = window.devicePixelRatio || 1;
+    exportCanvas.width = exportWidth * ratio;
+    exportCanvas.height = exportHeight * ratio;
+
+    // Assurez-vous que le CSS taille est correct
+    exportCanvas.style.width = exportWidth + 'px';
+    exportCanvas.style.height = exportHeight + 'px';
+
+    // Mettre à l'échelle le contexte du canvas pour correspondre à la densité de pixels de l'écran
+    exportCtx.scale(ratio, ratio);
 
     // Dessine le titre et la date
     exportCtx.font = 'bold 16px Arial';
@@ -34,16 +44,6 @@ function exportChartToPDF(chartId, fileName, format, width, height) {
         const imageData = exportCtx.getImageData(0, titleHeight + dateHeight, width, height);
         const data = imageData.data;
 
-        // for (let i = 0; i < data.length; i += 4) {
-        //     // Vérifie si le pixel est transparent (transparence = 0)
-        //     if (data[i + 3] !== 0) {
-        //         // Met à jour la couleur en noir (0, 0, 0)
-        //         data[i] = 0; // Rouge
-        //         data[i + 1] = 0; // Vert
-        //         data[i + 2] = 0; // Bleu
-        //     }
-        // }
-
         exportCtx.putImageData(imageData, 0, titleHeight + dateHeight);
 
         // Exporte en PDF avec les couleurs mises à jour
@@ -53,7 +53,35 @@ function exportChartToPDF(chartId, fileName, format, width, height) {
     }
 }
 
+function getTitle(startTitle) {
+    let title = startTitle;
+    if (document.getElementById("raisonSociale")) {
+        const raisonSociale = document.getElementById("raisonSociale");
+        if (raisonSociale.value !== "") {
+            title += " DE L\'ENTREPRISE " + raisonSociale.value.toUpperCase();
+        }
+    }
+    if (document.getElementById("nSIREN")) {
+        const nSiren = document.getElementById("nSIREN");
+        if (nSiren.value !== "") {
+            title += " N°SIREN " + nSiren.value;
+        }
+    }
+    if (document.getElementById("nImp")) {
+        const nImp = document.getElementById("nImp");
+        if (nImp.value !== "") {
+            title += " DU DOSSIER IMPAYES " + nImp.value;
+        }
+    }
+    if (title === startTitle) {
+        title += " DE TOUS LES UTILISATEURS";
+    }
+    return title;
+}
 
+function exportChartToPDFWithTitle(chartId, startTitle, format, width, height) {
+    exportChartToPDF(chartId, getTitle(startTitle), format, width, height);
+}
 
 function exportTableToCSV() {
     let csvContent = "data:text/csv;charset=utf-8,";
