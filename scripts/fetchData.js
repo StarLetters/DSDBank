@@ -109,7 +109,7 @@ function getTreasuryPerMonth(leftBound, rightBound) {
     });
 }
 
-function getDiscount(startDate, endDate) {
+function getDiscount(startDate, endDate, orderBy) {
     console.log("Fetching via getDiscount()");
     let value="";
 
@@ -118,6 +118,9 @@ function getDiscount(startDate, endDate) {
     }
     if (document.getElementById("nRemise") && document.getElementById("nRemise").value !== "") {
         value = '&nRemise=' + document.getElementById("nRemise").value;
+    }
+    if (document.getElementById("raison") && document.getElementById("raison").value !== "") {
+        value = '&raison=' + document.getElementById("raison").value;
     }
     if (document.getElementById("email") && document.getElementById("email").textContent !== "") {
         value = value + '&email=' + document.getElementById("email").textContent;
@@ -128,7 +131,7 @@ function getDiscount(startDate, endDate) {
     if (endDate !== null && endDate !== "") {
         value = value + '&endDate=' + endDate;
     }
-    value = value + '&order=' + document.getElementById("order-by").value;
+    value = value + '&order=' + orderBy;
     console.log(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`);
     return fetchData(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`, {
         method: 'POST',
