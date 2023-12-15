@@ -51,11 +51,11 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <div class="hidePO col-12 col-md-6 align-items-center flex-row order-md-2">
                         <div class="col-12 mb-3 mb-md-0" id="selectDate">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-6 col-md-6">
                                     <label for="startDate">Date de début :</label>
                                     <input type="date" id="startDate" class="form-control form-control-sm date col-12">
                                 </div>
-                                <div class="col-6">
+                                <div class="col-6 col-md-6">
                                     <label for="endDate">Date de fin :</label>
                                     <input type="date" id="endDate" class="form-control form-control-sm date col-12">
                                 </div>
@@ -95,24 +95,27 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
             </div>
 
 
-            <div class="row justify-content-between align-items-start mx-3 mb-3">
-                <div id="items-per-page-container">
-                    <label for="items-per-page">Éléments par page:</label>
-                    <select id="items-per-page" class="item-selecteur">
-                        <option value="3">3</option>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                    </select>
-                </div>
-                <div id="results-container" class="text-right"></div>
-            </div>
-            <div id="order-by-container" class="col-md-12 col-lg-6 order-by">
-                <label for="order-by">Trier par:</label>
-                <select id="order-by" class="item-selecteur col-6 col-sm-6">
-                    <option value="montantDesc">Montant décroissant</option>
-                    <option value="montantAsc">Montant croissant</option>
-                </select>
-            </div>
+<div class="row justify-content-between align-items-start mx-5 mb-3">
+    <div id="items-per-page-container">
+        <label for="items-per-page">Éléments par page:</label>
+        <select id="items-per-page" class="item-selecteur">
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+        </select>
+    </div>
+    </div>
+    <div class="d-flex flex-row">
+        <div id="order-by-container" class="col-md-12 mb-2 mx-4 col-lg-6 order-by">
+            <label for="order-by">Trier par:</label>
+            <select id="order-by" class="item-selecteur col-6 col-sm-6">
+                <option value="montantDesc">Montant décroissant</option>
+                <option value="montantAsc">Montant croissant</option>
+            </select>
+        </div>
+        <div id="results-container" class="text-right col-5"></div>
+
+</div>
             <div class="row">
                 <div id="table-container"></div>
             </div>
@@ -120,7 +123,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 <nav id="pagination-container" class="flex-row flex-wrap"></nav>
             </div>
             <div class="col-12 mt-5 d-flex flex-row flex-sm-column">
-                <div class="col-12 col-md-5 mb-5 ml-3">
+                <div class="col-12 col-md-6 mb-5 ml-3">
                     <select id="export-select">
                         <option value="csv">Exporter en CSV</option>
                         <option value="xls">Exporter en XLS</option>
