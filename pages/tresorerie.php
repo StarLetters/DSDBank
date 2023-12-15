@@ -17,7 +17,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
 
     'secure' => true,
     'samesite' => 'None'
-]); ?>
+]);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -46,69 +47,87 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <h1 class="mt-5 mb-5 text-center">Annonces de trésorerie</h1>
                     </div>
                 </div>
-                    <?php
-                    if ($role == 0) {
-                        echo "<div id=\"numSiren\" class=\"hidden\">".$_SESSION['numSiren']."</div>";
-                    }
-                    if ($role == 1) {
-                        echo "
-                    <div>
-                    <label for=\"nSIREN\">N° SIREN :</label>
-                    <input type=\"text\" id=\"nSIREN\" class=\"form-control form-control-sm date\">
-                    
-                    
-                    <button id=\"resetButton\">Effacer</button>
-                    <button id=\"searchButton\">Rechercher</button>
-                    </div>";
-                    }
-                    ?>
-                <div id="order-by-container">
-                    <?php
-                    if ($role == 1) {
-                        echo "
-                    <label for=\"order-by\">Trier par:</label>
-                    <select id=\"order-by\" class=\"item-selecteur\">
-                        <option value=\"montantDesc\">Montant décroissant</option>
-                        <option value=\"montantAsc\">Montant croissant</option>
-                        <option value=\"numSiren\" id=\"orderSiren\">N° SIREN</option> 
-                    </select>";
-                    }
-                    ?>
-                </div>
-                <div>
-                    <div class="row px-4 mb-2">
-                    <div id="items-per-page-container" class="mx-3">
-                        <label for="items-per-page">Éléments par page:</label>
-                        <select id="items-per-page" class="item-selecteur">
-                            <option value="3">3</option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                        </select>
+
+                <div class="align-items-center d-flex flex-column justify-content-center">
+                    <div class="col-12 col-md-6" id="search-container">
+                        <label for="nSIREN" class="mt-3">N° SIREN :</label>
+                        <input type="text" id="nSIREN" class="form-control form-control-sm date">
+
+                        <?php
+                        if ($role == 0) {
+                            echo "<div id=\"numSiren\" class=\"hidden\">" . $_SESSION['numSiren'] . "</div>";
+                        }
+                        if ($role == 1) {
+                            echo '  
+                                        
+                                        <label class="mt-2" for="dateValeur">Date de la valeur</label>
+                                        <input type="date" id="dateValeur" class="form-control form-control-sm dateValeur order-md-1">
+                                        <label for="raisonSociale" class="mt-3">Raison Sociale :</label>
+                                        <input type="text" id="raisonSociale" class="form-control form-control-sm date">
+                                    ';
+                        }
+                        ?>
+                        <div class="d-flex flex-column flex-md-row mt-2">
+                            <button id="resetButton" class="align-self-center my-1">Effacer</button>
+                            <button id="searchButton" class="align-self-center my-1">Rechercher</button>
+                        </div>
                     </div>
-                    <div id="results-container" class="text-right"></div>
                 </div>
 
-                    <div id="table-container"></div>
-                    <div class="col-md-12 col-lg-6 my-3">
-                            <select id="export-select" class="col-4 col-sm-4">
-                                <option value="csv">Exporter en CSV</option>
-                                <option value="xls">Exporter en XLS</option>
-                                <option value="pdf">Exporter en PDF</option>
+                <div id="order-by-container">
+                </div>
+
+                <div class="row mt-5 ct1 mr-3">
+                    <div id="order-by-container" class="col-md-12 col-lg-6 order-by">
+                        <?php
+                        if ($role == 1) {
+                            echo "
+                                <label for=\"order-by\">Trier par:</label>
+                                    <select id=\"order-by\" class=\"item-selecteur\" style='width:auto;'>
+                                        <option value=\"montantDesc\">Montant décroissant</option>
+                                        <option value=\"montantAsc\">Montant croissant</option>
+                                        <option value=\"numSiren\" id=\"orderSiren\">N° SIREN</option> 
+                                    </select>
+                                ";
+                        }
+                        ?>
+                    </div>
+                    <div id="items-per-page-container" class="col-md-12 col-lg-6">
+                        <div style="justify-content: end; display: flex; align-content: center">
+                            <label for="items-per-page" style="margin-bottom:0;">Éléments par page : &nbsp;</label>
+                            <select id="items-per-page" class="item-selecteur col-1 col-sm-1">
+                                <option value="3">3</option>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
                             </select>
-                            <button class="export-button col-2 col-sm-4" onclick="exportTable()">Exporter</button>
                         </div>
+                        <div id="results-container" class="text-right"></div>
+                    </div>
+
+                </div>
+                <div>
+                    <div id="table-container"></div>
+                    <div class="col-md-12 col-lg-6 my-2 ml-3">
+
+                        <button class="export-button col-2 col-sm-4" style="max-width:fit-content; width:auto;" onclick="exportTable()">Exporter</button>
+                        <select id="export-select" class="col-4 col-sm-4" style="max-width:fit-content; width:auto;">
+                            <option value="csv">en CSV</option>
+                            <option value="xls">en XLS</option>
+                            <option value="pdf">en PDF</option>
+                        </select>
+                    </div>
                     <nav id="pagination-container"></nav>
 
                 </div>
                 <?php
-                    if ($role == 1) {
-                        /*$nSiren = ;
+                if ($role == 1) {
+                    /*$nSiren = ;
                         include("../account/getReason.php");
                         $raison = getReason($nSiren);
                         $titre = "L'ENTREPRISE ".$raison." N°SIREN ".$nSiren;
                         $button = "<button class=\"export-pdf-button\" id=\"export-pdf\" 
                         onclick=\"exportChartToPDF('lineChart', 'GRAPHIQUE DES TRESORERIES DE ".$titre.", 'pdf', 750, 400)\">Exporter en PDF</button>";*/
-                        echo "
+                    echo "
                     <div class=\"col-md-12 mt-5\" id=\"lineChartSection\">
                     <h2 id=\"chartTitle\" class=\"mb-3\">Evolution de la trésorerie</h2>
                     <canvas id=\"lineChart\"></canvas>
@@ -117,7 +136,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     echo "
                     </div>
                     </div>";
-                    }
+                }
                 ?>
             </div>
             <?php include('../includes/footer.html'); ?>
