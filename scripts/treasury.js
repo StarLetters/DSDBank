@@ -9,50 +9,58 @@ const nSIRENElement = document.getElementById("nSIREN");
 const resetButtonElement = document.getElementById("resetButton");
 const searchButtonElement = document.getElementById("searchButton");
 const orderByElement = document.getElementById("order-by");
-const lineChartSectionElement = document.getElementById("lineChartSection");
-
-
+const chartTitle = document.getElementById("chartTitle");
+const lineChart = document.getElementById("lineChart");
+const dateValue = document.getElementById("dateValeur");
+const socialReason = document.getElementById("raisonSociale");
 
 // Fonction pour mettre à jour le tableau
 async function updateTable() {
-    updateDataTable(await getTreasury());
-    if ((nSIRENElement && nSIRENElement.value != "")) {
-        toggleTreasury();
-        lineChartSectionElement.style.display = "block";
-    }else if (lineChartSectionElement) {
-        lineChartSectionElement.style.display = "none";
-    }
-    addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"));
+  const fetchedData = await getTreasury();
+  updateDataTable(fetchedData);
+
+  if ( fetchedData.length === 1 ) {
+    toggleTreasury(dateValue.value);
+    chartTitle.style.display = "block";
+    lineChart.style.display = "block";
+  } else {
+    chartTitle.style.display = "none";
+    lineChart.style.display = "none";
+  }
+  addRedClassToCellIfNegative(
+    document.querySelectorAll("#table-container tbody tr")
+  );
 }
 
 // Fonction pour ajouter des écouteurs d'évènements
-async function addListener(){
-itemsPerPageElement.addEventListener("change", ()=>{changeItemsPerPage(); addRedClassToLastRowIfNegative();});
-searchButtonElement.addEventListener("click", updateTable);
-if (nSIRENElement) {
+async function addListener() {
+  itemsPerPageElement.addEventListener("change", () => {
+    changeItemsPerPage();
+    addRedClassToLastRowIfNegative();
+  });
+  searchButtonElement.addEventListener("click", updateTable);
+  if (nSIRENElement) {
     nSIRENElement.addEventListener("keyup", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            document.getElementById("searchButton").click();
-        }
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("searchButton").click();
+      }
     });
-}
-resetButtonElement.addEventListener("click", () => {
+  }
+  resetButtonElement.addEventListener("click", () => {
     if (nSIRENElement) {
       nSIRENElement.value = "";
+      socialReason.value = "";
+      dateValue.value = "";
     }
-});
-if (orderByElement) {
-    orderByElement.addEventListener("change", updateTable);
-}
+  });
+  orderByElement.addEventListener("change", updateTable);
 }
 
-function initializeTreasury(){
-    addListener();
-    updateTable();
-    if (lineChartSectionElement) {
-        lineChartSectionElement.style.display = "none";
-    }
+function initializeTreasury() {
+  addListener();
+  updateTable();
+  chartTitle.style.display = "none";
 }
 
 initializeTreasury();

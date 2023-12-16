@@ -9,6 +9,11 @@ include('../backend/cnx.php');
 include('../api/utilities.php');
 
 $token = htmlspecialchars($_GET['token']);
+$raisonSociale = isset($_GET['raisonSociale']) ? htmlspecialchars($_GET['raisonSociale']) : null;
+$nSiren = isset($_GET['nSIREN']) ? htmlspecialchars($_GET['nSIREN']) : null;
+$dateValeur = isset($_GET['rightBound']) ? htmlspecialchars($_GET['rightBound']) : null;
+
+
 $role = verifRole($token);
 
 $request = "SELECT 
@@ -30,18 +35,16 @@ if ($role == 0) {
         WHERE tra.idUtilisateur = uti.idUtilisateur
         AND uti.email = tok.email
         AND tok.token = :token)";
-} else if (isset($_GET['nSIREN'])) {
-    $request .= " WHERE Entreprise.numSiren = :numSiren";
-}else{
-    header('Location: ../index.html');
-}
+} else {
+   if ($nSiren) $request .= " WHERE Entreprise.numSiren = '". $nSiren ."'";
+   if ($raisonSociale) $request .= " AND Entreprise.raisonSociale = '". $raisonSociale ."'";
+  }
+  if ($dateValeur) $request .= " AND Transaction.dateVente <= '". $dateValeur ."'" ;
+
 $request .= " GROUP BY DATE_FORMAT(Transaction.dateVente, '%Y-%m');";
 $result = $cnx->prepare($request);
-if ($role == 0) {
-    $result->bindParam(":token", $token);
-} else if (isset($_GET['nSIREN'])) {
-    $result->bindParam(":numSiren", $_GET['nSIREN']);
-}
+if ($role == 0) $result->bindParam(":token", $token);
+
 $result->execute();
 $result = $result->fetchAll();
 outputJson($result);

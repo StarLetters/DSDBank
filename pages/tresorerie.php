@@ -51,17 +51,15 @@ include '../backend/utilities.php';
 
                 <div class="align-items-center d-flex flex-column justify-content-center">
                     <div class="col-12 col-md-6" id="search-container">
-                        <label for="nSIREN" class="mt-3">N° SIREN :</label>
-                        <input type="text" id="nSIREN" class="form-control form-control-sm date">
-
+                        <label class="mt-2" for="dateValeur">Date de la valeur</label>
+                        <input type="date" id="dateValeur" class="form-control form-control-sm dateValeur order-md-1">
                         <?php
                         if ($role == 1) {
-                            echo '  
-                                        
-                                        <label class="mt-2" for="dateValeur">Date de la valeur</label>
-                                        <input type="date" id="dateValeur" class="form-control form-control-sm dateValeur order-md-1">
-                                        <label for="raisonSociale" class="mt-3">Raison Sociale :</label>
-                                        <input type="text" id="raisonSociale" class="form-control form-control-sm date">
+                            echo '
+                                <label for="nSIREN" class="mt-3">N° SIREN :</label>
+                                <input type="text" id="nSIREN" class="form-control form-control-sm date">
+                                <label for="raisonSociale" class="mt-3">Raison Sociale :</label>
+                                <input type="text" id="raisonSociale" class="form-control form-control-sm date">
                                     ';
                         }
                         ?>
@@ -110,8 +108,8 @@ include '../backend/utilities.php';
                         $filename = 'TABLEAU ANNONCES DE TRESORERIE';
                         $onclick = getOnClickTable($role, $filename);
                         ?>
-                        <button class="export-button col-2 col-sm-4" style="max-width:fit-content; width:auto;" onclick="<?php echo $onclick ?>">Exporter</button>
-                        <select id="export-select" class="col-4 col-sm-4" style="max-width:fit-content; width:auto;">
+                        <button class="export-button" style="padding: 4px 15px;" onclick="<?php echo $onclick ?>">Exporter</button>
+                        <select id="export-select" style="width:auto; padding: 4px 15px;">
                             <option value="csv">en CSV</option>
                             <option value="xls">en XLSX</option>
                             <option value="pdf">en PDF</option>

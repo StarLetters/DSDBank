@@ -67,13 +67,15 @@ function createTable(data, tableId, AreCellsColored = false) {
     const headerRow = document.createElement('tr');
 
     // Parcourir les clés de la première entrée pour créer les en-têtes de colonnes
-    Object.keys(data[0]).forEach(key => {
-        if (!/^\d+$/.test(key)) {
-            const th = document.createElement('th');
-            th.textContent = key.toString(); // Convertir la clé en chaîne de caractères
-            headerRow.appendChild(th);
-        }
-    });
+    if (data.length !== 0){
+        Object.keys(data[0]).forEach(key => {
+            if (!/^\d+$/.test(key)) {
+                const th = document.createElement('th');
+                th.textContent = key.toString(); // Convertir la clé en chaîne de caractères
+                headerRow.appendChild(th);
+            }
+        });
+    }
 
     thead.appendChild(headerRow);
     table.appendChild(thead);
@@ -166,6 +168,7 @@ async function updateDataTable(externdata, AreCellsColored = false) {
     createTable(paginatedData, 'table-container', AreCellsColored);
     renderPagination(data, itemsPerPage);
     showResult();
+    
 }
 
 async function updateDetailedDataTable(externdata) {
