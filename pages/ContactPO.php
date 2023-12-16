@@ -17,6 +17,7 @@ if (isset($_POST['subject']) && isset($_POST['name']) && isset($_POST['text']) &
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Contact Responsable</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="../data/img/LogoDSD.png" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -22,6 +22,7 @@ if ($cnx->inTransaction()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page de validation</title>
+    <link rel="shortcut icon" href="../data/img/LogoDSD.png" type="image/x-icon">
 </head>
 
 <body>

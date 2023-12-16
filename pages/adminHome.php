@@ -20,6 +20,7 @@ include('../backend/cnx.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Panel Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="../data/img/LogoDSD.png" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,10 +30,6 @@ include('../backend/cnx.php');
     <link rel="stylesheet" href="../css/Register.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/varColor.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/global.css" />
-    
-
-
-    
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
