@@ -125,8 +125,13 @@ include '../backend/utilities.php';
                             <select id="export-select" class="col-5 col-sm-6">
                                 <option value="csv">Exporter en CSV</option>
                                 <option value="xls">Exporter en XLS</option>
+                                <option value="pdf">Exporter en PDF</option>
                             </select>
-                            <button class="export-button col-2 col-sm-4" onclick="exportTable()">Exporter</button>
+                            <?php
+                            $filename = 'TABLEAU DES IMPAYES';
+                            $onclick = getOnClickTable($role, $filename);
+                            ?>
+                            <button class="export-button col-2 col-sm-4" onclick="<?php echo $onclick ?>">Exporter</button>
                         </div>
                         <div class="col-md-12 col-lg-6">
                             <div id="results-container" class="text-right ct2"></div>

@@ -55,10 +55,6 @@ include '../backend/utilities.php';
                         <input type="text" id="nSIREN" class="form-control form-control-sm date">
 
                         <?php
-                        if ($role == 0) {
-                            echo "<div id=\"numSiren\" class=\"hidden\">" . $_SESSION['numSiren'] . "</div>";
-                            echo "<div id=\"raisonSociale\" class=\"hidden\">" . $_SESSION['displayName'] . "</div>";
-                        }
                         if ($role == 1) {
                             echo '  
                                         
@@ -110,11 +106,14 @@ include '../backend/utilities.php';
                 <div>
                     <div id="table-container"></div>
                     <div class="col-md-12 col-lg-6 my-2 ml-3">
-
-                        <button class="export-button col-2 col-sm-4" style="max-width:fit-content; width:auto;" onclick="exportTable()">Exporter</button>
+                        <?php 
+                        $filename = 'TABLEAU ANNONCES DE TRESORERIE';
+                        $onclick = getOnClickTable($role, $filename);
+                        ?>
+                        <button class="export-button col-2 col-sm-4" style="max-width:fit-content; width:auto;" onclick="<?php echo $onclick ?>">Exporter</button>
                         <select id="export-select" class="col-4 col-sm-4" style="max-width:fit-content; width:auto;">
                             <option value="csv">en CSV</option>
-                            <option value="xls">en XLS</option>
+                            <option value="xls">en XLSX</option>
                             <option value="pdf">en PDF</option>
                         </select>
                     </div>
@@ -135,19 +134,19 @@ include '../backend/utilities.php';
             </div>
             <?php include('../includes/footer.html'); ?>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-        <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-        
-        <script defer type="module" src="../scripts/treasury.js"></script>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 
-        <script src="../scripts/header.js"></script>
-        <script src="../scripts/exportData.js"></script>
-        <script defer type="module" src="../scripts/graphic.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
+    <script defer type="module" src="../scripts/treasury.js"></script>
 
-</body>
+    <script src="../scripts/header.js"></script>
+    <script src="../scripts/exportData.js"></script>
+    <script defer type="module" src="../scripts/graphic.js"></script>
+
+    </body>
 
 </html>

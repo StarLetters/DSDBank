@@ -52,42 +52,10 @@ function exportChartToPDF(chartId, fileName, format, width, height) {
         html2pdf().from(element).save(fileName + '.pdf');
     }
 }
-
-function getTitle(startTitle) {
-    let title = startTitle;
-    if (document.getElementById("raisonSociale")) {
-        const raisonSociale = document.getElementById("raisonSociale");
-        if (raisonSociale.value !== "") {
-            title += " DE L\'ENTREPRISE " + raisonSociale.value.toUpperCase();
-        }
-    }
-    if (document.getElementById("nSIREN")) {
-        const nSiren = document.getElementById("nSIREN");
-        if (nSiren.value !== "") {
-            title += " N°SIREN " + nSiren.value;
-        }
-    }
-    if (document.getElementById("nImp")) {
-        const nImp = document.getElementById("nImp");
-        if (nImp.value !== "") {
-            title += " DU DOSSIER IMPAYES " + nImp.value;
-        }
-    }
-    if (title === startTitle) {
-        title += " DE TOUS LES UTILISATEURS";
-    }
-    return title;
-}
-
-function exportChartToPDFWithTitle(chartId, startTitle, format, width, height) {
-    exportChartToPDF(chartId, getTitle(startTitle), format, width, height);
-}
-
-function exportTableToCSV() {
+function exportTableToCSV(tableId, fileName) {
     let csvContent = "data:text/csv;charset=utf-8,";
 
     // le titre et la date
-    const fileName = 'tableau';
     const currentDate = new Date().toLocaleDateString();
     csvContent += 'Titre: ' + fileName + '\n';
     csvContent += 'Date: ' + currentDate + '\n';
@@ -113,16 +81,15 @@ function exportTableToCSV() {
 
 }
 
-function exportTableToXLS() {
+function exportTableToXLS(tableId, fileName) {
     const workbook = XLSX.utils.book_new();
-    const worksheet = XLSX.utils.table_to_sheet(document.getElementById('table-container'));
+    const worksheet = XLSX.utils.table_to_sheet(document.getElementById(tableId));
 
     // le titre et la date
-    const fileName = 'tableau';
     const currentDate = new Date().toLocaleDateString();
     XLSX.utils.sheet_add_aoa(worksheet, [['Titre: ' + fileName], ['Date: ' + currentDate]], { origin: -1 });
 
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Tableau');
+    XLSX.utils.book_append_sheet(workbook, worksheet, fileName);
 
     const xlsContent = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
 
@@ -136,11 +103,10 @@ function exportTableToXLS() {
     link.click();
 }
 
-function exportDetailledTableToCSV(tableId) {
+function exportDetailledTableToCSV(tableId, fileName) {
     let csvContent = "data:text/csv;charset=utf-8,";
 
     // le titre et la date
-    const fileName = 'tableau';
     const currentDate = new Date().toLocaleDateString();
     csvContent += 'Titre: ' + fileName + '\n';
     csvContent += 'Date: ' + currentDate + '\n';
@@ -181,17 +147,16 @@ function exportDetailledTableToCSV(tableId) {
     link.click();
 }
 
-function exportDetailledTableToXLS(tableId) {
+function exportDetailledTableToXLS(tableId, fileName) {
     const tableData = getMainTableData(tableId);
 
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.aoa_to_sheet(tableData);
 
     // le titre et la date
-    const fileName = 'tableau';
     const currentDate = new Date().toLocaleDateString();
     XLSX.utils.sheet_add_aoa(worksheet, [['Titre: ' + fileName], ['Date: ' + currentDate]], { origin: -1 });
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Tableau');
+    XLSX.utils.book_append_sheet(workbook, worksheet, fileName);
 
     const selectedRows = Array.from(document.querySelectorAll('.collapse.show'));
     for (let i = 0; i < selectedRows.length; i++) {
@@ -241,13 +206,13 @@ function getRowData(row) {
     return rowData;
 }
 
-function exportTableToPDF(tableId) {
-    const title = "Mon tableau";
+function exportTableToPDF(tableId, fileName) {
+    const title = fileName;
     const date = "Date : 01/03/2023";
     
     const element = document.getElementById(tableId);
     const options = {
-      filename: 'mon-tableau.pdf',
+      filename: fileName+'.pdf',
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2 },
       jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' }
@@ -255,15 +220,12 @@ function exportTableToPDF(tableId) {
   
     const content = `
     <style>
-      #table-container {
-        filter: grayscale(1);
-      }
-
       td{
         color : black!important;
+        font-size: 12px!important;
       }
     </style>
-      <h1>${title}</h1>
+      <h2>${title}</h2>
       <p>${date}</p>
       ${element.innerHTML}
     `;
@@ -271,26 +233,72 @@ function exportTableToPDF(tableId) {
     html2pdf().set(options).from(content).save();
   }
 
-function exportTable() {
+function exportTable($filename) {
     var selectElement = document.getElementById("export-select");
     var selectedValue = selectElement.value;
 
     if (selectedValue === "csv") {
-        exportTableToCSV('table-container');
+        exportTableToCSV('table-container', $filename);
     } else if (selectedValue === "xls") {
-        exportTableToXLS('table-container');
+        exportTableToXLS('table-container', $filename);
     } else if (selectedValue === "pdf") {
-        exportTableToPDF("table-container");
+        exportTableToPDF("table-container", $filename);
     }
 }
 
-function exportDetailledTable() {
+function exportDetailledTable($filename) {
     var selectElement = document.getElementById("export-select");
     var selectedValue = selectElement.value;
 
     if (selectedValue === "csv") {
-        exportDetailledTableToCSV('table-container');
+        exportDetailledTableToCSV('table-container', $filename);
     } else if (selectedValue === "xls") {
-        exportDetailledTableToXLS('table-container');
+        exportDetailledTableToXLS('table-container', $filename);
+    } else if (selectedValue === "pdf") {
+        exportTableToPDF("table-container", $filename);
     }
+}
+
+function exportChartToPDFWithTitle(chartId, startTitle, format, width, height) {
+    exportChartToPDF(chartId, getTitle(startTitle), format, width, height);
+}
+
+function exportTableWithName($filename){
+    return exportTable(getTitle($filename));
+}
+
+function exportDetailledTableWithName($filename){
+    return exportDetailledTable(getTitle($filename));
+}
+
+function getTitle(startTitle) {
+    let title = startTitle;
+    if (document.getElementById("raisonSociale")) {
+        const raisonSociale = document.getElementById("raisonSociale");
+        if (raisonSociale.value !== "") {
+            title += " DE L\'ENTREPRISE " + raisonSociale.value.toUpperCase();
+        }
+    }
+    if (document.getElementById("nSIREN")) {
+        const nSiren = document.getElementById("nSIREN");
+        if (nSiren.value !== "") {
+            title += " N°SIREN " + nSiren.value;
+        }
+    }
+    if (document.getElementById("nImp")) {
+        const nImp = document.getElementById("nImp");
+        if (nImp.value !== "") {
+            title += " DU DOSSIER IMPAYES " + nImp.value;
+        }
+    }
+    if (document.getElementById("nRemise")) {
+        const nRemise = document.getElementById("nRemise");
+        if (nRemise.value !== "") {
+            title += " DE LA REMISE " + nRemise.value;
+        }
+    }
+    if (title === startTitle) {
+        title += " DE TOUS LES UTILISATEURS";
+    }
+    return title;
 }
