@@ -18,6 +18,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     'samesite' => 'None'
 ]);
 
+include '../backend/utilities.php';
 ?>
 
 <!DOCTYPE html>
@@ -124,8 +125,13 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                             <select id="export-select" class="col-5 col-sm-6">
                                 <option value="csv">Exporter en CSV</option>
                                 <option value="xls">Exporter en XLS</option>
+                                <option value="pdf">Exporter en PDF</option>
                             </select>
-                            <button class="export-button col-2 col-sm-4" onclick="exportTable()">Exporter</button>
+                            <?php
+                            $filename = 'TABLEAU DES IMPAYES';
+                            $onclick = getOnClickTable($role, $filename);
+                            ?>
+                            <button class="export-button col-2 col-sm-4" onclick="<?php echo $onclick ?>">Exporter</button>
                         </div>
                         <div class="col-md-12 col-lg-6">
                             <div id="results-container" class="text-right ct2"></div>
@@ -149,13 +155,16 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <div class="chart">
                             <canvas id="barChart"></canvas>
                         </div>
-                        <!--
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
-                                <button class="export-pdf-button" onclick="exportTableToPDF('barChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter en PDF</button>
+                                <?php 
+                                $filename = 'GRAPHIQUE A BARRES DES IMPAYES';
+                                $onclick = getOnclick($role, $filename, 'barChart', 800, 400);
+                                echo "<button class=\"export-pdf-button\" onclick=\"" . htmlspecialchars($onclick) . "\">Exporter en PDF</button>";
+                                ?>
                             </div>
                         </div>
-                        -->
+                        
                     </div>
 
                     <div class="col-md-12 mt-5" id="lineChartSection">
@@ -165,8 +174,11 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </div>
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
-                                <button class="export-pdf-button" onclick="exportTableToPDF('lineChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter
-                                    en PDF</button>
+                                <?php 
+                                $filename = 'GRAPHIQUE LINEAIRE DES IMPAYES';
+                                $onclick = getOnclick($role, $filename, 'lineChart', 800, 400);
+                                echo "<button class=\"export-pdf-button\" onclick=\"" . htmlspecialchars($onclick) . "\">Exporter en PDF</button>";
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -175,11 +187,11 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <h3 class="pt-5">Motifs d'impayés</h3>
                     <canvas id="pieChart"></canvas>
                     <div class="col-auto mt-3">
-                        <!--
-                        <button class="export-pdf-button" onclick="exportTableToPDF('pieChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter
-                            en
-                            PDF</button>
-                            -->
+                        <?php
+                        $filename = 'GRAPHIQUE DES MOTIFS IMPAYES';
+                        $onclick = getOnclick($role, $filename, 'pieChart', 800, 400);
+                        echo "<button class=\"export-pdf-button\" onclick=\"" . htmlspecialchars($onclick) . "\">Exporter en PDF</button>";
+                        ?>
                     </div>
                 </div>
 

@@ -58,6 +58,7 @@ function createTable(data, tableId, AreCellsColored = false) {
     const tableContainer = document.getElementById(tableId);
     tableContainer.innerHTML = '';
 
+ 
     // Créer un tableau HTML
     const table = document.createElement('table');
 

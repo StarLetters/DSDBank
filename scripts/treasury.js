@@ -9,22 +9,21 @@ const nSIRENElement = document.getElementById("nSIREN");
 const resetButtonElement = document.getElementById("resetButton");
 const searchButtonElement = document.getElementById("searchButton");
 const orderByElement = document.getElementById("order-by");
-const chartTitle = document.getElementById("chartTitle");
+const lineChartSectionElement = document.getElementById("lineChartSection");
+
 
 
 // Fonction pour mettre à jour le tableau
 async function updateTable() {
     updateDataTable(await getTreasury());
-    if ((nSIRENElement && nSIRENElement.value != "" )|| !nSIRENElement) {
+    if ((nSIRENElement && nSIRENElement.value != "")) {
         toggleTreasury();
-        chartTitle.style.display = "block";
-    }else{
-        chartTitle.style.display = "none";
+        lineChartSectionElement.style.display = "block";
+    }else if (lineChartSectionElement) {
+        lineChartSectionElement.style.display = "none";
     }
     addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"));
 }
-
-
 
 // Fonction pour ajouter des écouteurs d'évènements
 async function addListener(){
@@ -43,13 +42,17 @@ resetButtonElement.addEventListener("click", () => {
       nSIRENElement.value = "";
     }
 });
-orderByElement.addEventListener("change", updateTable);
+if (orderByElement) {
+    orderByElement.addEventListener("change", updateTable);
+}
 }
 
 function initializeTreasury(){
     addListener();
     updateTable();
-    chartTitle.style.display = "none";
+    if (lineChartSectionElement) {
+        lineChartSectionElement.style.display = "none";
+    }
 }
 
 initializeTreasury();

@@ -18,6 +18,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     'secure' => true,
     'samesite' => 'None'
 ]);
+
+include '../backend/utilities.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -34,7 +36,6 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/impayes.css">
     <link rel="stylesheet" href="../css/tresorerie.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 
 <body>
@@ -52,7 +53,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <div class="col-12 col-md-6" id="search-container">
                         <label for="nSIREN" class="mt-3">N° SIREN :</label>
                         <input type="text" id="nSIREN" class="form-control form-control-sm date">
-                        
+
                         <?php
                         if ($role == 1) {
                             echo '  
@@ -105,11 +106,14 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 <div>
                     <div id="table-container"></div>
                     <div class="col-md-12 col-lg-6 my-2 ml-3">
-
-                        <button class="export-button col-2 col-sm-4" style="max-width:fit-content; width:auto;" onclick="exportTable()">Exporter</button>
+                        <?php 
+                        $filename = 'TABLEAU ANNONCES DE TRESORERIE';
+                        $onclick = getOnClickTable($role, $filename);
+                        ?>
+                        <button class="export-button col-2 col-sm-4" style="max-width:fit-content; width:auto;" onclick="<?php echo $onclick ?>">Exporter</button>
                         <select id="export-select" class="col-4 col-sm-4" style="max-width:fit-content; width:auto;">
                             <option value="csv">en CSV</option>
-                            <option value="xls">en XLS</option>
+                            <option value="xls">en XLSX</option>
                             <option value="pdf">en PDF</option>
                         </select>
                     </div>
@@ -117,28 +121,32 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
 
                 </div>
                 <div class="col-md-12 mt-5" id="lineChartSection">
-                    <h2 id="chartTitle" class="mb-3">Evolution de la trésorerie</h2>
+                    <h1 id="chartTitle">Evolution de la trésorerie</h1>
                     <canvas id="lineChart"></canvas>
                     <div class="col-auto mt-3">
-                        <button class="export-pdf-button" onclick="exportTableToPDF('lineChart', 'GRAPHIQUE DES TRESORERIES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'NSIREN ' . $_SESSION['numSiren']) ?>', 'pdf', 750, 400)">Exporter en PDF</button>
+                        <?php
+                        $filename = 'GRAPHIQUE EVOLUTION DE LA TRESORERIE';
+                        $onclick = getOnclick($role, $filename, 'lineChart', 800, 400);
+                        echo "<button class=\"export-pdf-button\" onclick=\"" . htmlspecialchars($onclick) . "\">Exporter en PDF</button>";
+                        ?>
                     </div>
                 </div>
             </div>
             <?php include('../includes/footer.html'); ?>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 
-        <script defer type="module" src="../scripts/treasury.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
-        <script src="../scripts/header.js"></script>
-        <script src="../scripts/exportData.js"></script>
-        <script defer type="module" src="../scripts/graphic.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-        <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+    <script defer type="module" src="../scripts/treasury.js"></script>
 
-</body>
+    <script src="../scripts/header.js"></script>
+    <script src="../scripts/exportData.js"></script>
+    <script defer type="module" src="../scripts/graphic.js"></script>
+
+    </body>
 
 </html>

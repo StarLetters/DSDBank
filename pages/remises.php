@@ -17,6 +17,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     'secure' => true,
     'samesite' => 'None'
 ]);
+
+include '../backend/utilities.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -62,10 +64,10 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </div>
                     </div>
                 </div>
-                
-                    <?php
-                    if ($role == 1) {
-                        echo "
+
+                <?php
+                if ($role == 1) {
+                    echo "
                         <div class=\"row mb-5\">
                         <div class=\"col-12 col-md-4 offset-md-4\">
                     <input type=\"text\" id=\"nSiren\" class=\"form-control form-control-sm date\" placeholder=\"N°SIREN\">
@@ -76,11 +78,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <input type=\"text\" id=\"raison\" class=\"form-control form-control-sm date\" placeholder=\"Raison Sociale\">
                     </div>
                     </div>";
-                    }
-                    echo "  
-                    <div id=\"email\" class=\"hidden\">".$_SESSION['email']."</div>
-                    ";
-                    ?>
+                }
+                ?>
                 <div class="row mb-5">
                     <div class="col-12 col-md-4 offset-md-4">
                         <input type="text" id="nRemise" class="form-control form-control-sm date" placeholder="N°Remise">
@@ -121,24 +120,28 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <select id="export-select">
                             <option value="csv">Exporter en CSV</option>
                             <option value="xls">Exporter en XLS</option>
+                            <option value="pdf">Exporter en PDF</option>
                         </select>
-                        <button id="export-button" class="export-button" onclick="exportDetailledTable()">Exporter</button>
+                        <?php
+                        $filename = 'TABLEAU REMISES';
+                        $onclick = getOnClickDetailledTable($role, $filename);
+                        ?>
+                        <button id="export-button" class="export-button" onclick="<?php echo $onclick ?>">Exporter</button>
                     </div>
                 </div>
                 <?php include('../includes/footer.html'); ?>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
-
-        <script defer type="module" src="../scripts/remittance.js"></script>
-
-        <script src="../scripts/header.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.6/xlsx.full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script defer type="module" src="../scripts/remittance.js"></script>
+        <script src="../scripts/header.js"></script>
 </body>
 
 </html>
