@@ -60,7 +60,6 @@ include('../backend/cnx.php');
                     </div>
                 </section>
             </div>
-            <?php include('../includes/footer.html'); ?>
         </div>
     </div>
 
