@@ -3,6 +3,10 @@ body {
     padding: 0;
 }
 
+#navbar-wrapper .navbar {
+  background-color: transparent;
+}
+
 .h5, h5 {
   font-size: 0.9rem;
   color: white;

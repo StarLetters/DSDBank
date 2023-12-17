@@ -110,7 +110,7 @@ tr:hover {
 }
 
 #items-per-page{
-  width: 60px!important;
+  width: fit-content;
 }
 
 @media screen and (max-width: 1200px) {

@@ -28,7 +28,7 @@ include '../backend/utilities.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remises</title>
     <link rel="shortcut icon" href="../data/img/LogoDSD.png" type="image/x-icon">
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -92,9 +92,10 @@ include '../backend/utilities.php';
                     </div>
                 </div>
             </div>
+            <hr class="mt-5 mb-5">
+            <div class="row h-25"></div>
 
-
-            <div class="row justify-content-between align-items-start mx-5 mb-3">
+            <div class="row justify-content-between align-items-start mx-5 mb-3 mt-5">
                 <div id="items-per-page-container">
                     <label for="items-per-page">Éléments par page:</label>
                     <select id="items-per-page" class="item-selecteur">
@@ -105,7 +106,7 @@ include '../backend/utilities.php';
                 </div>
             </div>
             <div class="d-flex flex-row clm">
-                <div id="order-by-container" class="col-md-12 mb-2 mx-4 col-lg-6 order-by">
+                <div id="order-by-container" class="col-12 mb-2 mx-4 col-md-6 order-by">
                     <label for="order-by">Trier par:</label>
                     <select id="order-by" class="item-selecteur col-6 col-sm-6">
                         <option value="montantDesc">Montant décroissant</option>
