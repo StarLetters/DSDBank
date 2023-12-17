@@ -1,0 +1,17 @@
+.personne {
+    width: 50%;
+}
+
+.elgato {
+    width: 30%;
+}
+
+.reseau {
+    color: white;
+    text-decoration: none;
+}
+
+.reseau:hover {
+    color: white;
+}
+
