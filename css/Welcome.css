@@ -160,6 +160,9 @@
     padding: 10px;
   }
   
+  ::placeholder{
+    color: var(--couleur-text);
+  }
 
   @media (min-width: 768px) and (max-width: 1380px) {
     .center-box {
