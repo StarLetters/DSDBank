@@ -58,7 +58,7 @@ function getUnpaidsForEach(leftBound, rightBound, orderby, nImpaye, nSIREN, rais
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        },
+        }
     });
 }
 
@@ -84,8 +84,10 @@ function getTreasury() {
 
     let order = (document.getElementById("order-by") && document.getElementById("order-by").value !== "") ? '&orderby=' + document.getElementById("order-by").value : "";
     let nS = (document.getElementById("nSIREN") && document.getElementById("nSIREN").value !== "") ? '&nSIREN=' + document.getElementById("nSIREN").value : "";
+    let socialReason = (document.getElementById("raisonSociale") && document.getElementById("raisonSociale").value !== "") ? '&raisonSociale=' + document.getElementById("raisonSociale").value : "";
+    let dateValue = (document.getElementById("dateValeur") && document.getElementById("dateValeur").value !== "") ? '&dateValeur=' + document.getElementById("dateValeur").value : "";
 
-    return fetchData(`../api/treasuryForEach.php?token=${getCookie("cnxToken")}${nS}${order}`, {
+    return fetchData(`../api/treasuryForEach.php?token=${getCookie("cnxToken")}${nS}${order}${socialReason}${dateValue}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -99,9 +101,10 @@ function getTreasuryPerMonth(leftBound, rightBound) {
     let left = leftBound !== "" ? '&leftBound=' + leftBound : "";
     let right = rightBound !== "" ? '&rightBound=' + rightBound : "";
     let nS = (document.getElementById("nSIREN") && document.getElementById("nSIREN").value !== "") ? '&nSIREN=' + document.getElementById("nSIREN").value : "";
+    let rS = (document.getElementById("raisonSociale") && document.getElementById("raisonSociale").value !== "") ? '&raisonSociale=' + document.getElementById("raisonSociale").value : "";
 
-    console.log(`../api/treasuryPerMonth.php?token=${getCookie("cnxToken")}${left}${right}${nS}`);
-    return fetchData(`../api/treasuryPerMonth.php?token=${getCookie("cnxToken")}${left}${right}${nS}`, {
+    
+    return fetchData(`../api/treasuryPerMonth.php?token=${getCookie("cnxToken")}${left}${right}${nS}${rS}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -153,4 +156,15 @@ function getDiscountDetails(nRemise) {
     });
 }
 
-export { getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons, getTreasury, getTreasuryPerMonth, getDiscount, getDiscountDetails };
+function getReason(nSiren) {
+    let nS = nSiren !== null ? "&nSiren" + nSiren : "";
+    console.log(`../api/getReason.php?${nS}`);
+    return fetchData(`../api/getReason.php?${nS}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+}
+
+export { getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons, getTreasury, getTreasuryPerMonth, getDiscount, getDiscountDetails, getReason };

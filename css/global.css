@@ -84,3 +84,9 @@ button:hover{
       width: auto;
     }
   }
+
+  @media (max-width: 380px){
+    h1{
+      font-size: 1.5rem!important;
+    }
+  }

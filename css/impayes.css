@@ -42,17 +42,6 @@ option {
   padding-bottom: 25px;
 }
 
-@media screen and (max-width: 2250px) {
-    th{
-        font-size: 0.5rem!important;
-    }
-    
-    td{
-        font-size: 0.6rem;
-    }
-    
-}
-
 .form-row > .col, .form-row > [class*="col-"] {
     padding-right: 5px;
     padding-left: 5%;
@@ -95,11 +84,15 @@ option {
 /* .order-by {
 } */
 
+#order-by-container {
+    flex-wrap: wrap;
+    justify-content: flex-end
+}
+
 .text-right {
     text-align: right !important;
   }
 
-button[onclick^="exportTable"],
 nav#pagination-container {
     margin-right: 1em;
 }
@@ -142,7 +135,10 @@ nav#pagination-container {
     width: 100%;
   }
 
-  button.export-pdf-button, button#resetButton,
+
+  button.export-button, 
+  button.export-pdf-button,
+  button#resetButton,
   button#searchButton {
     border-radius: 15px;
     background-color: var(--couleur-violet-bouton);
@@ -151,13 +147,32 @@ nav#pagination-container {
     border: none;
     cursor: pointer;
     border: 1px solid var(--couleur-violet-bouton);
-    margin-left: 0;
-    margin-right: 5%;
+
+    width: fit-content!important;
+  }
+
+  #choiceDateImp{
+    max-width: fit-content;
+  }
+  #order-by,
+  #export-select{
+    width: fit-content!important;
   }
 
   .form-row{
     height: inherit!important;
   }
+
+  @media screen and (max-width: 2250px) {
+    th{
+        font-size: 0.5rem!important;
+    }
+    
+    td{
+        font-size: 0.6rem;
+    }
+    
+}
 
   @media (max-width: 768px) {
     .col-md-6 {
@@ -171,6 +186,9 @@ nav#pagination-container {
       margin-top: 0px;
     }
 
+    #order-by-container{
+      justify-content: center;
+    }
   }
 
 

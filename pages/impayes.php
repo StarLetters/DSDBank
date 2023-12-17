@@ -18,6 +18,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     'samesite' => 'None'
 ]);
 
+include '../backend/utilities.php';
 ?>
 
 <!DOCTYPE html>
@@ -27,6 +28,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes impayés</title>
+    <link rel="shortcut icon" href="../data/img/LogoDSD.png" type="image/x-icon">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -50,7 +53,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 <div class="row mt-4 ct1 flex-column flex-md-row mb-3">
                     <div class="hidePO col-12 col-md-6 align-items-center flex-row order-md-2">
                         <div class="col-12 mx-auto mt-auto">
-                            <div class="hidePO text-center" id="date-container">
+                            <div class="hidePO text-center mb-3" id="date-container">
                                 <label for="choiceDateImp">Dater par : </label>
                                 <select id="choiceDateImp" class="item-selecteur col-5 col-sm-6">
                                     <option value="custom" id="dateCustomImp">Dates personnalisées</option>
@@ -96,15 +99,15 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 <div class="row mt-5 ct1">
                     <div id="items-per-page-container" class="col-md-12 col-lg-6">
                         <label for="items-per-page">Éléments par page:</label>
-                        <select id="items-per-page" class="item-selecteur col-1 col-sm-1">
+                        <select id="items-per-page" class="item-selecteur">
                             <option value="3">3</option>
                             <option value="5">5</option>
                             <option value="10">10</option>
                         </select>
                     </div>
-                    <div id="order-by-container" class="col-md-12 col-lg-6 order-by">
-                        <label for="order-by">Trier par:</label>
-                        <select id="order-by" class="item-selecteur col-6 col-sm-6">
+                    <div id="order-by-container" class="col-md-12 col-lg-6 d-flex align-items-center order-by">
+                        <label for="order-by" class="mb-0 mx-2">Trier par:</label>
+                        <select id="order-by" class="item-selecteur">
                             <option value="montantDesc">Montant décroissant</option>
                             <option value="montantAsc">Montant croissant</option>
                             <option value="motif" id="motifImp" class="hidePO">Motif</option>
@@ -121,11 +124,16 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 <div class="ct1">
                     <div class="row my-3">
                         <div class="col-md-12 col-lg-6 mb-2">
-                            <select id="export-select" class="col-5 col-sm-6">
-                                <option value="csv">Exporter en CSV</option>
-                                <option value="xls">Exporter en XLS</option>
+                            <?php
+                            $filename = 'TABLEAU DES IMPAYES';
+                            $onclick = getOnClickTable($role, $filename);
+                            ?>
+                            <button class="export-button" style="padding: 4px 15px;" onclick="<?php echo $onclick ?>">Exporter</button>
+                            <select id="export-select" style="padding: 4px 15px;">
+                                <option value="csv">en CSV</option>
+                                <option value="xls">en XLSX</option>
+                                <option value="pdf">en PDF</option>
                             </select>
-                            <button class="export-button col-2 col-sm-4" onclick="exportTable()">Exporter</button>
                         </div>
                         <div class="col-md-12 col-lg-6">
                             <div id="results-container" class="text-right ct2"></div>
@@ -149,13 +157,16 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         <div class="chart">
                             <canvas id="barChart"></canvas>
                         </div>
-                        <!--
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
-                                <button class="export-pdf-button" onclick="exportTableToPDF('barChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter en PDF</button>
+                                <?php
+                                $filename = 'GRAPHIQUE A BARRES DES IMPAYES';
+                                $onclick = getOnclick($role, $filename, 'barChart', 800, 400);
+                                echo "<button class=\"export-pdf-button\" onclick=\"" . htmlspecialchars($onclick) . "\">Exporter en PDF</button>";
+                                ?>
                             </div>
                         </div>
-                        -->
+
                     </div>
 
                     <div class="col-md-12 mt-5" id="lineChartSection">
@@ -165,8 +176,11 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                         </div>
                         <div class="col-auto mt-3">
                             <div class="col-auto mt-3">
-                                <button class="export-pdf-button" onclick="exportTableToPDF('lineChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter
-                                    en PDF</button>
+                                <?php
+                                $filename = 'GRAPHIQUE LINEAIRE DES IMPAYES';
+                                $onclick = getOnclick($role, $filename, 'lineChart', 800, 400);
+                                echo "<button class=\"export-pdf-button\" onclick=\"" . htmlspecialchars($onclick) . "\">Exporter en PDF</button>";
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -175,11 +189,11 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <h3 class="pt-5">Motifs d'impayés</h3>
                     <canvas id="pieChart"></canvas>
                     <div class="col-auto mt-3">
-                        <!--
-                        <button class="export-pdf-button" onclick="exportTableToPDF('pieChart', 'GRAPHIQUE DES IMPAYES DE <?php echo strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']); ?>', 'pdf', 750, 400)">Exporter
-                            en
-                            PDF</button>
-                            -->
+                        <?php
+                        $filename = 'GRAPHIQUE DES MOTIFS IMPAYES';
+                        $onclick = getOnclick($role, $filename, 'pieChart', 800, 400);
+                        echo "<button class=\"export-pdf-button\" onclick=\"" . htmlspecialchars($onclick) . "\">Exporter en PDF</button>";
+                        ?>
                     </div>
                 </div>
 

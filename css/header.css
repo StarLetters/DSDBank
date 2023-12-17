@@ -70,6 +70,7 @@ body {
     z-index: 1000;
     position: fixed;
     left: 250px;
+    top: 0;
     width: 0;
     height: 100%;
     margin-left: -250px;
@@ -121,7 +122,7 @@ body {
     text-decoration: none;
     color: #fff;
     opacity: 100%;
-    background: var(--couleur-violet-bouton);
+    background: var(--couleur-hover);
 }
 
 .sidebar-nav>li>a i.fa {
@@ -148,6 +149,8 @@ body {
     position: fixed;
     width: 100%;
     top: 0;
+    background-color: var(--couleur-fond);
+    border-radius: 0px 0px 40px 40px;
 }
 
 #navbar-wrapper .navbar a:hover {
@@ -221,7 +224,7 @@ hr {
         margin-right: 60px;
     }
 }
-
+/*
 @media (min-width: 768px) and (max-width: 991px) {
 
     #wrapper.toggled #navbar-wrapper {
@@ -253,9 +256,10 @@ hr {
         margin-right: 250px;
     }
 }
+*/
 
 /* Pour les petits écrans, la barre de navigation occupe toute la largeur */
-@media (max-width: 767px) {
+@media (max-width: 990px) {
 
     
     #navbar-wrapper.active {

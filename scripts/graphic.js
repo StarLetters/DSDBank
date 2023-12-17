@@ -202,9 +202,8 @@ function dataForChart2(data) {
   return { montants, dates };
 }
 
-async function toggleTreasury(){
-  const fetchedData = await getTreasuryPerMonth("","");
-  console.log(fetchedData);
+async function toggleTreasury(date){
+  const fetchedData = await getTreasuryPerMonth("",date);
   const { montants, dates } = dataForChart2(fetchedData);
   createLineChart("Evolution de la trésorerie", dates, montants);
   console.log("toggleTreasury");

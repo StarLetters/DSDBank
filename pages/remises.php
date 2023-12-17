@@ -17,6 +17,8 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     'secure' => true,
     'samesite' => 'None'
 ]);
+
+include '../backend/utilities.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -25,8 +27,9 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remises</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+    <link rel="shortcut icon" href="../data/img/LogoDSD.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/varColor.css">
@@ -48,41 +51,39 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     </div>
                 </div>
                 <div class="row mt-4 ct1 flex-column flex-md-row mb-3">
-                <div class="hidePO col-12 col-md-6 align-items-center flex-row order-md-2">
-    <div class="col-12 mb-3 mb-md-0" id="selectDate">
-        <div class="row clm">
-            <div class="col-6 col-md-6">
-                <label for="startDate">Date de début :</label>
-                <input type="date" id="startDate" class="form-control form-control-sm date col-12">
-            </div>
-            <div class="col-6 col-md-6">
-                <label for="endDate">Date de fin :</label>
-                <input type="date" id="endDate" class="form-control form-control-sm date col-12">
-            </div>
-        </div>
-    </div>
+                    <div class="hidePO col-12 col-md-6 align-items-center flex-row order-md-2">
+                        <div class="col-12 mb-3 mb-md-0" id="selectDate">
+                            <div class="row clm">
+                                <div class="col-6 col-md-6">
+                                    <label for="startDate">Date de début :</label>
+                                    <input type="date" id="startDate" class="form-control form-control-sm date col-12">
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <label for="endDate">Date de fin :</label>
+                                    <input type="date" id="endDate" class="form-control form-control-sm date col-12">
+                                </div>
+                            </div>
+                        </div>
 
-    <?php
-    if ($role == 1) {
-        echo '
-        <div class="row mb-5 clm">
-            <div class="col-6 col-md-6">
-                <label for="nSiren">N°SIREN</label>
-                <input type="text" id="nSiren" class="form-control form-control-sm date col-12">
-            </div>
-            <div class="col-6 col-md-6">
-                <label for="raison">Raison Sociale</label>
-                <input type="text" id="raison" class="form-control form-control-sm date col-12">
-            </div>
-        </div>';
-    }
-    echo '<div id="email" class="hidden">' . $_SESSION['email'] . '</div>';
-    ?>
-</div>
+                        <?php
+                        if ($role == 1) {
+                            echo '
+                    <div class="row mb-5 clm">
+                        <div class="col-6 col-md-6">
+                            <label for="nSiren">N°SIREN</label>
+                            <input type="text" id="nSiren" class="form-control form-control-sm date col-12">
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <label for="raison">Raison Sociale</label>
+                            <input type="text" id="raison" class="form-control form-control-sm date col-12">
+                        </div>
+                    </div>';
+                        }
+                        ?>
+                    </div>
                     <div class="col-12 col-md-6" id="search-container">
                         <label class="mt-2" for="nRemise">N°Remise</label>
-                        <input type="text" id="nRemise" class="form-control form-control-sm date"
-                            placeholder="N°Remise">
+                        <input type="text" id="nRemise" class="form-control form-control-sm date" placeholder="N°Remise">
 
                         <div class="d-flex flex-column flex-md-row mt-2">
                             <button id="resetButton" class="mx-1">Effacer</button>
@@ -91,9 +92,10 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     </div>
                 </div>
             </div>
+            <hr class="mt-5 mb-5">
+            <div class="row h-25"></div>
 
-
-            <div class="row justify-content-between align-items-start mx-5 mb-3">
+            <div class="row justify-content-between align-items-start mx-5 mb-3 mt-5">
                 <div id="items-per-page-container">
                     <label for="items-per-page">Éléments par page:</label>
                     <select id="items-per-page" class="item-selecteur">
@@ -104,7 +106,7 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                 </div>
             </div>
             <div class="d-flex flex-row clm">
-                <div id="order-by-container" class="col-md-12 mb-2 mx-4 col-lg-6 order-by">
+                <div id="order-by-container" class="col-12 mb-2 mx-4 col-md-6 order-by">
                     <label for="order-by">Trier par:</label>
                     <select id="order-by" class="item-selecteur col-6 col-sm-6">
                         <option value="montantDesc">Montant décroissant</option>
@@ -125,12 +127,18 @@ setcookie('cnxToken', $_SESSION['cnxToken'], [
                     <select id="export-select" class="m2">
                         <option value="csv">Exporter en CSV</option>
                         <option value="xls">Exporter en XLS</option>
+                        <option value="pdf">Exporter en PDF</option>
                     </select>
-                    <button id="export-button" class="export-button" onclick="exportDetailledTable()">Exporter</button>
+                    <?php
+                    $filename = 'TABLEAU REMISES';
+                    $onclick = getOnClickDetailledTable($role, $filename);
+                    ?>
+                    <button id="export-button" class="export-button" onclick="<?php echo $onclick ?>">Exporter</button>
                 </div>
             </div>
             <?php include('../includes/footer.html'); ?>
         </div>
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
 
