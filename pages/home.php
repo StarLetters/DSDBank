@@ -1,8 +1,8 @@
 <?php
 session_start();
 require('../account/verifLogin.php');
-$verif = verifLogin();
-switch ($verif) {
+$role = verifLogin();
+switch ($role) {
     case 0:
         break;
     case 1:

@@ -4,12 +4,12 @@
     --couleur-bouton-gris: #d1d1d1;
     --couleur-bouton: rgba(39, 18, 66, 0.804); /* Couleur bouton violette */
     --couleur-text: rgb(255, 255, 255); /* Couleur texte blanche */
-    --couleur-hover: #1f1f1f; 
+    --couleur-hover: rgba(31, 31, 31, 0.7); 
     --couleur-input: #64111170; /* changé */
     --couleur-avertissement: rgb(201, 49, 49); /* Couleur avertissement changé */
     --couleur-violet-bg:rgb(99, 89, 233); /* Couleur violet bg */
     --couleur-fond-rouge:rgba(158, 35, 35,0.25); /* Couleur fond rouge  */
-    --couleur-fond-sombre: #3b3939; /* changé */
+    --couleur-fond-sombre: #363636; /* changé */
     --couleur-text-violet:rgb(193, 200, 228); /* Couleur texte violet */
     --couleur-bleu: #7393B3; /* changé */
 }

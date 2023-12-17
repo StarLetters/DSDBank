@@ -1,5 +1,5 @@
 import { toggleUnpaidCharts } from "./graphic.js";
-import { updateDataTable, changeItemsPerPage} from "./dataTable.js";
+import { updateDataTable, changeItemsPerPage } from "./dataTable.js";
 import { displayElements } from "./utilities.js";
 import { getUnpaidsForEach } from "./fetchData.js";
 
@@ -71,10 +71,12 @@ function addListener() {
     choiceDateImpElement.value = "custom";
     updateAll();
   });
-  chartTypeElement.addEventListener("change", () => {
-    toggleUnpaidCharts(chartTypeElement.value);
+  chartTypeElement.addEventListener("change", toggleUnpaidCharts(chartTypeElement.value));
+  itemsPerPageElement.addEventListener("change", () => {
+    changeItemsPerPage();
+    updateAll();
   });
-  itemsPerPageElement.addEventListener("change", changeItemsPerPage);
+
   orderByElement.addEventListener("change", updateTable);
   searchButtonElement.addEventListener("click", updateAll);
   nImpElement.addEventListener("keyup", (event) => {
