@@ -31,8 +31,8 @@ session_start();
                     </div>
                 </div>
                 <div class="align-items-center d-flex flex-column justify-content-center"> 
-                    <div class="infos align-items-center d-flex flex-column justify-content-center mb-5">
-                        <h2 class="d-flex justify-content-center">Informations légales :</h2>
+                    <div class="text-container align-items-center d-flex flex-column justify-content-center mb-5">
+                        <h3 class="d-flex justify-content-center">Informations légales</h3>
                         <div class="justify-content-start">
                             <div class="mb-3">Ce site est un projet réalisé par des étudiants dans le cadre du BUT Informatique</div>
                             <div>Étudiants responsables du projet :</div>
@@ -49,26 +49,26 @@ session_start();
                             </div>
                         </div>
                     </div>
-                    <div class="infos align-items-center d-flex flex-column justify-content-center mb-5">
-                        <h2 class="d-flex justify-content-center">Propriété intellectuelle :</h2>
+                    <div class="text-container align-items-center d-flex flex-column justify-content-center mb-5">
+                        <h3 class="d-flex justify-content-center">Propriété intellectuelle</h3>
                         <div class="txt justify-content-start">
-                            Tous les contenus originaux créés pour ce projet, y compris 
-                            mais sans s'y limiter, les textes, les logos, les graphiques 
-                            et les images, sont la propriété intellectuelle des étudiants 
-                            responsables du projet "DSD Bank".
+                            Tous les contenus originaux créés pour ce projet, y compris les textes, les logos, les graphiques 
+                            et les images, sont la propriété intellectuelle des étudiants responsables du projet "DSD Bank".
                         </div>
                     </div>
-                    <div class="infos align-items-center d-flex flex-column justify-content-center mb-5">
-                        <h2 class="d-flex justify-content-center">Utilisation des données :</h2>
+                    <div class="text-container align-items-center d-flex flex-column justify-content-center mb-5">
+                        <h3 class="d-flex justify-content-center">Utilisation des données</h3>
                         <div class="txt justify-content-start">
                             Les informations collectées sur ce site, dans le cadre de formulaires,
                             ne seront en aucun cas utilisées à des fins commerciales.
+                        </div>
+                        <div class="txt justify-content-start">
                             Les données collectées dans le cadre de ce projet sont traitées
                             de manière confidentielle et ne seront pas partagées avec des tiers.
                         </div>
                     </div>
-                    <div class="infos align-items-center d-flex flex-column justify-content-center mb-5">
-                        <h2 class="d-flex justify-content-center">Cookies :</h2>
+                    <div class="text-container align-items-center d-flex flex-column justify-content-center mb-5">
+                        <h3 class="d-flex justify-content-center">Cookies</h3>
                         <div class="txt justify-content-start">
                             Ce site peut utiliser des cookies à des fins de démonstration et de fonctionnement interne du projet.
                             Aucune donnée personnelle n'est collectée via ces cookies.
