@@ -71,7 +71,9 @@ function addListener() {
     choiceDateImpElement.value = "custom";
     updateAll();
   });
-  chartTypeElement.addEventListener("change", toggleUnpaidCharts(chartTypeElement.value));
+  chartTypeElement.addEventListener("change", () => {
+    toggleUnpaidCharts(chartTypeElement.value);
+  });
   itemsPerPageElement.addEventListener("change", () => {
     changeItemsPerPage();
     updateAll();
