@@ -128,7 +128,7 @@ ini_set('display_startup_errors', 1);
                                 <span class="eye-icon" onclick="togglePasswordVisibility(this)">&#x1F441;</span>
                             </div>
                         </div>
-                        <div class="form-group text-left">
+                        <div class="form-group text-left col">
                             <a class="button-forgot" href="demandereinit.html">Mot de passe oublié ?</a>
                         </div>
                         <div class="form-group text-left">
