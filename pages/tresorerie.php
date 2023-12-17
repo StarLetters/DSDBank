@@ -59,9 +59,9 @@ include '../backend/utilities.php';
                         if ($role == 1) {
                             echo '
                                 <label for="nSIREN" class="mt-3">N° SIREN :</label>
-                                <input type="text" id="nSIREN" class="form-control form-control-sm date">
+                                <input type="text" id="nSIREN" class="form-control form-control-sm date" placeholder="1234567889">
                                 <label for="raisonSociale" class="mt-3">Raison Sociale :</label>
-                                <input type="text" id="raisonSociale" class="form-control form-control-sm date">
+                                <input type="text" id="raisonSociale" class="form-control form-control-sm date" placeholder="DSDCorp">
                                     ';
                         }
                         ?>

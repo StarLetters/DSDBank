@@ -13,6 +13,7 @@ function exportChartToPDF(chartId, fileName, format, width, height) {
 
     const exportCtx = exportCanvas.getContext('2d');
 
+    // Assurez-vous que le canvas est à la même taille que le graphique d'origine
     const ratio = window.devicePixelRatio || 1;
     exportCanvas.width = exportWidth * ratio;
     exportCanvas.height = exportHeight * ratio;
@@ -34,23 +35,16 @@ function exportChartToPDF(chartId, fileName, format, width, height) {
     // Copie le contenu du graphique original sur le nouveau canvas
     exportCtx.drawImage(canvas, 0, titleHeight + dateHeight, width, height);
 
-    if ((chartId === 'pieChart') && format === 'pdf') {
-        // Exporte en PDF avec les couleurs du pie chart
-        const element = document.createElement('div');
-        element.appendChild(exportCanvas);
-        html2pdf().from(element).save(fileName + '.pdf');
-    } else if (format === 'pdf') {
+    if (!(chartId === 'pieChart') && format === 'pdf') {
         // Convertit le reste en noir pour les autres types de graphiques
         const imageData = exportCtx.getImageData(0, titleHeight + dateHeight, width, height);
         const data = imageData.data;
 
         exportCtx.putImageData(imageData, 0, titleHeight + dateHeight);
-
-        // Exporte en PDF avec les couleurs mises à jour
-        const element = document.createElement('div');
-        element.appendChild(exportCanvas);
-        html2pdf().from(element).save(fileName + '.pdf');
     }
+    const element = document.createElement('div');
+    element.appendChild(exportCanvas);
+    html2pdf().from(element).save(fileName + '.pdf');
 }
 function exportTableToCSV(tableId, fileName) {
     let csvContent = "data:text/csv;charset=utf-8,";
@@ -89,7 +83,7 @@ function exportTableToXLS(tableId, fileName) {
     const currentDate = new Date().toLocaleDateString();
     XLSX.utils.sheet_add_aoa(worksheet, [['Titre: ' + fileName], ['Date: ' + currentDate]], { origin: -1 });
 
-    XLSX.utils.book_append_sheet(workbook, worksheet, fileName);
+    XLSX.utils.book_append_sheet(workbook, worksheet, "tableau");
 
     const xlsContent = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
 

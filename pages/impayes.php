@@ -77,7 +77,7 @@ include '../backend/utilities.php';
                     </div>
                     <div class="col-12 col-md-6" id="search-container">
                         <label class="mt-2" for="nImp">N° Dossier Impayés :</label>
-                        <input type="text" id="nImp" class="form-control form-control-sm nImp order-md-1">
+                        <input type="text" id="nImp" class="form-control form-control-sm nImp order-md-1" placeholder="">
                         <?php
                         if ($role == 1) {
                             echo '  
@@ -131,7 +131,7 @@ include '../backend/utilities.php';
                             <button class="export-button" style="padding: 4px 15px;" onclick="<?php echo $onclick ?>">Exporter</button>
                             <select id="export-select" style="padding: 4px 15px;">
                                 <option value="csv">en CSV</option>
-                                <option value="xls">en XLSX</option>
+                                <option value="xls">en XLS</option>
                                 <option value="pdf">en PDF</option>
                             </select>
                         </div>

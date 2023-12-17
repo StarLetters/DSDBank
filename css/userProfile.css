@@ -225,6 +225,10 @@ button:hover>a{
     cursor: pointer;
   }
 
+  #navbar-wrapper .navbar {
+    background-color: transparent;
+  }
+
 @media (max-width: 767px) {
 
     .card-group > .card {
