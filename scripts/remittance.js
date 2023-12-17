@@ -4,8 +4,8 @@ import { addRedClassToCellIfNegative } from "./utilities.js";
 
 // Constantes pour les éléments HTML réutilisés
 const itemsPerPageElement = document.getElementById("items-per-page");
-const nSirenElement = document.getElementById("nSiren");
-const raisonElement = document.getElementById("raison");
+const nSirenElement = document.getElementById("nSIREN");
+const raisonElement = document.getElementById("raisonSociale");
 const nRemiseElement = document.getElementById("nRemise");
 
 const resetButtonElement = document.getElementById("resetButton");
@@ -46,61 +46,28 @@ async function addListener() {
         if (nRemiseElement) {
             nRemiseElement.value = "";
         }
+        searchButtonElement.click();
       });
     if (nSirenElement) {
-        nSirenElement.addEventListener("click", () => {
-            nRemiseElement.value = "";
-            raisonElement.value = "";
-        });
         nSirenElement.addEventListener("keyup", function (event) {
             if (event.key === "Enter") {
                 event.preventDefault();
-                document.getElementById("searchButton").click();
+                searchButtonElement.click();
             }
         });
     }
     if (raisonElement) {
-        raisonElement.addEventListener("click", () => {
-            nSirenElement.value = "";
-            nRemiseElement.value = "";
-        });
         raisonElement.addEventListener("keyup", function (event) {
             if (event.key === "Enter") {
                 event.preventDefault();
-                document.getElementById("searchButton").click();
+                searchButtonElement.click();
             }
-        });
-    }
-    if (raisonElement && nSirenElement) {
-        nSirenElement.addEventListener("click", () => {
-            nRemiseElement.value = "";
-            raisonElement.value = "";
-        });
-        nSirenElement.addEventListener("keyup", function (event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                document.getElementById("searchButton").click();
-            }
-        });
-        raisonElement.addEventListener("click", () => {
-            nSirenElement.value = "";
-            nRemiseElement.value = "";
-        });
-        raisonElement.addEventListener("keyup", function (event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                document.getElementById("searchButton").click();
-            }
-        });
-        nRemiseElement.addEventListener("click", () => {
-            nSirenElement.value = "";
-            raisonElement.value="";
         });
     }
     nRemiseElement.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
             event.preventDefault();
-            document.getElementById("searchButton").click();
+            searchButtonElement.click();
         }
     });
     orderByElement.addEventListener("change", updateTable);

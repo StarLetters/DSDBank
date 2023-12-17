@@ -22,12 +22,7 @@ function addColorToCells(tableRows) {
     const lastCellValue = parseFloat(row.lastElementChild.textContent);
 
     const roundedValue = Math.round(lastCellValue / 100) * 100;
-
-    console.log(roundedValue);
-
     row.lastElementChild.classList.add("amount"+roundedValue);
-
-    
   }
 }
 

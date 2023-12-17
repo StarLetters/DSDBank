@@ -97,9 +97,6 @@ function createTable(data, tableId, AreCellsColored = false) {
                     const cellValue = parseFloat(value);
                     const roundedValue = Math.max(Math.round(cellValue / 100) * 100, -800); // Set maximum value to 800
                     cell.classList.add("amount"+roundedValue);
-
-                    console.log("amount"+roundedValue);
-
                 }
 
                 cell.textContent = value;

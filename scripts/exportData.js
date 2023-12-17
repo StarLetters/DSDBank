@@ -121,7 +121,6 @@ function exportDetailledTableToCSV(tableId, fileName) {
     const excludedRows = Array.from(document.querySelectorAll('.detailsRow'));
     rows.forEach(row => {
         if (!excludedRows.includes(row)) {
-            console.log(row);
             const cells = Array.from(row.querySelectorAll('td')).map(td => td.textContent);
             csvContent += cells.join(',') + '\n';
         }
@@ -156,7 +155,7 @@ function exportDetailledTableToXLS(tableId, fileName) {
     // le titre et la date
     const currentDate = new Date().toLocaleDateString();
     XLSX.utils.sheet_add_aoa(worksheet, [['Titre: ' + fileName], ['Date: ' + currentDate]], { origin: -1 });
-    XLSX.utils.book_append_sheet(workbook, worksheet, fileName);
+    XLSX.utils.book_append_sheet(workbook, worksheet, "tableau principal");
 
     const selectedRows = Array.from(document.querySelectorAll('.collapse.show'));
     for (let i = 0; i < selectedRows.length; i++) {
@@ -195,6 +194,7 @@ function getMainTableData(tableId) {
             tableData.push(getRowData(row));
         }
     }
+    return tableData;
 }
 
 function getRowData(row) {
@@ -209,15 +209,15 @@ function getRowData(row) {
 function exportTableToPDF(tableId, fileName) {
     const title = fileName;
     const date = "Date : 01/03/2023";
-    
+
     const element = document.getElementById(tableId);
     const options = {
-      filename: fileName+'.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' }
+        filename: fileName + '.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' }
     };
-  
+
     const content = `
     <style>
       td{
@@ -229,9 +229,9 @@ function exportTableToPDF(tableId, fileName) {
       <p>${date}</p>
       ${element.innerHTML}
     `;
-  
+
     html2pdf().set(options).from(content).save();
-  }
+}
 
 function exportTable($filename) {
     var selectElement = document.getElementById("export-select");
@@ -259,41 +259,49 @@ function exportDetailledTable($filename) {
     }
 }
 
-function exportChartToPDFWithTitle(chartId, startTitle, format, width, height) {
-    exportChartToPDF(chartId, getTitle(startTitle), format, width, height);
+async function exportChartToPDFWithTitle(chartId, startTitle, format, width, height) {
+    exportChartToPDF(chartId,await getTitle(startTitle), format, width, height);
 }
 
-function exportTableWithName($filename){
-    return exportTable(getTitle($filename));
+async function exportTableWithName($filename) {
+    return exportTable(await getTitle($filename));
 }
 
-function exportDetailledTableWithName($filename){
-    return exportDetailledTable(getTitle($filename));
+async function exportDetailledTableWithName($filename) {
+    return exportDetailledTable(await getTitle($filename));
 }
 
-function getTitle(startTitle) {
+function isFieldValueValid(value) {
+    return value.trim().length > 0;
+}
+
+async function getTitle(startTitle) {
     let title = startTitle;
     if (document.getElementById("raisonSociale")) {
         const raisonSociale = document.getElementById("raisonSociale");
-        if (raisonSociale.value !== "") {
+        if (isFieldValueValid(raisonSociale.value)) {
             title += " DE L\'ENTREPRISE " + raisonSociale.value.toUpperCase();
+            const siren = await getReasonSiren("numSiren");
+            title += " N°SIREN " + siren.toString();
         }
     }
     if (document.getElementById("nSIREN")) {
         const nSiren = document.getElementById("nSIREN");
-        if (nSiren.value !== "") {
+        if (isFieldValueValid(nSiren.value)) {
+            const raison = await getReasonSiren("raisonSociale");
+            title += " DE L\'ENTREPRISE " + raison.toString();
             title += " N°SIREN " + nSiren.value;
         }
     }
     if (document.getElementById("nImp")) {
         const nImp = document.getElementById("nImp");
-        if (nImp.value !== "") {
+        if (isFieldValueValid(nImp.value)) {
             title += " DU DOSSIER IMPAYES " + nImp.value;
         }
     }
     if (document.getElementById("nRemise")) {
         const nRemise = document.getElementById("nRemise");
-        if (nRemise.value !== "") {
+        if (isFieldValueValid(nRemise.value)) {
             title += " DE LA REMISE " + nRemise.value;
         }
     }
@@ -302,3 +310,52 @@ function getTitle(startTitle) {
     }
     return title;
 }
+
+function getCookie(name) {
+    let cookieArr = document.cookie.split("; ");
+    for (let i = 0; i < cookieArr.length; i++) {
+        let cookiePair = cookieArr[i].split("=");
+        if (name === cookiePair[0]) {
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+    return null;
+}
+
+async function getReasonSiren(reasonSiren) {
+    const nSiren = document.getElementById("nSIREN");
+    const raisonSociale = document.getElementById("raisonSociale");
+    let parameter = ""; // Ajoutez cette ligne pour déclarer la variable parameter
+  
+    if (reasonSiren == "numSiren") {
+      if (nSiren && isFieldValueValid(nSiren.value)) {
+        return nSiren.value;
+      } else {
+        parameter = "&raisonSociale=" + raisonSociale.value;
+      }
+    } else if (reasonSiren == "raisonSociale") {
+      if (raisonSociale && isFieldValueValid(raisonSociale.value)) {
+        return raisonSociale.value;
+      } else {
+        parameter = "&numSiren=" + nSiren.value;
+      }
+    }
+  
+    const response = await fetch(
+      '../api/getReasonSiren.php?token=' + getCookie("cnxToken") + parameter,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }
+    );
+  
+    const data = await response.json();
+  
+    if (reasonSiren === "numSiren") {
+      return data.numSiren;
+    } else if (reasonSiren === "raisonSociale") {
+      return data.raisonSociale;
+    }
+  }

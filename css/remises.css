@@ -49,8 +49,6 @@ button#resetButton, button#searchButton, #export-select, #export-button {
     border: none;
     cursor: pointer;
     border: 1px solid var(--couleur-violet-bouton);
-    margin-left: 0;
-    margin-right: 5%;
     font-size: 0.8rem;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }

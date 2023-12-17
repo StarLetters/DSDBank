@@ -162,9 +162,6 @@ async function toggleUnpaidCharts(selectedChart) {
   const startDate = document.getElementById("startDate").value;
   const endDate = document.getElementById("endDate").value;
 
-  console.log(startDate);
-  console.log(endDate);
-
   try {
     const fetchedData = await getUnpaidsPerMonth(startDate, endDate);
     const { montants, dates } = dataForChart(fetchedData);
@@ -172,10 +169,6 @@ async function toggleUnpaidCharts(selectedChart) {
     const fetchedReasons = await getUnpaidReasons(startDate, endDate);
 
     const { reasonCount, reasons} = dataForPieChart(fetchedReasons);
-
-    console.log(reasonCount);
-    console.log(reasons);
-
 
     makePieChart(reasonCount, reasons, nHarmoniousColors("blue",reasons.length));
 
@@ -206,7 +199,6 @@ async function toggleTreasury(date){
   const fetchedData = await getTreasuryPerMonth("",date);
   const { montants, dates } = dataForChart2(fetchedData);
   createLineChart("Evolution de la trésorerie", dates, montants);
-  console.log("toggleTreasury");
 }
 
 export { toggleUnpaidCharts, toggleTreasury};

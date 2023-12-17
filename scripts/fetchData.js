@@ -9,15 +9,19 @@ function getCookie(name) {
     return null;
 }
 
-async function fetchData(url, options) {
+async function fetchData(url) {
     if (getCookie("cnxToken") === null) {
         document.location.href = "../index.html";
     }
 
-    return fetch(url, options)
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             return data;
         })
         .catch(error => {
@@ -27,24 +31,16 @@ async function fetchData(url, options) {
 }
 
 function getUnpaidsPerMonth(leftBound, rightBound) {
-    console.log("Fetching via getUnpaidsPerMonth()");
-
     let nS = (document.getElementById("nSIREN") && document.getElementById("nSIREN").value !== "") ? '&nSIREN=' + document.getElementById("nSIREN").value : "";
     let rS = (document.getElementById("raisonSociale") && document.getElementById("raisonSociale").value !== "") ? '&raisonSociale=' + document.getElementById("raisonSociale").value : "";
 
     let left = leftBound !== "" ? '&leftBound=' + leftBound : "";
     let right = rightBound !== "" ? '&rightBound=' + rightBound : "";
 
-    return fetchData(`../api/unpaidsPerMonth.php?token=${getCookie("cnxToken")}${left}${right}${nS}${rS}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    });
+    return fetchData(`../api/unpaidsPerMonth.php?token=${getCookie("cnxToken")}${left}${right}${nS}${rS}`);
 }
 
 function getUnpaidsForEach(leftBound, rightBound, orderby, nImpaye, nSIREN, raisonSociale) {
-    console.log("Fetching via getUnpaidsForEach()");
 
     let left = leftBound !== "" ? '&leftBound=' + leftBound : "";
     let right = rightBound !== "" ? '&rightBound=' + rightBound : "";
@@ -53,17 +49,10 @@ function getUnpaidsForEach(leftBound, rightBound, orderby, nImpaye, nSIREN, rais
     let nS = nSIREN !== "" ? '&nSIREN=' + nSIREN : "";
     let rS = raisonSociale !== "" ? '&raisonSociale=' + raisonSociale : "";
 
-    console.log(`../api/unpaidsForEach.php?token=${getCookie("cnxToken")}${left}${right}${order}${nImp}${nS}${rS}`);
-    return fetchData(`../api/unpaidsForEach.php?token=${getCookie("cnxToken")}${left}${right}${order}${nImp}${nS}${rS}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+    return fetchData(`../api/unpaidsForEach.php?token=${getCookie("cnxToken")}${left}${right}${order}${nImp}${nS}${rS}`);
 }
 
 function getUnpaidReasons(leftBound, rightBound) {
-    console.log("Fetching via getUnpaidReasons()");
 
     let nS = (document.getElementById("nSIREN") && document.getElementById("nSIREN").value !== "") ? '&nSIREN=' + document.getElementById("nSIREN").value : "";
     let rS = (document.getElementById("raisonSociale") && document.getElementById("raisonSociale").value !== "") ? '&raisonSociale=' + document.getElementById("raisonSociale").value : "";
@@ -71,100 +60,60 @@ function getUnpaidReasons(leftBound, rightBound) {
     let left = leftBound !== "" ? '&leftBound=' + leftBound : "";
     let right = rightBound !== "" ? '&rightBound=' + rightBound : "";
 
-    return fetchData(`../api/unpaidReasons.php?token=${getCookie("cnxToken")}${left}${right}${nS}${rS}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    });
+    return fetchData(`../api/unpaidReasons.php?token=${getCookie("cnxToken")}${left}${right}${nS}${rS}`);
 }
 
 function getTreasury() {
-    console.log("Fetching via getTreasury()");
 
     let order = (document.getElementById("order-by") && document.getElementById("order-by").value !== "") ? '&orderby=' + document.getElementById("order-by").value : "";
     let nS = (document.getElementById("nSIREN") && document.getElementById("nSIREN").value !== "") ? '&nSIREN=' + document.getElementById("nSIREN").value : "";
     let socialReason = (document.getElementById("raisonSociale") && document.getElementById("raisonSociale").value !== "") ? '&raisonSociale=' + document.getElementById("raisonSociale").value : "";
     let dateValue = (document.getElementById("dateValeur") && document.getElementById("dateValeur").value !== "") ? '&dateValeur=' + document.getElementById("dateValeur").value : "";
 
-    return fetchData(`../api/treasuryForEach.php?token=${getCookie("cnxToken")}${nS}${order}${socialReason}${dateValue}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    });
+    return fetchData(`../api/treasuryForEach.php?token=${getCookie("cnxToken")}${nS}${order}${socialReason}${dateValue}`);
 }
 
 function getTreasuryPerMonth(leftBound, rightBound) {
-    console.log("Fetching via getTreasuryPerMonth()");
-
     let left = leftBound !== "" ? '&leftBound=' + leftBound : "";
     let right = rightBound !== "" ? '&rightBound=' + rightBound : "";
     let nS = (document.getElementById("nSIREN") && document.getElementById("nSIREN").value !== "") ? '&nSIREN=' + document.getElementById("nSIREN").value : "";
     let rS = (document.getElementById("raisonSociale") && document.getElementById("raisonSociale").value !== "") ? '&raisonSociale=' + document.getElementById("raisonSociale").value : "";
 
     
-    return fetchData(`../api/treasuryPerMonth.php?token=${getCookie("cnxToken")}${left}${right}${nS}${rS}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    });
+    return fetchData(`../api/treasuryPerMonth.php?token=${getCookie("cnxToken")}${left}${right}${nS}${rS}`);
 }
 
 function getDiscount(startDate, endDate, orderBy) {
-    console.log("Fetching via getDiscount()");
     let value="";
 
-    if (document.getElementById("nSiren") && document.getElementById("nSiren").value !== "") {
-        value = '&nSiren=' + document.getElementById("nSiren").value;
+    if (document.getElementById("nSIREN") && document.getElementById("nSIREN").value !== "") {
+        value += '&nSiren=' + document.getElementById("nSIREN").value;
     }
     if (document.getElementById("nRemise") && document.getElementById("nRemise").value !== "") {
-        value = '&nRemise=' + document.getElementById("nRemise").value;
+        value += '&nRemise=' + document.getElementById("nRemise").value;
     }
-    if (document.getElementById("raison") && document.getElementById("raison").value !== "") {
-        value = '&raison=' + document.getElementById("raison").value;
-    }
-    if (document.getElementById("email") && document.getElementById("email").textContent !== "") {
-        value = value + '&email=' + document.getElementById("email").textContent;
+    if (document.getElementById("raisonSociale") && document.getElementById("raisonSociale").value !== "") {
+        value += '&raison=' + document.getElementById("raisonSociale").value;
     }
     if (startDate !== null && startDate !== "") {
-        value = value + '&startDate=' + startDate;
+        value +='&startDate=' + startDate;
     }
     if (endDate !== null && endDate !== "") {
-        value = value + '&endDate=' + endDate;
+        value += '&endDate=' + endDate;
     }
-    value = value + '&order=' + orderBy;
-    console.log(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`);
-    return fetchData(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    });
+    value += '&order=' + orderBy;
+    return fetchData(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`);
 }
 
 function getDiscountDetails(nRemise) {
 
     let nR = nRemise !== null ? '&nRemise=' + nRemise : "";
-    console.log(`../api/discountDetails.php?token=${getCookie("cnxToken")}${nR}`);
-    return fetchData(`../api/discountDetails.php?token=${getCookie("cnxToken")}${nR}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    });
+    return fetchData(`../api/discountDetails.php?token=${getCookie("cnxToken")}${nR}`);
 }
 
 function getReason(nSiren) {
     let nS = nSiren !== null ? "&nSiren" + nSiren : "";
-    console.log(`../api/getReason.php?${nS}`);
-    return fetchData(`../api/getReason.php?${nS}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    });
+    return fetchData(`../api/getReason.php?${nS}`);
 }
 
 export { getUnpaidsForEach, getUnpaidsPerMonth, getUnpaidReasons, getTreasury, getTreasuryPerMonth, getDiscount, getDiscountDetails, getReason };

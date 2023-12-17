@@ -137,7 +137,6 @@ async function search() {
 
   displayOrderBy();
   data = await getUnpaidsForEach(startDate, endDate, order, nImp, nSIREN, raisonSociale);
-  console.log(data);
   updateTable(data);
 }
 
