@@ -58,7 +58,7 @@ include('../backend/cnx.php');
                                     Profitez dès maintenant de la comptabilité à la fois simple et complète
                                 </h5>
                             </span>
-                            <a href="../pages/userProfile.php" class="custom-button col-md-3 col-sm-3 align-self-center     ">Voir mon profil</a>
+                            <a href="../pages/userProfile.php" class="btn custom-button align-self-center     ">Voir mon profil</a>
                         </div>
                     </div>
                 </section>
@@ -75,37 +75,39 @@ include('../backend/cnx.php');
                 </section>
 
                 <section class="text-center mt-5">
-                    <h2 class="text-white">Les avis clients</h2>
+                    <h2 class="text-white">Quelques avis clients</h2>
                 </section>
 
                 <div class="container text-center mt-5">
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
-                            <div id="clientCarousel" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    <!-- Avis client 1 -->
-                                    <div class="carousel-item active">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/20/20863.png" class="img-fluid rounded-circle" class="d-block mx-auto" alt="Client 1">
-                                        <h3 class="text-white">Nom Client 1</h3>
-                                        <p class="text-white">Avis du client 1 ici...</p>
-                                    </div>
+                        <div id="customerReviewsCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <!-- Avis client 1 -->
+        <div class="carousel-item active">
+            <img src="https://st.depositphotos.com/2101611/3925/v/450/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg" class="img-fluid rounded-circle" class="d-block mx-auto" alt="Client 1">
+            <h3 class="text-white">John Doe</h3>
+            <p class="text-white">Excellent service ! Je suis très satisfait de mon expérience avec cette entreprise. Le personnel était amical et compétent. Je recommande vivement leurs services.</p>
+        </div>
 
-                                    <!-- Avis client 2 -->
-                                    <div class="carousel-item">
-                                        <img src="https://st.depositphotos.com/2101611/3925/v/450/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg" class="img-fluid rounded-circle" class="d-block mx-auto" alt="Client 2">
-                                        <h3 class="text-white">Nom Client 2</h3>
-                                        <p class="text-white">Avis du client 2 ici...</p>
-                                    </div>
+        <!-- Avis client 2 -->
+        <div class="carousel-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/20/20863.png" class="img-fluid rounded-circle" class="d-block mx-auto" alt="Client 2">
+            <h3 class="text-white">Jane Smith</h3>
+            <p class="text-white">J'ai été impressionné par le professionnalisme de cette entreprise. Ils ont résolu mon problème rapidement et efficacement. Je les recommande sans hésitation.</p>
+        </div>
 
-                                    <div class="carousel-item">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/20/20863.png" class="img-fluid rounded-circle" class="d-block mx-auto" alt="Client 3">
-                                        <h3 class="text-white">Nom Client 3</h3>
-                                        <p class="text-white">Avis du client 3 ici...</p>
-                                    </div>
+        <!-- Avis client 3 -->
+        <div class="carousel-item">
+            <img src="https://st.depositphotos.com/2101611/3925/v/450/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture.jpg" class="img-fluid rounded-circle" class="d-block mx-auto" alt="Client 3">
+            <h3 class="text-white">Michael Johnson</h3>
+            <p class="text-white">Le service client de cette entreprise est exceptionnel. Ils ont répondu à toutes mes questions et préoccupations de manière amicale et professionnelle. Je suis très satisfait de leur travail.</p>
+        </div>
 
-                                    <!-- etc-->
+        <!-- Ajoutez ici d'autres avis clients -->
 
-                                </div>
+    </div>
+</div>
 
                                 <!-- Contrôles de navigation -->
                                 <a class="carousel-control-prev" href="#clientCarousel" role="button" data-slide="prev">
