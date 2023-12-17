@@ -1,0 +1,72 @@
+.personne {
+    width: 50%;
+}
+
+.elgato {
+    width: 30%;
+}
+
+.roles {
+    font-size: 30px;
+}
+
+.reseau {
+    color: white;
+    text-decoration: none;
+}
+
+.reseau:hover {
+    color: white;
+}
+
+.icone {
+    font-size: 50px;
+}
+
+@media (max-width: 1300px) {
+    .ligne {
+        flex-direction: column !important;
+        align-items: center!important;
+    }
+
+    .elgato {
+        width: 50%;
+    }
+
+    .personne {
+        width: 80%;
+    }
+
+    h2 {
+        font-size: 1.4rem !important;
+    }
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem !important;
+    }
+    .elgato {
+        width: 75%;
+    }
+
+    h2 {
+        font-size: 1.3rem !important;
+    }
+
+    h3 {
+        font-size: 1.1rem !important;
+    }
+
+    .roles-container {
+        margin-right: 5px !important;
+    }
+
+    .roles {
+        font-size: 0.9rem !important;
+    }
+
+    .icone {
+        font-size: 40px;
+    }
+}
