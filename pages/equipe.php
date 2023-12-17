@@ -35,13 +35,13 @@ session_start();
                     </div>
                 </div>
                 <!-- 1ère ligne -->
-                <div class="align-items-start d-flex justify-content-around mb-5">
-                    <section class="personne align-items-center d-flex flex-column justify-content-center">
-                        <h1 class="mb-3">MERLIN Lucas</h1>
+                <div class="ligne align-items-start d-flex justify-content-around mb-5">
+                    <section class="personne align-items-center d-flex flex-column justify-content-center mb-5">
+                        <h2 class="mb-3 text-center">MERLIN Lucas</h2>
                         <img class="elgato mb-3" src="../data/img/elgatolulu.png" alt="elgato">
                         <div class="d-flex justify-content-between">
-                            <div class="mr-5">
-                                <h2>Rôles</h2>
+                            <div class="roles-container mr-5">
+                                <h3>Rôles</h3>
                                 <div class="roles d-flex flex-column justify-content-start">
                                     <div>Chef de projet</div>
                                     <div>Expert</div>
@@ -49,37 +49,37 @@ session_start();
                                 </div>
                             </div>
                             <div>
-                                <h2>Réseaux</h2>
+                                <h3>Réseaux</h3>
                                 <div class="d-flex justify-content-around">
                                     <a class="reseau" href="https://github.com/Luucas7" target="_blank">
-                                        <i class="fab fa-github" style="font-size: 50px;" ></i> <!-- Icône GitHub -->
+                                        <i class="fab fa-github icone"></i> <!-- Icône GitHub -->
                                     </a>
                                     <a  class="reseau" href="https://www.linkedin.com/in/lucas-merlin-a5b08426b/" target="_blank">
-                                        <i class="fab fa-linkedin" style="font-size: 50px;"></i></i> <!-- Icône LinkedIn -->
+                                        <i class="fab fa-linkedin icone"></i></i> <!-- Icône LinkedIn -->
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </section>
                     <section class="personne align-items-center d-flex flex-column justify-content-start">
-                        <h1 class="mb-3">HOUANGKEO Emeline</h1>
+                        <h2 class="mb-3 text-center">HOUANGKEO Emeline</h2>
                         <img class="elgato mb-3" src="../data/img/elgatoemeu.png" alt="elgato">
                         <div class="d-flex justify-content-between">
-                            <div class="mr-5">
-                                <h2>Rôles</h2>
+                            <div class="roles-container mr-5">
+                                <h3>Rôles</h3>
                                 <div class="roles d-flex flex-column justify-content-start">
                                     <div>Priseuse</div>
                                     <div>Promoteuse</div>
                                 </div>
                             </div>
                             <div>
-                                <h2>Réseaux</h2>
+                                <h3>Réseaux</h3>
                                 <div class="d-flex justify-content-around">
                                     <a class="reseau" href="https://github.com/Hyprra" target="_blank">
-                                        <i class="fab fa-github" style="font-size: 50px;" ></i>
+                                        <i class="fab fa-github icone" ></i>
                                     </a>
                                     <a  class="reseau" href="https://www.linkedin.com/in/emeline-houangkeo-5b8879266/" target="_blank">
-                                        <i class="fab fa-linkedin" style="font-size: 50px;"></i></i>
+                                        <i class="fab fa-linkedin icone"></i></i>
                                     </a>
                                 </div>
                             </div>
@@ -87,50 +87,50 @@ session_start();
                     </section>
                 </div>
                 <!-- 2ème ligne -->
-                <div class="align-items-start d-flex justify-content-around">
-                    <section class="personne align-items-center d-flex flex-column justify-content-center">
-                        <h1>BAFFIONI Adrien</h1>
+                <div class="ligne align-items-start d-flex justify-content-around">
+                    <section class="personne align-items-center d-flex flex-column justify-content-center mb-5">
+                        <h2 class="mb-3 text-center">BAFFIONI Adrien</h2>
                         <img class="elgato mb-3" src="../data/img/elgatoadridri.png" alt="elgato">
                         <div class="d-flex justify-content-between">
-                            <div class="mr-5">
-                                <h2>Rôles</h2>
+                            <div class="roles-container mr-5">
+                                <h3>Rôles</h3>
                                 <div class="roles d-flex flex-column justify-content-start">
                                     <div>Organisateur</div>
                                     <div>Soutien</div>
                                 </div>
                             </div>
                             <div>
-                                <h2>Réseaux</h2>
+                                <h3>Réseaux</h3>
                                 <div class="d-flex justify-content-around">
                                     <a class="reseau" href="https://github.com/AdrienB23" target="_blank">
-                                        <i class="fab fa-github" style="font-size: 50px;" ></i>
+                                        <i class="fab fa-github icone"></i>
                                     </a>
                                     <a  class="reseau" href="https://www.linkedin.com/in/adrien-baffioni-83465a26a/" target="_blank">
-                                        <i class="fab fa-linkedin" style="font-size: 50px;"></i></i>
+                                        <i class="fab fa-linkedin icone"></i></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </section>
                     <section class="personne align-items-center d-flex flex-column justify-content-center">
-                        <h1>LAHLOUH Elias</h1>
+                        <h2 class="mb-3 text-center">LAHLOUH Elias</h2>
                         <img class="elgato mb-3" src="../data/img/elgatoelinette.png" alt="elgato">
                         <div class="d-flex justify-content-between">
-                            <div class="mr-5">
-                                <h2>Rôles</h2>
+                            <div class="roles-container mr-5">
+                                <h3>Rôles</h3>
                                 <div class="roles d-flex flex-column justify-content-start">
                                     <div>Propulseur</div>
                                     <div>Coordinateur</div>
                                 </div>
                             </div>
                             <div>
-                                <h2>Réseaux</h2>
+                                <h3>Réseaux</h3>
                                 <div class="d-flex justify-content-around">
                                     <a class="reseau" href="https://github.com/Eliaslhl" target="_blank">
-                                        <i class="fab fa-github" style="font-size: 50px;" ></i>
+                                        <i class="fab fa-github icone"></i>
                                     </a>
                                     <a  class="reseau" href="https://www.linkedin.com/in/elias-lahlouh-1332a1243/" target="_blank">
-                                        <i class="fab fa-linkedin" style="font-size: 50px;"></i></i>
+                                        <i class="fab fa-linkedin icone"></i></i>
                                     </a>
                                 </div>
                             </div>
