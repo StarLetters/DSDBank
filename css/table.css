@@ -61,12 +61,12 @@ table tr {
   padding: 6px 10px;
   border-radius: 15px;
   cursor: pointer;
-  background-color: var(--couleur-bleu);
-  color: var(--couleur-text); 
+  background-color: white;
+  color: black; 
 }
 
 .item-selecteur:hover {
-  background-color: var(--couleur-bleu);
+  background-color: white;
 }
 
 table th,

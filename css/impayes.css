@@ -1,7 +1,7 @@
 .slide, .date, .btn-export, .nImp {
-    background-color: var(--couleur-bleu);
+    background-color: white;
     color: var(--couleur-fond-sombre);
-    border: 1px solid var(--couleur-bleu);
+    border: 1px solid white;
     border-radius: 10px;
     padding: 10px 15px;
     font-size: 0.8rem;
@@ -168,6 +168,7 @@ nav#pagination-container {
   #export-select{
     width: fit-content!important;
     background-color: var(--couleur-bouton-gris);
+    color: black;
   }
 
   .form-row{
