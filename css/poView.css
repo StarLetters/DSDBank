@@ -51,7 +51,7 @@ table th {
 }
 
 button, .creer {
-    background-color: var(--couleur-bouton);
+    background-color: var(--couleur-bleu);
     color: var(--couleur-text)!important;
     border: 1px solid var(--couleur-text);
     border-radius: 10px;
@@ -99,7 +99,7 @@ tr:hover{
 
   
 .page-item{
-    background-color: var(--couleur-bouton);
+    background-color: var(--couleur-bleu);
 }
 
 .page-link{
