@@ -42,7 +42,7 @@ session_start();
                         <div class="d-flex justify-content-between">
                             <div class="mr-5">
                                 <h2>Rôles</h2>
-                                <div class="d-flex flex-column justify-content-start">
+                                <div class="roles d-flex flex-column justify-content-start">
                                     <div>Chef de projet</div>
                                     <div>Expert</div>
                                     <div>Perfectionneur</div>
@@ -67,7 +67,7 @@ session_start();
                         <div class="d-flex justify-content-between">
                             <div class="mr-5">
                                 <h2>Rôles</h2>
-                                <div class="d-flex flex-column justify-content-start">
+                                <div class="roles d-flex flex-column justify-content-start">
                                     <div>Priseuse</div>
                                     <div>Promoteuse</div>
                                 </div>
@@ -94,7 +94,7 @@ session_start();
                         <div class="d-flex justify-content-between">
                             <div class="mr-5">
                                 <h2>Rôles</h2>
-                                <div class="d-flex flex-column justify-content-start">
+                                <div class="roles d-flex flex-column justify-content-start">
                                     <div>Organisateur</div>
                                     <div>Soutien</div>
                                 </div>
@@ -118,7 +118,7 @@ session_start();
                         <div class="d-flex justify-content-between">
                             <div class="mr-5">
                                 <h2>Rôles</h2>
-                                <div class="d-flex flex-column justify-content-start">
+                                <div class="roles d-flex flex-column justify-content-start">
                                     <div>Propulseur</div>
                                     <div>Coordinateur</div>
                                 </div>

@@ -6,6 +6,10 @@
     width: 30%;
 }
 
+.roles {
+    font-size: 30px;
+}
+
 .reseau {
     color: white;
     text-decoration: none;
@@ -14,4 +18,5 @@
 .reseau:hover {
     color: white;
 }
+
 
