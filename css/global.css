@@ -19,7 +19,7 @@ body{
 .btn-option {
   color: var(--couleur-text);
   border: 1px solid var(--couleur-text);
-  background-color: var(--couleur-bouton);
+  background-color: var(--couleur-bleu);
   font-size: 1rem;
 }
 

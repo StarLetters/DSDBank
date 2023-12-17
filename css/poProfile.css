@@ -49,7 +49,7 @@
 .btn-option {
     color: var(--couleur-text);
     border: 1px solid var(--couleur-text);
-    background-color: var(--couleur-bouton);
+    background-color: var(--couleur-bleu);
     font-size: 1rem;
 }
 
@@ -75,7 +75,7 @@
     margin: 50px auto;
     border: 1px solid #999;
     width: 60%;
-    background-color: var(--couleur-bouton);
+    background-color: #7393b3bb;
 
 }
 
