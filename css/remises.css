@@ -25,30 +25,43 @@
 }
 
 #search-container {
-    border: 1px solid var(--couleur-violet-bouton);
+    border: 3px solid var(--couleur-bleu);
     border-radius: 10px;
     padding-bottom: 80px;
   }
 
 .nRemise {
-    background-color: var(--couleur-violet-bouton);
+    background-color: var(--couleur-bleu);
     color: var(--couleur-fond-sombre);
-    border: 1px solid var(--couleur-violet-bouton);
+    border: 1px solid var(--couleur-bleu);
     border-radius: 10px;
     padding: 10px 15px;
     font-size: 0.8rem;
     width: 100%;
   }
 
-
-button#resetButton, button#searchButton, #export-select, #export-button {
+  button#resetButton, #export-select {
     border-radius: 15px;
-    background-color: var(--couleur-violet-bouton);
-    color: var(--couleur-fond-sombre);
+    background-color: #d1d1d1;
+    color: var(--couleur-text);
     padding: 5px 20px;
     border: none;
     cursor: pointer;
-    border: 1px solid var(--couleur-violet-bouton);
+    border: 1px solid #d1d1d1;
+    margin-left: 0;
+    margin-right: 5%;
+    font-size: 0.8rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+ button#searchButton, #export-button {
+    border-radius: 15px;
+    background-color: var(--couleur-bleu);
+    color: var(--couleur-text);
+    padding: 5px 20px;
+    border: none;
+    cursor: pointer;
+    border: 1px solid var(--couleur-bleu);
     margin-left: 0;
     margin-right: 5%;
     font-size: 0.8rem;
@@ -93,7 +106,7 @@ button#resetButton, button#searchButton, #export-select, #export-button {
       }
 
       #search-container {
-        border: 1px solid var(--couleur-violet-bouton);
+        border: 1px solid var(--couleur-bleu);
         border-radius: 10px;
         padding-bottom: 270px;
         margin-top: 1em;

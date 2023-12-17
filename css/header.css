@@ -70,13 +70,13 @@ body {
     z-index: 1000;
     position: fixed;
     left: 250px;
-    top: 0;
+    top: 0; 
     width: 0;
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
     overflow-x: hidden;
-    background-image: url("../data/img/clouds.jpg");
+    background-image: url("../data/img/nuages.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

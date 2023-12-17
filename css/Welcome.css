@@ -5,7 +5,7 @@
   }
   
   body {
-    background-image: url('../data/img/clouds.jpg');
+    background-image: url('../data/img/nuages.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
@@ -79,14 +79,14 @@
   .form-group input {
     width: 100%; 
     padding: 10px;
-    border: 1px solid var(--couleur-bouton);
+    border: 1px solid var(--couleur-bleu);
     border-radius: 30px;
-    background-color: var(--couleur-bouton);
+    background-color: var(--couleur-bleu);
     color: var(--couleur-text);
   }
 
   .form-group input:-webkit-autofill{
-    background-color: var(--couleur-bouton) !important;
+    background-color: var(--couleur-bleu) !important;
 
   }
   
@@ -133,7 +133,7 @@
   }
   
   .button-register {
-    background-color: var(--couleur-bouton);
+    background-color: var(--couleur-bleu);
     color: var(--couleur-text);
     border-radius: 30px;
     padding: 10px 30px;
