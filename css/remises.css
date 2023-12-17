@@ -91,6 +91,23 @@ button#resetButton, button#searchButton, #export-select, #export-button {
         margin-top: 3em;
       }
 
+      .clm {
+        flex-direction: column !important;
+      }
+
+      #search-container {
+        border: 1px solid var(--couleur-violet-bouton);
+        border-radius: 10px;
+        padding-bottom: 270px;
+        margin-top: 1em;
+      }
+
+      .col-5 {
+        -ms-flex: 0 0 41.666667%;
+        flex: 0 0 41.666667%;
+        max-width: 48.667%;
+      }
+
   }
 
 
