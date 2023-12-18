@@ -257,7 +257,6 @@
     }
 
     .button-register {
-      background-color: var(--couleur-bouton);
       color: var(--couleur-text);
       border-radius: 30px;
       padding: 10px 10px;
