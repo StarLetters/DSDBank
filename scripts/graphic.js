@@ -74,6 +74,22 @@ function createBarChart(labels, data) {
   });
 }
 
+function createStackedBarChart(config){
+  if (myChart) {
+    myChart.destroy();
+  }
+  const ctx = document.getElementById("barChart").getContext("2d");
+  myChart = new Chart(ctx, config);
+}
+
+function createStackedLineChart(config){
+  if (myChart) {
+    myChart.destroy();
+  }
+  const ctx = document.getElementById("lineChart").getContext("2d");
+  myChart = new Chart(ctx, config);
+}
+
 function dataForChart(data) {
   const montants = data.map((item) => item.montant);
   const dates = data.map((item) => `${item.mois}/${item.annee}`);
@@ -112,13 +128,12 @@ function createLineChart(title, labels, data) {
     },
     options: {
       scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true,
-            },
-          },
-        ],
+        x: {
+          stacked: true,
+        },
+        y: {
+          stacked: true
+        }
       },
     },
   });
@@ -167,8 +182,50 @@ async function toggleUnpaidCharts(selectedChart) {
     const { montants, dates } = dataForChart(fetchedData);
 
     const fetchedReasons = await getUnpaidReasons(startDate, endDate);
+    const { reasonCount, reasons } = dataForPieChart(fetchedReasons);
 
-    const { reasonCount, reasons} = dataForPieChart(fetchedReasons);
+    const treasuryPerMonthFetched = await getTreasuryPerMonth(startDate, endDate);
+    const treasuryPerMonth = treasuryPerMonthFetched.map((item) => item.totalmontant);
+
+    const data = {
+      labels: dates,
+      datasets: [
+        {
+          label: "Chiffre d'affaires global",
+          data: treasuryPerMonth,
+          backgroundColor: '#C6B1FF',
+        },
+  
+        {
+          label: "Montant des impayés",
+          data: montants,
+          backgroundColor: '#FFB1B1',
+        },
+      ]
+      };
+      
+
+    const config = {
+      type: selectedChart,
+      data: data,
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Impayés'
+          },
+        },
+        responsive: true,
+        scales: {
+          x: {
+            stacked: true,
+          },
+          y: {
+            stacked: true
+          }
+        }
+      }
+    };
 
     makePieChart(reasonCount, reasons, nHarmoniousColors("blue",reasons.length));
 
@@ -176,12 +233,13 @@ async function toggleUnpaidCharts(selectedChart) {
       barChartSection.style.display = "block";
       lineChartSection.style.display = "none";
 
-      createBarChart(dates, montants);
+      createStackedBarChart(config);
+
     } else if (selectedChart === "line") {
       barChartSection.style.display = "none";
       lineChartSection.style.display = "block";
 
-      createLineChart("Montant des impayés",dates, montants);
+      createStackedLineChart(config);
     }
   } catch (error) {
     console.error(error);

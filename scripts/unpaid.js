@@ -153,7 +153,6 @@ function initializeImp() {
 
   addListener();
   displayOrderBy();
-
   search();
 }
 
