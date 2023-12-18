@@ -1,3 +1,4 @@
+/*
 function getCookie(name) {
     let cookieArr = document.cookie.split("; ");
     for (let i = 0; i < cookieArr.length; i++) {
@@ -8,9 +9,13 @@ function getCookie(name) {
     }
     return null;
 }
+*/
+function getCnxToken() {
+    return document.getElementById("token").dataset.token;
+}
 
 async function fetchData(url) {
-    if (getCookie("cnxToken") === null) {
+    if (getCnxToken() === null) {
         document.location.href = "../index.html";
     }
 
@@ -37,7 +42,7 @@ function getUnpaidsPerMonth(leftBound, rightBound) {
     let left = leftBound !== "" ? '&leftBound=' + leftBound : "";
     let right = rightBound !== "" ? '&rightBound=' + rightBound : "";
 
-    return fetchData(`../api/unpaidsPerMonth.php?token=${getCookie("cnxToken")}${left}${right}${nS}${rS}`);
+    return fetchData(`../api/unpaidsPerMonth.php?token=${getCnxToken()}${left}${right}${nS}${rS}`);
 }
 
 function getUnpaidsForEach(leftBound, rightBound, orderby, nImpaye, nSIREN, raisonSociale) {
@@ -49,7 +54,7 @@ function getUnpaidsForEach(leftBound, rightBound, orderby, nImpaye, nSIREN, rais
     let nS = nSIREN !== "" ? '&nSIREN=' + nSIREN : "";
     let rS = raisonSociale !== "" ? '&raisonSociale=' + raisonSociale : "";
 
-    return fetchData(`../api/unpaidsForEach.php?token=${getCookie("cnxToken")}${left}${right}${order}${nImp}${nS}${rS}`);
+    return fetchData(`../api/unpaidsForEach.php?token=${getCnxToken()}${left}${right}${order}${nImp}${nS}${rS}`);
 }
 
 function getUnpaidReasons(leftBound, rightBound) {
@@ -60,7 +65,7 @@ function getUnpaidReasons(leftBound, rightBound) {
     let left = leftBound !== "" ? '&leftBound=' + leftBound : "";
     let right = rightBound !== "" ? '&rightBound=' + rightBound : "";
 
-    return fetchData(`../api/unpaidReasons.php?token=${getCookie("cnxToken")}${left}${right}${nS}${rS}`);
+    return fetchData(`../api/unpaidReasons.php?token=${getCnxToken()}${left}${right}${nS}${rS}`);
 }
 
 function getTreasury() {
@@ -70,7 +75,7 @@ function getTreasury() {
     let socialReason = (document.getElementById("raisonSociale") && document.getElementById("raisonSociale").value !== "") ? '&raisonSociale=' + document.getElementById("raisonSociale").value : "";
     let dateValue = (document.getElementById("dateValeur") && document.getElementById("dateValeur").value !== "") ? '&dateValeur=' + document.getElementById("dateValeur").value : "";
 
-    return fetchData(`../api/treasuryForEach.php?token=${getCookie("cnxToken")}${nS}${order}${socialReason}${dateValue}`);
+    return fetchData(`../api/treasuryForEach.php?token=${getCnxToken()}${nS}${order}${socialReason}${dateValue}`);
 }
 
 function getTreasuryPerMonth(leftBound, rightBound) {
@@ -80,7 +85,7 @@ function getTreasuryPerMonth(leftBound, rightBound) {
     let rS = (document.getElementById("raisonSociale") && document.getElementById("raisonSociale").value !== "") ? '&raisonSociale=' + document.getElementById("raisonSociale").value : "";
 
     
-    return fetchData(`../api/treasuryPerMonth.php?token=${getCookie("cnxToken")}${left}${right}${nS}${rS}`);
+    return fetchData(`../api/treasuryPerMonth.php?token=${getCnxToken()}${left}${right}${nS}${rS}`);
 }
 
 function getDiscount(startDate, endDate, orderBy) {
@@ -102,13 +107,13 @@ function getDiscount(startDate, endDate, orderBy) {
         value += '&endDate=' + endDate;
     }
     value += '&order=' + orderBy;
-    return fetchData(`../api/discountForEach.php?token=${getCookie("cnxToken")}${value}`);
+    return fetchData(`../api/discountForEach.php?token=${getCnxToken()}${value}`);
 }
 
 function getDiscountDetails(nRemise) {
 
     let nR = nRemise !== null ? '&nRemise=' + nRemise : "";
-    return fetchData(`../api/discountDetails.php?token=${getCookie("cnxToken")}${nR}`);
+    return fetchData(`../api/discountDetails.php?token=${getCnxToken()}${nR}`);
 }
 
 function getReason(nSiren) {

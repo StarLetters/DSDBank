@@ -68,52 +68,6 @@ $result = $result->fetchAll();
                     <p class="text-white profile-title mx-auto ml-md-4"> <?php echo $result[0]['raisonSociale'] ?></p>
                 </div>
                 
-
-                <div class="col d-flex flex-column align-items-center">
-                    <p class="text-center mt-4" style="color:var(--couleur-text);"> Solde du compte au <?php 
-                    $fmt = new IntlDateFormatter(
-                        'fr_FR',
-                        IntlDateFormatter::FULL,
-                        IntlDateFormatter::NONE
-                    );
-
-                    echo $fmt->format(new DateTime());
-
-
-                    ?></p> 
-                                    <?php
-                                    echo "<p ";
-                                    $request1 = "SELECT * FROM Transaction WHERE idUtilisateur = :idUtilisateur;";
-                                    $result1 = $cnx->prepare($request1);
-                                    $result1->bindParam(':idUtilisateur', $result[0]['idUtilisateur']);
-                                    $result1->execute();
-                                    $result1 = $result1->fetchAll();
-                                    $montant = 0;
-                                    for ($i = 0; $i < count($result1); $i++) {
-                                        if ($result1[$i]['sens'] == "-") {
-                                            $montant -= $result1[$i]['montant'];
-                                        } else {
-                                            $montant += $result1[$i]['montant'];
-                                        }
-                                    }
-                                    echo "style =\"font-size:1.75rem; font-weight:450; ";
-                                    if ($montant < 0) {
-                                        echo "color: red;";
-                                    } else {
-                                        echo "color: #3be145;";
-                                    } 
-                                    echo "\"";
-                                    ?>                                
-                                    ><?php
-                                        echo $montant." €</p>";
-                                        ?>
-                        </div>
-
-
-
-
-                
-                
                 <div class="col my-auto d-flex justify-content-center justify-content-md-end ">
                     <button class="btn btn-modifier" onclick="openModifier()">Modifier profil</button>
                     <button class="btn btn-deconnexion"><a href="../account/deco.php" class="text-reset text-decoration-none">Se déconnecter</a></button>
