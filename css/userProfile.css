@@ -33,7 +33,7 @@
 }
 
 .banner{
-    background: url(../data/img/clouds.jpg) no-repeat center center/cover;
+    background: url(../data/img/nuages.jpg) no-repeat center center/cover;
 }
 
 .infos p{
@@ -198,7 +198,7 @@ button:hover>a{
     margin: 50px auto;
     border: 1px solid #999;
     width: 60%;
-    background-color: var(--couleur-bouton);
+    background-color: #7393b3bb;
     
   }
 
@@ -223,6 +223,10 @@ button:hover>a{
     font-size: 50px;
     font-weight: bold;
     cursor: pointer;
+  }
+
+  #navbar-wrapper .navbar {
+    background-color: transparent;
   }
 
 @media (max-width: 767px) {

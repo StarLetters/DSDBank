@@ -3,11 +3,11 @@
 session_start();
 
 require('../account/verifLogin.php');
-$verif = verifLogin();
-if ($verif !== 0) {
-    if ($verif === 1) {
+$role = verifLogin();
+if ($role !== 0) {
+    if ($role === 1) {
         header('Location: ../pages/poProfile.php');
-    } else if ($verif === 2) {
+    } else if ($role === 2) {
         header('Location: ../pages/adminHome.php');
     } else {
         header('Location: ../pages/welcome.php');
@@ -166,7 +166,6 @@ $result = $result->fetchAll();
             document.getElementById("modal").style.display = "block";
             const $wrapper = document.querySelector('#wrapper');
             const largeurEcran = window.innerWidth;
-            console.log(largeurEcran);
             if (($wrapper.classList.contains('toggled') && window.innerWidth < 992) || (!$wrapper.classList.contains('toggled') && window.innerWidth > 992)) {
                 $wrapper.classList.toggle('toggled'); //toggle the left sidebar
             }

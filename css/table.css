@@ -13,8 +13,9 @@ table caption {
 }
 
 table tr {
-  border: 2px solid var(--couleur-fond-sombre);
+  border: 2px solid rgba(69, 92, 116, 0.66);
   padding: 0.35em !important;
+  background-color: rgba(79, 101, 124, 0.66);
 }
 
 
@@ -41,11 +42,11 @@ table tr {
   padding: 0px 12px;
   border-radius: 15px;
   cursor: pointer;
-  background-color: var(--couleur-violet-bouton);
+  background-color: var(--couleur-bleu);
 }
 
 .pagination-button:hover {
-  background-color: var(--couleur-violet-bouton);
+  background-color: var(--couleur-bleu);
 }
 
 /* Style spécifique pour les flèches */
@@ -60,12 +61,12 @@ table tr {
   padding: 6px 10px;
   border-radius: 15px;
   cursor: pointer;
-  background-color: var(--couleur-violet-bouton);
-  color: var(--couleur-fond-sombre); 
+  background-color: white;
+  color: black; 
 }
 
 .item-selecteur:hover {
-  background-color: var(--couleur-violet-bouton);
+  background-color: white;
 }
 
 table th,
@@ -81,13 +82,13 @@ table th {
   font-size: 0.7em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background-color: var(--couleur-hover);
+  background-color: var(--couleur-bleu);
   color: var(--couleur-text);
   padding: 1.5em 0 1.5em 0;
 }
 
 tr:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(98, 125, 152, 0.5) !important;
 }
 
 .table-container {
@@ -111,6 +112,11 @@ tr:hover {
 
 #items-per-page{
   width: fit-content;
+}
+
+[type="button"]:not(:disabled), [type="reset"]:not(:disabled), [type="submit"]:not(:disabled), button:not(:disabled) {
+  cursor: pointer;
+  color: white;
 }
 
 @media screen and (max-width: 1200px) {

@@ -36,8 +36,6 @@ include '../backend/utilities.php';
     <link rel="stylesheet" href="../css/table.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/remises.css">
-
-    <script src="../scripts/exportData.js"></script>
 </head>
 
 <body>
@@ -64,28 +62,27 @@ include '../backend/utilities.php';
                                 </div>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="col-12 col-md-6" id="search-container">
                         <?php
                         if ($role == 1) {
                             echo '
-                    <div class="row mb-5 clm">
-                        <div class="col-6 col-md-6">
-                            <label for="nSiren">N°SIREN</label>
-                            <input type="text" id="nSiren" class="form-control form-control-sm date col-12">
+                        <div class="col-12 mt-2">
+                            <label for="nSIREN">N°SIREN</label>
+                            <input type="text" id="nSIREN" class="form-control form-control-sm date col-12" placeholder="123456789">
                         </div>
-                        <div class="col-6 col-md-6">
-                            <label for="raison">Raison Sociale</label>
-                            <input type="text" id="raison" class="form-control form-control-sm date col-12">
-                        </div>
-                    </div>';
+                        <div class="col-12 mt-2">
+                            <label for="raisonSociale">Raison Sociale</label>
+                            <input type="text" id="raisonSociale" class="form-control form-control-sm date col-12" placeholder="DSDCorp">
+                        </div>';
                         }
                         ?>
-                    </div>
-                    <div class="col-12 col-md-6" id="search-container">
-                        <label class="mt-2" for="nRemise">N°Remise</label>
-                        <input type="text" id="nRemise" class="form-control form-control-sm date" placeholder="N°Remise">
+                        <div class="col-12 my-2">
+                            <label for="nRemise">N°Remise</label>
+                            <input type="text" id="nRemise" class="form-control form-control-sm date" placeholder="8168551">
+                        </div>
 
-                        <div class="d-flex flex-column flex-md-row mt-2">
+                        <div class="d-flex flex-column flex-md-row mt-3">
                             <button id="resetButton" class="mx-1">Effacer</button>
                             <button id="searchButton" class="mx-1">Rechercher</button>
                         </div>
@@ -124,16 +121,16 @@ include '../backend/utilities.php';
             </div>
             <div class="col-12 mt-5 d-flex flex-row flex-sm-column">
                 <div class="col-12 col-md-6 mb-5 ml-3">
-                    <select id="export-select" class="m2">
-                        <option value="csv">Exporter en CSV</option>
-                        <option value="xls">Exporter en XLS</option>
-                        <option value="pdf">Exporter en PDF</option>
-                    </select>
                     <?php
                     $filename = 'TABLEAU REMISES';
                     $onclick = getOnClickDetailledTable($role, $filename);
                     ?>
                     <button id="export-button" class="export-button" onclick="<?php echo $onclick ?>">Exporter</button>
+                    <select id="export-select" class="m2">
+                        <option value="csv">en CSV</option>
+                        <option value="xls">en XLS</option>
+                        <option value="pdf">en PDF</option>
+                    </select>
                 </div>
             </div>
             <?php include('../includes/footer.html'); ?>
@@ -141,16 +138,23 @@ include '../backend/utilities.php';
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+    
 
     <script defer type="module" src="../scripts/remittance.js"></script>
 
     <script src="../scripts/header.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="../scripts/exportData.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.6/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
 </body>
 
 </html>

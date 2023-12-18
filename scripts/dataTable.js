@@ -29,17 +29,10 @@ function renderPagination(data, itemsPerPage) {
     paginationContainer.innerHTML = '';
 
     const totalPages = Math.ceil(data.length / itemsPerPage);
-    // Ajoute des boutons numérotés avec flèches
+    // Ajoute des boutons numérotés sans flèches
     for (let i = 1; i <= totalPages; i++) {
         const button = document.createElement('button');
-
-        if (i === 1) {
-            button.innerHTML = '&larr;'; // Flèche gauche pour le premier bouton
-        } else if (i === totalPages) {
-            button.innerHTML = '&rarr;'; // Flèche droite pour le dernier bouton
-        } else {
-            button.textContent = i;
-        }
+        button.textContent = i;
 
         button.classList.add('pagination-button');
         if (i === currentPage) {
@@ -97,9 +90,6 @@ function createTable(data, tableId, AreCellsColored = false) {
                     const cellValue = parseFloat(value);
                     const roundedValue = Math.max(Math.round(cellValue / 100) * 100, -800); // Set maximum value to 800
                     cell.classList.add("amount"+roundedValue);
-
-                    console.log("amount"+roundedValue);
-
                 }
 
                 cell.textContent = value;

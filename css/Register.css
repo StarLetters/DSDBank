@@ -1,5 +1,5 @@
 body {
-    background-image: url('../data/img/clouds.jpg');
+    background-image: url('../data/img/nuages.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
@@ -18,8 +18,8 @@ body {
 }
 
 .border-head {
-    border: 2px solid var(--couleur-hover);
-    background-color: var(--couleur-bouton);
+    border: 2px solid var(--couleur-bleu);
+    background-color: var(--couleur-bleu);
     padding: 8px 120px 7px 120px;
     text-align: center;
     border-radius: 30px;
@@ -73,7 +73,7 @@ body {
     width: 15px;
     left: 4px;
     bottom: 4px;
-    background-color: var(--couleur-bouton);
+    background-color: var(--couleur-bleu);
     -webkit-transition: .4s;
     transition: .5s;
     border-radius: 20px;
@@ -236,7 +236,7 @@ form .form-check-label {
 /* boutons */
 
 .custom-button {
-    background-color: var(--couleur-bouton); 
+    background-color: var(--couleur-bleu); 
     color: var(--couleur-text); 
     border: none;
     padding: 10px 25px;

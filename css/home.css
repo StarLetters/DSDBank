@@ -17,7 +17,7 @@ body {
 }
 
 .custom-button {
-    background-color: var(--couleur-violet-bouton); 
+    background-color: var(--couleur-bleu); 
     color: var(--couleur-text); 
     border: none;
     padding: 5px 15px;
@@ -71,6 +71,7 @@ body {
 footer{
     margin-top: 0!important;
 }
+
 
 
 .bvn{

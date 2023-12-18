@@ -1,7 +1,7 @@
 .slide, .date, .btn-export, .nImp {
-    background-color: var(--couleur-violet-bouton);
+    background-color: white;
     color: var(--couleur-fond-sombre);
-    border: 1px solid var(--couleur-violet-bouton);
+    border: 1px solid white;
     border-radius: 10px;
     padding: 10px 15px;
     font-size: 0.8rem;
@@ -37,7 +37,7 @@ option {
   }
 
 #search-container{
-  border: 1px solid var(--couleur-violet-bouton);
+  border: 1px solid var(--couleur-bleu);
   border-radius: 10px;
   padding-bottom: 25px;
 }
@@ -115,38 +115,48 @@ nav#pagination-container {
 
   button.export-button {
     border-radius: 30px;
-    background-color: var(--couleur-violet-bouton);
+    background-color: var(--couleur-bleu);
     color: var(--couleur-fond-sombre);
     padding: 0px 6px;
     border: none;
     cursor: pointer;
-    border: 1px solid var(--couleur-violet-bouton);
+    border: 1px solid var(--couleur-bleu);
   }
 
   select {
     word-wrap: normal;
     border-radius: 15px;
-    background-color: var(--couleur-violet-bouton);
+    background-color: var(--couleur-bleu);
     color: var(--couleur-fond-sombre);
     padding: 2px 6px;
     border: none;
     cursor: pointer;
-    border: 1px solid var(--couleur-violet-bouton);
+    border: 1px solid var(--couleur-bleu);
     width: 100%;
   }
 
-
-  button.export-button, 
-  button.export-pdf-button,
-  button#resetButton,
-  button#searchButton {
+  button#resetButton {
     border-radius: 15px;
-    background-color: var(--couleur-violet-bouton);
+    background-color: var(--couleur-bouton-gris);
+    color: var(--couleur-fond-sombre);
+    padding: 5px 20px;
+    border: none;
+    cursor: pointer; 
+    border: 1px solid var(--couleur-bouton-gris);
+
+    width: fit-content!important;
+  }
+
+  button#searchButton, 
+  button.export-pdf-button,
+  button.export-button {
+    border-radius: 15px;
+    background-color: var(--couleur-bleu);
     color: var(--couleur-fond-sombre);
     padding: 5px 20px;
     border: none;
     cursor: pointer;
-    border: 1px solid var(--couleur-violet-bouton);
+    border: 1px solid var(--couleur-bleu);
 
     width: fit-content!important;
   }
@@ -157,6 +167,8 @@ nav#pagination-container {
   #order-by,
   #export-select{
     width: fit-content!important;
+    background-color: var(--couleur-bouton-gris);
+    color: black;
   }
 
   .form-row{

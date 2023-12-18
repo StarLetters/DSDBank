@@ -7,20 +7,25 @@
         <li class="nav-item"><a class="nav-link" href="../pages/tresorerie.php">Trésorerie</a></li>
         <li class="nav-item"><a class="nav-link" href="../pages/remises.php">Remises</a></li>
         <li class="nav-item"><a class="nav-link" href="../pages/impayes.php">Impayés</a></li>
-        <li class="nav-item"><a class="nav-link" href="../pages/userProfile.php">Mon profil</a></li>
+        <?php
+        if ($role == 0) {
+            echo '
+        <li class="nav-item"><a class="nav-link" href="../pages/userProfile.php">Mon profil</a></li>';
+        }
+        ?>
 
         <!-- TEMPORAIRE -->
         <li class="nav-item"><a class="nav-link" style="color:tomato" href="../account/deco.php">Se déconnecter</a></li>
     </ul>
     <hr>
     <div class="profile-section mt-auto">
-        
+
         <div class="profile-picture text-center">
             <img src="../data/img/LogoDSD.png" alt="Photo de profil" class="img-f rounded-circle">
         </div>
         <div class="profile-info text-center">
-            <div class="profile-name text-white"><?php echo $_SESSION['displayName']?></div>
-            <div id="profile-email" class="profile-profession text-white"><?php echo $_SESSION['email']?></div>
+            <div class="profile-name text-white"><?php echo $_SESSION['displayName'] ?></div>
+            <div id="profile-email" class="profile-profession text-white"><?php echo $_SESSION['email'] ?></div>
         </div>
     </div>
 </aside>

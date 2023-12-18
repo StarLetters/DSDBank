@@ -8,9 +8,9 @@
     color: white;
     border: 1px solid var(--couleur-avertissement);
     border-radius: 10px;
-    padding: 10px 25px;
+    padding: 10px 25px; 
     font-size: 0.9rem;
-}
+} 
 
 body{
     padding-top: 50px;
@@ -19,7 +19,7 @@ body{
 .btn-option {
   color: var(--couleur-text);
   border: 1px solid var(--couleur-text);
-  background-color: var(--couleur-bouton);
+  background-color: var(--couleur-bleu);
   font-size: 1rem;
 }
 

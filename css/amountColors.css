@@ -1,10 +1,14 @@
+.amount0{
+    background-color: rgba(255, 235, 83, 0.4);
+}
+
 .amount-100 {
     background-color: rgba(216, 180, 17, 0.4);
 }
 
 .amount-200 {
     background-color: rgba(241, 143, 14, 0.4);
-}
+} 
 
 .amount-300 {
     background-color: rgba(232, 93, 4, 0.4);
@@ -27,5 +31,5 @@
 }
 
 .amount-800 {
-    background-color: rgba(55, 6, 23, 0.4);
+    background-color: rgba(55, 6, 6, 0.4);
 }

@@ -1,5 +1,5 @@
 import { toggleUnpaidCharts } from "./graphic.js";
-import { updateDataTable, changeItemsPerPage} from "./dataTable.js";
+import { updateDataTable, changeItemsPerPage } from "./dataTable.js";
 import { displayElements } from "./utilities.js";
 import { getUnpaidsForEach } from "./fetchData.js";
 
@@ -74,7 +74,11 @@ function addListener() {
   chartTypeElement.addEventListener("change", () => {
     toggleUnpaidCharts(chartTypeElement.value);
   });
-  itemsPerPageElement.addEventListener("change", changeItemsPerPage);
+  itemsPerPageElement.addEventListener("change", () => {
+    changeItemsPerPage();
+    updateAll();
+  });
+
   orderByElement.addEventListener("change", updateTable);
   searchButtonElement.addEventListener("click", updateAll);
   nImpElement.addEventListener("keyup", (event) => {
@@ -137,7 +141,6 @@ async function search() {
 
   displayOrderBy();
   data = await getUnpaidsForEach(startDate, endDate, order, nImp, nSIREN, raisonSociale);
-  console.log(data);
   updateTable(data);
 }
 

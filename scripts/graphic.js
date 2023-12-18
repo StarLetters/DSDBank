@@ -17,8 +17,8 @@ function createBarChart(labels, data) {
         {
           label: "Montant des impayés",
           data: data,
-          backgroundColor: "#C6B1FF",
-          borderColor: "#C6B1FF",
+          backgroundColor: "#7393B3",
+          borderColor: "#7393B3",
           borderWidth: 1,
           color: "black",
         },
@@ -121,7 +121,7 @@ function createLineChart(title, labels, data) {
           label: title,
           data: data,
           fill: false,
-          borderColor: "#C6B1FF",
+          borderColor: "#7393B3",
           borderWidth: 1,
         },
       ],
@@ -177,16 +177,12 @@ async function toggleUnpaidCharts(selectedChart) {
   const startDate = document.getElementById("startDate").value;
   const endDate = document.getElementById("endDate").value;
 
-  console.log(startDate);
-  console.log(endDate);
-
   try {
     const fetchedData = await getUnpaidsPerMonth(startDate, endDate);
     const { montants, dates } = dataForChart(fetchedData);
 
     const fetchedReasons = await getUnpaidReasons(startDate, endDate);
     const { reasonCount, reasons } = dataForPieChart(fetchedReasons);
-
 
     const treasuryPerMonthFetched = await getTreasuryPerMonth(startDate, endDate);
     const treasuryPerMonth = treasuryPerMonthFetched.map((item) => item.totalmontant);
@@ -261,7 +257,6 @@ async function toggleTreasury(date){
   const fetchedData = await getTreasuryPerMonth("",date);
   const { montants, dates } = dataForChart2(fetchedData);
   createLineChart("Evolution de la trésorerie", dates, montants);
-  console.log("toggleTreasury");
 }
 
 export { toggleUnpaidCharts, toggleTreasury};
