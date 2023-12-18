@@ -4,7 +4,7 @@ function getOnclick($role, $filename, $typechart, $width, $height)
     $onclick = "";
     if ($role == 0) {
         if (isset($_SESSION['displayName'], $_SESSION['numSiren'])) {
-            $filename .= " DE L'ENTREPRISE " . strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']);
+            $filename .= " DE L\'ENTREPRISE " . strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']);
             $onclick = "exportChartToPDF('" . $typechart . "', '" . addslashes($filename) . "' , 'pdf'," . $width . ", " . $height . ")";
         } else {
             header('Location: ../index.html');
@@ -20,7 +20,7 @@ function getOnClickTable($role, $filename)
     $onclick = "";
     if ($role == 0) {
         if (isset($_SESSION['displayName'], $_SESSION['numSiren'])) {
-            $filename .= " DE L'ENTREPRISE " . strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']);
+            $filename .= " DE L\'ENTREPRISE " . strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']);
             $onclick = "exportTable('" . $filename . "')";
         } else {
             header('Location: ../index.html');
@@ -36,7 +36,7 @@ function getOnClickDetailledTable($role, $filename)
     $onclick = "";
     if ($role == 0) {
         if (isset($_SESSION['displayName'], $_SESSION['numSiren'])) {
-            $filename .= " DE L'ENTREPRISE " . strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']);
+            $filename .= " DE L\'ENTREPRISE " . strtoupper($_SESSION['displayName'] . ' ' .  'N SIREN ' . $_SESSION['numSiren']);
             $onclick = "exportDetailledTable('" . $filename . "')";
         } else {
             header('Location: ../index.html');
