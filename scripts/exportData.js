@@ -305,6 +305,7 @@ async function getTitle(startTitle) {
     return title;
 }
 
+/* DEPRECIE A CAUSE DE LA GESTION DES COOKIES DU SERVEUR DE L'UNIVERSITE
 function getCookie(name) {
     let cookieArr = document.cookie.split("; ");
     for (let i = 0; i < cookieArr.length; i++) {
@@ -314,6 +315,12 @@ function getCookie(name) {
         }
     }
     return null;
+}
+*/
+
+function getCnxToken() {
+    console.log(document.getElementById("token").dataset.token);
+    return document.getElementById("token").dataset.token;
 }
 
 async function getReasonSiren(reasonSiren) {
@@ -336,7 +343,7 @@ async function getReasonSiren(reasonSiren) {
     }
   
     const response = await fetch(
-      '../api/getReasonSiren.php?token=' + getCookie("cnxToken") + parameter,
+      '../api/getReasonSiren.php?token=' + getCnxToken() + parameter,
       {
         method: 'POST',
         headers: {
