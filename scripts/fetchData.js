@@ -84,7 +84,6 @@ function getTreasuryPerMonth(leftBound, rightBound) {
     let nS = (document.getElementById("nSIREN") && document.getElementById("nSIREN").value !== "") ? '&nSIREN=' + document.getElementById("nSIREN").value : "";
     let rS = (document.getElementById("raisonSociale") && document.getElementById("raisonSociale").value !== "") ? '&raisonSociale=' + document.getElementById("raisonSociale").value : "";
 
-    
     return fetchData(`../api/treasuryPerMonth.php?token=${getCnxToken()}${left}${right}${nS}${rS}`);
 }
 
@@ -111,7 +110,6 @@ function getDiscount(startDate, endDate, orderBy) {
 }
 
 function getDiscountDetails(nRemise) {
-
     let nR = nRemise !== null ? '&nRemise=' + nRemise : "";
     return fetchData(`../api/discountDetails.php?token=${getCnxToken()}${nR}`);
 }

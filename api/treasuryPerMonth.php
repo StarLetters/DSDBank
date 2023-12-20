@@ -12,7 +12,7 @@ $token = htmlspecialchars($_GET['token']);
 $raisonSociale = isset($_GET['raisonSociale']) ? htmlspecialchars($_GET['raisonSociale']) : null;
 $nSiren = isset($_GET['nSIREN']) ? htmlspecialchars($_GET['nSIREN']) : null;
 $dateValeur = isset($_GET['rightBound']) ? htmlspecialchars($_GET['rightBound']) : null;
-
+$dateDebut = isset($_GET['leftBound']) ? htmlspecialchars($_GET['leftBound']) : null;
 
 $role = verifRole($token);
 
@@ -23,7 +23,7 @@ SUM(
     WHEN Transaction.sens = '-' THEN -Transaction.montant
     ELSE Transaction.montant
   END
-) OVER (ORDER BY Transaction.dateVente) AS `totalmontant`
+) AS `totalmontant`
 FROM 
 Transaction
 JOIN 
@@ -39,6 +39,7 @@ if ($role == 0) {
    if ($nSiren) $request .= " WHERE Entreprise.numSiren = '". $nSiren ."'";
    if ($raisonSociale) $request .= " AND Entreprise.raisonSociale = '". $raisonSociale ."'";
   }
+  if ($dateDebut) $request .= " AND Transaction.dateVente >= '". $dateDebut ."'";
   if ($dateValeur) $request .= " AND Transaction.dateVente <= '". $dateValeur ."'" ;
 
 $request .= " GROUP BY DATE_FORMAT(Transaction.dateVente, '%Y-%m');";

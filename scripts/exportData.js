@@ -319,7 +319,6 @@ function getCookie(name) {
 */
 
 function getCnxToken() {
-    console.log(document.getElementById("token").dataset.token);
     return document.getElementById("token").dataset.token;
 }
 

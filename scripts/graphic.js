@@ -74,7 +74,7 @@ function createBarChart(labels, data) {
   });
 }
 
-function createStackedBarChart(config){
+function createStackedBarChart(config) {
   if (myChart) {
     myChart.destroy();
   }
@@ -82,7 +82,7 @@ function createStackedBarChart(config){
   myChart = new Chart(ctx, config);
 }
 
-function createStackedLineChart(config){
+function createStackedLineChart(config) {
   if (myChart) {
     myChart.destroy();
   }
@@ -185,25 +185,33 @@ async function toggleUnpaidCharts(selectedChart) {
     const { reasonCount, reasons } = dataForPieChart(fetchedReasons);
 
     const treasuryPerMonthFetched = await getTreasuryPerMonth(startDate, endDate);
-    const treasuryPerMonth = treasuryPerMonthFetched.map((item) => item.totalmontant);
 
+    let turnoverPerMonth = [];
+    for (let i = 0; i < montants.length; i++) {
+      turnoverPerMonth[i] = 0;
+      for (let j = 0; j < treasuryPerMonthFetched.length; j++) {
+        if (treasuryPerMonthFetched[j].mois.split("-")[1] === dates[i].split("/")[0] && treasuryPerMonthFetched[j].mois.split("-")[0] === dates[i].split("/")[1]) {
+          turnoverPerMonth[i] = parseInt(treasuryPerMonthFetched[j].totalmontant) + parseInt(montants[i]);
+        }
+      }
+    }
     const data = {
       labels: dates,
       datasets: [
-        {
-          label: "Chiffre d'affaires global",
-          data: treasuryPerMonth,
-          backgroundColor: '#C6B1FF',
-        },
-  
         {
           label: "Montant des impayés",
           data: montants,
           backgroundColor: '#FFB1B1',
         },
+
+        {
+          label: "Chiffre d'affaires global",
+          data: turnoverPerMonth,
+          backgroundColor: '#C6B1FF',
+        },
       ]
-      };
-      
+    };
+
 
     const config = {
       type: selectedChart,
@@ -227,7 +235,7 @@ async function toggleUnpaidCharts(selectedChart) {
       }
     };
 
-    makePieChart(reasonCount, reasons, nHarmoniousColors("blue",reasons.length));
+    makePieChart(reasonCount, reasons, nHarmoniousColors("blue", reasons.length));
 
     if (selectedChart === "bar") {
       barChartSection.style.display = "block";
@@ -253,10 +261,10 @@ function dataForChart2(data) {
   return { montants, dates };
 }
 
-async function toggleTreasury(date){
-  const fetchedData = await getTreasuryPerMonth("",date);
+async function toggleTreasury(date) {
+  const fetchedData = await getTreasuryPerMonth("", date);
   const { montants, dates } = dataForChart2(fetchedData);
   createLineChart("Evolution de la trésorerie", dates, montants);
 }
 
-export { toggleUnpaidCharts, toggleTreasury};
+export { toggleUnpaidCharts, toggleTreasury };

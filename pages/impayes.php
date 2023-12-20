@@ -147,7 +147,7 @@ include '../backend/utilities.php';
                     </select>
 
                     <div class="col-md-12 mt-5" id="barChartSection">
-                        <h3>Somme des impayés par mois</h3>
+                        <h3 class="mb-3">Somme des impayés par mois</h3>
                         <div class="chart">
                             <canvas id="barChart"></canvas>
                         </div>
