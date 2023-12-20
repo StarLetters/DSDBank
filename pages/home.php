@@ -123,6 +123,7 @@ include('../backend/cnx.php');
                     </div>
                 </div>
             </div>
+            <?php include('../includes/footer.html'); ?>
         </div>
     </div>
     </div>

@@ -11,13 +11,7 @@ if ($role == 2) {
 if (!isset($_SESSION['cnxToken'])) {
     header('Location: ../index.html');
 }
-// Récupération du token de connexion pour le JS
-setcookie('cnxToken', $_SESSION['cnxToken'], [
-    'expires' => time() + 60 * 60 * 24,
 
-    'secure' => true,
-    'samesite' => 'None'
-]);
 
 include '../backend/utilities.php';
 ?>
@@ -41,7 +35,7 @@ include '../backend/utilities.php';
 </head>
 
 <body>
-    <div class="">
+    <div id="token" data-token="<?php echo $_SESSION['cnxToken'];?>">
         <div id="wrapper">
             <?php include('../includes/header.php'); ?>
             <div class="col-12">
