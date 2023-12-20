@@ -190,7 +190,7 @@ async function toggleUnpaidCharts(selectedChart) {
     for (let i = 0; i < montants.length; i++) {
       turnoverPerMonth[i] = 0;
       for (let j = 0; j < treasuryPerMonthFetched.length; j++) {
-        if (treasuryPerMonthFetched[j].mois.split("-")[1] === dates[i].split("/")[0] && treasuryPerMonthFetched[j].mois.split("-")[0] === dates[i].split("/")[1]) {
+        if (parseInt(treasuryPerMonthFetched[j].mois.split("-")[1]) === parseInt(dates[i].split("/")[0]) && treasuryPerMonthFetched[j].mois.split("-")[0] === dates[i].split("/")[1]) {
           turnoverPerMonth[i] = parseInt(treasuryPerMonthFetched[j].totalmontant) + parseInt(montants[i]);
         }
       }

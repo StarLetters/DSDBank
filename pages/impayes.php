@@ -181,7 +181,11 @@ include '../backend/utilities.php';
                 </div>
                 <div class="col-md-12 mt-5 mb-4">
                     <h3 class="pt-5">Motifs d'impayés</h3>
+                    <div class="row justify-content-center">
+                        <div id="chart-wrapper" class="w-75">
                     <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
                     <div class="col-auto mt-3">
                         <?php
                         $filename = 'GRAPHIQUE DES MOTIFS IMPAYES';
