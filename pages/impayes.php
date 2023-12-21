@@ -71,7 +71,7 @@ include '../backend/utilities.php';
                     </div>
                     <div class="col-12 col-md-6" id="search-container">
                         <label class="mt-2" for="nImp">N° Dossier Impayés :</label>
-                        <input type="text" id="nImp" class="form-control form-control-sm nImp order-md-1" placeholder="">
+                        <input type="text" id="nImp" class="form-control form-control-sm nImp order-md-1">
                         <?php
                         if ($role == 1) {
                             echo '  

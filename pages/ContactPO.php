@@ -56,12 +56,12 @@ if (isset($_POST['subject']) && isset($_POST['name']) && isset($_POST['text']) &
                 <div class="form-row">
                     <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 12 pour Email -->
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" maxlength="50" required />
+                        <input type="email" class="form-control" id="email" name="email" maxlength="50" required />
                         <div class="invalid-feedback">Erreur</div>
                     </div>
                     <div class="form-group col-md-6 col-sm-12 mb-4"> <!-- Utilisation des classes col-md-12 col-sm-12 pour une largeur maximale sur les petits écrans -->
                         <label for="name">Nom</label>
-                        <input class="form-control" type="text" id="name" name="name" placeholder="Nom" maxlength="100" required />
+                        <input class="form-control" type="text" id="name" name="name" maxlength="100" required />
 
                         <div class="invalid-feedback">Erreur</div>
                     </div>
@@ -71,7 +71,7 @@ if (isset($_POST['subject']) && isset($_POST['name']) && isset($_POST['text']) &
                 <div class="form-row">
                 <div class="form-group col-md-12 mb-4">
                         <label for="subject">Objet</label>
-                        <textarea class="form-control" id="subject" name="subject" placeholder="Demande" rows="1" required></textarea>
+                        <textarea class="form-control" id="subject" name="subject" rows="1" required></textarea>
 
                         <div class="invalid-feedback">Erreur</div>
                     </div>
@@ -81,7 +81,7 @@ if (isset($_POST['subject']) && isset($_POST['name']) && isset($_POST['text']) &
                     <div class="form-group col-md-12 mb-4">
 
                         <label for="text">Texte</label>
-                        <textarea class="form-control" id="text" name="text" placeholder="Bonjour..." rows="6" required></textarea>
+                        <textarea class="form-control" id="text" name="text" rows="6" required></textarea>
 
                         <div class="invalid-feedback">Erreur</div>
                     </div>

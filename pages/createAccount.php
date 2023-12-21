@@ -113,22 +113,22 @@ verification($socialReason, $email);
             <div class="form-row">
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Raison Sociale -->
                     <label for="socialReason">Raison Sociale</label>
-                    <input class="form-control" type="text" id="socialReason" name="socialReason" placeholder="Raison Sociale" maxlength="100" required />
+                    <input class="form-control" type="text" id="socialReason" name="socialReason" maxlength="100" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Raison Sociale -->
                     <label for="siren">N° SIREN</label>
-                    <input class="form-control" type="text" id="siren" name="siren" placeholder="Numéro SIREN" pattern="[0-9]{9}" maxlength="9" required />
+                    <input class="form-control" type="text" id="siren" name="siren" pattern="[0-9]{9}" maxlength="9" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Email -->
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" maxlength="50" required />
+                    <input type="email" class="form-control" id="email" name="email" maxlength="50" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4"> <!-- Colonne de largeur 6 pour Téléphone --> <!-- PAS SUR POUR LE PATTERN -->
                     <label for="phone">Téléphone</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Téléphone" maxlength="10" pattern="^\+?\d{7,10}$" />
+                    <input type="tel" class="form-control" id="phone" name="phone" maxlength="10" pattern="^\+?\d{7,10}$" />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
             </div>
@@ -139,12 +139,12 @@ verification($socialReason, $email);
             <div class="form-row">
                 <div class="form-group col-md-6 mb-4">
                     <label for="password">Créer un mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Créer un mot de passe" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$" required />
+                    <input type="password" class="form-control" id="password" name="password" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$" required />
                     <div class="invalid-feedback">Erreur</div>
                 </div>
                 <div class="form-group col-md-6 mb-4">
                     <label for="confirmPassword">Confirmation du mot de passe</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmer le mot de passe" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$" required />
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" pattern="^(?=.*[A-Z])(?=.*\d).{8,}$" required />
                 </div>
                 <div class="invalid-feedback">Erreur</div>
             </div>

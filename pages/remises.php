@@ -63,17 +63,17 @@ include '../backend/utilities.php';
                             echo '
                         <div class="col-12 mt-2">
                             <label for="nSIREN">N°SIREN</label>
-                            <input type="text" id="nSIREN" class="form-control form-control-sm date col-12" placeholder="123456789">
+                            <input type="text" id="nSIREN" class="form-control form-control-sm date col-12">
                         </div>
                         <div class="col-12 mt-2">
                             <label for="raisonSociale">Raison Sociale</label>
-                            <input type="text" id="raisonSociale" class="form-control form-control-sm date col-12" placeholder="DSDCorp">
+                            <input type="text" id="raisonSociale" class="form-control form-control-sm date col-12">
                         </div>';
                         }
                         ?>
                         <div class="col-12 my-2">
                             <label for="nRemise">N°Remise</label>
-                            <input type="text" id="nRemise" class="form-control form-control-sm date" placeholder="8168551">
+                            <input type="text" id="nRemise" class="form-control form-control-sm date">
                         </div>
 
                         <div class="d-flex flex-column flex-md-row mt-3">
