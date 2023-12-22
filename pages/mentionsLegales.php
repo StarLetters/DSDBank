@@ -1,5 +1,7 @@
 <?php
 session_start();
+require('../account/verifLogin.php');
+$role = verifLogin();
 ?>
 <!DOCTYPE html>
 <html lang="fr">

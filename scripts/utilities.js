@@ -4,25 +4,31 @@ function displayElements(elements, displayValue) {
   }
 }
 
-function addRedClassToCellIfNegative(tableRows) {
+function addRedClassToCellIfNegative(tableRows, details = false) {
   for (let i = 0; i < tableRows.length; i++) {
     const row = tableRows[i];
-    const lastCellValue = parseFloat(row.lastElementChild.textContent);
+    if (details && row.classList.contains("detailsRow")) {
+      continue;
+    }
+    const lastCell = details ? row.lastElementChild.previousElementSibling : row.lastElementChild;
+    const lastCellValue = parseFloat(lastCell.textContent);
+
     if (lastCellValue < 0) {
-      row.lastElementChild.classList.add("red");
-    } else if (tableRows[i].lastElementChild.classList.contains("red")) {
-      tableRows[i].lastElementChild.classList.remove("red");
+      lastCell.classList.add("red");
+    } else if (lastCell.classList.contains("red")) {
+      lastCell.classList.remove("red");
     }
   }
 }
 
 function addColorToCells(tableRows) {
+
   for (let i = 0; i < tableRows.length; i++) {
     const row = tableRows[i];
     const lastCellValue = parseFloat(row.lastElementChild.textContent);
 
     const roundedValue = Math.round(lastCellValue / 100) * 100;
-    row.lastElementChild.classList.add("amount"+roundedValue);
+    row.lastElementChild.classList.add("amount" + roundedValue);
   }
 }
 

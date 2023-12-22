@@ -36,7 +36,7 @@ async function updateTable() {
 async function addListener() {
   itemsPerPageElement.addEventListener("change", () => {
     changeItemsPerPage();
-    addRedClassToLastRowIfNegative();
+    addRedClassToCellIfNegative();
   });
   searchButtonElement.addEventListener("click", updateTable);
   if (nSIRENElement) {
@@ -51,8 +51,9 @@ async function addListener() {
     if (nSIRENElement) {
       nSIRENElement.value = "";
       socialReason.value = "";
-      dateValue.value = "";
     }
+    dateValue.value = "";
+    updateDataTable();
   });
   orderByElement.addEventListener("change", updateTable);
 }

@@ -72,14 +72,13 @@ $role = verifRole($token);
 $order = isset($_GET['orderby']) ? htmlspecialchars($_GET['orderby']) : null;
 $numSiren = null;
 $raisonSociale = null;
-$dateValeur = null;
 if ($role == 1){
     $numSiren = isset($_GET['nSIREN']) ? htmlspecialchars($_GET['nSIREN']) : null;
     $token = null;
 
     $raisonSociale = isset($_GET['raisonSociale']) ? htmlspecialchars($_GET['raisonSociale']) : null;
-    $dateValeur = isset($_GET['dateValeur']) ? htmlspecialchars($_GET['dateValeur']) : null;
 }
+$dateValeur = isset($_GET['dateValeur']) ? htmlspecialchars($_GET['dateValeur']) : null;
 $result = getTreasury($token, $numSiren, $order, $raisonSociale, $dateValeur);
 outputJson($result);
 ?>

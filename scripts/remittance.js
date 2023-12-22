@@ -22,18 +22,18 @@ async function updateTable() {
     let startDate = startDateElement.value;
     let endDate = endDateElement.value;
     let order = orderByElement.value
-    updateDetailedDataTable(await getDiscount(startDate, endDate, order));
-    addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"));
+    await updateDetailedDataTable(await getDiscount(startDate, endDate, order));
+    addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"),true);
 }
 
 // Fonction pour ajouter des écouteurs d'évènements
 async function addListener() {
     itemsPerPageElement.addEventListener("change", () => {
         changeItemsPerPage();
-        addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"));
+        addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"),true);
     });
     paginationElement.addEventListener("click", () => {
-        addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"));
+        addRedClassToCellIfNegative(document.querySelectorAll("#table-container tbody tr"),true);
     });
     searchButtonElement.addEventListener("click", updateTable);
     resetButtonElement.addEventListener("click", () => {
