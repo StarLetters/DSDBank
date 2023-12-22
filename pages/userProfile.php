@@ -64,7 +64,7 @@ $result = $result->fetchAll();
             <div class="row-1 banner" style="height: 200px;"></div>
             <div class="row-1 d-flex justify-content-between flex-column flex-md-row">
                 <div class="col d-flex flex-column">
-                    <img src="../data/img/Mochi.jpg" alt="Photo de profil" class="rounded-circle profilepic mx-auto ml-md-5 img-thumbnail" style="height: 150px;">
+                    <img src="../data/img/DefaultUser.png" alt="Photo de profil" class="rounded-circle profilepic mx-auto ml-md-5 img-thumbnail" style="height: 150px;">
                     <p class="text-white profile-title mx-auto ml-md-4"> <?php echo $result[0]['raisonSociale'] ?></p>
                 </div>
                 
