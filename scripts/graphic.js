@@ -156,17 +156,23 @@ const makePieChart = (fetchedData, labels, colors) => {
   };
 
   const ctx = document.getElementById("pieChart").getContext("2d");
+  const screenWidth = window.innerWidth;
+  
   pieChart = new Chart(ctx, {
     type: "pie",
     data: data,
     options: {
+      responsive: true,
+      maintainAspectRatio: screenWidth < 480 ? false : true,
       plugins: {
         legend: {
           position: "bottom",
         },
       },
+      
     },
   });
+  console.log(pieChart);
 };
 
 // Fonction pour basculer entre les graphiques
@@ -224,6 +230,7 @@ async function toggleUnpaidCharts(selectedChart) {
           },
         },
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
           x: {
             stacked: true,

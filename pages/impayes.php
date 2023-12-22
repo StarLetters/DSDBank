@@ -35,10 +35,10 @@ include '../backend/utilities.php';
 </head>
 
 <body>
-    <div id="token" data-token="<?php echo $_SESSION['cnxToken'];?>">
+    <div id="token" data-token="<?php echo $_SESSION['cnxToken']; ?>">
         <div id="wrapper">
             <?php include('../includes/header.php'); ?>
-            <div class="col-12 p-3">
+            <div class="col-12 p-0 p-sm-3">
                 <div class="row mb-5">
                     <div class="col-12 col-md-12 text-center mt-5">
                         <h1 class="mt-4">Mes impayés</h1>
@@ -183,8 +183,8 @@ include '../backend/utilities.php';
                 <div class="col-md-12 mt-5 mb-4">
                     <h3 class="pt-5">Motifs d'impayés</h3>
                     <div class="row justify-content-center">
-                        <div id="chart-wrapper" class="w-75">
-                    <canvas id="pieChart"></canvas>
+                        <div id="chart-wrapper" class="w-100 w-md-75 h-100">
+                            <canvas id="pieChart"></canvas>
                         </div>
                     </div>
                     <div class="col-auto mt-3">
@@ -205,8 +205,7 @@ include '../backend/utilities.php';
     </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1"></script>
     <script defer type="module" src="../scripts/graphic.js"></script>
     <script defer type="module" src="../scripts/unpaid.js"></script>
     <script src="../scripts/exportData.js"></script>

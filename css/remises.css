@@ -81,6 +81,16 @@
     justify-content: space-between;
   }
 
+  tr[data-toggle="collapse"]{
+    cursor: pointer;
+  }
+
+  .fas.fa-plus{
+    padding:8px;
+    border: 1px solid var(--couleur-text);
+    border-radius: 50%;
+  }
+
   @media (max-width: 1380px) {
     .col-md-6 {
       -ms-flex: 0 0 50%;

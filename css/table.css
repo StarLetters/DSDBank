@@ -119,6 +119,13 @@ tr:hover {
   color: white;
 }
 
+.pagination-dots{
+  color: var(--couleur-text);
+  padding: 0 5px;
+  font-weight: bold;
+  letter-spacing: 5px;
+}
+
 @media screen and (max-width: 1200px) {
   table {
     border: 0;

@@ -29,8 +29,19 @@ function renderPagination(data, itemsPerPage) {
     paginationContainer.innerHTML = '';
 
     const totalPages = Math.ceil(data.length / itemsPerPage);
+    let tooMuch = false;
+    if (totalPages > 5) {
+        tooMuch = true;
+    }
     // Ajoute des boutons numérotés sans flèches
     for (let i = 1; i <= totalPages; i++) {
+        if (tooMuch && i < totalPages-2 && i>2) {
+            const dots = document.createElement('span');
+            dots.textContent = '...';
+            dots.setAttribute('class', 'pagination-dots');
+            paginationContainer.appendChild(dots);
+            i += totalPages - 4;
+        }
         const button = document.createElement('button');
         button.textContent = i;
 
@@ -117,15 +128,24 @@ async function updateDetails(data) {
         if (row === null) {
             continue;
         }
-        let nbCol = row.getElementsByTagName('td').length;
+        let nbCol = row.getElementsByTagName('td').length+1;
         row.setAttribute('data-target', "#details".concat(nRemise));
         row.setAttribute('data-toggle', "collapse");
         row.setAttribute('aria-expanded', "false");
         row.setAttribute('aria-controls', "details".concat(nRemise));
+        let detailCell = document.createElement('td');
+        let detailButton = document.createElement('i');
+        detailButton.setAttribute('class', 'fas fa-plus');
+        detailCell.appendChild(detailButton);
+        row.appendChild(detailCell);
         const newRow = await createRowWithDetails(nRemise, nbCol)
         row.insertAdjacentElement('afterend', newRow);
         createTableWithDetails(nRemise);
     }
+    let headCell = document.createElement('th');
+    const newText = document.createTextNode("DETAILS");
+    headCell.appendChild(newText);
+    document.getElementsByTagName('thead')[0].getElementsByTagName('tr')[0].appendChild(headCell);
 }
 
 async function createRowWithDetails(nRemise, nbCol) {
