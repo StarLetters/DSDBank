@@ -43,7 +43,7 @@ include('../backend/cnx.php');
             <div class="color-background"></div>
             <div class="blurred-background"></div>
             <div id="content" class="content-show">
-                <section id="content-wrapper" class="no-margin-bottom d-flex justify-content-center text-center" style="top:0;position:inherit; height:100vh">
+                <section id="content-wrapper" class="no-margin-bottom d-flex justify-content-center text-center" style="top:0;position:inherit; min-height:100vh">
                     <div class="row-1">
                         <div class="col-12 d-flex flex-column">
                             <h2 class="content-title text-white mt-5">Bonjour,
