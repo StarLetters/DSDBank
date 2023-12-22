@@ -138,7 +138,7 @@ include '../backend/utilities.php';
 
                 <div id="table-container"></div>
 
-                <nav id="pagination-container"></nav>
+                <nav id="pagination-container" class="flex-wrap"></nav>
 
                 <div class="hidePO row mt-5" id="graphics">
 

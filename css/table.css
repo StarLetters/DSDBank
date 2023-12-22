@@ -124,6 +124,25 @@ tr:hover {
   padding: 0 5px;
   font-weight: bold;
   letter-spacing: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pagination-dots:hover {
+  animation: pulse 1s infinite;
+  animation-duration: 2s;
 }
 
 @media screen and (max-width: 1200px) {

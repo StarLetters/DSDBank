@@ -24,13 +24,13 @@ function paginateTable(data, itemsPerPage) {
     return paginatedData;
 }
 
-function renderPagination(data, itemsPerPage) {
+function renderPagination(data, itemsPerPage, displayAll = false) {
     const paginationContainer = document.getElementById('pagination-container');
     paginationContainer.innerHTML = '';
 
     const totalPages = Math.ceil(data.length / itemsPerPage);
     let tooMuch = false;
-    if (totalPages > 5) {
+    if (totalPages > 5 && displayAll === false) {
         tooMuch = true;
     }
     // Ajoute des boutons numérotés sans flèches
@@ -39,6 +39,9 @@ function renderPagination(data, itemsPerPage) {
             const dots = document.createElement('span');
             dots.textContent = '...';
             dots.setAttribute('class', 'pagination-dots');
+            dots.addEventListener('click', () => {  
+                renderPagination(data, itemsPerPage, true);
+            });
             paginationContainer.appendChild(dots);
             i += totalPages - 4;
         }
