@@ -230,7 +230,6 @@ async function toggleUnpaidCharts(selectedChart) {
           },
         },
         responsive: true,
-        maintainAspectRatio: false,
         scales: {
           x: {
             stacked: true,
