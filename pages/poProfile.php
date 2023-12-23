@@ -59,8 +59,8 @@ $nbSupp = $result['suppression'] ?? 0;
             <div class="row-1 banner" style="height: 200px;"></div>
             <div class="row-1 d-flex justify-content-between flex-column flex-md-row">
                 <div class="col d-flex flex-column">
-                    <img src="../data/img/Mochi.jpg" alt="Photo de profil" class="rounded-circle profilepic mx-auto ml-md-5 img-thumbnail" style="height: 150px;">
-                    <p class="text-white profile-title mx-auto ml-md-4">Lucaski SARL</p>
+                    <img src="../data/img/DefaultUser.png" alt="Photo de profil" class="rounded-circle profilepic mx-auto ml-md-5 img-thumbnail" style="height: 150px;">
+                    <p class="text-white profile-title mx-auto ml-md-4">Responsable</p>
                 </div>
                 <div class="col my-auto d-flex justify-content-center justify-content-md-end ">
                     <button class="btn btn-modifier" onclick="openModifier()">Modifier profil</button>
