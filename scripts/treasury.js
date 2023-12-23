@@ -53,7 +53,7 @@ async function addListener() {
       socialReason.value = "";
     }
     dateValue.value = "";
-    updateDataTable();
+    updateTable();
   });
   orderByElement.addEventListener("change", updateTable);
 }
