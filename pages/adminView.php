@@ -91,7 +91,6 @@ $result = $result->fetchAll();
                 <div class="row d-flex flex-column flex-md-row flex-wrap justify-content-between mx-2 mb-4 mt-5 mt-md-0">
                     <p class="d-md-block text-white h2 text-center text-md-left">PROFILS</p>
                     <div class="d-flex align-items-center">
-                        <!-- TODO : Bouton Créer compte href="createAccount.php" -->
                         <a href="createAccount.php" class="creer" id="btnCreer">Créer un compte</a>
                         <button id="btnSupp" onclick="suppCompte()"> Supprimer compte(s)</button>
                         <button id="btnValider" type="submit" style="display:none">Valider</button>

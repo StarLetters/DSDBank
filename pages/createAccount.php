@@ -28,8 +28,6 @@ $request = 'SELECT email, mdp FROM Utilisateur WHERE email = :email';
     $result->execute();
     $result = $result->fetchAll();
 
-    //SI YA DEJA QUELQU'UN AVEC CET EMAIL
-    //TODO
     if (count($result) > 0) {
         setPopup(0,"L'email est déjà utilisé");
         header('Location: createAccount.php');
