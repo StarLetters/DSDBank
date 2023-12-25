@@ -4,15 +4,19 @@ function displayElements(elements, displayValue) {
   }
 }
 
-function addRedClassToCellIfNegative(tableRows, details = false) {
+async function addRedClassToCellIfNegative(tableRows, details = false) {
   for (let i = 0; i < tableRows.length; i++) {
     const row = tableRows[i];
     if (details && row.classList.contains("detailsRow")) {
       continue;
     }
-    const lastCell = details ? row.lastElementChild.previousElementSibling : row.lastElementChild;
-    const lastCellValue = parseFloat(lastCell.textContent);
+    let lastCell = details ? row.lastElementChild.previousElementSibling : row.lastElementChild;
 
+    let lastCellValue = parseFloat(lastCell.textContent);
+    if (isNaN(lastCellValue)) {
+      lastCell = row.lastElementChild;
+      lastCellValue = parseFloat(lastCell.textContent);
+    }
     if (lastCellValue < 0) {
       lastCell.classList.add("red");
     } else if (lastCell.classList.contains("red")) {
